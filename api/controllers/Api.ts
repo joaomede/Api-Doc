@@ -46,7 +46,7 @@ class Api {
 
     // esse metodo precisa fazer o SORT
     try {
-      const allApiByUser = await knex('api').select().where('userIdFk', req.userId)
+      const allApiByUser = await knex('api').select().where({ userIdFk: req.userId })
       resp.returnSucessObject(res, allApiByUser)
     } catch (error) {
       resp.returnErrorMessage(res, "Erro ao carregar a lista de Api's")
@@ -60,16 +60,8 @@ class Api {
     /// esse metodo precisa de algo similar a populate
 
     try {
-      const api = await knex('api').select().where('id', apiId)
-      if (api[0].isPublic === true) {
-        resp.returnSucessObject(res, api)
-      } else {
-        if (api[0].userIdFk === req.userId) {
-          resp.returnSucessObject(res, api)
-        } else {
-          resp.returnErrorMessage(res, 'Você não tem autorização para acessar esse conteúdo')
-        }
-      }
+      const api = await knex('api').select().where({ id: apiId, userIdFk: req.userId })
+      resp.returnSucessObject(res, api)
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao tentar carregar as informações da api')
     }
