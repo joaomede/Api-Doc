@@ -5,6 +5,7 @@ import * as https from 'https'
 import router from './routes/Router'
 import routerAuth from './routes/RouterAuth'
 import routerCheckin from './routes/RouterCheckin'
+import routerGeral from './routes/RouterGeral'
 import express = require('express')
 import cors = require('cors')
 dotenv.config()
@@ -24,6 +25,7 @@ class App {
 
   private routes (): void {
     this.express.use(routerAuth)
+    this.express.use(routerGeral)
     this.express.use(routerCheckin)
     this.express.use(router)
   }
