@@ -8,8 +8,7 @@ export async function up (knex: Knex): Promise<any> {
     table.text('descriptionApi').notNullable()
     table.text('version').notNullable()
     table.boolean('isPublic').notNullable()
-    table.date('createdAt').notNullable()
-    table.date('updatedAt').notNullable()
+    table.timestamps(true, true)
     table.integer('userIdFk').unsigned().references('id').inTable('user').onDelete('CASCADE').index()
   })
 }
