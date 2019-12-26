@@ -1,16 +1,14 @@
 import { Router } from 'express'
 import validate from '../utils/Validation'
-
-// const authMiddleware = require('./middlewares/auth')
-// routes.use(authMiddleware);
+import CheckJwt from '../middlewares/CheckJwt'
 
 import cApi from '../controllers/controllerApi'
 import cEndPoint from '../controllers/controllerEndPoint'
 import cVerbs from '../controllers/controllerVerbs'
 import cCodeResp from '../controllers/controllerCodesResp'
-// import cApiContent from '../controllers/controllerGeral'
-
 const routes = Router()
+
+routes.use(CheckJwt.checkJwt)
 
 routes.post('/api/api/create', cApi.store)
 routes.get('/api/api/get/:apiId', cApi.indexOne)
