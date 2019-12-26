@@ -29,6 +29,7 @@ function registerSchema (): Joi.ObjectSchema<object> {
 }
 
 class Validation {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async register (req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       await registerSchema().validateAsync(await req.body)
@@ -38,6 +39,7 @@ class Validation {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async login (req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       await loginSchema().validateAsync(await req.body)
