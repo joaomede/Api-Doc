@@ -60,7 +60,7 @@ class Auth {
             token: await Plugin.generateToken({ id: user[0].id }, '7d')
           })
         } else {
-          resp.returnErrorMessage(res, 'O email informado não foi encontrado')
+          resp.returnErrorMessage(res, 'A senhão está incorreta')
         }
       }
     } catch (error) {
