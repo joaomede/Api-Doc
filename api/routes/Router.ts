@@ -2,6 +2,7 @@ import { Router } from 'express'
 import apiValidate from '../utils/ApiValidate'
 import endpointValidate from '../utils/EndPointValidation'
 import verbValidate from '../utils/VerbValidate'
+import codesrespValidate from '../utils/CodesRespValidation'
 import CheckJwt from '../middlewares/CheckJwt'
 
 import cApi from '../controllers/Api'
@@ -26,6 +27,6 @@ routes.put('/api/endpoint/update/:id', cEndPoint.update)
 routes.post('/api/verb/create/:endPointId', verbValidate.create, cVerbs.store)
 routes.get('/api/verb/getall/:endPointId', cVerbs.index)
 
-routes.post('/api/codesresp/create/:verbsId', cCodeResp.store)
+routes.post('/api/codesresp/create/:verbId', codesrespValidate.create, cCodeResp.store)
 
 export default routes
