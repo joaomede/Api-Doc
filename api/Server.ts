@@ -1,5 +1,5 @@
-import App from './app'
-import Http from './apphttp'
+import App from './App'
+import Http from './Apphttp'
 import * as dotenv from 'dotenv'
 // import socketIO = require('socket.io')
 dotenv.config()
