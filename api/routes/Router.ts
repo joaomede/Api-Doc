@@ -2,10 +2,10 @@ import { Router } from 'express'
 import validate from '../utils/Validation'
 import CheckJwt from '../middlewares/CheckJwt'
 
-import cApi from '../controllers/controllerApi'
-import cEndPoint from '../controllers/controllerEndPoint'
-import cVerbs from '../controllers/controllerVerbs'
-import cCodeResp from '../controllers/controllerCodesResp'
+import cApi from '../controllers/Api'
+import cEndPoint from '../controllers/EndPoint'
+import cVerbs from '../controllers/Verb'
+import cCodeResp from '../controllers/CodesResp'
 const routes = Router()
 
 routes.use(CheckJwt.checkJwt)

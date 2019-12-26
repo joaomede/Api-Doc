@@ -21,13 +21,13 @@ async function verificaSuper (req: NewRequest, res: Response): Promise<any> {
 class Auth {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async register (req: Request, res: Response): Promise<any> {
-    let { email, password } = req.body
+    const { email, password } = req.body
     try {
       const result = await knex('user').select().where('email', email)
       if (result.length === 0) {
         const saltRounds = 10
         const hash = bcrypt.hashSync(password, saltRounds)
-        password = hash
+        req.body.password = hash
 
         try {
           const user = await knex('user').insert(req.body).returning('*')
@@ -41,64 +41,31 @@ class Auth {
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao verificar disponibilidade do e-mail')
     }
-
-    await knex('user')
-      .select()
-      .where('email', req.body.email)
-      .then(async user => {
-        if (user.length === 0) {
-
-        } else {
-        }
-      })
-
-    if (!email) {
-      return res.status(400).send({ error: 'email em branco' })
-    }
-    if (!password) {
-      return res.status(400).send({ error: 'senha em branco' })
-    }
-    if (!name) {
-      return res.status(400).send({ error: 'nome em branco' })
-    }
-
-    try {
-      if (await User.findOne({ email })) {
-        return res.status(400).send({ error: 'O usuário já existe' })
-      }
-      const user = await User.create(req.body)
-      user.password = undefined
-      const token = await gerenerateToken({ id: user._id })
-      return res.status(200).send({ user, token })
-    } catch (err) {
-      return res.status(400).send({ error: 'Falha no registro' })
-    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async auth (req: Request, res: Response): Promise<any> {
     const { email, password } = req.body
 
-    await knex('user')
-      .where('email', email)
-      .then(async (user) => {
-        if (user.length === 0) {
-          res.json({
-            error: 'O usuário não existe'
+    try {
+      const user = await knex('user').where({ email: email })
+      if (user.length === 0) {
+        resp.returnErrorMessage(res, 'O usuário não foi encontrado')
+      } else {
+        const match = bcrypt.compareSync(password, user[0].password)
+        if (match) {
+          user[0].password = undefined
+          resp.returnSucessObject(res, {
+            user: user[0],
+            token: await Plugin.generateToken({ id: user[0].id }, '7d')
           })
         } else {
-          const match = bcrypt.compareSync(password, user[0].password)
-          if (match) {
-            user[0].password = undefined
-            resp.returnSucessObject(res, {
-              user: user[0],
-              token: await Plugin.generateToken({ id: user[0].id }, '7d')
-            })
-          } else {
-            resp.returnErrorMessage(res, 'Email or password did not match')
-          }
+          resp.returnErrorMessage(res, 'O email informado não foi encontrado')
         }
-      })
+      }
+    } catch (error) {
+      resp.returnErrorMessage(res, 'Problemas ao tentar efetuar o login')
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
