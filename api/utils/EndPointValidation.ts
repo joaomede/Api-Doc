@@ -9,7 +9,7 @@ function endPointSchema (): Joi.ObjectSchema<object> {
   })
 }
 
-class ApiValidade {
+class EndPointValidade {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async create (req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
@@ -21,4 +21,4 @@ class ApiValidade {
   }
 }
 
-export default new ApiValidade()
+export default new EndPointValidade()
