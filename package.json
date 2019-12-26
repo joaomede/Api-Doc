@@ -16,6 +16,7 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
+    "@hapi/joi": "^16.1.8",
     "bcrypt": "^3.0.7",
     "connect-history-api-fallback": "^1.6.0",
     "cors": "^2.8.5",
