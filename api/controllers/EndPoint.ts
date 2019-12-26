@@ -43,7 +43,7 @@ class EndPoint {
       await knex('endpoint').where({ id: id, userIdFk: req.userId }).update(newEndpoint)
       resp.returnSucessMessage(res, 'Api atualizada com sucesso')
     } catch (error) {
-      resp.returnErrorMessage(res, 'Erro ao tentar atualizar as informações da api')
+      resp.returnErrorMessage(res, 'Erro ao tentar atualizar as informações do endpoint')
     }
   }
 
