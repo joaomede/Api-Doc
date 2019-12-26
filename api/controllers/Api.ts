@@ -12,12 +12,13 @@ class Api {
         version: req.body.version,
         isPublic: req.body.isPublic,
         descriptionApi: req.body.descriptionApi,
-        user: req.userId
+        userIdFk: req.userId
       })
 
       resp.returnSucessMessage(res, 'Api adicionada com sucesso')
     } catch (error) {
-      resp.returnErrorMessage(res, 'Erro ao tentar criar api')
+      // resp.returnErrorMessage(res, 'Erro ao tentar criar api')
+      resp.returnErrorMessage(res, error)
     }
   }
 
@@ -60,7 +61,15 @@ class Api {
 
     try {
       const api = await knex('api').select().where('id', apiId)
-      resp.returnSucessObject(res, api)
+      if (api[0].isPublic === true) {
+        resp.returnSucessObject(res, api)
+      } else {
+        if (api[0].userIdFk === req.userId) {
+          resp.returnSucessObject(res, api)
+        } else {
+          resp.returnErrorMessage(res, 'Você não tem autorização para acessar esse conteúdo')
+        }
+      }
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao tentar carregar as informações da api')
     }
@@ -68,9 +77,14 @@ class Api {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async destroy (req: NewRequest, res: Response): Promise<any> {
+    const { id } = req.params
+
+    if (id === undefined || id === null) {
+      resp.returnErrorMessage(res, 'Não foi identificado a referência da Api')
+    }
     // precisa remover em cascata
     try {
-      await knex('api').where('id', req.params.apiId, 'userIdFk', req.userId).del()
+      await knex('api').where({ id: id, userIdFk: req.userId }).del()
       resp.returnSucessMessage(res, 'Documentação deletada com sucesso')
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao tentar deletar documentação')
