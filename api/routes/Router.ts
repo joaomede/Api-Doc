@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import apiValidate from '../utils/ApiValidate'
+import endpointValidate from '../utils/EndPointValidation'
 import CheckJwt from '../middlewares/CheckJwt'
 
 import cApi from '../controllers/Api'
@@ -16,7 +17,10 @@ routes.get('/api/api/getall/', cApi.index)
 routes.delete('/api/api/delete/:id', cApi.destroy)
 routes.put('/api/api/update/:id', cApi.update)
 
-routes.post('/api/endpoint/:apiId', cEndPoint.store)
+routes.post('/api/endpoint/create/:apiId', endpointValidate.create, cEndPoint.store)
+routes.get('/api/endpoint/getall/:apiId', cEndPoint.index)
+routes.delete('/api/endpoint/delete/:id', cEndPoint.destroy)
+routes.put('/api/endpoint/update/:id', cEndPoint.update)
 
 routes.post('/api/verb/store/:endPointId', cVerbs.store)
 
