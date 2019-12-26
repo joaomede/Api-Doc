@@ -1,0 +1,37 @@
+[
+  {
+    "descriptionEndPonitsType": "esse endpoint é responsável por chamar todo tipo de método",
+    "idEndPoints": "n8fGpEyq9l6JdzuVysx5",
+    "nameEndPointsType": "Pasta",
+    "isRootInsert": true,
+    "elm": {}
+  },
+  [
+    {
+      "dataType": "array mostrando tipo de entrada",
+      "descriptionVerb": "descrição 2",
+      "endPoint": "/pasta",
+      "parameter": "headers",
+      "paramsType": "tipo do parametro",
+      "respValue": "resp value",
+      "verbId": "dUisPCex9dvE7CWlsw5n",
+      "verbType": "post",
+      "verbValue": "array de dados",
+      "isRootInsert": true,
+      "elm": {}
+    },
+    {
+      "dataType": "{array}",
+      "descriptionVerb": "esse verbo faz tal coisa",
+      "endPoint": "/pasta",
+      "parameter": "body, headers, params",
+      "paramsType": "o parametro faz isso ou aquilo",
+      "respValue": "{array}",
+      "verbId": "lrCPoaOHF6LkNJUR7P6n",
+      "verbType": "post",
+      "verbValue": "{array}",
+      "isRootInsert": true,
+      "elm": {}
+    }
+  ]
+]
