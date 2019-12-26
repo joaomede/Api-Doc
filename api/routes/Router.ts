@@ -15,7 +15,7 @@ routes.use(CheckJwt.checkJwt)
 
 routes.post('/api/api/create', apiValidate.create, cApi.store)
 routes.get('/api/api/get/:apiId', cApi.indexOne)
-routes.get('/api/api/getall/', cApi.index)
+routes.get('/api/api/getall', cApi.index)
 routes.delete('/api/api/delete/:id', cApi.destroy)
 routes.put('/api/api/update/:id', cApi.update)
 
