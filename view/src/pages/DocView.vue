@@ -3,30 +3,31 @@
   <div class="centralDiv q-pa-xs text-center">
     <div>
       <q-card
+        v-if="renderComponent"
         class="text-center my-card"
         style="width: auto;"
       >
         <q-card-section>
           <div class="text-h5">
-            <strong>API:</strong> {{ apiData.apiName }}
+            <strong>API:</strong> {{ lista.apiName }}
           </div>
           <div class="text-h6">
-            <strong>Versão:</strong> {{ apiData.version }}
+            <strong>Versão:</strong> {{ lista.version }}
           </div>
           <div
-            v-if="apiData.isPublic"
+            v-if="lista.isPublic"
             class="text-h6"
           >
             <strong>Documentação Pública</strong>
           </div>
           <div
-            v-if="!apiData.isPublic"
+            v-if="!lista.isPublic"
             class="text-p"
           >
             <strong>Documentação Privada</strong>
           </div>
           <div class="text-p">
-            <strong>Descrição:</strong> {{ apiData.descriptionApi }}
+            <strong>Descrição:</strong> {{ lista.descriptionApi }}
           </div>
           <button @click="consoleLog()">
             teste
@@ -34,7 +35,7 @@
         </q-card-section>
 
         <q-list
-          v-for="(endpoint, indexEndPoint) in apiData.endpoint"
+          v-for="(endpoint, indexEndPoint) in lista.endpoint"
           :key="endpoint.id"
           bordered
           class="rounded-borders"
@@ -49,30 +50,27 @@
               {{ endpoint.descriptionEndPonitsType }}
             </div>
 
-            <!--
             <q-card>
               <q-card-section>
-                <q-list v-for="post in listaDataDeTodosOsPoints.verbsPost" :key="post.verbId">
-                  <q-expansion-item expand-separator icon="fa fa-p" :label="item.endPoint" header-class="text-green">
+                <q-list
+                  v-for="verb in endpoint.verbs"
+                  :key="verb.id"
+                >
+                  <q-expansion-item
+                    expand-separator
+                    icon="fa fa-p"
+                    :label="verb.verbType"
+                    header-class="text-green"
+                  >
                     <q-card>
                       <q-card-section>
-                        {{ item }}
-                      </q-card-section>
-                    </q-card>
-                  </q-expansion-item>
-                </q-list>
-
-                <q-list v-for="post in listaDataDeTodosOsPoints.verbsPost" :key="post.verbId">
-                  <q-expansion-item expand-separator icon="fa fa-p" :label="post.verbsPost" header-class="text-green">
-                    <q-card>
-                      <q-card-section>
-                        {{ item }}
+                        {{ verb.verbType }}
                       </q-card-section>
                     </q-card>
                   </q-expansion-item>
                 </q-list>
               </q-card-section>
-            </q-card> -->
+            </q-card>
           </q-expansion-item>
         </q-list>
       </q-card>
@@ -91,8 +89,13 @@ export default {
   data () {
     return {
       apiData: {},
-      userPermission: []
-
+      userPermission: [],
+      renderComponent: true
+    }
+  },
+  computed: {
+    lista () {
+      return Object.assign({}, this.apiData)
     }
   },
   watch: {
@@ -116,17 +119,24 @@ export default {
     },
     async getVerbsAndCodes (endPointId, index) {
       try {
-        const res = this.$axios.get(`api/geral/getpublicverb/${this.id}`, { headers: this.user.headers })
-        // let teste = this.apiData
-        // teste.endpoint[index].verbs = await result.data
-        const lista = []
-        lista.push(res.data)
-        console.log(lista)
-        // this.apiData.endpoint[index] = await result.data
+        const result = await this.$axios.get(`api/geral/getpublicverb/${endPointId}`, { headers: this.user.headers })
+        this.forceRerender()
+        this.apiData.endpoint[index].verbs = await result.data
+
+        // console.log(this.apiData.endpoint[index])
       } catch (error) {
         console.log(error)
         this.$notify(error, 'red')
       }
+    },
+    forceRerender () {
+      // Remove my-component from the DOM
+      this.renderComponent = false
+
+      this.$nextTick(() => {
+        // Add the component back in
+        this.renderComponent = true
+      })
     }
   }
 }
