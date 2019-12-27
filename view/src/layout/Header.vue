@@ -15,7 +15,7 @@
 
         <q-toolbar-title>{{ headertitle }}</q-toolbar-title>
         <q-btn
-          v-if="user"
+          v-if="user.id !== null"
           class="q-mr-xs"
           dense
           round
@@ -32,7 +32,7 @@
           </q-badge>
         </q-btn>
         <q-btn
-          v-if="!user"
+          v-if="user.id === null"
           class="q-mr-xs"
           dense
           round
@@ -48,7 +48,7 @@
           </q-badge>
         </q-btn>
         <q-btn
-          v-if="!user.uid"
+          v-if="user.id === null"
           flat
           round
           dense
@@ -57,7 +57,7 @@
           to="/login"
         />
         <q-btn
-          v-if="user.uid"
+          v-if="user.id !== null"
           alt="Sair"
           flat
           round
