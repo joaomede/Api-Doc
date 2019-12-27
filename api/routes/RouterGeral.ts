@@ -1,4 +1,4 @@
-import c from '../controllers/Geral'
+import c from '../controllers/Public'
 import { Router } from 'express'
 
 const routes = Router()
