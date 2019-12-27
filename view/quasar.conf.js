@@ -8,7 +8,8 @@ module.exports = function (ctx) {
     boot: [
       'firebase',
       'axios',
-      'notify'
+      'notify',
+      'globallyMixins'
     ],
 
     css: [
