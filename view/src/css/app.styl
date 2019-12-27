@@ -9,7 +9,6 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  max-width: 700px;
   align-items: center;
   flex-direction: column;
 }
@@ -49,4 +48,39 @@
   color: #000000;
   height: 100px; 
   width: 120px;
+}
+
+.scrollArea{
+  height: calc(100% - 150px);
+  margin-top: 150px; 
+  border-right: 1px solid #ddd;
+}
+
+.fabCenter{
+  height: 75px
+  width: 75px
+  bottom: 20px; 
+  left: calc(50% - 20px)
+  z-index: 3000
+}
+
+.iconFabCenter {
+  font-size: 50px !important;
+}
+
+.fabBack{
+  left: calc(50% - 70px)
+  bottom: 35px; 
+  z-index: 3000
+}
+.fabRight{
+  right: 18px; 
+  bottom: 60px; 
+  z-index: 10
+}
+
+.fabLeft{
+  left: 18px; 
+  bottom: 60px; 
+  z-index: 10
 }
