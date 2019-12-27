@@ -19,6 +19,13 @@ export default {
       } else {
         return 'v1.0.0'
       }
+    },
+    feedID () {
+      if (this.$store.getters.getAppFeedID != null) {
+        return this.$store.getters.getAppFeedID
+      } else {
+        return null
+      }
     }
   }
 }
