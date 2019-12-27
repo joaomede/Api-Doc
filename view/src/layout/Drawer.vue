@@ -61,7 +61,7 @@
 
     <q-img
       class="absolute-top"
-      :src="bg"
+      src="../statics/bg.jpg"
       style="height: 150px"
     >
       <div class="absolute-bottom bg-transparent">
@@ -69,7 +69,7 @@
           size="56px"
           class="q-mb-sm"
         >
-          <img src="../statics/boy-avatar.png">
+          <!-- <img src="../statics/boy-avatar.png"> -->
         </q-avatar>
         <div class="text-weight-bold">
           {{ user.name }}
@@ -94,7 +94,6 @@
 </template>
 
 <script>
-import bg from '../statics/bg.jpg'
 export default {
   props: {
     width: {
@@ -105,7 +104,6 @@ export default {
   },
   data () {
     return {
-      bg: bg,
       menu: this.left
     }
   },
