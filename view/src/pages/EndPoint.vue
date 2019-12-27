@@ -78,7 +78,12 @@
 
 <script>
 export default {
-  props: ['id'],
+  props: {
+    id: {
+      type: String,
+      default: ''
+    }
+  },
   data () {
     return {
       listApiData: {},
@@ -98,22 +103,6 @@ export default {
       descriptionApi: null
     }
   },
-  computed: {
-    user () {
-      if (this.$store.getters.getUser != null) {
-        return this.$store.getters.getUser
-      } else {
-        return { uid: null, email: null }
-      }
-    },
-    userPerfil () {
-      if (this.$store.getters.getUserPerfil != null) {
-        return this.$store.getters.getUserPerfil
-      } else {
-        return { uid: null, function: null }
-      }
-    }
-  },
   watch: {
     user: 'init'
   },
@@ -121,12 +110,6 @@ export default {
     this.init()
   },
   methods: {
-    notificacao (Mensagem, Cor) {
-      this.$q.notify({
-        message: Mensagem,
-        color: Cor
-      })
-    },
     async init () {
       if (this.user.uid != null) {
         this.getApiData()
