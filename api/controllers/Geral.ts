@@ -6,7 +6,7 @@ import knexPopulate from 'knex-populate'
 
 class Geral {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public async getPublicDoc (req: NewRequest, res: Response): Promise<any> {
+  public async getApiAndEndPoints (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
 
     try {
@@ -31,7 +31,7 @@ class Geral {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public async getPublicVerb (req: NewRequest, res: Response): Promise<any> {
+  public async getVerbsAndCodes (req: NewRequest, res: Response): Promise<any> {
     const { endPointId } = req.params
 
     try {
@@ -51,7 +51,7 @@ class Geral {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public async indexPreviewAllPublicDocs (req: NewRequest, res: Response): Promise<any> {
+  public async listAllPublicApi (req: NewRequest, res: Response): Promise<any> {
     try {
       const allPublicList = await knex('api').select().where({ isPublic: true })
       resp.returnSucessObject(res, allPublicList)

@@ -179,7 +179,7 @@ export default {
     },
     async indexApiDoc () {
       try {
-        const result = await this.$axios.get(`api/geral/getpublicdoc/${this.id}`, { headers: this.user.headers })
+        const result = await this.$axios.get(`api/geral/getapiandendpoints/${this.id}`, { headers: this.user.headers })
         this.apiData = await result.data
         // console.log(this.apiData)
       } catch (error) {
@@ -188,7 +188,7 @@ export default {
     },
     async getVerbsAndCodes (endPointId, index) {
       try {
-        const result = await this.$axios.get(`api/geral/getpublicverb/${endPointId}`, { headers: this.user.headers })
+        const result = await this.$axios.get(`api/geral/getverbsandcodes/${endPointId}`, { headers: this.user.headers })
         this.$set(this.apiData.endpoint[index], 'verbs', result.data)
       } catch (error) {
         this.$notify(error, 'red')

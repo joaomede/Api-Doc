@@ -71,7 +71,7 @@ export default {
     },
     async indexPublicListDocs () {
       try {
-        const result = await this.$axios.get('api/geral/indexpreviewpublicdoc', { headers: this.user.headers })
+        const result = await this.$axios.get('api/geral/api/geral/listallpublicapi', { headers: this.user.headers })
         this.listOfApis = await result.data
         console.log(await this.listOfApis)
       } catch (error) {

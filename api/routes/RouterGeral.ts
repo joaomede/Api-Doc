@@ -3,8 +3,8 @@ import { Router } from 'express'
 
 const routes = Router()
 
-routes.get('/api/geral/getpublicdoc/:id', c.getPublicDoc)
-routes.get('/api/geral/getpublicverb/:endPointId', c.getPublicVerb)
-routes.get('/api/geral/indexpreviewpublicdoc', c.indexPreviewAllPublicDocs)
+routes.get('/api/geral/getapiandendpoints/:id', c.getApiAndEndPoints)
+routes.get('/api/geral/getverbsandcodes/:endPointId', c.getVerbsAndCodes)
+routes.get('/api/geral/api/geral/listallpublicapi', c.listAllPublicApi)
 
 export default routes
