@@ -43,6 +43,39 @@ class CodesResp {
       resp.returnErrorMessage(res, 'Erro ao tentar carregar todos os códigos respostas')
     }
   }
+
+  public async update (req: NewRequest, res: Response): Promise<any> {
+    const { id } = req.params
+
+    const newCode = {
+      typeCode: req.body.typeCode,
+      reason: req.body.reason,
+      responseModel: req.body.responseModel,
+      headers: req.body.headers
+    }
+
+    try {
+      await knex('codesresp').where({ id: id, userIdFk: req.userId }).update(newCode)
+      resp.returnSucessMessage(res, 'O Código resposta foi atualizado com sucesso')
+    } catch (error) {
+      resp.returnErrorMessage(res, 'Erro ao tentar atualizar o código resposta')
+    }
+  }
+
+  public async destroy (req: NewRequest, res: Response): Promise<any> {
+    const { id } = req.params
+
+    if (id === undefined || id === null) {
+      resp.returnErrorMessage(res, 'Não foi identificado a referência do Código resposta')
+    }
+    // precisa remover em cascata
+    try {
+      await knex('api').where({ id: id, userIdFk: req.userId }).del()
+      resp.returnSucessMessage(res, 'Código resposta apagado com sucesso')
+    } catch (error) {
+      resp.returnErrorMessage(res, 'Erro ao tentar apagar Código resposta')
+    }
+  }
 }
 
 export default new CodesResp()

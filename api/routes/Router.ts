@@ -39,5 +39,8 @@ routes.get('/api/verb/getall/:endPointId', cVerbs.index)
 // * //
 // Codes Response
 routes.post('/api/codesresp/create/:verbId', codesrespValidate.create, cCodeResp.store)
+routes.get('/api/codesresp/getall/:verbId', cCodeResp.index)
+routes.delete('/api/codesresp/delete/:id', cCodeResp.destroy)
+routes.put('/api/codesresp/update/:id', codesrespValidate.create, cCodeResp.update)
 
 export default routes
