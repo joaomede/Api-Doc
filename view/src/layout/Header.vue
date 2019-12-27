@@ -13,7 +13,7 @@
           @click="hideShowMenu()"
         />
 
-        <q-toolbar-title>{{ headerTitle }}</q-toolbar-title>
+        <q-toolbar-title>{{ headertitle }}</q-toolbar-title>
         <q-btn
           v-if="user"
           class="q-mr-xs"
@@ -28,7 +28,7 @@
             floating
             transparent
           >
-            {{ cloudVersion }}
+            {{ version }}
           </q-badge>
         </q-btn>
         <q-btn
@@ -44,7 +44,7 @@
             floating
             transparent
           >
-            {{ cloudVersion }}
+            {{ version }}
           </q-badge>
         </q-btn>
         <q-btn
@@ -66,52 +66,6 @@
           @click="logout"
         />
       </q-toolbar>
-      <q-breadcrumbs
-        v-if="$q.platform.is.mobile"
-        align="center"
-        active-color="white"
-        style="font-size: 14px"
-      >
-        <q-breadcrumbs-el
-          icon="home"
-          to="/dash"
-        />
-        <q-breadcrumbs-el
-          v-if="pastaAtual.id != null"
-          :to="'/quadro/' + pastaAtual.id"
-          :label="pastaAtual.titlePasta"
-          icon="folder"
-        />
-        <q-breadcrumbs-el
-          v-if="quadroAtual.id != null"
-          :label="quadroAtual.titleQuadro"
-          icon="folder"
-        />
-      </q-breadcrumbs>
-
-      <q-breadcrumbs
-        v-if="$q.platform.is.desktop"
-        align="center"
-        active-color="white"
-        style="font-size: 20px"
-      >
-        <q-breadcrumbs-el
-          label="Home"
-          icon="home"
-          to="/dash"
-        />
-        <q-breadcrumbs-el
-          v-if="pastaAtual.id != null"
-          :to="'/quadro/' + pastaAtual.id"
-          :label="pastaAtual.titlePasta"
-          icon="folder"
-        />
-        <q-breadcrumbs-el
-          v-if="quadroAtual.id != null"
-          :label="quadroAtual.titleQuadro"
-          icon="folder"
-        />
-      </q-breadcrumbs>
     </q-header>
   </div>
 </template>
