@@ -16,7 +16,7 @@
         style="max-width: 900px; margin: auto;"
       >
         <div class="text-h6">
-          Lista de Api's documentadas
+          Lista de Documentação de API publicas
         </div>
         <q-separator spaced />
         <q-item
@@ -25,7 +25,7 @@
           v-ripple
           clickable
           style="font-size: 18px;"
-          @click="toPageEndPoints(item)"
+          @click="toPageCompletePublicDoc(item)"
         >
           <q-item-section
             avatar
@@ -40,15 +40,12 @@
             <q-item-label lines="5">
               {{ item.apiName }}
             </q-item-label>
+
+            <q-item-label caption>
+              {{ item.descriptionApi }}
+            </q-item-label>
           </q-item-section>
-          <q-item-section
-            side
-            top
-          >
-            <q-item-section lines="1">
-              {{}}
-            </q-item-section>
-          </q-item-section>
+
           <q-separator spaced />
         </q-item>
       </q-list>
@@ -57,66 +54,32 @@
 </template>
 
 <script>
-import router from '../router'
-
 export default {
   data () {
     return {
-      listOfApis: [],
-      carregou: false
+      listOfApis: []
     }
   },
-
   computed: {
-    user () {
-      if (this.$store.getters.getUser != null) {
-        return this.$store.getters.getUser
-      } else {
-        return { uid: null, email: null }
-      }
-    },
-    listApis () {
-      if (this.$store.getters.getListApis != null) {
-        return this.$store.getters.getListApis
-      } else {
-        return null
-      }
-    },
-    carregamentoPermitido () {
-      if ((this.listApis != null) & (this.user.uid != null)) {
-        return true
-      } else {
-        return false
-      }
-    }
-  },
-  watch: {
-    carregamentoPermitido: 'init'
   },
   created () {
     this.init()
   },
   methods: {
     async init () {
-      if (this.carregamentoPermitido) {
-        await this.carregaApisList()
+      this.indexPublicListDocs()
+    },
+    async indexPublicListDocs () {
+      try {
+        const result = await this.$axios.get('api/geral/indexpreviewpublicdoc', { headers: this.user.headers })
+        this.listOfApis = await result.data
+        console.log(await this.listOfApis)
+      } catch (error) {
+        this.$notify('Erro ao carregar lista de documentação publica', 'red')
       }
     },
-    async carregaApisList () {
-      this.listOfApis = []
-      for (var i = 0; i < this.listApis.length; i++) {
-        // db.collection('app')
-        //   .doc(this.listApis[i].id)
-        //   .get()
-        //   .then(doc => {
-        //     this.listOfApis.push(doc.data())
-        //   })
-        //   .catch(() => {})
-      }
-      this.carregou = true
-    },
-    toPageEndPoints (item) {
-      router.push({ name: 'endpoints', params: { id: item.idApi } })
+    toPageCompletePublicDoc (item) {
+      this.$router.push({ name: 'DocView', params: { id: ('' + item.id) } })
     }
   }
 }
