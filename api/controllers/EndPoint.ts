@@ -20,7 +20,7 @@ class EndPoint {
 
       try {
         await knex('endpoint').insert(newEndPoint)
-        resp.returnErrorMessage(res, 'Novo EndPoint criado com sucesso')
+        resp.returnSucessMessage(res, 'Novo EndPoint criado com sucesso')
       } catch (error) {
         resp.returnErrorMessage(res, 'Erro ao tentar criar EndPoint')
       }
