@@ -8,10 +8,11 @@
   "scripts": {
     "build:dev": "rimraf dist/ && sucrase ./api -d ./dist --transforms typescript,imports",
     "dev": "nodemon api/Server.ts",
+    "start:dev": "sucrase-node api/Server.ts",
     "migrate": "sucrase-node api/db/migrate",
     "build:view": "cd view && yarn quasar build -m spa",
     "build": "webpack",
-    "start": "node api/Server.ts",
+    "start": "node dist/Server.js",
     "version": "git add -A ./",
     "postversion": "git push && git push --tags"
   },
