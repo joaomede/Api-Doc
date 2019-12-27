@@ -46,6 +46,43 @@ class Verb {
       resp.returnErrorMessage(res, 'Erro ao tentar carregar todos os EndPoints')
     }
   }
+
+  public async update (req: NewRequest, res: Response): Promise<any> {
+    const { id } = req.params
+
+    const newVerb = {
+      verbType: req.body.verbType,
+      endPoint: req.body.endPoint,
+      parameter: req.body.parameter,
+      verbValue: req.body.verbValue,
+      descriptionVerb: req.body.descriptionVerb,
+      paramsType: req.body.paramsType,
+      respValue: req.body.respValue,
+      dataType: req.body.dataType
+    }
+
+    try {
+      await knex('verb').where({ id: id, userIdFk: req.userId }).update(newVerb)
+      resp.returnSucessMessage(res, 'O verbo foi atualizado com sucesso')
+    } catch (error) {
+      resp.returnErrorMessage(res, 'Erro ao tentar atualizar o verb')
+    }
+  }
+
+  public async destroy (req: NewRequest, res: Response): Promise<any> {
+    const { id } = req.params
+
+    if (id === undefined || id === null) {
+      resp.returnErrorMessage(res, 'Não foi identificado a referência do Verbo')
+    }
+    // precisa remover em cascata
+    try {
+      await knex('api').where({ id: id, userIdFk: req.userId }).del()
+      resp.returnSucessMessage(res, 'Verbo apagado com sucesso')
+    } catch (error) {
+      resp.returnErrorMessage(res, 'Erro ao tentar apagar verbo')
+    }
+  }
 }
 
 export default new Verb()
