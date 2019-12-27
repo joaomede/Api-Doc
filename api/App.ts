@@ -5,7 +5,7 @@ import * as https from 'https'
 import router from './routes/Router'
 import routerAuth from './routes/RouterAuth'
 import routerCheckin from './routes/RouterCheckin'
-import routerGeral from './routes/RouterGeral'
+import routerGeral from './routes/RouterPublic'
 import express = require('express')
 import cors = require('cors')
 dotenv.config()
