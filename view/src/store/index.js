@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     user: null,
     version: null,
-    apisList: null
+    apisList: null,
+    appFeedId: null
   },
   getters: {
     getUser: state => {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
     getVersion (state) {
       return state.version
+    },
+    getAppFeedID (state) {
+      return state.appFeedId
     }
   },
   mutations: {
