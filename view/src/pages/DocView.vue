@@ -80,6 +80,36 @@
 
 <script>
 export default {
+  filters: {
+    verificaCor (item) {
+      if (item === 'POST') {
+        return 'text-green'
+      }
+      if (item === 'DELETE') {
+        return 'text-red'
+      }
+      if (item === 'GET') {
+        return 'text-purple'
+      }
+      if (item === 'PUT') {
+        return 'text-orange'
+      }
+    },
+    verificaLetra (item) {
+      if (item === 'POST') {
+        return 'fa fa-p'
+      }
+      if (item === 'DELETE') {
+        return 'fa fa-d'
+      }
+      if (item === 'GET') {
+        return 'fa fa-g'
+      }
+      if (item === 'PUT') {
+        return 'fa fa-u'
+      }
+    }
+  },
   props: {
     id: {
       type: String,
