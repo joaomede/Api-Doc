@@ -14,11 +14,10 @@ export default {
       }
     },
     version () {
-      if (this.$store.getters.getVersion !== null) {
-        return this.$store.getters.getVersion
-      } else {
-        return 'v1.0.0'
-      }
+      return this.$store.getters.getVersion
+    },
+    versionCloud () {
+      return this.$store.getters.getVersionCloud
     },
     feedID () {
       if (this.$store.getters.getAppFeedID != null) {

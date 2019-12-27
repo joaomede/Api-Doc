@@ -28,7 +28,7 @@
             floating
             transparent
           >
-            {{ version }}
+            {{ versionCloud }}
           </q-badge>
         </q-btn>
         <q-btn
@@ -44,7 +44,7 @@
             floating
             transparent
           >
-            {{ version }}
+            {{ versionCloud }}
           </q-badge>
         </q-btn>
         <q-btn

@@ -1,15 +1,17 @@
 import Vue, { ssrContext } from 'vue'
 import Vuex from 'vuex'
-import { Cookies } from 'quasar'
+import { Cookies, Loading, QSpinnerGears } from 'quasar'
 import { db } from '../boot/firebase'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     user: null,
     version: null,
-    apisList: null,
-    appFeedId: null
+    versionCloud: null,
+    appFeedId: null,
+    apisList: null
   },
   getters: {
     getUser: state => {
@@ -20,6 +22,9 @@ export default new Vuex.Store({
     },
     getVersion (state) {
       return state.version
+    },
+    getVersionCloud (state) {
+      return state.versionCloud
     },
     getAppFeedID (state) {
       return state.appFeedId
@@ -49,23 +54,34 @@ export default new Vuex.Store({
       }
     },
     async versionCheck (state) {
+      Loading.show({
+        spinner: QSpinnerGears,
+        spinnerColor: 'blue',
+        spinnerSize: 140,
+        backgroundColor: 'black',
+        message: 'Verificando se o aplicativo está atualizado...',
+        messageColor: 'black'
+      })
       state.version = process.env.VERSION
       state.appFeedId = process.env.APPFEED
-      let version
 
-      db
-        .collection('app')
-        .doc(state.appFeedId)
-        .collection('feed')
-        .where('novo', '==', true)
-        .onSnapshot(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            version = doc.data().tituloPostagem
+      setTimeout(() => {
+        db
+          .collection('app')
+          .doc(state.appFeedId)
+          .collection('feed')
+          .where('novo', '==', true)
+          .onSnapshot(querySnapshot => {
+            querySnapshot.forEach(doc => {
+              state.versionCloud = doc.data().tituloPostagem
+            })
+            if (state.version !== state.versionCloud) {
+              window.location.reload(true)
+            } else {
+              Loading.hide()
+            }
           })
-          if (state.version !== version) {
-            window.location.reload(true)
-          }
-        })
+      }, 3000)
     },
     setApisList (state, objeto) {
       state.apisList = objeto

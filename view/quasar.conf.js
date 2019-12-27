@@ -94,7 +94,10 @@ module.exports = function (ctx) {
       ],
 
       // Quasar plugins
-      plugins: ['Notify', 'Cookies']
+      plugins: ['Notify', 'Cookies', 'Loading'],
+      config: {
+        loading: { /* Loading defaults */ }
+      }
     },
 
     supportIE: false,
