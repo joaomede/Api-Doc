@@ -9,7 +9,7 @@ module.exports = function (ctx) {
       'boot.js',
       'main.js',
       'axios.js',
-      'nofity.js'
+      'notify.js'
     ],
 
     css: [
