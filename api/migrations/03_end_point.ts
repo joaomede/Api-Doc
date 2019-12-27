@@ -8,7 +8,7 @@ export async function up (knex: Knex): Promise<any> {
     table.text('descriptionEndPonitsType').notNullable()
     table.timestamps(true, true)
     table.integer('apiIdFk').unsigned().references('id').inTable('api').onDelete('CASCADE').index()
-    table.integer('userIdFk').unsigned().references('id').inTable('user').onDelete('CASCADE').index()
+    table.integer('userIdFk').unsigned().references('id').inTable('users').onDelete('CASCADE').index()
   })
 }
 

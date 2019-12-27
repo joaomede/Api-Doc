@@ -14,7 +14,7 @@ export async function up (knex: Knex): Promise<any> {
     table.text('dataType').notNullable()
     table.timestamps(true, true)
     table.integer('endPointIdFk').unsigned().references('id').inTable('endpoint').onDelete('CASCADE').index()
-    table.integer('userIdFk').unsigned().references('id').inTable('user').onDelete('CASCADE').index()
+    table.integer('userIdFk').unsigned().references('id').inTable('users').onDelete('CASCADE').index()
   })
 }
 

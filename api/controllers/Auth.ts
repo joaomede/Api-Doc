@@ -9,14 +9,14 @@ class Auth {
   public async register (req: Request, res: Response): Promise<any> {
     const { email, password } = req.body
     try {
-      const result = await knex('user').select().where('email', email)
+      const result = await knex('users').select().where('email', email)
       if (result.length === 0) {
         const saltRounds = 10
         const hash = bcrypt.hashSync(password, saltRounds)
         req.body.password = hash
 
         try {
-          const user = await knex('user').insert(req.body).returning('*')
+          const user = await knex('users').insert(req.body).returning('*')
           resp.returnSucessObject(res, user)
         } catch (error) {
           resp.returnErrorMessage(res, 'Erro ao tentar cadastrar o novo usuário')
@@ -34,7 +34,7 @@ class Auth {
     const { email, password } = req.body
 
     try {
-      const user = await knex('user').where({ email: email })
+      const user = await knex('users').where({ email: email })
       if (user.length === 0) {
         resp.returnErrorMessage(res, 'O usuário não foi encontrado')
       } else {

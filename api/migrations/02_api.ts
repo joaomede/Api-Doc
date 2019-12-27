@@ -9,7 +9,7 @@ export async function up (knex: Knex): Promise<any> {
     table.text('version').notNullable()
     table.boolean('isPublic').notNullable()
     table.timestamps(true, true)
-    table.integer('userIdFk').unsigned().references('id').inTable('user').onDelete('CASCADE').index()
+    table.integer('userIdFk').unsigned().references('id').inTable('users').onDelete('CASCADE').index()
   })
 }
 
