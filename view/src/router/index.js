@@ -1,34 +1,87 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import routes from './routes'
+import { Cookies } from 'quasar'
+import { http } from '../boot/axios'
+
 Vue.use(VueRouter)
 
-const Router = new VueRouter({
-  scrollBehavior: () => ({ x: 0, y: 0 }),
-  routes,
-  mode: process.env.VUE_ROUTER_MODE,
-  base: process.env.VUE_ROUTER_BASE
-})
+export default function ({ ssrContext }) {
+  let allRoutes = [
+    {
+      path: '/',
+      redirect: '/login'
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: () => import('../pages/Login')
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: () => import('../pages/About')
+    },
+    {
+      path: '/dash',
+      name: 'Dash',
+      component: () => import('../pages/Dash'),
+      meta: { requerAuth: true }
+    },
+    {
+      path: '/feedversion',
+      name: 'FeedVersion',
+      component: () => import('../pages/FeedVersion'),
+      meta: { requerAuth: true }
+    },
+    {
+      path: '/changepassword',
+      name: 'ChangePassword',
+      component: () => import('../pages/ChangePassword'),
+      meta: { requerAuth: true }
+    }
+  ]
 
-Router.beforeEach((to, from, next) => {
-  // let autorizacao = to.matched.some(record => record.meta.requerAuth)
-  // let adminAuth = to.matched.some(record => record.meta.adminAuth)
+  if (process.env.MODE !== 'ssr') {
+    allRoutes.push({
+      path: '*',
+      redirect: '/login'
+    })
+  }
+  const router = new VueRouter({
+    mode: process.env.VUE_ROUTER_MODE,
+    base: process.env.VUE_ROUTER_BASE,
+    routes: allRoutes
+  })
 
-  next()
+  router.beforeEach((to, from, next) => {
+    let autorizacao = to.matched.some(record => record.meta.requerAuth)
+    let user
+    let cookies
 
-  // if (autorizacao) {
-  //   firebase.auth().onAuthStateChanged(function (user) {
-  //     if (!user) {
-  //       next({
-  //         path: '/apidoc'
-  //       })
-  //     } else {
-  //       next()
-  //     }
-  //   })
-  // } else {
-  //   next()
-  // }
-})
+    if (process.env.MODE !== 'ssr') {
+      user = Cookies.get('user')
+    } else {
+      cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies // otherwise we're on client
+      user = cookies.get('user')
+    }
 
-export default Router
+    if (autorizacao) {
+      if (user) {
+        http
+          .get('api/auth/checkin', { headers: user.headers })
+          .then(() => {
+            next()
+          })
+          .catch(() => {
+            next({ path: '/login' })
+          })
+      } else {
+        next({ path: '/login' })
+      }
+    } else {
+      next()
+    }
+  })
+
+  return router
+}
