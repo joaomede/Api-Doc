@@ -48,6 +48,7 @@ export default {
     logout () {
       this.$q.cookies.remove('user')
       this.$store.dispatch('boot')
+      this.$router.replace('login')
     }
   }
 }
