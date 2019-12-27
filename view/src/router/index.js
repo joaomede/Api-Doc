@@ -12,8 +12,8 @@ const Router = new VueRouter({
 })
 
 Router.beforeEach((to, from, next) => {
-  let autorizacao = to.matched.some(record => record.meta.requerAuth);
-  let adminAuth = to.matched.some(record => record.meta.adminAuth);
+  let autorizacao = to.matched.some(record => record.meta.requerAuth)
+  // let adminAuth = to.matched.some(record => record.meta.adminAuth)
 
   if (autorizacao) {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -24,10 +24,10 @@ Router.beforeEach((to, from, next) => {
       } else {
         next()
       }
-    });
+    })
   } else {
     next()
   }
-});
+})
 
-export default Router;
+export default Router

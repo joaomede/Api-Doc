@@ -4,18 +4,46 @@
     <div>
       <q-card class="text-center my-card">
         <q-card-section>
-          <div class="text-h5"><strong>API:</strong> {{ this.listApiData.apiName }}</div>
-          <div class="text-h6"><strong>Versão:</strong> {{ this.listApiData.version }}</div>
-          <div class="text-h6" v-if="this.listApiData.isPublic"><strong>Documentação Pública</strong></div>
-          <div class="text-p" v-if="!this.listApiData.isPublic"><strong>Documentação Privada</strong></div>
-          <div class="text-p"><strong>Descrição:</strong> {{ this.listApiData.descriptionApi }}</div>
-          <button @click="consoleLog()">teste</button>
+          <div class="text-h5">
+            <strong>API:</strong> {{ listApiData.apiName }}
+          </div>
+          <div class="text-h6">
+            <strong>Versão:</strong> {{ listApiData.version }}
+          </div>
+          <div
+            v-if="listApiData.isPublic"
+            class="text-h6"
+          >
+            <strong>Documentação Pública</strong>
+          </div>
+          <div
+            v-if="!listApiData.isPublic"
+            class="text-p"
+          >
+            <strong>Documentação Privada</strong>
+          </div>
+          <div class="text-p">
+            <strong>Descrição:</strong> {{ listApiData.descriptionApi }}
+          </div>
+          <button @click="consoleLog()">
+            teste
+          </button>
         </q-card-section>
 
-        <q-list bordered class="rounded-borders" v-for="endpoint in listaDataDeTodosOsPoints" :key="endpoint.idEndPoints">
-          <q-expansion-item expand-separator :label="endpoint.endpointInfo.nameEndPointsType" header-class="text-black text-left">
-            <div class="text-p">{{ endpoint.endpointInfo.descriptionEndPonitsType }}</div>
-
+        <q-list
+          v-for="endpoint in listaDataDeTodosOsPoints"
+          :key="endpoint.idEndPoints"
+          bordered
+          class="rounded-borders"
+        >
+          <q-expansion-item
+            expand-separator
+            :label="endpoint.endpointInfo.nameEndPointsType"
+            header-class="text-black text-left"
+          >
+            <div class="text-p">
+              {{ endpoint.endpointInfo.descriptionEndPonitsType }}
+            </div>
 
             <!--
             <q-card>
@@ -41,8 +69,6 @@
                 </q-list>
               </q-card-section>
             </q-card> -->
-
-
           </q-expansion-item>
         </q-list>
       </q-card>
@@ -51,14 +77,11 @@
 </template>
 
 <script>
-import firebase, { firestore } from "firebase";
-import { db } from "../boot/main";
-import router from "../router";
-import moment from "moment";
+import { db } from '../boot/main'
 
 export default {
-  props: ["id"],
-  data() {
+  props: ['id'],
+  data () {
     return {
       listApiData: {},
       listaDataDeTodosOsPoints: [],
@@ -69,60 +92,79 @@ export default {
       listaTodosOsVerbos: [],
 
       leu: false,
-      //api data
+      // api data
       idApi: null,
       apiName: null,
       version: null,
       isPublic: null,
       descriptionApi: null
-    };
+    }
+  },
+  computed: {
+    user () {
+      if (this.$store.getters.getUser != null) {
+        return this.$store.getters.getUser
+      } else {
+        return { uid: null, email: null }
+      }
+    },
+    userPerfil () {
+      if (this.$store.getters.getUserPerfil != null) {
+        return this.$store.getters.getUserPerfil
+      } else {
+        return { uid: null, function: null }
+      }
+    }
   },
   watch: {
-    user: "init"
+    user: 'init'
+  },
+  created () {
+    this.init()
   },
   methods: {
-    notificacao(Mensagem, Cor) {
+    notificacao (Mensagem, Cor) {
       this.$q.notify({
         message: Mensagem,
         color: Cor
-      });
+      })
     },
-    async init() {
+    async init () {
       if (this.user.uid != null) {
-        this.getApiData();
+        this.getApiData()
       }
     },
-    consoleLog() {
-      console.log(this.listaTodosOsVerbos);
+    consoleLog () {
+      console.log(this.listaTodosOsVerbos)
     },
-    async getApiData() {
-      db.collection("app")
+    async getApiData () {
+      db.collection('app')
         .doc(this.id)
         .get()
         .then(doc => {
           if (doc.exists) {
-            if (doc.data().isPubic == false) {
-              this.notificacao("Essa documentação não é pública", "red");
+            if (doc.data().isPubic === false) {
+              this.notificacao('Essa documentação não é pública', 'red')
             } else {
-              this.listApiData = doc.data();
-              this.getUserPermissions();
-              //this.getListaTodosOsIdsDosEndPoints();
-              this.carregaEndPoints();
+              this.listApiData = doc.data()
+              this.getUserPermissions()
+              // this.getListaTodosOsIdsDosEndPoints();
+              this.carregaEndPoints()
             }
           } else {
-            this.notificacao("Essa Documentação não existe", "red");
+            this.notificacao('Essa Documentação não existe', 'red')
           }
-        });
+        })
     },
-    async carregaEndPoints() {
-      //referencia endpoints
+    async carregaEndPoints () {
+      // referencia endpoints
       let refdb = db
-        .collection("app")
+        .collection('app')
         .doc(this.id)
-        .collection("endPoints");
+        .collection('endPoints')
 
-      this.listaDataDeTodosOsPoints = [];
-      let pegaTodasAsidsEndPoints = await refdb.get();
+      this.listaDataDeTodosOsPoints = []
+      let pegaTodasAsidsEndPoints = await refdb.get()
       pegaTodasAsidsEndPoints.forEach(doc => {
         let objeto = {
           endpointInfo: doc.data(),
@@ -130,157 +172,135 @@ export default {
           verbsGet: [],
           verbsUpdate: [],
           verbsDelete: []
-        };
-        this.listaDataDeTodosOsPoints.push(objeto);
+        }
+        this.listaDataDeTodosOsPoints.push(objeto)
 
-        //this.carregaVerbos();
-      });
-      this.IdsDosVerbos();
+        // this.carregaVerbos();
+      })
+      this.IdsDosVerbos()
     },
-    async IdsDosVerbos() {
+    async IdsDosVerbos () {
       for (var index = 0; index < this.listaDataDeTodosOsPoints.length; index++) {
-        let idPoint = this.listaDataDeTodosOsPoints[index].endpointInfo.idEndPoints;
+        let idPoint = this.listaDataDeTodosOsPoints[index].endpointInfo.idEndPoints
 
-        this.listaTodosOsVerbos.push({ base: [] });
-        db.collection("app")
+        this.listaTodosOsVerbos.push({ base: [] })
+        db.collection('app')
           .doc(this.id)
-          .collection("endPoints")
+          .collection('endPoints')
           .doc(idPoint)
-          .collection("verbs")
+          .collection('verbs')
           .onSnapshot(querySnapshot => {
-            console.log(querySnapshot.size);
+            console.log(querySnapshot.size)
             querySnapshot.forEach(idsDosVerbos => {
-              this.listaTodosOsVerbos[index - 1].base.push(idsDosVerbos.data().verbId);
-            });
-          });
+              this.listaTodosOsVerbos[index - 1].base.push(idsDosVerbos.data().verbId)
+            })
+          })
       }
     },
-    async carregaVerbos() {
+    async carregaVerbos () {
       for (var index = 0; index < this.listaDataDeTodosOsPoints.length; index++) {
-        //console.log(this.listaDataDeTodosOsPoints[index].endpointInfo.idEndPoints);
+        // console.log(this.listaDataDeTodosOsPoints[index].endpointInfo.idEndPoints);
         let dsdsdsds = db
-          .collection("app")
+          .collection('app')
           .doc(this.id)
-          .collection("endPoints")
+          .collection('endPoints')
           .doc(this.listaDataDeTodosOsPoints[index].endpointInfo.idEndPoints)
-          .collection("verbs");
+          .collection('verbs')
         dsdsdsds.get().then(resultado => {
           resultado.forEach(casa => {
-            //console.log(casa.data());
-            this.listaDataDeTodosOsPoints[index - 1].verbsPost.verbs.push(casa.data());
-          });
-        });
+            // console.log(casa.data());
+            this.listaDataDeTodosOsPoints[index - 1].verbsPost.verbs.push(casa.data())
+          })
+        })
       }
     },
 
-
-    async getListaTodosOsIdsDosEndPoints() {
-      db.collection("app")
+    async getListaTodosOsIdsDosEndPoints () {
+      db.collection('app')
         .doc(this.id)
-        .collection("endPoints")
+        .collection('endPoints')
         .onSnapshot(querySnapshot => {
-          this.listOfEndPoints = [];
+          this.listOfEndPoints = []
           querySnapshot.forEach(doc => {
-            this.listOfEndPoints.push({ idEndPoints: doc.data().idEndPoints });
-          });
-          this.getTodasOsEndPoints();
-        });
+            this.listOfEndPoints.push({ idEndPoints: doc.data().idEndPoints })
+          })
+          this.getTodasOsEndPoints()
+        })
     },
-    async getTodasOsEndPoints() {
-      this.listaDataDeTodosOsPoints = [];
+    async getTodasOsEndPoints () {
+      this.listaDataDeTodosOsPoints = []
       for (var index = 0; index < this.listOfEndPoints.length; index++) {
-        db.collection("app")
+        db.collection('app')
           .doc(this.id)
-          .collection("endPoints")
+          .collection('endPoints')
           .doc(this.listOfEndPoints[index].idEndPoints)
           .get()
           .then(doc => {
             if (doc.exists) {
-              const idEndPoint = this.listOfEndPoints[index - 1].idEndPoints;
+              const idEndPoint = this.listOfEndPoints[index - 1].idEndPoints
               let objeto = {
                 endpointInfo: doc.data(),
                 verbsPost: [],
                 verbsGet: [{}],
                 verbsUpdate: [{}],
                 verbsDelete: [{}]
-              };
-              const i = index - 1;
-              this.listaDataDeTodosOsPoints.push(objeto);
-              this.getTodasAsIdsDosVerbos(idEndPoint, i);
+              }
+              const i = index - 1
+              this.listaDataDeTodosOsPoints.push(objeto)
+              this.getTodasAsIdsDosVerbos(idEndPoint, i)
             } else {
-              this.notificacao("Essa Documentação não existe", "red");
+              this.notificacao('Essa Documentação não existe', 'red')
             }
-          });
+          })
       }
     },
-    async getTodasAsIdsDosVerbos(idEndPoint, index) {
-      db.collection("app")
+    async getTodasAsIdsDosVerbos (idEndPoint, index) {
+      db.collection('app')
         .doc(this.id)
-        .collection("endPoints")
+        .collection('endPoints')
         .doc(idEndPoint)
-        .collection("verbs")
+        .collection('verbs')
         .onSnapshot(querySnapshot => {
-          this.listaTodosOsVerbos = [];
+          this.listaTodosOsVerbos = []
           querySnapshot.forEach(listaVerbos => {
-            this.listaTodosOsVerbos.push(listaVerbos.data());
-            this.getTodosOsVerbos(idEndPoint, index);
-          });
-        });
+            this.listaTodosOsVerbos.push(listaVerbos.data())
+            this.getTodosOsVerbos(idEndPoint, index)
+          })
+        })
     },
-    async getTodosOsVerbos(idEndPoint, index) {
-      console.log(index);
+    async getTodosOsVerbos (idEndPoint, index) {
+      console.log(index)
       for (var indexPost = 0; indexPost < this.listaTodosOsVerbos.length; indexPost++) {
-        let refTodosOsverbos = db
-          .collection("app")
+        db.collection('app')
           .doc(this.id)
-          .collection("endPoints")
+          .collection('endPoints')
           .doc(idEndPoint)
-          .collection("verbs")
+          .collection('verbs')
           .doc(this.listaTodosOsVerbos[indexPost].verbId)
-
           .get()
           .then(pegaVerbos => {
             if (pegaVerbos.exists) {
-              this.listaDataDeTodosOsPoints[index].verbsPost.push(pegaVerbos.data());
+              this.listaDataDeTodosOsPoints[index].verbsPost.push(pegaVerbos.data())
             } else {
-              this.notificacao("Essa Documentação não existe", "red");
+              this.notificacao('Essa Documentação não existe', 'red')
             }
-          });
+          })
       }
     },
-    async getUserPermissions() {
-      db.collection("app")
+    async getUserPermissions () {
+      db.collection('app')
         .doc(this.id)
-        .collection("users")
-        .where("uid", "==", this.user.uid)
+        .collection('users')
+        .where('uid', '==', this.user.uid)
         .onSnapshot(querySnapshot => {
-          this.userPermission = [];
+          this.userPermission = []
           querySnapshot.forEach(doc => {
-            this.userPermission.push(doc.data());
-          });
-        });
-    }
-  },
-  created() {
-    this.init();
-  },
-  computed: {
-    user() {
-      if (this.$store.getters.getUser != null) {
-        return this.$store.getters.getUser;
-      } else {
-        return { uid: null, email: null };
-      }
-    },
-    userPerfil() {
-      if (this.$store.getters.getUserPerfil != null) {
-        return this.$store.getters.getUserPerfil;
-      } else {
-        return { uid: null, function: null };
-      }
+            this.userPermission.push(doc.data())
+          })
+        })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
