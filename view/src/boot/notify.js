@@ -1,7 +1,7 @@
 import { Notify } from 'quasar'
 
 export default async ({ Vue }) => {
-  Vue.prototype.$notifiy = function (mensagem, cor) {
+  Vue.prototype.$notify = function (mensagem, cor) {
     Notify.create({
       message: mensagem,
       color: cor
