@@ -167,7 +167,7 @@
       >
         <q-toolbar>
           <q-toolbar-title style="font-size: 15px;">
-            Por Symbol 2 Studio - 2019 ({{ this.versaoAtual }})
+            Por Symbol 2 Studio - 2019 ({{ versaoAtual }})
           </q-toolbar-title>
         </q-toolbar>
       </q-footer>
@@ -176,8 +176,7 @@
 </template>
 
 <script>
-import firebase from 'firebase'
-import { db, dbfeed } from './boot/main'
+// import { db } from './boot/main'
 // import moment from "moment";
 export default {
   name: 'App',
@@ -218,20 +217,6 @@ export default {
       if (this.user.uid != null) {
         this.listApisUser()
       }
-    },
-    listApisUser () {
-      db.collection('users')
-        .doc(this.user.uid)
-        .collection('apis')
-        .onSnapshot(querySnapshot => {
-          const listApis = []
-          querySnapshot.forEach(doc => {
-            listApis.push({
-              id: doc.data().id
-            })
-            this.$store.dispatch('setApisList', listApis)
-          })
-        })
     }
   }
 }

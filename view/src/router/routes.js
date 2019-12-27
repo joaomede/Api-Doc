@@ -1,59 +1,49 @@
 
 const routes = [
   {
-    path: '*',
-    redirect: '/apidoc'
-  },
-  {
     path: '/',
     redirect: '/apidoc'
   },
   {
     path: '/apidoc',
-    name: 'apidoc',
-    component: () => import('../pages/apidoc')
+    name: 'ApiDoc',
+    component: () => import('../pages/ApiDoc')
   },
   {
-    path: '/sobre',
-    name: 'sobre',
-    component: () => import('../pages/sobre')
+    path: '/about',
+    name: 'About',
+    component: () => import('../pages/About')
   },
   {
     path: '/dash',
-    name: 'dash',
-    component: () => import('../pages/dash'),
-    meta: { requerAuth: true }
-  },
-  {
-    path: '/feedversion',
-    name: 'feedversion',
-    component: () => import('../pages/feedversion'),
+    name: 'Dash',
+    component: () => import('../pages/Dash'),
     meta: { requerAuth: true }
   },
   {
     path: '/login',
-    name: 'login',
-    component: () => import('../pages/login')
+    name: 'Login',
+    component: () => import('../pages/Login')
   },
   {
-    path: '/trocasenha',
-    name: 'trocasenha',
-    component: () => import('../pages/trocasenha'),
+    path: '/changepassword',
+    name: 'ChangePassword',
+    component: () => import('../pages/ChangePassword'),
     meta: { requerAuth: true }
   },
   {
-    path: '/endpoints/:id',
-    name: 'endpoints',
-    component: () => import('../components/endpoints'),
+    path: '/endpoint/:id',
+    name: 'EndPoint',
+    component: () => import('../pages/EndPoint'),
     props: true
   }
 ]
 
 // Always leave this as last one
 if (process.env.MODE !== 'ssr') {
-  /* routes.push({
+  routes.push({
     path: '*',
-    component: () => import('pages/Error404.vue')
-  }) */
+    component: () => import('pages/ApiDoc')
+  })
 }
 export default routes

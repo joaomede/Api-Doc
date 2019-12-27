@@ -11,7 +11,7 @@
       <div class="centralDiv">
         <q-card-section>
           <div class="text-h5 text-bold">
-            Sistema desenvolvido pela Symbol 2 Studio - João Medeiros (2019 - {{ this.versaoAtual }})
+            Sistema desenvolvido pela Symbol 2 Studio - João Medeiros (2019 - {{ versaoAtual }})
           </div>
           <div class="text-h6">
             Contatos: (11) 96849-8492

@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Firebase from 'firebase'
-// import { db, timestamp } from "../boot/main";
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -20,7 +17,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setUser: state => {
-      state.user = Firebase.auth().currentUser
+
     },
     setApisList (state, objeto) {
       state.apisList = objeto

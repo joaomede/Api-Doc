@@ -58,7 +58,7 @@
 
 <script>
 import router from '../router'
-import { db } from '../boot/main'
+
 export default {
   data () {
     return {
@@ -105,13 +105,13 @@ export default {
     async carregaApisList () {
       this.listOfApis = []
       for (var i = 0; i < this.listApis.length; i++) {
-        db.collection('app')
-          .doc(this.listApis[i].id)
-          .get()
-          .then(doc => {
-            this.listOfApis.push(doc.data())
-          })
-          .catch(() => {})
+        // db.collection('app')
+        //   .doc(this.listApis[i].id)
+        //   .get()
+        //   .then(doc => {
+        //     this.listOfApis.push(doc.data())
+        //   })
+        //   .catch(() => {})
       }
       this.carregou = true
     },
