@@ -1,11 +1,11 @@
 
 <template>
   <div class="centralDiv q-pa-xs text-center">
-    <div>
+    <div class="centralDiv">
       <q-card
         v-if="renderComponent"
         class="text-center my-card"
-        style="width: auto;"
+        style="max-width: 100%;"
       >
         <q-card-section>
           <div class="text-h5">
@@ -29,11 +29,13 @@
           <div class="text-p">
             <strong>Descrição:</strong> {{ lista.descriptionApi }}
           </div>
-          <button @click="consoleLog()">
+          <button @click="fakeDelete()">
             teste
           </button>
         </q-card-section>
-
+        <div class="text-h6">
+          Todos os endpoints:
+        </div>
         <q-list
           v-for="(endpoint, indexEndPoint) in lista.endpoint"
           :key="endpoint.id"
@@ -47,7 +49,7 @@
             @show="getVerbsAndCodes(endpoint.id, indexEndPoint)"
           >
             <div class="text-p">
-              {{ endpoint.descriptionEndPonitsType }}
+              Descrição da entidade: {{ endpoint.descriptionEndPonitsType }}
             </div>
 
             <q-card>
@@ -58,13 +60,45 @@
                 >
                   <q-expansion-item
                     expand-separator
-                    icon="fa fa-p"
+                    :icon="verb.verbType | verificaLetra"
                     :label="verb.verbType"
-                    header-class="text-green"
+                    :header-class="verb.verbType | verificaCor"
                   >
                     <q-card>
-                      <q-card-section>
-                        {{ verb.verbType }}
+                      <q-card-section class="text-left">
+                        Endpoint: {{ verb.endPoint }} <br>
+                        Parameter: {{ verb.parameter }} <br>
+                        verbValue: {{ verb.verbValue }} <br>
+                        descriptionVerb: {{ verb.descriptionVerb }} <br>
+                        paramsType: {{ verb.paramsType }} <br>
+                        respValue: {{ verb.respValue }} <br>
+                        dataType: {{ verb.dataType }} <br>
+                        <q-card>
+                          <q-card-section>
+                            <div class="text-h6">
+                              Codes Response
+                            </div>
+                            <q-list
+                              v-for="codes in verb.codesresp"
+                              :key="codes.id"
+                            >
+                              <q-expansion-item
+                                expand-separator
+                                icon="a"
+                                :label="codes.typeCode"
+                                header-class="a"
+                              >
+                                <q-card>
+                                  <q-card-section>
+                                    reason: {{ codes.reason }} <br>
+                                    responseModel: {{ codes.responseModel }} <br>
+                                    headers: {{ codes.headers }} <br>
+                                  </q-card-section>
+                                </q-card>
+                              </q-expansion-item>
+                            </q-list>
+                          </q-card-section>
+                        </q-card>
                       </q-card-section>
                     </q-card>
                   </q-expansion-item>
@@ -135,6 +169,11 @@ export default {
     this.init()
   },
   methods: {
+    fakeDelete () {
+      console.log(this.apiData.endpoint[0].verbs[0])
+      this.$delete(this.apiData.endpoint[0].verbs, 0)
+      console.log(this.apiData.endpoint[0].verbs[0])
+    },
     init () {
       this.indexApiDoc()
     },
@@ -150,23 +189,10 @@ export default {
     async getVerbsAndCodes (endPointId, index) {
       try {
         const result = await this.$axios.get(`api/geral/getpublicverb/${endPointId}`, { headers: this.user.headers })
-        this.forceRerender()
-        this.apiData.endpoint[index].verbs = await result.data
-
-        // console.log(this.apiData.endpoint[index])
+        this.$set(this.apiData.endpoint[index], 'verbs', result.data)
       } catch (error) {
-        console.log(error)
         this.$notify(error, 'red')
       }
-    },
-    forceRerender () {
-      // Remove my-component from the DOM
-      this.renderComponent = false
-
-      this.$nextTick(() => {
-        // Add the component back in
-        this.renderComponent = true
-      })
     }
   }
 }
