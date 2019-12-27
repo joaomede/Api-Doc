@@ -4,7 +4,8 @@ export default {
       if (this.$store.getters.getUser != null) {
         return this.$store.getters.getUser
       } else {
-        return { id: null,
+        return {
+          id: null,
           email: 'email@email.com',
           name: 'Nothing',
           headers: {
