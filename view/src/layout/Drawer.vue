@@ -21,7 +21,7 @@
         </q-item>
 
         <q-item
-          v-if="user"
+          v-if="user.id !== null"
           v-ripple
           clickable
           to="feedversion"
@@ -33,10 +33,10 @@
         </q-item>
 
         <q-item
-          v-if="user"
+          v-if="user.id !== null"
           v-ripple
           clickable
-          to="/trocarsenha"
+          to="/changepassword"
         >
           <q-item-section avatar>
             <q-icon name="vpn_key" />
@@ -48,13 +48,13 @@
         <q-item
           v-ripple
           clickable
-          to="/sobre"
+          to="/about"
         >
           <q-item-section avatar>
             <q-icon name="question_answer" />
           </q-item-section>
 
-          <q-item-section>Sobre</q-item-section>
+          <q-item-section>About</q-item-section>
         </q-item>
       </q-list>
     </q-scroll-area>
