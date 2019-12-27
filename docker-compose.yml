@@ -1,0 +1,54 @@
+version: "3.3"
+
+services:
+  pg:
+    image: postgres:11.5-alpine
+    container_name: pg-database
+    env_file:
+      - .env
+    ports:
+      - ${PORTDB}:5432
+    expose:
+      - "5432"
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    networks:
+      - redePostgres
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - "8888:80"
+    depends_on:
+      - pg
+    networks:
+      - redePostgres
+
+  server:
+    image: joaomede/nodejs12prod:1.0
+    container_name: "server-api-doc"
+    ports:
+      - ${HTTPSERVERPORT}:${HTTPSERVERPORT}
+      - ${APIPORT}:${APIPORT}
+    depends_on:
+      - pg
+    links:
+      - pg
+    env_file:
+      - .env
+    command: node dist/server
+    expose:
+      - ${HTTPSERVERPORT}
+      - ${APIPORT}
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - redePostgres
+
+networks:
+  redePostgres:
+    driver: bridge
