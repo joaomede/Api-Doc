@@ -2,7 +2,7 @@
 ## By João Medeiros - <symbol2studio@gmail.com>
 
 PORT=$(grep -Po '(?<=^APIPORT=)\w*$' .env)
-ENDPOINT='auth/register'
+ENDPOINT='api/auth/register'
 URL='http://127.0.0.1:'$PORT/$ENDPOINT
 
 HEADER='"Content-type: application/json"'
@@ -12,5 +12,5 @@ read -p "Informe a senha: " password
 
 curl \
   -H "Content-Type: application/json" \
-  --data '{"name": '\"$name\"', "email": '\"$email\"', "password": '\"$password\"', "caixa_atual": '\"$caixa_atual\"'}' \
+  --data '{"name": '\"$name\"', "email": '\"$email\"', "password": '\"$password\"'}' \
   -X POST $URL
