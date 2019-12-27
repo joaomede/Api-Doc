@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
+  <div class="centralDiv q-pa-xs text-center">
     <q-form>
       <q-card class="my-card">
         <q-card-section>
@@ -41,54 +41,10 @@
         </q-card-section>
       </q-card>
     </q-form>
-
-    <!-- caixa de diálogo adiciona pasta -->
-    <q-dialog
-      v-model="dialogoEsqueciSenha"
-      transition-show="rotate"
-      transition-hide="rotate"
-    >
-      <q-card>
-        <q-card-section>
-          <div class="text-h6">
-            Recupere seu acesso
-          </div>
-        </q-card-section>
-
-        <q-card-section>
-          <q-form class="q-gutter-md">
-            <q-input
-              v-model="emailRecuperacao"
-              label="Informe seu email de recuperação"
-              required
-            />
-          </q-form>
-        </q-card-section>
-
-        <q-card-section>
-          <q-btn
-            color="primary"
-            @click="RecuperaAcesso"
-          >
-            Recuperar Acesso
-          </q-btn>
-        </q-card-section>
-
-        <q-card-section>
-          <q-btn
-            color="primary"
-            @click.stop="dialogoEsqueciSenha = false"
-          >
-            Voltar
-          </q-btn>
-        </q-card-section>
-      </q-card>
-    </q-dialog>
   </div>
 </template>
 
 <script>
-import firebase from 'firebase'
 export default {
   name: 'Login',
   data: () => ({
@@ -100,39 +56,39 @@ export default {
     emailRules: [v => !!v || 'E-mail é requerido', v => /.+@.+/.test(v) || 'E-mail precisa ser válido'],
     senhaRules: [v => !!v || 'Senha é requerida', v => v.length >= 6 || 'Precisa ter mais de 6 dígitos']
   }),
+  computed: {
+    user () {
+      return this.$store.getters.getUser
+    }
+  },
   created () {
     this.verificaEstaLogado()
   },
   methods: {
-    Notificacao (Mensagem, Cor) {
-      this.$q.notify({
-        message: Mensagem,
-        color: Cor
-      })
-    },
-    login () {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.senha)
-        .then(data => {
-          // this.gravaUltimoAcesso();
-        })
-        .catch(e => {
-          this.Notificacao('Problemas na autenticação, verifique o e-mail e senha', 'red')
-        })
-    },
-    RecuperaAcesso () {
-      firebase
-        .auth()
-        .sendPasswordResetEmail(this.emailRecuperacao)
-        .then(() => {
-          this.Notificacao('Email de recuperação enviado com sucesso', 'green')
-        })
-      this.dialogoEsqueciSenha = false
+    async login () {
+      try {
+        const result = await this.$axios.post('api/auth/login', { email: this.email, password: this.senha })
+        const { id, email, name } = await result.data.user
+        const token = await result.data.token
+        const user = {
+          id: id,
+          name: name,
+          email: email,
+          headers: {
+            Authorization: 'Bearer ' + token
+          }
+        }
+        await this.$q.cookies.set('user', user)
+        await this.$store.dispatch('boot')
+        this.$router.replace('dash')
+        this.$notify(`Bem vindo de volta ${result.data.user.name}!`, 'green')
+      } catch (error) {
+        this.$notify('Erro ao tentar efetuar o login', 'red')
+      }
     },
     verificaEstaLogado () {
       if (this.$store.getters.getUser != null) {
-        this.$router.replace('inicial')
+        this.$router.replace('dash')
       }
     }
   }
