@@ -21,7 +21,6 @@
     </q-btn>
     <div class="centralDiv">
       <q-card
-        v-if="renderComponent"
         class="text-center my-card"
         style="max-width: 100%;"
       >
@@ -47,13 +46,15 @@
           <div class="text-p">
             <strong>Descrição:</strong> {{ lista.descriptionApi }}
           </div>
-          <button @click="fakeDelete()">
-            teste
-          </button>
         </q-card-section>
         <div class="text-h6">
-          Todos os endpoints:
+          Todos os endpoints
         </div>
+
+        <q-btn @click="dialogAddNewEndPoint = true">
+          Criar Novo Endpoint
+        </q-btn>
+
         <q-list
           v-for="(endpoint, indexEndPoint) in lista.endpoint"
           :key="endpoint.id"
@@ -69,6 +70,10 @@
             <div class="text-p">
               Descrição da entidade: {{ endpoint.descriptionEndPonitsType }}
             </div>
+
+            <q-btn @click="dialogAddNewVerb = true; endpointId = endpoint.id, endpointIndex = indexEndPoint">
+              Criar Novo Verbo
+            </q-btn>
 
             <q-card>
               <q-card-section>
