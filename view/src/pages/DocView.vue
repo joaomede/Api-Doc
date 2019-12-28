@@ -16,6 +16,12 @@
       @eventClose="dialogAddNewResponses = false"
       @save="storeNewResponses($event)"
     />
+
+    <DialogConfirmDelete
+      :dialog="dialogConfirmDeleteTag"
+      @eventClose="dialogConfirmDeleteTag = false"
+      @confirm="deleteTag()"
+    />
     <div
       class="centralDiv"
     >
@@ -100,19 +106,9 @@
                 <q-icon
                   class="text-right"
                   side
-                  name="add"
+                  name="delete"
                   color="primary"
-                  @click.stop="dialogAddNewPaths = true; tagId = tags.id; tagIndex = indexTags;"
-                />
-              </q-item-section>
-
-              <q-item-section side>
-                <q-icon
-                  class="text-right"
-                  side
-                  name="delete_sweep"
-                  color="primary"
-                  @click.stop="exibeDeletaLote(item)"
+                  @click.stop="dialogConfirmDeleteTag = true; tag = tags; tagIndex = indexTags;"
                 />
               </q-item-section>
             </q-item>
@@ -120,9 +116,22 @@
 
             <q-card style="background-color: #fff9f0">
               <q-card-section>
-                <div class="text-h6">
-                  <strong>Paths relacionados a tag:</strong> {{ tags.nameTag }}
-                </div>
+                <q-item>
+                  <q-item-section>
+                    <div class="text-h6">
+                      <strong>Paths relacionados a tag:</strong> {{ tags.nameTag }}
+                    </div>
+                  </q-item-section>
+                  <q-item-section side>
+                    <q-icon
+                      class="text-right"
+                      side
+                      name="add"
+                      color="primary"
+                      @click.stop="dialogAddNewPaths = true; tag = tags; tagIndex = indexTags;"
+                    />
+                  </q-item-section>
+                </q-item>
 
                 <q-card>
                   <q-list
@@ -141,15 +150,28 @@
                           class="text-left"
                           :style="paths.verbType | filtrarCorBackground"
                         >
-                          <q-item>
-                            Paths: {{ paths.path }} <br>
-                            Parameter: {{ paths.parameter }} <br>
-                            verbValue: {{ paths.verbValue }} <br>
-                            descriptionVerb: {{ paths.descriptionVerb }} <br>
-                            paramsType: {{ paths.paramsType }} <br>
-                            respValue: {{ paths.respValue }} <br>
-                            dataType: {{ paths.dataType }} <br>
-                          </q-item>
+                          <q-card-section>
+                            <q-item>
+                              <q-item-section>
+                                Paths: {{ paths.path }} <br>
+                                Parameter: {{ paths.parameter }} <br>
+                                verbValue: {{ paths.verbValue }} <br>
+                                descriptionVerb: {{ paths.descriptionVerb }} <br>
+                                paramsType: {{ paths.paramsType }} <br>
+                                respValue: {{ paths.respValue }} <br>
+                                dataType: {{ paths.dataType }} <br>
+                              </q-item-section>
+                              <q-item-section side>
+                                <q-icon
+                                  class="text-right"
+                                  side
+                                  name="delete_sweep"
+                                  color="primary"
+                                  @click.stop="exibeDeletaLote(item)"
+                                />
+                              </q-item-section>
+                            </q-item>
+                          </q-card-section>
                           <q-card>
                             <q-card-section>
                               <div class="text-h6">
@@ -202,20 +224,22 @@ import DialogAddNewTags from '../components/dialog/DialogAddNewTags'
 import DialogAddNewPaths from '../components/dialog/DialogAddNewPaths'
 import DialogAddNewResponses from '../components/dialog/DialogAddNewResponses'
 
+import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
+
 export default {
   filters: {
     filtrarCorBackground (item) {
       if (item === 'POST') {
-        return 'background-color: #4caf5026'
+        return 'background-color: #4caf5018'
       }
       if (item === 'DELETE') {
-        return 'background-color: #f4433626'
+        return 'background-color: #f4433618'
       }
       if (item === 'GET') {
-        return 'background-color: #9c27b026'
+        return 'background-color: #9c27b018'
       }
       if (item === 'PUT') {
-        return 'background-color: #ff980026'
+        return 'background-color: #ff980018'
       }
     },
     verificaCor (item) {
@@ -250,7 +274,8 @@ export default {
   components: {
     DialogAddNewTags,
     DialogAddNewPaths,
-    DialogAddNewResponses
+    DialogAddNewResponses,
+    DialogConfirmDelete
   },
   props: {
     id: {
@@ -265,6 +290,11 @@ export default {
       dialogAddNewTags: false,
       dialogAddNewPaths: false,
       dialogAddNewResponses: false,
+      dialogConfirmDeleteTag: false,
+
+      tag: {
+        id: ''
+      },
 
       tagId: null,
       tagIndex: null,
@@ -285,6 +315,16 @@ export default {
     this.init()
   },
   methods: {
+    async deleteTag () {
+      try {
+        const result = await this.$axios.delete(`api/tags/delete/${this.tag.id}`, { headers: this.user.headers })
+        this.$delete(this.apiData.tags, this.tagIndex)
+        this.dialogConfirmDeleteTag = false
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
+    },
     fakeDelete () {
       console.log(this.apiData.tags[0].paths[0])
       this.$delete(this.apiData.tags[0].paths, 0)
@@ -295,10 +335,10 @@ export default {
     },
     async storeNewEndPoint (newEndPoint) {
       try {
-        await this.$axios.post(`api/tags/create/${this.id}`, newEndPoint, { headers: this.user.headers })
+        const result = await this.$axios.post(`api/tags/create/${this.id}`, newEndPoint, { headers: this.user.headers })
         this.dialogAddNewTags = false
         this.indexApiDoc()
-        this.$notify('Novo tags criado com sucesso', 'green')
+        this.$notify(await result.data.ok, 'green')
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
       }
