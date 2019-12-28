@@ -22,6 +22,19 @@
       @eventClose="dialogConfirmDeleteTag = false"
       @confirm="deleteTag()"
     />
+
+    <DialogConfirmDelete
+      :dialog="dialogConfirmDeletePaths"
+      @eventClose="dialogConfirmDeletePaths = false"
+      @confirm="deletePaths()"
+    />
+
+    <DialogConfirmDelete
+      :dialog="dialogConfirmDeleteResponses"
+      @eventClose="dialogConfirmDeleteResponses = false"
+      @confirm="deleteResponses()"
+    />
+
     <div
       class="centralDiv"
     >
@@ -290,9 +303,20 @@ export default {
       dialogAddNewTags: false,
       dialogAddNewPaths: false,
       dialogAddNewResponses: false,
+
       dialogConfirmDeleteTag: false,
+      dialogConfirmDeletePaths: false,
+      dialogConfirmDeleteResponses: false,
 
       tag: {
+        id: ''
+      },
+
+      path: {
+        id: ''
+      },
+
+      response: {
         id: ''
       },
 
