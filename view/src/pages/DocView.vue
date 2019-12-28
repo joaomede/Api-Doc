@@ -261,7 +261,7 @@ export default {
     async storeNewResponses (newResponses) {
       try {
         const result = await this.$axios.post(`api/responses/create/${this.pathId}`, newResponses, { headers: this.user.headers })
-        this.dialogAddNewPaths = false
+        this.dialogAddNewResponses = false
         let index
         if (this.apiData.tags[this.tagIndex].paths[this.pathIndex].responses === undefined) {
           index = 0
