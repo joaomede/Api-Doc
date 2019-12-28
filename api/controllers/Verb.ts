@@ -13,7 +13,7 @@ class Verb {
       resp.returnErrorMessage(res, 'Não foi identificado o endpoint referência')
     }
     try {
-      await knex('verb').insert({
+      const result = await knex('verb').insert({
         verbType: verbType,
         endPoint: endPoint,
         parameter: parameter,
@@ -24,8 +24,8 @@ class Verb {
         dataType: dataType,
         endPointIdFk: endPointId,
         userIdFk: req.userId
-      })
-      resp.returnSucessMessage(res, 'Verbo criado com sucesso')
+      }).returning('*')
+      resp.returnSucessObject(res, result)
     } catch (error) {
       resp.returnErrorMessage(res, error)
     }
