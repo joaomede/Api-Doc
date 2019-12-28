@@ -16,13 +16,12 @@
       @eventClose="dialogAddNewResponses = false"
       @save="storeNewResponses($event)"
     />
-    <q-btn @click="teste()">
-      teste
-    </q-btn>
-    <div class="centralDiv">
+    <div
+      class="centralDiv"
+    >
       <q-card
         class="text-center my-card"
-        style="max-width: 100%;"
+        style="max-width: 100%; background-color: #fff9f0"
       >
         <q-card-section>
           <div class="text-h5">
@@ -56,18 +55,30 @@
             <strong>Descrição:</strong> {{ lista.descriptionApi }}
           </div>
         </q-card-section>
-        <div class="text-h6">
-          Todos os endpoints
-        </div>
 
-        <q-btn @click="dialogAddNewTags = true">
-          Criar Novo Endpoint
-        </q-btn>
+        <q-item>
+          <q-item-section>
+            <div class="text-h6">
+              Todas as Tags
+            </div>
+          </q-item-section>
+
+          <q-item-section side>
+            <q-icon
+              class="text-right"
+              side
+              name="add"
+              color="primary"
+              @click.stop="dialogAddNewTags = true"
+            />
+          </q-item-section>
+        </q-item>
 
         <q-list
           v-for="(tags, indexTags) in lista.tags"
           :key="tags.id"
           bordered
+          style="background-color: #f5f7f6"
           class="rounded-borders"
         >
           <q-expansion-item
@@ -76,70 +87,107 @@
             header-class="text-black text-left"
             @show="getVerbsAndCodes(tags.id, indexTags)"
           >
-            <div class="text-p">
-              Descrição da entidade: {{ tags.descriptionTag }}
-            </div>
+            <q-item>
+              <q-item-section>
+                <q-item-label lines="5">
+                  <div class="text-p">
+                    <strong>Descrição da Tag:</strong> {{ tags.descriptionTag }}
+                  </div>
+                </q-item-label>
+              </q-item-section>
 
-            <q-btn @click="dialogAddNewPaths = true; tagId = tags.id; tagIndex = indexTags;">
-              Criar Novo Verbo
-            </q-btn>
+              <q-item-section side>
+                <q-icon
+                  class="text-right"
+                  side
+                  name="add"
+                  color="primary"
+                  @click.stop="dialogAddNewPaths = true; tagId = tags.id; tagIndex = indexTags;"
+                />
+              </q-item-section>
 
-            <q-card>
+              <q-item-section side>
+                <q-icon
+                  class="text-right"
+                  side
+                  name="delete_sweep"
+                  color="primary"
+                  @click.stop="exibeDeletaLote(item)"
+                />
+              </q-item-section>
+            </q-item>
+            <q-separator spaced />
+
+            <q-card style="background-color: #fff9f0">
               <q-card-section>
-                <q-list
-                  v-for="(paths, indexPath) in tags.paths"
-                  :key="paths.id"
-                >
-                  <q-expansion-item
-                    expand-separator
-                    :icon="paths.verbType | verificaLetra"
-                    :label="paths.verbType"
-                    :header-class="paths.verbType | verificaCor"
+                <div class="text-h6">
+                  <strong>Paths relacionados a tag:</strong> {{ tags.nameTag }}
+                </div>
+
+                <q-card>
+                  <q-list
+                    v-for="(paths, indexPath) in tags.paths"
+                    :key="paths.id"
                   >
-                    <q-card>
-                      <q-card-section class="text-left">
-                        Paths: {{ paths.path }} <br>
-                        Parameter: {{ paths.parameter }} <br>
-                        verbValue: {{ paths.verbValue }} <br>
-                        descriptionVerb: {{ paths.descriptionVerb }} <br>
-                        paramsType: {{ paths.paramsType }} <br>
-                        respValue: {{ paths.respValue }} <br>
-                        dataType: {{ paths.dataType }} <br>
-                        <q-card>
-                          <q-card-section>
-                            <div class="text-h6">
-                              Responses
-                            </div>
+                    <q-expansion-item
+                      expand-separator
+                      :icon="paths.verbType | verificaLetra"
+                      :label="paths.verbType"
+                      :caption="`Path: ${paths.path}`"
+                      :header-class="paths.verbType | verificaCor"
+                    >
+                      <q-card>
+                        <q-card-section
+                          class="text-left"
+                          :style="paths.verbType | filtrarCorBackground"
+                        >
+                          <q-item>
+                            Paths: {{ paths.path }} <br>
+                            Parameter: {{ paths.parameter }} <br>
+                            verbValue: {{ paths.verbValue }} <br>
+                            descriptionVerb: {{ paths.descriptionVerb }} <br>
+                            paramsType: {{ paths.paramsType }} <br>
+                            respValue: {{ paths.respValue }} <br>
+                            dataType: {{ paths.dataType }} <br>
+                          </q-item>
+                          <q-card>
+                            <q-card-section>
+                              <div class="text-h6">
+                                Responses
+                              </div>
 
-                            <q-btn @click="dialogAddNewResponses = true; pathId = paths.id; tagIndex = indexTags; pathIndex = indexPath">
-                              Criar Novo Verbo
-                            </q-btn>
+                              <q-btn @click="dialogAddNewResponses = true; pathId = paths.id; tagIndex = indexTags; pathIndex = indexPath">
+                                Criar Novo Verbo
+                              </q-btn>
 
-                            <q-list
-                              v-for="codes in paths.responses"
-                              :key="codes.id"
-                            >
-                              <q-expansion-item
-                                expand-separator
-                                icon="a"
-                                :label="codes.typeCode"
-                                header-class="a"
+                              <q-list
+                                v-for="codes in paths.responses"
+                                :key="codes.id"
                               >
-                                <q-card>
-                                  <q-card-section>
-                                    reason: {{ codes.reason }} <br>
-                                    responseModel: {{ codes.responseModel }} <br>
-                                    headers: {{ codes.headers }} <br>
-                                  </q-card-section>
-                                </q-card>
-                              </q-expansion-item>
-                            </q-list>
-                          </q-card-section>
-                        </q-card>
-                      </q-card-section>
-                    </q-card>
-                  </q-expansion-item>
-                </q-list>
+                                <q-expansion-item
+                                  expand-separator
+                                  icon="a"
+                                  :label="codes.typeCode"
+                                  header-class="a"
+                                >
+                                  <q-card>
+                                    <q-card-section>
+                                      reason: {{ codes.reason }} <br>
+                                      responseModel: {{ codes.responseModel }} <br>
+                                      headers: {{ codes.headers }} <br>
+                                    </q-card-section>
+                                  </q-card>
+                                </q-expansion-item>
+                                <q-separator />
+                              </q-list>
+                            </q-card-section>
+                          </q-card>
+                        </q-card-section>
+                      </q-card>
+                    </q-expansion-item>
+                    <q-separator />
+                  </q-list>
+                </q-card>
               </q-card-section>
             </q-card>
           </q-expansion-item>
@@ -156,6 +204,20 @@ import DialogAddNewResponses from '../components/dialog/DialogAddNewResponses'
 
 export default {
   filters: {
+    filtrarCorBackground (item) {
+      if (item === 'POST') {
+        return 'background-color: #4caf5026'
+      }
+      if (item === 'DELETE') {
+        return 'background-color: #f4433626'
+      }
+      if (item === 'GET') {
+        return 'background-color: #9c27b026'
+      }
+      if (item === 'PUT') {
+        return 'background-color: #ff980026'
+      }
+    },
     verificaCor (item) {
       if (item === 'POST') {
         return 'text-green'
