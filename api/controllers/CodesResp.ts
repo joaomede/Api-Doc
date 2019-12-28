@@ -44,6 +44,7 @@ class CodesResp {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async update (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
 
@@ -62,6 +63,7 @@ class CodesResp {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async destroy (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
 
