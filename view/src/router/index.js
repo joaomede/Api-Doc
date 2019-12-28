@@ -28,6 +28,18 @@ export default function ({ ssrContext }) {
       meta: { requerAuth: true }
     },
     {
+      path: '/publicdocs',
+      name: 'PublicList',
+      component: () => import('../pages/PublicList'),
+      meta: { requerAuth: true }
+    },
+    {
+      path: '/privatedocs',
+      name: 'PrivateList',
+      component: () => import('../pages/PrivateList'),
+      meta: { requerAuth: true }
+    },
+    {
       path: '/feedversion',
       name: 'FeedVersion',
       component: () => import('../pages/FeedVersion'),
