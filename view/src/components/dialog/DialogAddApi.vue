@@ -41,6 +41,26 @@
       </q-card-section>
 
       <q-card-section>
+        <q-form class="q-gutter-md">
+          <q-input
+            v-model="form.email"
+            label="Informe a versão atual da api"
+            required
+          />
+        </q-form>
+      </q-card-section>
+
+      <q-card-section>
+        <q-form class="q-gutter-md">
+          <q-input
+            v-model="form.license"
+            label="Informe a versão atual da api"
+            required
+          />
+        </q-form>
+      </q-card-section>
+
+      <q-card-section>
         <div class="q-gutter-sm">
           <q-checkbox
             v-model="form.isPublic"
@@ -84,6 +104,8 @@ export default {
         apiName: '',
         descriptionApi: '',
         version: '',
+        email: '',
+        license: '',
         isPublic: false
       },
       dialogPopup: this.dialog
@@ -109,8 +131,9 @@ export default {
         apiName: '',
         descriptionApi: '',
         version: '',
-        isPublic: false
-      }
+        email: '',
+        license: '',
+        isPublic: false }
     }
   }
 }

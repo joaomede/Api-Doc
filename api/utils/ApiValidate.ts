@@ -7,6 +7,8 @@ function apiSchema (): Joi.ObjectSchema<object> {
     apiName: Joi.string().required(),
     descriptionApi: Joi.string().required(),
     version: Joi.string().required(),
+    email: Joi.string().required(),
+    license: Joi.string().required(),
     isPublic: Joi.boolean().required()
   })
 }
