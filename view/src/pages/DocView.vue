@@ -1,17 +1,17 @@
 
 <template>
   <div class="centralDiv q-pa-xs text-center">
-    <DialogAddNewEndPoint
+    <DialogAddNewTags
       :dialog="dialogAddNewEndPoint"
       @eventClose="dialogAddNewEndPoint = false"
       @save="storeNewEndPoint($event)"
     />
-    <DialogAddNewVerb
+    <DialogAddNewPaths
       :dialog="dialogAddNewVerb"
       @eventClose="dialogAddNewVerb = false"
       @save="storeNewVerb($event)"
     />
-    <DialogAddNewCodes
+    <DialogAddNewResponses
       :dialog="dialogAddNewCodes"
       @eventClose="dialogAddNewCodes = false"
       @save="storeNewCodes($event)"
@@ -136,9 +136,9 @@
 </template>
 
 <script>
-import DialogAddNewEndPoint from '../components/dialog/DialogAddNewEndPoint'
-import DialogAddNewVerb from '../components/dialog/DialogAddNewVerb'
-import DialogAddNewCodes from '../components/dialog/DialogAddNewCodes'
+import DialogAddNewTags from '../components/dialog/DialogAddNewTags'
+import DialogAddNewPaths from '../components/dialog/DialogAddNewPaths'
+import DialogAddNewResponses from '../components/dialog/DialogAddNewResponses'
 
 export default {
   filters: {
@@ -172,9 +172,9 @@ export default {
     }
   },
   components: {
-    DialogAddNewEndPoint,
-    DialogAddNewVerb,
-    DialogAddNewCodes
+    DialogAddNewTags,
+    DialogAddNewPaths,
+    DialogAddNewResponses
   },
   props: {
     id: {
