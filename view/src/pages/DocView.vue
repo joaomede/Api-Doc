@@ -4,17 +4,17 @@
     <DialogAddNewTags
       :dialog="dialogAddNewTags"
       @eventClose="dialogAddNewTags = false"
-      @save="storeNewEndPoint($event)"
+      @save="storeNewTag($event)"
     />
     <DialogAddNewPaths
       :dialog="dialogAddNewPaths"
       @eventClose="dialogAddNewPaths = false"
-      @save="storeNewVerb($event)"
+      @save="storeNewPath($event)"
     />
     <DialogAddNewResponses
       :dialog="dialogAddNewResponses"
       @eventClose="dialogAddNewResponses = false"
-      @save="storeNewResponses($event)"
+      @save="storeNewResponse($event)"
     />
 
     <DialogConfirmDelete
@@ -333,7 +333,7 @@ export default {
     init () {
       this.indexApiDoc()
     },
-    async storeNewEndPoint (newEndPoint) {
+    async storeNewTag (newEndPoint) {
       try {
         const result = await this.$axios.post(`api/tags/create/${this.id}`, newEndPoint, { headers: this.user.headers })
         this.dialogAddNewTags = false
@@ -343,7 +343,7 @@ export default {
         this.$notify(error.response.data.error, 'red')
       }
     },
-    async storeNewVerb (newVerb) {
+    async storeNewPath (newVerb) {
       try {
         const result = await this.$axios.post(`api/paths/create/${this.tagId}`, newVerb, { headers: this.user.headers })
         this.dialogAddNewPaths = false
@@ -360,7 +360,7 @@ export default {
         this.$notify(error.response.data.error, 'red')
       }
     },
-    async storeNewResponses (newResponses) {
+    async storeNewResponse (newResponses) {
       try {
         const result = await this.$axios.post(`api/responses/create/${this.pathId}`, newResponses, { headers: this.user.headers })
         this.dialogAddNewResponses = false
