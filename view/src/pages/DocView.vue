@@ -26,13 +26,13 @@
     <DialogConfirmDelete
       :dialog="dialogConfirmDeletePaths"
       @eventClose="dialogConfirmDeletePaths = false"
-      @confirm="deletePaths()"
+      @confirm="deletePath()"
     />
 
     <DialogConfirmDelete
       :dialog="dialogConfirmDeleteResponses"
       @eventClose="dialogConfirmDeleteResponses = false"
-      @confirm="deleteResponses()"
+      @confirm="deleteResponse()"
     />
 
     <div
@@ -180,7 +180,7 @@
                                   side
                                   name="delete_sweep"
                                   color="primary"
-                                  @click.stop="exibeDeletaLote(item)"
+                                  @click.stop="dialogConfirmDeletePaths = true; tag = tags; tagIndex = indexTags; pathIndex = indexPath"
                                 />
                               </q-item-section>
                             </q-item>
@@ -191,7 +191,7 @@
                                 Responses
                               </div>
 
-                              <q-btn @click="dialogAddNewResponses = true; pathId = paths.id; tagIndex = indexTags; pathIndex = indexPath">
+                              <q-btn @click="dialogAddNewResponses = true; path.id = paths.id; tagIndex = indexTags; pathIndex = indexPath">
                                 Criar Novo Verbo
                               </q-btn>
 
@@ -320,10 +320,7 @@ export default {
         id: ''
       },
 
-      tagId: null,
       tagIndex: null,
-
-      pathId: null,
       pathIndex: null
     }
   },
@@ -349,6 +346,23 @@ export default {
         this.$notify(error.response.data.error, 'red')
       }
     },
+    async deletePath () {
+      try {
+        const result = await this.$axios.delete(`api/paths/delete/${this.tag.id}`, { headers: this.user.headers })
+        this.dialogConfirmDeletePaths = false
+        this.$delete(this.apiData.tags[this.tagIndex].paths, this.pathIndex)
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.data.response.error, 're')
+      }
+    },
+    async deleteResponse () {
+      try {
+
+      } catch (error) {
+
+      }
+    },
     fakeDelete () {
       console.log(this.apiData.tags[0].paths[0])
       this.$delete(this.apiData.tags[0].paths, 0)
@@ -369,7 +383,7 @@ export default {
     },
     async storeNewPath (newVerb) {
       try {
-        const result = await this.$axios.post(`api/paths/create/${this.tagId}`, newVerb, { headers: this.user.headers })
+        const result = await this.$axios.post(`api/paths/create/${this.tag.id}`, newVerb, { headers: this.user.headers })
         this.dialogAddNewPaths = false
         let index
         if (this.apiData.tags[this.tagIndex].paths === undefined) {
@@ -386,7 +400,7 @@ export default {
     },
     async storeNewResponse (newResponses) {
       try {
-        const result = await this.$axios.post(`api/responses/create/${this.pathId}`, newResponses, { headers: this.user.headers })
+        const result = await this.$axios.post(`api/responses/create/${this.path.id}`, newResponses, { headers: this.user.headers })
         this.dialogAddNewResponses = false
         let index
         if (this.apiData.tags[this.tagIndex].paths[this.pathIndex].responses === undefined) {
@@ -415,7 +429,9 @@ export default {
         const result = await this.$axios.get(`api/api/getverbsandcodes/${endPointId}`, { headers: this.user.headers })
         this.$set(this.apiData.tags[index], 'paths', result.data)
       } catch (error) {
-        this.$notify(error.response.data.error, 'red')
+        if (error.response.data.error !== 'Não há verbos disponíveis') {
+          this.$notify(error.response.data.error, 'red')
+        }
       }
     }
   }
