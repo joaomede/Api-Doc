@@ -115,7 +115,7 @@ class Api {
 
     try {
       const verbAndCodes = await knexPopulate(knex, 'verb')
-        .find({ endPointIdFK: endPointId })
+        .find({ endPointIdFk: endPointId })
         .populate('codesresp', 'verbIdFk', 'codesresp')
         .exec()
 
