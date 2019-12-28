@@ -2,19 +2,19 @@
 <template>
   <div class="centralDiv q-pa-xs text-center">
     <DialogAddNewTags
-      :dialog="dialogAddNewEndPoint"
-      @eventClose="dialogAddNewEndPoint = false"
+      :dialog="dialogAddNewTags"
+      @eventClose="dialogAddNewTags = false"
       @save="storeNewEndPoint($event)"
     />
     <DialogAddNewPaths
-      :dialog="dialogAddNewVerb"
-      @eventClose="dialogAddNewVerb = false"
+      :dialog="dialogAddNewPaths"
+      @eventClose="dialogAddNewPaths = false"
       @save="storeNewVerb($event)"
     />
     <DialogAddNewResponses
-      :dialog="dialogAddNewCodes"
-      @eventClose="dialogAddNewCodes = false"
-      @save="storeNewCodes($event)"
+      :dialog="dialogAddNewResponses"
+      @eventClose="dialogAddNewResponses = false"
+      @save="storeNewResponses($event)"
     />
     <q-btn @click="teste()">
       teste
@@ -43,6 +43,15 @@
           >
             <strong>Documentação Privada</strong>
           </div>
+
+          <div class="text-p">
+            <strong>E-mail:</strong> {{ lista.email }}
+          </div>
+
+          <div class="text-h6">
+            <strong>Licença:</strong> {{ lista.license }}
+          </div>
+
           <div class="text-p">
             <strong>Descrição:</strong> {{ lista.descriptionApi }}
           </div>
@@ -51,12 +60,12 @@
           Todos os endpoints
         </div>
 
-        <q-btn @click="dialogAddNewEndPoint = true">
+        <q-btn @click="dialogAddNewTags = true">
           Criar Novo Endpoint
         </q-btn>
 
         <q-list
-          v-for="(tags, indexEndPoint) in lista.tags"
+          v-for="(tags, indexTags) in lista.tags"
           :key="tags.id"
           bordered
           class="rounded-borders"
@@ -65,20 +74,20 @@
             expand-separator
             :label="tags.nameTag"
             header-class="text-black text-left"
-            @show="getVerbsAndCodes(tags.id, indexEndPoint)"
+            @show="getVerbsAndCodes(tags.id, indexTags)"
           >
             <div class="text-p">
               Descrição da entidade: {{ tags.descriptionTag }}
             </div>
 
-            <q-btn @click="dialogAddNewVerb = true; endpointId = tags.id; endpointIndex = indexEndPoint;">
+            <q-btn @click="dialogAddNewPaths = true; tagId = tags.id; tagIndex = indexTags;">
               Criar Novo Verbo
             </q-btn>
 
             <q-card>
               <q-card-section>
                 <q-list
-                  v-for="paths in tags.paths"
+                  v-for="(paths, indexPath) in tags.paths"
                   :key="paths.id"
                 >
                   <q-expansion-item
@@ -89,7 +98,7 @@
                   >
                     <q-card>
                       <q-card-section class="text-left">
-                        Endpoint: {{ paths.tags }} <br>
+                        Paths: {{ paths.path }} <br>
                         Parameter: {{ paths.parameter }} <br>
                         verbValue: {{ paths.verbValue }} <br>
                         descriptionVerb: {{ paths.descriptionVerb }} <br>
@@ -99,8 +108,13 @@
                         <q-card>
                           <q-card-section>
                             <div class="text-h6">
-                              Codes Response
+                              Responses
                             </div>
+
+                            <q-btn @click="dialogAddNewResponses = true; pathId = paths.id; tagIndex = indexTags; pathIndex = indexPath">
+                              Criar Novo Verbo
+                            </q-btn>
+
                             <q-list
                               v-for="codes in paths.responses"
                               :key="codes.id"
@@ -186,13 +200,15 @@ export default {
     return {
       apiData: {},
       userPermission: [],
-      dialogAddNewEndPoint: false,
-      dialogAddNewVerb: false,
-      dialogAddNewCodes: false,
+      dialogAddNewTags: false,
+      dialogAddNewPaths: false,
+      dialogAddNewResponses: false,
 
-      endpointId: null,
-      endpointIndex: null,
-      verbId: null
+      tagId: null,
+      tagIndex: null,
+
+      pathId: null,
+      pathIndex: null
     }
   },
   computed: {
@@ -218,7 +234,7 @@ export default {
     async storeNewEndPoint (newEndPoint) {
       try {
         await this.$axios.post(`api/tags/create/${this.id}`, newEndPoint, { headers: this.user.headers })
-        this.dialogAddNewEndPoint = false
+        this.dialogAddNewTags = false
         this.indexApiDoc()
         this.$notify('Novo tags criado com sucesso', 'green')
       } catch (error) {
@@ -227,22 +243,38 @@ export default {
     },
     async storeNewVerb (newVerb) {
       try {
-        const result = await this.$axios.post(`api/paths/create/${this.endpointId}`, newVerb, { headers: this.user.headers })
-        this.dialogAddNewVerb = false
+        const result = await this.$axios.post(`api/paths/create/${this.tagId}`, newVerb, { headers: this.user.headers })
+        this.dialogAddNewPaths = false
         let index
-        if (this.apiData.tags[this.endpointIndex].paths === undefined) {
+        if (this.apiData.tags[this.tagIndex].paths === undefined) {
           index = 0
-          this.$set(this.apiData.tags[this.endpointIndex], 'paths', await result.data)
+          this.$set(this.apiData.tags[this.tagIndex], 'paths', await result.data)
         } else {
-          index = this.apiData.tags[this.endpointIndex].paths.length
-          this.$set(this.apiData.tags[this.endpointIndex].paths, index, await result.data[0])
+          index = this.apiData.tags[this.tagIndex].paths.length
+          this.$set(this.apiData.tags[this.tagIndex].paths, index, await result.data[0])
         }
         this.$notify('Novo verbo criado com sucesso', 'green')
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
       }
     },
-    async storeNewCodes () {},
+    async storeNewResponses (newResponses) {
+      try {
+        const result = await this.$axios.post(`api/responses/create/${this.pathId}`, newResponses, { headers: this.user.headers })
+        this.dialogAddNewPaths = false
+        let index
+        if (this.apiData.tags[this.tagIndex].paths[this.pathIndex].responses === undefined) {
+          index = 0
+          this.$set(this.apiData.tags[this.tagIndex].paths[this.pathIndex], 'responses', await result.data)
+        } else {
+          index = this.apiData.tags[this.tagIndex].paths[this.pathIndex].responses.length
+          this.$set(this.apiData.tags[this.tagIndex].paths[this.pathIndex].responses, index, await result.data[0])
+        }
+        this.$notify('Novo verbo criado com sucesso', 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
+    },
     async indexApiDoc () {
       try {
         const result = await this.$axios.get(`api/api/getapiandendpoints/${this.id}`, { headers: this.user.headers })

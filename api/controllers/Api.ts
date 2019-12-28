@@ -11,8 +11,10 @@ class Api {
       await knex('api').insert({
         apiName: req.body.apiName,
         version: req.body.version,
-        isPublic: req.body.isPublic,
         descriptionApi: req.body.descriptionApi,
+        email: req.body.email,
+        license: req.body.license,
+        isPublic: req.body.isPublic,
         userIdFk: req.userId
       })
 
@@ -30,6 +32,8 @@ class Api {
     const newApi = {
       apiName: req.body.apiName,
       version: req.body.version,
+      email: req.body.email,
+      license: req.body.license,
       isPublic: req.body.isPublic,
       descriptionApi: req.body.descriptionApi
     }

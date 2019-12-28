@@ -44,7 +44,7 @@
         <q-form class="q-gutter-md">
           <q-input
             v-model="form.email"
-            label="Informe a versão atual da api"
+            label="Informe um e-mail para contato"
             required
           />
         </q-form>
@@ -54,7 +54,7 @@
         <q-form class="q-gutter-md">
           <q-input
             v-model="form.license"
-            label="Informe a versão atual da api"
+            label="Informe o tipo de licença ou link"
             required
           />
         </q-form>

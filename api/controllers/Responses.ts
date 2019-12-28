@@ -14,15 +14,15 @@ class Responses {
     }
 
     try {
-      await knex('responses').insert({
+      const result = await knex('responses').insert({
         typeCode: typeCode,
         reason: reason,
         responseModel: responseModel,
         headers: headers,
         userIdFk: req.userId,
         pathsIdFk: verbId
-      })
-      resp.returnSucessMessage(res, 'Código resposta criado com sucesso')
+      }).returning('*')
+      resp.returnSucessObject(res, result)
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao tentar criar o código resposta')
     }
