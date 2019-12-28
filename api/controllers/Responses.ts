@@ -3,7 +3,7 @@ import { NewRequest } from '../interface/NewRequest'
 import { Response } from 'express'
 import resp from 'resp-express'
 
-class CodesResp {
+class Responses {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async store (req: NewRequest, res: Response): Promise<any> {
     const { typeCode, reason, responseModel, headers } = req.body
@@ -14,13 +14,13 @@ class CodesResp {
     }
 
     try {
-      await knex('codesresp').insert({
+      await knex('responses').insert({
         typeCode: typeCode,
         reason: reason,
         responseModel: responseModel,
         headers: headers,
         userIdFk: req.userId,
-        verbIdFk: verbId
+        pathsIdFk: verbId
       })
       resp.returnSucessMessage(res, 'Código resposta criado com sucesso')
     } catch (error) {
@@ -37,8 +37,8 @@ class CodesResp {
     }
 
     try {
-      const endpoint = await knex('codesresp').where({ userIdFk: req.userId, verbIdFk: verbId })
-      resp.returnSucessObject(res, endpoint)
+      const tags = await knex('responses').where({ userIdFk: req.userId, pathsIdFk: verbId })
+      resp.returnSucessObject(res, tags)
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao tentar carregar todos os códigos respostas')
     }
@@ -56,7 +56,7 @@ class CodesResp {
     }
 
     try {
-      await knex('codesresp').where({ id: id, userIdFk: req.userId }).update(newCode)
+      await knex('responses').where({ id: id, userIdFk: req.userId }).update(newCode)
       resp.returnSucessMessage(res, 'O Código resposta foi atualizado com sucesso')
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao tentar atualizar o código resposta')
@@ -72,7 +72,7 @@ class CodesResp {
     }
     // precisa remover em cascata
     try {
-      await knex('codesresp').where({ id: id, userIdFk: req.userId }).del()
+      await knex('responses').where({ id: id, userIdFk: req.userId }).del()
       resp.returnSucessMessage(res, 'Código resposta apagado com sucesso')
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao tentar apagar Código resposta')
@@ -80,4 +80,4 @@ class CodesResp {
   }
 }
 
-export default new CodesResp()
+export default new Responses()

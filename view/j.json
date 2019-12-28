@@ -1,8 +1,8 @@
 [
   {
-    "descriptionEndPonitsType": "esse endpoint é responsável por chamar todo tipo de método",
+    "descriptionTag": "esse tags é responsável por chamar todo tipo de método",
     "idEndPoints": "n8fGpEyq9l6JdzuVysx5",
-    "nameEndPointsType": "Pasta",
+    "nameTag": "Pasta",
     "isRootInsert": true,
     "elm": {}
   },
@@ -10,7 +10,7 @@
     {
       "dataType": "array mostrando tipo de entrada",
       "descriptionVerb": "descrição 2",
-      "endPoint": "/pasta",
+      "path": "/pasta",
       "parameter": "headers",
       "paramsType": "tipo do parametro",
       "respValue": "resp value",
@@ -23,7 +23,7 @@
     {
       "dataType": "{array}",
       "descriptionVerb": "esse verbo faz tal coisa",
-      "endPoint": "/pasta",
+      "path": "/pasta",
       "parameter": "body, headers, params",
       "paramsType": "o parametro faz isso ou aquilo",
       "respValue": "{array}",

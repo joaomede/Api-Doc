@@ -5,7 +5,7 @@ import resp from 'resp-express'
 function verbSchema (): Joi.ObjectSchema<object> {
   return Joi.object().keys({
     verbType: Joi.string().required(),
-    endPoint: Joi.string().required(),
+    path: Joi.string().required(),
     parameter: Joi.string().required(),
     verbValue: Joi.string().required(),
     descriptionVerb: Joi.string().required(),

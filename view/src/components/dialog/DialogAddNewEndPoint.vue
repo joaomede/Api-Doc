@@ -13,7 +13,7 @@
       <q-card-section>
         <q-form class="q-gutter-md">
           <q-input
-            v-model="form.nameEndPointsType"
+            v-model="form.nameTag"
             label="Informe o nome do Endpoint"
             required
           />
@@ -23,7 +23,7 @@
       <q-card-section>
         <q-form class="q-gutter-md">
           <q-input
-            v-model="form.descriptionEndPonitsType"
+            v-model="form.descriptionTag"
             label="Informe a descrição do Endpoint"
             required
           />
@@ -60,8 +60,8 @@ export default {
   data () {
     return {
       form: {
-        nameEndPointsType: '',
-        descriptionEndPonitsType: ''
+        nameTag: '',
+        descriptionTag: ''
       },
       dialogPopup: this.dialog
     }
@@ -83,8 +83,8 @@ export default {
     },
     reset () {
       this.form = {
-        nameEndPointsType: '',
-        descriptionEndPonitsType: ''
+        nameTag: '',
+        descriptionTag: ''
       }
     }
   }

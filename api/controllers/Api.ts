@@ -92,8 +92,8 @@ class Api {
       // const doc = await knex('api').where({ id: id })
 
       const api = await knex('api').where({ id: id })
-      const endPoint = await knex('endpoint').where({ apiIdFk: id })
-      api[0].endpoint = endPoint
+      const tags = await knex('tags').where({ apiIdFk: id })
+      api[0].tags = tags
 
       if (api.length === 0) {
         resp.returnErrorMessage(res, 'A api que você está tentando acessar não foi encontrada')
@@ -114,9 +114,9 @@ class Api {
     const { endPointId } = req.params
 
     try {
-      const verbAndCodes = await knexPopulate(knex, 'verb')
-        .find({ endPointIdFk: endPointId })
-        .populate('codesresp', 'verbIdFk', 'codesresp')
+      const verbAndCodes = await knexPopulate(knex, 'paths')
+        .find({ tagsIdFk: endPointId })
+        .populate('responses', 'pathsIdFk', 'responses')
         .exec()
 
       if (verbAndCodes.length === 0) {

@@ -56,53 +56,53 @@
         </q-btn>
 
         <q-list
-          v-for="(endpoint, indexEndPoint) in lista.endpoint"
-          :key="endpoint.id"
+          v-for="(tags, indexEndPoint) in lista.tags"
+          :key="tags.id"
           bordered
           class="rounded-borders"
         >
           <q-expansion-item
             expand-separator
-            :label="endpoint.nameEndPointsType"
+            :label="tags.nameTag"
             header-class="text-black text-left"
-            @show="getVerbsAndCodes(endpoint.id, indexEndPoint)"
+            @show="getVerbsAndCodes(tags.id, indexEndPoint)"
           >
             <div class="text-p">
-              Descrição da entidade: {{ endpoint.descriptionEndPonitsType }}
+              Descrição da entidade: {{ tags.descriptionTag }}
             </div>
 
-            <q-btn @click="dialogAddNewVerb = true; endpointId = endpoint.id; endpointIndex = indexEndPoint;">
+            <q-btn @click="dialogAddNewVerb = true; endpointId = tags.id; endpointIndex = indexEndPoint;">
               Criar Novo Verbo
             </q-btn>
 
             <q-card>
               <q-card-section>
                 <q-list
-                  v-for="verb in endpoint.verbs"
-                  :key="verb.id"
+                  v-for="paths in tags.paths"
+                  :key="paths.id"
                 >
                   <q-expansion-item
                     expand-separator
-                    :icon="verb.verbType | verificaLetra"
-                    :label="verb.verbType"
-                    :header-class="verb.verbType | verificaCor"
+                    :icon="paths.verbType | verificaLetra"
+                    :label="paths.verbType"
+                    :header-class="paths.verbType | verificaCor"
                   >
                     <q-card>
                       <q-card-section class="text-left">
-                        Endpoint: {{ verb.endPoint }} <br>
-                        Parameter: {{ verb.parameter }} <br>
-                        verbValue: {{ verb.verbValue }} <br>
-                        descriptionVerb: {{ verb.descriptionVerb }} <br>
-                        paramsType: {{ verb.paramsType }} <br>
-                        respValue: {{ verb.respValue }} <br>
-                        dataType: {{ verb.dataType }} <br>
+                        Endpoint: {{ paths.tags }} <br>
+                        Parameter: {{ paths.parameter }} <br>
+                        verbValue: {{ paths.verbValue }} <br>
+                        descriptionVerb: {{ paths.descriptionVerb }} <br>
+                        paramsType: {{ paths.paramsType }} <br>
+                        respValue: {{ paths.respValue }} <br>
+                        dataType: {{ paths.dataType }} <br>
                         <q-card>
                           <q-card-section>
                             <div class="text-h6">
                               Codes Response
                             </div>
                             <q-list
-                              v-for="codes in verb.codesresp"
+                              v-for="codes in paths.responses"
                               :key="codes.id"
                             >
                               <q-expansion-item
@@ -208,34 +208,34 @@ export default {
   },
   methods: {
     fakeDelete () {
-      console.log(this.apiData.endpoint[0].verbs[0])
-      this.$delete(this.apiData.endpoint[0].verbs, 0)
-      console.log(this.apiData.endpoint[0].verbs[0])
+      console.log(this.apiData.tags[0].paths[0])
+      this.$delete(this.apiData.tags[0].paths, 0)
+      console.log(this.apiData.tags[0].paths[0])
     },
     init () {
       this.indexApiDoc()
     },
     async storeNewEndPoint (newEndPoint) {
       try {
-        await this.$axios.post(`api/endpoint/create/${this.id}`, newEndPoint, { headers: this.user.headers })
+        await this.$axios.post(`api/tags/create/${this.id}`, newEndPoint, { headers: this.user.headers })
         this.dialogAddNewEndPoint = false
         this.indexApiDoc()
-        this.$notify('Novo endpoint criado com sucesso', 'green')
+        this.$notify('Novo tags criado com sucesso', 'green')
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
       }
     },
     async storeNewVerb (newVerb) {
       try {
-        const result = await this.$axios.post(`api/verb/create/${this.endpointId}`, newVerb, { headers: this.user.headers })
+        const result = await this.$axios.post(`api/paths/create/${this.endpointId}`, newVerb, { headers: this.user.headers })
         this.dialogAddNewVerb = false
         let index
-        if (this.apiData.endpoint[this.endpointIndex].verbs === undefined) {
+        if (this.apiData.tags[this.endpointIndex].paths === undefined) {
           index = 0
-          this.$set(this.apiData.endpoint[this.endpointIndex], 'verbs', await result.data)
+          this.$set(this.apiData.tags[this.endpointIndex], 'paths', await result.data)
         } else {
-          index = this.apiData.endpoint[this.endpointIndex].verbs.length
-          this.$set(this.apiData.endpoint[this.endpointIndex].verbs, index, await result.data[0])
+          index = this.apiData.tags[this.endpointIndex].paths.length
+          this.$set(this.apiData.tags[this.endpointIndex].paths, index, await result.data[0])
         }
         this.$notify('Novo verbo criado com sucesso', 'green')
       } catch (error) {
@@ -255,7 +255,7 @@ export default {
     async getVerbsAndCodes (endPointId, index) {
       try {
         const result = await this.$axios.get(`api/api/getverbsandcodes/${endPointId}`, { headers: this.user.headers })
-        this.$set(this.apiData.endpoint[index], 'verbs', result.data)
+        this.$set(this.apiData.tags[index], 'paths', result.data)
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
       }

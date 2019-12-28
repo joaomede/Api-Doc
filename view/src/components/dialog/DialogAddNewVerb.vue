@@ -33,8 +33,8 @@
       <q-card-section>
         <q-form class="q-gutter-md">
           <q-input
-            v-model="form.endPoint"
-            label="Informe o endereço do endpoint, ex.: api/login"
+            v-model="form.path"
+            label="Informe o endereço do path, ex.: api/login"
             required
           />
         </q-form>
@@ -121,7 +121,7 @@ export default {
     return {
       form: {
         verbType: '',
-        endPoint: '',
+        path: '',
         parameter: '',
         verbValue: '',
         descriptionVerb: '',
@@ -150,7 +150,7 @@ export default {
     reset () {
       this.form = {
         verbType: '',
-        endPoint: '',
+        path: '',
         parameter: '',
         verbValue: '',
         descriptionVerb: '',

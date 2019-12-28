@@ -6,23 +6,23 @@ import resp from 'resp-express'
 class Verb {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async store (req: NewRequest, res: Response): Promise<any> {
-    const { verbType, endPoint, parameter, verbValue, descriptionVerb, paramsType, respValue, dataType } = req.body
+    const { verbType, path, parameter, verbValue, descriptionVerb, paramsType, respValue, dataType } = req.body
     const { endPointId } = req.params
 
     if (endPointId === undefined || endPointId === null) {
-      resp.returnErrorMessage(res, 'Não foi identificado o endpoint referência')
+      resp.returnErrorMessage(res, 'Não foi identificado o path referência')
     }
     try {
-      const result = await knex('verb').insert({
+      const result = await knex('paths').insert({
         verbType: verbType,
-        endPoint: endPoint,
+        path: path,
         parameter: parameter,
         verbValue: verbValue,
         descriptionVerb: descriptionVerb,
         paramsType: paramsType,
         respValue: respValue,
         dataType: dataType,
-        endPointIdFk: endPointId,
+        tagsIdFk: endPointId,
         userIdFk: req.userId
       }).returning('*')
       resp.returnSucessObject(res, result)
@@ -36,12 +36,12 @@ class Verb {
     const { endPointId } = req.params
 
     if (endPointId === undefined || endPointId === null) {
-      resp.returnErrorMessage(res, 'Não foi identificado o endpoint relacionado')
+      resp.returnErrorMessage(res, 'Não foi identificado o path relacionado')
     }
 
     try {
-      const endpoint = await knex('verb').where({ userIdFk: req.userId, endPointIdFk: endPointId })
-      resp.returnSucessObject(res, endpoint)
+      const path = await knex('paths').where({ userIdFk: req.userId, tagsIdFk: endPointId })
+      resp.returnSucessObject(res, path)
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao tentar carregar todos os EndPoints')
     }
@@ -53,7 +53,7 @@ class Verb {
 
     const newVerb = {
       verbType: req.body.verbType,
-      endPoint: req.body.endPoint,
+      path: req.body.path,
       parameter: req.body.parameter,
       verbValue: req.body.verbValue,
       descriptionVerb: req.body.descriptionVerb,
@@ -63,10 +63,10 @@ class Verb {
     }
 
     try {
-      await knex('verb').where({ id: id, userIdFk: req.userId }).update(newVerb)
+      await knex('paths').where({ id: id, userIdFk: req.userId }).update(newVerb)
       resp.returnSucessMessage(res, 'O verbo foi atualizado com sucesso')
     } catch (error) {
-      resp.returnErrorMessage(res, 'Erro ao tentar atualizar o verb')
+      resp.returnErrorMessage(res, 'Erro ao tentar atualizar o paths')
     }
   }
 
@@ -79,7 +79,7 @@ class Verb {
     }
     // precisa remover em cascata
     try {
-      await knex('verb').where({ id: id, userIdFk: req.userId }).del()
+      await knex('paths').where({ id: id, userIdFk: req.userId }).del()
       resp.returnSucessMessage(res, 'Verbo apagado com sucesso')
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao tentar apagar verbo')

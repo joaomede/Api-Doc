@@ -12,14 +12,14 @@ class EndPoint {
       resp.returnErrorMessage(res, 'Referência da Api não identificada')
     } else {
       const newEndPoint = {
-        nameEndPointsType: req.body.nameEndPointsType,
-        descriptionEndPonitsType: req.body.descriptionEndPonitsType,
+        nameTag: req.body.nameTag,
+        descriptionTag: req.body.descriptionTag,
         apiIdFk: apiId,
         userIdFk: req.userId
       }
 
       try {
-        await knex('endpoint').insert(newEndPoint)
+        await knex('tags').insert(newEndPoint)
         resp.returnSucessMessage(res, 'Novo EndPoint criado com sucesso')
       } catch (error) {
         resp.returnErrorMessage(res, 'Erro ao tentar criar EndPoint')
@@ -32,18 +32,18 @@ class EndPoint {
     const id = req.params.id
 
     if (id === undefined || id === null) {
-      resp.returnErrorMessage(res, 'O endpoint a ser atualizado não foi referênciado')
+      resp.returnErrorMessage(res, 'O tags a ser atualizado não foi referênciado')
     }
 
     const newEndpoint = {
-      nameEndPointsType: req.body.nameEndPointsType,
-      descriptionEndPonitsType: req.body.descriptionEndPonitsType
+      nameTag: req.body.nameTag,
+      descriptionTag: req.body.descriptionTag
     }
     try {
-      await knex('endpoint').where({ id: id, userIdFk: req.userId }).update(newEndpoint)
+      await knex('tags').where({ id: id, userIdFk: req.userId }).update(newEndpoint)
       resp.returnSucessMessage(res, 'Api atualizada com sucesso')
     } catch (error) {
-      resp.returnErrorMessage(res, 'Erro ao tentar atualizar as informações do endpoint')
+      resp.returnErrorMessage(res, 'Erro ao tentar atualizar as informações do tags')
     }
   }
 
@@ -52,8 +52,8 @@ class EndPoint {
     const { apiId } = req.params
 
     try {
-      const endpoint = await knex('endpoint').where({ userIdFk: req.userId, apiIdFk: apiId })
-      resp.returnSucessObject(res, endpoint)
+      const tags = await knex('tags').where({ userIdFk: req.userId, apiIdFk: apiId })
+      resp.returnSucessObject(res, tags)
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao tentar carregar todos os EndPoints')
     }
@@ -64,19 +64,19 @@ class EndPoint {
     const { id } = req.params
 
     if (id === undefined || id === null) {
-      resp.returnErrorMessage(res, 'Referencia para o endpoint não foi encontrada')
+      resp.returnErrorMessage(res, 'Referencia para o tags não foi encontrada')
     }
 
     try {
-      const endpoint = await knex('endpoint').where({ userIdFk: req.userId, id: id })
-      if (endpoint.length === 0) {
-        resp.returnErrorMessage(res, 'Esse endpoint já foi removido ou não existe')
+      const tags = await knex('tags').where({ userIdFk: req.userId, id: id })
+      if (tags.length === 0) {
+        resp.returnErrorMessage(res, 'Esse tags já foi removido ou não existe')
       } else {
-        await knex('endpoint').where({ userIdFk: req.userId, id: id }).del()
+        await knex('tags').where({ userIdFk: req.userId, id: id }).del()
         resp.returnSucessMessage(res, 'Endpoint removido com sucesso')
       }
     } catch (error) {
-      resp.returnErrorMessage(res, 'Erro ao tentar remover endpoint')
+      resp.returnErrorMessage(res, 'Erro ao tentar remover tags')
     }
   }
 }

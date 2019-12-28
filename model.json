@@ -11,15 +11,15 @@
           {
             "idEndPoints": {
               "idEndPoints": "id",
-              "nameEndPointsType": "Pasta",
-              "descriptionEndPonitsType": "esse endpoint é responsável por chamar todo tipo de método",
-              "verbs": [
+              "nameTag": "Pasta",
+              "descriptionTag": "esse tags é responsável por chamar todo tipo de método",
+              "paths": [
                 {
                   "verbId": {
                     "verbId": "id do verbo",
                     "idPai": "",
                     "verbType": "post",
-                    "endPoint": "/pasta",
+                    "path": "/pasta",
                     "parameter": "body, headers, params",
                     "verbValue": "array de dados estruturando com o objeto é passado",
                     "descriptionVerb": "descrição explicando o que é a chamada",

@@ -1,14 +1,14 @@
 import { Router } from 'express'
 import apiValidate from '../utils/ApiValidate'
-import endpointValidate from '../utils/EndPointValidation'
-import verbValidate from '../utils/VerbValidate'
-import codesrespValidate from '../utils/CodesRespValidation'
+import tagsValidate from '../utils/TagsValidation'
+import pathsValidate from '../utils/PathsValidate'
+import responsesValidade from '../utils/ResponsesValidation'
 import CheckJwt from '../middlewares/CheckJwt'
 
 import cApi from '../controllers/Api'
-import cEndPoint from '../controllers/EndPoint'
-import cVerbs from '../controllers/Verb'
-import cCodeResp from '../controllers/CodesResp'
+import cTags from '../controllers/Tags'
+import cPaths from '../controllers/Paths'
+import cResponses from '../controllers/Responses'
 const routes = Router()
 
 routes.use(CheckJwt.checkJwt)
@@ -26,23 +26,23 @@ routes.get('/api/api/getverbsandcodes/:endPointId', cApi.getVerbsAndCodes)
 
 // * //
 // Endpoint
-routes.post('/api/endpoint/create/:apiId', endpointValidate.create, cEndPoint.store)
-routes.get('/api/endpoint/getall/:apiId', cEndPoint.index)
-routes.delete('/api/endpoint/delete/:id', cEndPoint.destroy)
-routes.put('/api/endpoint/update/:id', endpointValidate.create, cEndPoint.update)
+routes.post('/api/tags/create/:apiId', tagsValidate.create, cTags.store)
+routes.get('/api/tags/getall/:apiId', cTags.index)
+routes.delete('/api/tags/delete/:id', cTags.destroy)
+routes.put('/api/tags/update/:id', tagsValidate.create, cTags.update)
 
 // * //
 // Verbs
-routes.post('/api/verb/create/:endPointId', verbValidate.create, cVerbs.store)
-routes.get('/api/verb/getall/:endPointId', cVerbs.index)
-routes.delete('/api/verb/delete/:id', cVerbs.destroy)
-routes.put('/api/verb/update/:id', verbValidate.create, cVerbs.update)
+routes.post('/api/paths/create/:endPointId', pathsValidate.create, cPaths.store)
+routes.get('/api/paths/getall/:endPointId', cPaths.index)
+routes.delete('/api/paths/delete/:id', cPaths.destroy)
+routes.put('/api/paths/update/:id', pathsValidate.create, cPaths.update)
 
 // * //
 // Codes Response
-routes.post('/api/codesresp/create/:verbId', codesrespValidate.create, cCodeResp.store)
-routes.get('/api/codesresp/getall/:verbId', cCodeResp.index)
-routes.delete('/api/codesresp/delete/:id', cCodeResp.destroy)
-routes.put('/api/codesresp/update/:id', codesrespValidate.create, cCodeResp.update)
+routes.post('/api/responses/create/:verbId', responsesValidade.create, cResponses.store)
+routes.get('/api/responses/getall/:verbId', cResponses.index)
+routes.delete('/api/responses/delete/:id', cResponses.destroy)
+routes.put('/api/responses/update/:id', responsesValidade.create, cResponses.update)
 
 export default routes

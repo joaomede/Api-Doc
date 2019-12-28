@@ -4,8 +4,8 @@ import resp from 'resp-express'
 
 function endPointSchema (): Joi.ObjectSchema<object> {
   return Joi.object().keys({
-    nameEndPointsType: Joi.string().required(),
-    descriptionEndPonitsType: Joi.string().required()
+    nameTag: Joi.string().required(),
+    descriptionTag: Joi.string().required()
   })
 }
 
