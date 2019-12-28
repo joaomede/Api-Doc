@@ -1,6 +1,24 @@
 
 <template>
   <div class="centralDiv q-pa-xs text-center">
+    <DialogAddNewEndPoint
+      :dialog="dialogAddNewEndPoint"
+      @eventClose="dialogAddNewEndPoint = false"
+      @save="storeNewEndPoint($event)"
+    />
+    <DialogAddNewVerb
+      :dialog="dialogAddNewVerb"
+      @eventClose="dialogAddNewVerb = false"
+      @save="storeNewVerb($event)"
+    />
+    <DialogAddNewCodes
+      :dialog="dialogAddNewCodes"
+      @eventClose="dialogAddNewCodes = false"
+      @save="storeNewCodes($event)"
+    />
+    <q-btn @click="teste()">
+      teste
+    </q-btn>
     <div class="centralDiv">
       <q-card
         v-if="renderComponent"
@@ -113,6 +131,10 @@
 </template>
 
 <script>
+import DialogAddNewEndPoint from '../components/dialog/DialogAddNewEndPoint'
+import DialogAddNewVerb from '../components/dialog/DialogAddNewVerb'
+import DialogAddNewCodes from '../components/dialog/DialogAddNewCodes'
+
 export default {
   filters: {
     verificaCor (item) {
@@ -143,6 +165,11 @@ export default {
         return 'fa fa-u'
       }
     }
+  },
+  components: {
+    DialogAddNewEndPoint,
+    DialogAddNewVerb,
+    DialogAddNewCodes
   },
   props: {
     id: {
