@@ -71,7 +71,7 @@
               Descrição da entidade: {{ endpoint.descriptionEndPonitsType }}
             </div>
 
-            <q-btn @click="dialogAddNewVerb = true; endpointId = endpoint.id, endpointIndex = indexEndPoint">
+            <q-btn @click="dialogAddNewVerb = true; endpointId = endpoint.id; endpointIndex = indexEndPoint;">
               Criar Novo Verbo
             </q-btn>
 
@@ -186,7 +186,13 @@ export default {
     return {
       apiData: {},
       userPermission: [],
-      renderComponent: true
+      dialogAddNewEndPoint: false,
+      dialogAddNewVerb: false,
+      dialogAddNewCodes: false,
+
+      endpointId: null,
+      endpointIndex: null,
+      verbId: null
     }
   },
   computed: {
@@ -209,21 +215,49 @@ export default {
     init () {
       this.indexApiDoc()
     },
+    async storeNewEndPoint (newEndPoint) {
+      try {
+        await this.$axios.post(`api/endpoint/create/${this.id}`, newEndPoint, { headers: this.user.headers })
+        this.dialogAddNewEndPoint = false
+        this.indexApiDoc()
+        this.$notify('Novo endpoint criado com sucesso', 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
+    },
+    async storeNewVerb (newVerb) {
+      try {
+        const result = await this.$axios.post(`api/verb/create/${this.endpointId}`, newVerb, { headers: this.user.headers })
+        this.dialogAddNewVerb = false
+        let index
+        if (this.apiData.endpoint[this.endpointIndex].verbs === undefined) {
+          index = 0
+          this.$set(this.apiData.endpoint[this.endpointIndex], 'verbs', await result.data)
+        } else {
+          index = this.apiData.endpoint[this.endpointIndex].verbs.length
+          this.$set(this.apiData.endpoint[this.endpointIndex].verbs, index, await result.data[0])
+        }
+        this.$notify('Novo verbo criado com sucesso', 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
+    },
+    async storeNewCodes () {},
     async indexApiDoc () {
       try {
-        const result = await this.$axios.get(`api/geral/getapiandendpoints/${this.id}`, { headers: this.user.headers })
+        const result = await this.$axios.get(`api/api/getapiandendpoints/${this.id}`, { headers: this.user.headers })
         this.apiData = await result.data
         // console.log(this.apiData)
       } catch (error) {
-        this.$notify('Erro ao carregar a api')
+        this.$notify(error.response.data.error, 'red')
       }
     },
     async getVerbsAndCodes (endPointId, index) {
       try {
-        const result = await this.$axios.get(`api/geral/getverbsandcodes/${endPointId}`, { headers: this.user.headers })
+        const result = await this.$axios.get(`api/api/getverbsandcodes/${endPointId}`, { headers: this.user.headers })
         this.$set(this.apiData.endpoint[index], 'verbs', result.data)
       } catch (error) {
-        this.$notify(error, 'red')
+        this.$notify(error.response.data.error, 'red')
       }
     }
   }
