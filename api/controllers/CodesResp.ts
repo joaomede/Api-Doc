@@ -72,7 +72,7 @@ class CodesResp {
     }
     // precisa remover em cascata
     try {
-      await knex('api').where({ id: id, userIdFk: req.userId }).del()
+      await knex('codesresp').where({ id: id, userIdFk: req.userId }).del()
       resp.returnSucessMessage(res, 'Código resposta apagado com sucesso')
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao tentar apagar Código resposta')
