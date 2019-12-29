@@ -118,14 +118,11 @@ export default {
     }
   },
   watch: {
-    dialog: 'update',
-    apiForm: 'updateForm'
+    dialog: 'update'
   },
   methods: {
     update () {
       this.dialogPopup = this.dialog
-    },
-    updateForm () {
       this.form = this.apiForm
     },
     eventClose () {

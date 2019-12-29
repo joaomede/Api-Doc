@@ -95,14 +95,11 @@ export default {
     }
   },
   watch: {
-    dialog: 'update',
-    responseForm: 'updateForm'
+    dialog: 'update'
   },
   methods: {
     update () {
       this.dialogPopup = this.dialog
-    },
-    updateForm () {
       this.form = this.responseForm
     },
     eventClose () {
