@@ -718,19 +718,19 @@ export default {
     async postMethod (object, indexTag, indexPath) {
       try {
         if (object.parameter1 === true) {
-          const result = await this.$axios.post(`${object.path}/${object.parameterValue1}`, object.bodyValue, object.headersValue)
+          const result = await this.$axios.post(`${this.apiData.baseURL}/${object.path}/${object.parameterValue1}`, object.bodyValue, object.headersValue)
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
         if (object.parameter1 === true && object.parameter2 === true) {
-          const result = await this.$axios.post(`${object.path}/${object.parameterValue1}/${object.parameterValue2}`, object.bodyValue, object.headersValue)
+          const result = await this.$axios.post(`${this.apiData.baseURL}/${object.path}/${object.parameterValue1}/${object.parameterValue2}`, object.bodyValue, object.headersValue)
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
         if (object.parameter1 === true && object.parameter2 === true && object.parameter3 === true) {
-          const result = await this.$axios.post(`${object.path}/${object.parameterValue1}/${object.parameterValue2}/${object.parameterValue3}`, object.bodyValue, object.headersValue)
+          const result = await this.$axios.post(`${this.apiData.baseURL}/${object.path}/${object.parameterValue1}/${object.parameterValue2}/${object.parameterValue3}`, object.bodyValue, object.headersValue)
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
         if (object.parameter1 === false && object.parameter2 === false && object.parameter3 === false) {
-          const result = await this.$axios.post(`${object.path}`, object.bodyValue, object.headersValue)
+          const result = await this.$axios.post(`${this.apiData.baseURL}/${object.path}`, object.bodyValue, object.headersValue)
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
       } catch (error) {
@@ -740,19 +740,19 @@ export default {
     async getMethod (object, indexTag, indexPath) {
       try {
         if (object.parameter1 === true) {
-          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}`, { headers: object.headersValue })
+          const result = await this.$axios.get(`${this.apiData.baseURL}/${object.path}/${object.parameterValue1}`, { headers: object.headersValue })
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
         if (object.parameter1 === true && object.parameter2 === true) {
-          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}/${object.parameterValue2}`, { headers: object.headersValue })
+          const result = await this.$axios.get(`${this.apiData.baseURL}/${object.path}/${object.parameterValue1}/${object.parameterValue2}`, { headers: object.headersValue })
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
         if (object.parameter1 === true && object.parameter2 === true && object.parameter3 === true) {
-          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}/${object.parameterValue2}/${object.parameterValue3}`, { headers: object.headersValue })
+          const result = await this.$axios.get(`${this.apiData.baseURL}/${object.path}/${object.parameterValue1}/${object.parameterValue2}/${object.parameterValue3}`, { headers: object.headersValue })
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
         if (object.parameter1 === false && object.parameter2 === false && object.parameter3 === false) {
-          const result = await this.$axios.get(`${object.path}`, { headers: object.headersValue })
+          const result = await this.$axios.get(`${this.apiData.baseURL}/${object.path}`, { headers: object.headersValue })
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
       } catch (error) {
@@ -762,19 +762,19 @@ export default {
     async putMethod (object, indexTag, indexPath) {
       try {
         if (object.parameter1 === true) {
-          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}`, object.bodyValue, { headers: object.headersValue })
+          const result = await this.$axios.get(`${this.apiData.baseURL}/${object.path}/${object.parameterValue1}`, object.bodyValue, { headers: object.headersValue })
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
         if (object.parameter1 === true && object.parameter2 === true) {
-          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}/${object.parameterValue2}`, object.bodyValue, { headers: object.headersValue })
+          const result = await this.$axios.get(`${this.apiData.baseURL}/${object.path}/${object.parameterValue1}/${object.parameterValue2}`, object.bodyValue, { headers: object.headersValue })
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
         if (object.parameter1 === true && object.parameter2 === true && object.parameter3 === true) {
-          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}/${object.parameterValue2}/${object.parameterValue3}`, object.bodyValue, { headers: object.headersValue })
+          const result = await this.$axios.get(`${this.apiData.baseURL}/${object.path}/${object.parameterValue1}/${object.parameterValue2}/${object.parameterValue3}`, object.bodyValue, { headers: object.headersValue })
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
         if (object.parameter1 === false && object.parameter2 === false && object.parameter3 === false) {
-          const result = await this.$axios.get(`${object.path}`, object.bodyValue, { headers: object.headersValue })
+          const result = await this.$axios.get(`${this.apiData.baseURL}/${object.path}`, object.bodyValue, { headers: object.headersValue })
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
       } catch (error) {
@@ -784,19 +784,19 @@ export default {
     async deleteMethod (object, indexTag, indexPath) {
       try {
         if (object.parameter1 === true) {
-          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}`, { headers: object.headersValue })
+          const result = await this.$axios.get(`${this.apiData.baseURL}/${object.path}/${object.parameterValue1}`, { headers: object.headersValue })
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
         if (object.parameter1 === true && object.parameter2 === true) {
-          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}/${object.parameterValue2}`, { headers: object.headersValue })
+          const result = await this.$axios.get(`${this.apiData.baseURL}/${object.path}/${object.parameterValue1}/${object.parameterValue2}`, { headers: object.headersValue })
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
         if (object.parameter1 === true && object.parameter2 === true && object.parameter3 === true) {
-          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}/${object.parameterValue2}/${object.parameterValue3}`, { headers: object.headersValue })
+          const result = await this.$axios.get(`${this.apiData.baseURL}/${object.path}/${object.parameterValue1}/${object.parameterValue2}/${object.parameterValue3}`, { headers: object.headersValue })
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
         if (object.parameter1 === false && object.parameter2 === false && object.parameter3 === false) {
-          const result = await this.$axios.get(`${object.path}`, { headers: object.headersValue })
+          const result = await this.$axios.get(`${this.apiData.baseURL}/${object.path}`, { headers: object.headersValue })
           this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
         }
       } catch (error) {
