@@ -293,6 +293,15 @@
                                         <q-icon
                                           class="text-right"
                                           side
+                                          name="edit"
+                                          color="primary"
+                                          @click.stop="dialogUpdateResponse = true; response = responses; tagIndex = indexTags; pathIndex = indexPath; responseIndex = indexResponse"
+                                        />
+                                      </q-item-section>
+                                      <q-item-section side>
+                                        <q-icon
+                                          class="text-right"
+                                          side
                                           name="delete"
                                           color="primary"
                                           @click.stop="dialogConfirmDeleteResponses = true; response = responses; tagIndex = indexTags; pathIndex = indexPath; responseIndex = indexResponse"
@@ -470,6 +479,16 @@ export default {
         const result = await this.$axios.put(`api/paths/update/${newPath.id}`, newPath, { headers: this.user.headers })
         this.dialogUpdatePath = false
         this.$set(this.apiData.tags[this.tagIndex].paths, this.pathIndex, newPath)
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
+    },
+    async updateResponse (newResponse) {
+      try {
+        const result = await this.$axios.put(`api/responses/update/${newResponse.id}`, newResponse, { headers: this.user.headers })
+        this.dialogUpdateResponse = false
+        this.$set(this.apiData.tags[this.tagIndex].paths[this.pathIndex].responses, this.responseIndex, newResponse)
         this.$notify(result.data.ok, 'green')
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
