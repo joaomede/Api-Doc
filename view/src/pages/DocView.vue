@@ -233,6 +233,15 @@
                               <q-icon
                                 class="text-right"
                                 side
+                                name="edit"
+                                color="primary"
+                                @click.stop="dialogUpdatePath = true; path = paths; tagIndex = indexTags; pathIndex = indexPath"
+                              />
+                            </q-item-section>
+                            <q-item-section side>
+                              <q-icon
+                                class="text-right"
+                                side
                                 name="delete_sweep"
                                 color="primary"
                                 @click.stop="dialogConfirmDeletePaths = true; path = paths; tagIndex = indexTags; pathIndex = indexPath"
@@ -446,7 +455,6 @@ export default {
         this.$notify(error.response.data.error, 'red')
       }
     },
-
     async updateTag (newTag) {
       try {
         const result = await this.$axios.put(`api/tags/update/${newTag.id}`, newTag, { headers: this.user.headers })
@@ -457,7 +465,16 @@ export default {
         this.$notify(error.response.data.error, 'red')
       }
     },
-    async updateResponse () {},
+    async updatePath (newPath) {
+      try {
+        const result = await this.$axios.put(`api/paths/update/${newPath.id}`, newPath, { headers: this.user.headers })
+        this.dialogUpdatePath = false
+        this.$set(this.apiData.tags[this.tagIndex].paths, this.pathIndex, newPath)
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
+    },
     async deleteTag () {
       try {
         const result = await this.$axios.delete(`api/tags/delete/${this.tag.id}`, { headers: this.user.headers })

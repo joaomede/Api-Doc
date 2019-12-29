@@ -36,7 +36,7 @@ routes.put('/api/tags/update/:id', cTags.update)
 routes.post('/api/paths/create/:endPointId', pathsValidate.create, cPaths.store)
 routes.get('/api/paths/getall/:endPointId', cPaths.index)
 routes.delete('/api/paths/delete/:id', cPaths.destroy)
-routes.put('/api/paths/update/:id', pathsValidate.create, cPaths.update)
+routes.put('/api/paths/update/:id', cPaths.update)
 
 // * //
 // Codes Response
