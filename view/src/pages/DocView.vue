@@ -309,11 +309,6 @@
                                     }"
                                     :obj-data="paths.bodyValue"
                                   />
-                                  <div>
-                                    <vue-json-pretty
-                                      :data="paths.bodyValue"
-                                    />
-                                  </div>
 
                                   <q-separator spaced />
                                 </div>
@@ -321,6 +316,74 @@
                                 <div v-if="paths.data === true">
                                   Data Type: {{ paths.dataType }}<br>
                                   <q-separator spaced />
+                                </div>
+
+                                <div v-if="paths.verbType === 'POST'">
+                                  <q-btn
+                                    color="green"
+                                    @click="postMethod(paths, indexTags, indexPath)"
+                                  >
+                                    Enviar Requisitação
+                                  </q-btn>
+                                  <br><br>
+                                  <div v-if="paths.response !== undefined">
+                                    Status: {{ paths.response.status }} <br>
+                                    Resultado da requisição:
+                                    <vue-json-pretty
+                                      :data="paths.response.data"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div v-if="paths.verbType === 'DELETE'">
+                                  <q-btn
+                                    color="red"
+                                    @click="deleteMethod(paths, indexTags, indexPath)"
+                                  >
+                                    Enviar Requisitação
+                                  </q-btn>
+                                  <br><br>
+                                  <div v-if="paths.response !== undefined">
+                                    Status: {{ paths.response.status }} <br>
+                                    Resultado da requisição:
+                                    <vue-json-pretty
+                                      :data="paths.response.data"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div v-if="paths.verbType === 'GET'">
+                                  <q-btn
+                                    color="purple"
+                                    @click="getMethod(paths, indexTags, indexPath)"
+                                  >
+                                    Enviar Requisitação
+                                  </q-btn>
+                                  <br><br>
+                                  <div v-if="paths.response !== undefined">
+                                    Status: {{ paths.response.status }} <br>
+                                    Resultado da requisição:
+                                    <vue-json-pretty
+                                      :data="paths.response.data"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div v-if="paths.verbType === 'PUT'">
+                                  <q-btn
+                                    color="orange"
+                                    @click="putMethod(paths, indexTags, indexPath)"
+                                  >
+                                    Enviar Requisitação
+                                  </q-btn>
+                                  <br><br>
+                                  <div v-if="paths.response !== undefined">
+                                    Status: {{ paths.response.status }} <br>
+                                    Resultado da requisição:
+                                    <vue-json-pretty
+                                      :data="paths.response.data"
+                                    />
+                                  </div>
                                 </div>
                               </q-card-section>
                             </q-item-section>
@@ -646,6 +709,94 @@ export default {
         if (error.response.data.error !== 'Não há verbos disponíveis') {
           this.$notify(error.response.data.error, 'red')
         }
+      }
+    },
+    async postMethod (object, indexTag, indexPath) {
+      try {
+        if (object.parameter1 === true) {
+          const result = await this.$axios.post(`${object.path}/${object.parameterValue1}`, object.bodyValue, object.headersValue)
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+        if (object.parameter1 === true && object.parameter2 === true) {
+          const result = await this.$axios.post(`${object.path}/${object.parameterValue1}/${object.parameterValue2}`, object.bodyValue, object.headersValue)
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+        if (object.parameter1 === true && object.parameter2 === true && object.parameter3 === true) {
+          const result = await this.$axios.post(`${object.path}/${object.parameterValue1}/${object.parameterValue2}/${object.parameterValue3}`, object.bodyValue, object.headersValue)
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+        if (object.parameter1 === false && object.parameter2 === false && object.parameter3 === false) {
+          const result = await this.$axios.post(`${object.path}`, object.bodyValue, object.headersValue)
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+      } catch (error) {
+        this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', error.response)
+      }
+    },
+    async getMethod (object, indexTag, indexPath) {
+      try {
+        if (object.parameter1 === true) {
+          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}`, { headers: object.headersValue })
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+        if (object.parameter1 === true && object.parameter2 === true) {
+          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}/${object.parameterValue2}`, { headers: object.headersValue })
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+        if (object.parameter1 === true && object.parameter2 === true && object.parameter3 === true) {
+          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}/${object.parameterValue2}/${object.parameterValue3}`, { headers: object.headersValue })
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+        if (object.parameter1 === false && object.parameter2 === false && object.parameter3 === false) {
+          const result = await this.$axios.get(`${object.path}`, { headers: object.headersValue })
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+      } catch (error) {
+        this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', error.response)
+      }
+    },
+    async putMethod (object, indexTag, indexPath) {
+      try {
+        if (object.parameter1 === true) {
+          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}`, object.bodyValue, { headers: object.headersValue })
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+        if (object.parameter1 === true && object.parameter2 === true) {
+          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}/${object.parameterValue2}`, object.bodyValue, { headers: object.headersValue })
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+        if (object.parameter1 === true && object.parameter2 === true && object.parameter3 === true) {
+          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}/${object.parameterValue2}/${object.parameterValue3}`, object.bodyValue, { headers: object.headersValue })
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+        if (object.parameter1 === false && object.parameter2 === false && object.parameter3 === false) {
+          const result = await this.$axios.get(`${object.path}`, object.bodyValue, { headers: object.headersValue })
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+      } catch (error) {
+        this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', error.response)
+      }
+    },
+    async deleteMethod (object, indexTag, indexPath) {
+      try {
+        if (object.parameter1 === true) {
+          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}`, { headers: object.headersValue })
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+        if (object.parameter1 === true && object.parameter2 === true) {
+          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}/${object.parameterValue2}`, { headers: object.headersValue })
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+        if (object.parameter1 === true && object.parameter2 === true && object.parameter3 === true) {
+          const result = await this.$axios.get(`${object.path}/${object.parameterValue1}/${object.parameterValue2}/${object.parameterValue3}`, { headers: object.headersValue })
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+        if (object.parameter1 === false && object.parameter2 === false && object.parameter3 === false) {
+          const result = await this.$axios.get(`${object.path}`, { headers: object.headersValue })
+          this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', result)
+        }
+      } catch (error) {
+        this.$set(this.apiData.tags[indexTag].paths[indexPath], 'response', error.response)
       }
     }
   }
