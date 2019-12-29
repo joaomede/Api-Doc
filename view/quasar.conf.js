@@ -10,6 +10,7 @@ module.exports = function (ctx) {
       'axios',
       'notify',
       'plugins',
+      'globalFilters',
       'globallyMixins'
     ],
 
