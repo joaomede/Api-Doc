@@ -155,6 +155,11 @@
               <q-item-section>
                 <q-item-label lines="5">
                   <div class="text-p">
+                    <strong>Tag:</strong> {{ tags.nameTag }}
+                  </div>
+                </q-item-label>
+                <q-item-label lines="5">
+                  <div class="text-p">
                     <strong>Descrição da Tag:</strong> {{ tags.descriptionTag }}
                   </div>
                 </q-item-label>
@@ -224,6 +229,13 @@
                           <q-item>
                             <q-item-section>
                               <q-card-section>
+                                <div
+                                  v-if="paths.parameter1 === false"
+                                  class="text-h6"
+                                  style="font-size: 18px"
+                                >
+                                  <strong>Method:</strong> {{ paths.verbType }}
+                                </div>
                                 <div
                                   v-if="paths.parameter1 === false"
                                   class="text-h6"
@@ -369,6 +381,7 @@
                                   <q-card-section>
                                     <q-item>
                                       <q-item-section>
+                                        typeCode: {{ responses.typeCode }} <br>
                                         reason: {{ responses.reason }} <br>
                                         responseModel: {{ responses.responseModel }} <br>
                                         headers: {{ responses.headers }} <br>
