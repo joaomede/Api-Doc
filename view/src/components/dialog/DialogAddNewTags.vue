@@ -6,7 +6,7 @@
     <q-card>
       <q-card-section>
         <div class="text-h6">
-          Informe os dados do novo Endpoint
+          Informe um nome e uma descrição para esta tag
         </div>
       </q-card-section>
 
@@ -14,7 +14,7 @@
         <q-form class="q-gutter-md">
           <q-input
             v-model="form.nameTag"
-            label="Informe o nome do Endpoint"
+            label="Informe o nome do Tag"
             required
           />
         </q-form>
@@ -24,7 +24,7 @@
         <q-form class="q-gutter-md">
           <q-input
             v-model="form.descriptionTag"
-            label="Informe a descrição do Endpoint"
+            label="Informe a descrição do Tag"
             required
           />
         </q-form>

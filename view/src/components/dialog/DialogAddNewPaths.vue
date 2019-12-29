@@ -6,7 +6,7 @@
     <q-card>
       <q-card-section>
         <div class="text-h6">
-          Informe os dados da sua API
+          Informe os dados desse tipo de requisição
         </div>
       </q-card-section>
 
