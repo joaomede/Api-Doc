@@ -10,6 +10,7 @@
     "dev": "nodemon api/Server.ts",
     "start:dev": "sucrase-node api/Server.ts",
     "migrate": "sucrase-node api/db/migrate",
+    "migratedown": "sucrase-node api/db/migratedown",
     "build:view": "cd view && yarn quasar build -m spa",
     "build": "webpack",
     "start": "node dist/Server.js",
