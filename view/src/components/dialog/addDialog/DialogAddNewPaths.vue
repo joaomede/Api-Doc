@@ -264,9 +264,9 @@ export default {
         parameter3: false,
         parameterName3: '',
         parameterValue3: '',
-        headersValue: '',
+        headersValue: {},
         body: false,
-        bodyValue: '',
+        bodyValue: {},
         data: false,
         dataType: '',
         dataValue: ''
