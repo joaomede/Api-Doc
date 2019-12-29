@@ -209,27 +209,41 @@
                         </q-item>
 
                         <!-- vFor Responses -->
-                        <q-card
-                          v-for="codes in paths.responses"
-                          :key="codes.id"
-                        >
-                          <q-card-section>
-                            <q-expansion-item
-                              expand-separator
-                              icon="a"
-                              :label="codes.typeCode"
-                              header-class="a"
-                            >
-                              <q-card>
-                                <q-card-section>
-                                  reason: {{ codes.reason }} <br>
-                                  responseModel: {{ codes.responseModel }} <br>
-                                  headers: {{ codes.headers }} <br>
-                                </q-card-section>
-                              </q-card>
-                            </q-expansion-item>
-                            <q-separator />
-                          </q-card-section>
+                        <q-card>
+                          <q-list
+                            v-for="(responses, indexResponse) in paths.responses"
+                            :key="responses.id"
+                          >
+                            <q-card-section>
+                              <q-expansion-item
+                                icon="a"
+                                :label="responses.typeCode"
+                                header-class="a"
+                              >
+                                <q-card>
+                                  <q-card-section>
+                                    <q-item>
+                                      <q-item-section>
+                                        reason: {{ responses.reason }} <br>
+                                        responseModel: {{ responses.responseModel }} <br>
+                                        headers: {{ responses.headers }} <br>
+                                      </q-item-section>
+                                      <q-item-section side>
+                                        <q-icon
+                                          class="text-right"
+                                          side
+                                          name="delete"
+                                          color="primary"
+                                          @click.stop="dialogConfirmDeleteResponses = true; response = responses; tagIndex = indexTags; pathIndex = indexPath; responseIndex = indexResponse"
+                                        />
+                                      </q-item-section>
+                                    </q-item>
+                                  </q-card-section>
+                                </q-card>
+                              </q-expansion-item>
+                              <q-separator />
+                            </q-card-section>
+                          </q-list>
                         </q-card>
                       </q-card-section>
                     </q-card>
@@ -334,7 +348,8 @@ export default {
       },
 
       tagIndex: null,
-      pathIndex: null
+      pathIndex: null,
+      responseIndex: null
     }
   },
   computed: {
@@ -349,6 +364,9 @@ export default {
     this.init()
   },
   methods: {
+    init () {
+      this.indexApiDoc()
+    },
     async deleteTag () {
       try {
         const result = await this.$axios.delete(`api/tags/delete/${this.tag.id}`, { headers: this.user.headers })
@@ -366,23 +384,23 @@ export default {
         this.$delete(this.apiData.tags[this.tagIndex].paths, this.pathIndex)
         this.$notify(result.data.ok, 'green')
       } catch (error) {
-        this.$notify(error.data.response.error, 're')
+        this.$notify(error.data.response.error, 'red')
       }
     },
     async deleteResponse () {
       try {
-
+        const result = await this.$axios.delete(`api/responses/delete/${this.response.id}`, { headers: this.user.headers })
+        this.dialogConfirmDeleteResponses = false
+        this.$delete(this.apiData.tags[this.tagIndex].paths[this.pathIndex].responses, this.responseIndex)
+        this.$notify(result.data.ok, 'green')
       } catch (error) {
-
+        this.$notify(error.data.response.error, 'red')
       }
     },
     fakeDelete () {
       console.log(this.apiData.tags[0].paths[0])
       this.$delete(this.apiData.tags[0].paths, 0)
       console.log(this.apiData.tags[0].paths[0])
-    },
-    init () {
-      this.indexApiDoc()
     },
     async storeNewTag (newEndPoint) {
       try {
