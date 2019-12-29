@@ -65,23 +65,44 @@ export default new Vuex.Store({
       state.version = process.env.VERSION
       state.appFeedId = process.env.APPFEED
 
-      setTimeout(() => {
-        db
-          .collection('app')
-          .doc(state.appFeedId)
-          .collection('feed')
-          .where('novo', '==', true)
-          .onSnapshot(querySnapshot => {
-            querySnapshot.forEach(doc => {
-              state.versionCloud = doc.data().tituloPostagem
-            })
-            if (state.version !== state.versionCloud) {
-              window.location.reload(true)
-            } else {
-              Loading.hide()
-            }
+      db
+        .collection('app')
+        .doc(state.appFeedId)
+        .collection('feed')
+        .where('novo', '==', true)
+        .onSnapshot(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            state.versionCloud = doc.data().tituloPostagem
           })
-      }, 3000)
+        })
+
+      setTimeout(() => {
+        if (state.version !== state.versionCloud) {
+          Loading.show({
+            spinner: QSpinnerGears,
+            spinnerColor: 'red',
+            spinnerSize: 140,
+            backgroundColor: 'red',
+            message: 'O Aplicativo está desatualizado, aplicando atualização...',
+            messageColor: 'black'
+          })
+          setTimeout(() => {
+            window.location.reload(true)
+          }, 2000)
+        } else {
+          Loading.show({
+            spinner: QSpinnerGears,
+            spinnerColor: 'green',
+            spinnerSize: 140,
+            backgroundColor: 'green',
+            message: 'Aplicativo atualizado',
+            messageColor: 'black'
+          })
+          setTimeout(() => {
+            Loading.hide()
+          }, 1000)
+        }
+      }, 2500)
     },
     setApisList (state, objeto) {
       state.apisList = objeto
