@@ -102,6 +102,10 @@
                 <strong>Licença:</strong> {{ lista.license }}
               </div>
 
+              <div class="text-h6">
+                <strong>Base URL:</strong> {{ lista.baseURL }}
+              </div>
+
               <div class="text-p">
                 <strong>Descrição:</strong> {{ lista.descriptionApi }}
               </div>

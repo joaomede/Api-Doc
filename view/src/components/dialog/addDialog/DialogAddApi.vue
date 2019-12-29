@@ -71,6 +71,16 @@
         </div>
       </q-card-section>
 
+      <q-card-section>
+        <q-form class="q-gutter-md">
+          <q-input
+            v-model="form.baseURL"
+            label="Informe o endereço a URL da API"
+            required
+          />
+        </q-form>
+      </q-card-section>
+
       <q-card-section align="center">
         <q-btn
           class="q-ma-xs"
@@ -106,7 +116,8 @@ export default {
         version: '',
         email: '',
         license: '',
-        isPublic: false
+        isPublic: false,
+        baseURL: ''
       },
       dialogPopup: this.dialog
     }
@@ -133,7 +144,9 @@ export default {
         version: '',
         email: '',
         license: '',
-        isPublic: false }
+        isPublic: false,
+        baseURL: ''
+      }
     }
   }
 }

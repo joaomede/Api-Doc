@@ -9,6 +9,7 @@ export async function up (knex: Knex): Promise<any> {
     table.text('version').notNullable()
     table.text('email').notNullable()
     table.text('license').notNullable()
+    table.text('baseURL').notNullable()
     table.boolean('isPublic').notNullable()
     table.timestamps(true, true)
     table.integer('userIdFk').unsigned().references('id').inTable('users').onDelete('CASCADE').index()

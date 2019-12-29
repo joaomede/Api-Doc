@@ -9,7 +9,8 @@ function apiSchema (): Joi.ObjectSchema<object> {
     version: Joi.string().required(),
     email: Joi.string().required(),
     license: Joi.string().required(),
-    isPublic: Joi.boolean().required()
+    isPublic: Joi.boolean().required(),
+    baseURL: Joi.boolean().required()
   })
 }
 

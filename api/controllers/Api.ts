@@ -15,6 +15,7 @@ class Api {
         email: req.body.email,
         license: req.body.license,
         isPublic: req.body.isPublic,
+        baseURL: req.body.baseURL,
         userIdFk: req.userId
       })
 
@@ -35,6 +36,7 @@ class Api {
       email: req.body.email,
       license: req.body.license,
       isPublic: req.body.isPublic,
+      baseURL: req.body.baseURL,
       descriptionApi: req.body.descriptionApi
     }
     try {
