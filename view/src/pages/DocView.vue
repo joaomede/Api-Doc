@@ -37,16 +37,16 @@
 
     <DialogUpdateApi
       :dialog="dialogUpdateApi"
-      :api-form="api"
+      :apiform="api"
       @save="updateApi($event)"
       @eventClose="dialogUpdateApi = false"
     />
 
     <DialogUpdateTag
-      :dialog="dialogUpdatetag"
+      :dialog="dialogUpdateTag"
       :tag-form="tag"
       @save="updateTag($event)"
-      @eventClose="dialogUpdatetag = false"
+      @eventClose="dialogUpdateTag = false"
     />
 
     <DialogUpdatePath
@@ -71,36 +71,50 @@
         style="max-width: 100%; background-color: #fff9f0"
       >
         <q-card-section>
-          <div class="text-h5">
-            <strong>API:</strong> {{ lista.apiName }}
-          </div>
-          <div class="text-h6">
-            <strong>Versão:</strong> {{ lista.version }}
-          </div>
-          <div
-            v-if="lista.isPublic"
-            class="text-h6"
-          >
-            <strong>Documentação Pública</strong>
-          </div>
-          <div
-            v-if="!lista.isPublic"
-            class="text-p"
-          >
-            <strong>Documentação Privada</strong>
-          </div>
+          <q-item>
+            <q-item-section>
+              <div class="text-h5">
+                <strong>API:</strong> {{ lista.apiName }}
+              </div>
+              <div class="text-h6">
+                <strong>Versão:</strong> {{ lista.version }}
+              </div>
+              <div
+                v-if="lista.isPublic"
+                class="text-h6"
+              >
+                <strong>Documentação Pública</strong>
+              </div>
+              <div
+                v-if="!lista.isPublic"
+                class="text-p"
+              >
+                <strong>Documentação Privada</strong>
+              </div>
 
-          <div class="text-p">
-            <strong>E-mail:</strong> {{ lista.email }}
-          </div>
+              <div class="text-p">
+                <strong>E-mail:</strong> {{ lista.email }}
+              </div>
 
-          <div class="text-h6">
-            <strong>Licença:</strong> {{ lista.license }}
-          </div>
+              <div class="text-h6">
+                <strong>Licença:</strong> {{ lista.license }}
+              </div>
 
-          <div class="text-p">
-            <strong>Descrição:</strong> {{ lista.descriptionApi }}
-          </div>
+              <div class="text-p">
+                <strong>Descrição:</strong> {{ lista.descriptionApi }}
+              </div>
+            </q-item-section>
+
+            <q-item-section side>
+              <q-icon
+                class="text-right"
+                side
+                name="edit"
+                color="primary"
+                @click.stop="dialogUpdateApi = true; api = apiData"
+              />
+            </q-item-section>
+          </q-item>
         </q-card-section>
 
         <q-item>
@@ -142,6 +156,16 @@
                     <strong>Descrição da Tag:</strong> {{ tags.descriptionTag }}
                   </div>
                 </q-item-label>
+              </q-item-section>
+
+              <q-item-section side>
+                <q-icon
+                  class="text-right"
+                  side
+                  name="edit"
+                  color="primary"
+                  @click.stop="dialogUpdateTag = true; tag = tags; tagIndex = indexTags;"
+                />
               </q-item-section>
 
               <q-item-section side>
@@ -373,7 +397,7 @@ export default {
       dialogConfirmDeleteResponses: false,
 
       dialogUpdateApi: false,
-      dialogUpdatetag: false,
+      dialogUpdateTag: false,
       dialogUpdatePath: false,
       dialogUpdateResponse: false,
 
@@ -413,7 +437,15 @@ export default {
     init () {
       this.indexApiDoc()
     },
-    async updateApi () {},
+    async updateApi (newApi) {
+      try {
+        const result = await this.$axios.put(`api/api/update/${newApi.id}`, newApi, { headers: this.user.headers })
+        this.dialogUpdateApi = false
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
+    },
 
     async updateTag () {},
     async updatePath () {},

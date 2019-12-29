@@ -19,7 +19,7 @@ routes.post('/api/api/create', apiValidate.create, cApi.store)
 routes.get('/api/api/get/:apiId', cApi.indexOne)
 routes.get('/api/api/getall', cApi.index)
 routes.delete('/api/api/delete/:id', cApi.destroy)
-routes.put('/api/api/update/:id', apiValidate.create, cApi.update)
+routes.put('/api/api/update/:id', cApi.update)
 // API populate
 routes.get('/api/api/getapiandendpoints/:id', cApi.getApiAndEndPoints)
 routes.get('/api/api/getverbsandcodes/:endPointId', cApi.getVerbsAndCodes)

@@ -97,10 +97,13 @@
 export default {
   props: {
     dialog: Boolean,
-    apiForm: {
+    apiform: {
       type: Object,
       default: function () {
-        return {}
+        return {
+          id: '',
+          apiName: ''
+        }
       }
     }
   },
@@ -123,15 +126,15 @@ export default {
   methods: {
     update () {
       this.dialogPopup = this.dialog
-      this.form = this.apiForm
+      this.form = this.apiform
     },
     eventClose () {
       this.dialogPopup = false
       this.$emit('eventClose')
-      this.reset()
     },
     save () {
       this.$emit('save', this.form)
+      this.reset()
     },
     reset () {
       this.form = {
