@@ -93,7 +93,8 @@
           </q-item-section>
         </q-item>
 
-        <q-list
+        <!-- vfor Tags -->
+        <q-card
           v-for="(tags, indexTags) in lista.tags"
           :key="tags.id"
           bordered
@@ -127,8 +128,10 @@
             </q-item>
             <q-separator spaced />
 
+            <!-- Card Paths -->
             <q-card style="background-color: #fff9f0">
               <q-card-section>
+                <!-- Header path -->
                 <q-item>
                   <q-item-section>
                     <div class="text-h6">
@@ -146,87 +149,97 @@
                   </q-item-section>
                 </q-item>
 
-                <q-card>
-                  <q-list
-                    v-for="(paths, indexPath) in tags.paths"
-                    :key="paths.id"
+                <!-- vfor paths -->
+                <q-card
+                  v-for="(paths, indexPath) in tags.paths"
+                  :key="paths.id"
+                >
+                  <q-expansion-item
+                    expand-separator
+                    :icon="paths.verbType | verificaLetra"
+                    :label="paths.verbType"
+                    :caption="`Path: ${paths.path}`"
+                    :header-class="paths.verbType | verificaCor"
                   >
-                    <q-expansion-item
-                      expand-separator
-                      :icon="paths.verbType | verificaLetra"
-                      :label="paths.verbType"
-                      :caption="`Path: ${paths.path}`"
-                      :header-class="paths.verbType | verificaCor"
-                    >
-                      <q-card>
-                        <q-card-section
-                          class="text-left"
-                          :style="paths.verbType | filtrarCorBackground"
+                    <q-card>
+                      <q-card-section
+                        class="text-left"
+                        :style="paths.verbType | filtrarCorBackground"
+                      >
+                        <q-card-section>
+                          <q-item>
+                            <q-item-section>
+                              Paths: {{ paths.path }} <br>
+                              Parameter: {{ paths.parameter }} <br>
+                              verbValue: {{ paths.verbValue }} <br>
+                              descriptionVerb: {{ paths.descriptionVerb }} <br>
+                              paramsType: {{ paths.paramsType }} <br>
+                              respValue: {{ paths.respValue }} <br>
+                              dataType: {{ paths.dataType }} <br>
+                            </q-item-section>
+                            <q-item-section side>
+                              <q-icon
+                                class="text-right"
+                                side
+                                name="delete_sweep"
+                                color="primary"
+                                @click.stop="dialogConfirmDeletePaths = true; path = paths; tagIndex = indexTags; pathIndex = indexPath"
+                              />
+                            </q-item-section>
+                          </q-item>
+                        </q-card-section>
+
+                        <!-- header Responss -->
+                        <q-item>
+                          <q-item-section>
+                            <div class="text-h6">
+                              Responses
+                            </div>
+                          </q-item-section>
+
+                          <q-item-section side>
+                            <q-icon
+                              class="text-right"
+                              side
+                              name="add"
+                              color="primary"
+                              @click.stop="dialogAddNewResponses = true; path.id = paths.id; tagIndex = indexTags; pathIndex = indexPath;"
+                            />
+                          </q-item-section>
+                        </q-item>
+
+                        <!-- vFor Responses -->
+                        <q-card
+                          v-for="codes in paths.responses"
+                          :key="codes.id"
                         >
                           <q-card-section>
-                            <q-item>
-                              <q-item-section>
-                                Paths: {{ paths.path }} <br>
-                                Parameter: {{ paths.parameter }} <br>
-                                verbValue: {{ paths.verbValue }} <br>
-                                descriptionVerb: {{ paths.descriptionVerb }} <br>
-                                paramsType: {{ paths.paramsType }} <br>
-                                respValue: {{ paths.respValue }} <br>
-                                dataType: {{ paths.dataType }} <br>
-                              </q-item-section>
-                              <q-item-section side>
-                                <q-icon
-                                  class="text-right"
-                                  side
-                                  name="delete_sweep"
-                                  color="primary"
-                                  @click.stop="dialogConfirmDeletePaths = true; tag = tags; tagIndex = indexTags; pathIndex = indexPath"
-                                />
-                              </q-item-section>
-                            </q-item>
+                            <q-expansion-item
+                              expand-separator
+                              icon="a"
+                              :label="codes.typeCode"
+                              header-class="a"
+                            >
+                              <q-card>
+                                <q-card-section>
+                                  reason: {{ codes.reason }} <br>
+                                  responseModel: {{ codes.responseModel }} <br>
+                                  headers: {{ codes.headers }} <br>
+                                </q-card-section>
+                              </q-card>
+                            </q-expansion-item>
+                            <q-separator />
                           </q-card-section>
-                          <q-card>
-                            <q-card-section>
-                              <div class="text-h6">
-                                Responses
-                              </div>
-
-                              <q-btn @click="dialogAddNewResponses = true; path.id = paths.id; tagIndex = indexTags; pathIndex = indexPath">
-                                Criar Novo Verbo
-                              </q-btn>
-
-                              <q-list
-                                v-for="codes in paths.responses"
-                                :key="codes.id"
-                              >
-                                <q-expansion-item
-                                  expand-separator
-                                  icon="a"
-                                  :label="codes.typeCode"
-                                  header-class="a"
-                                >
-                                  <q-card>
-                                    <q-card-section>
-                                      reason: {{ codes.reason }} <br>
-                                      responseModel: {{ codes.responseModel }} <br>
-                                      headers: {{ codes.headers }} <br>
-                                    </q-card-section>
-                                  </q-card>
-                                </q-expansion-item>
-                                <q-separator />
-                              </q-list>
-                            </q-card-section>
-                          </q-card>
-                        </q-card-section>
-                      </q-card>
-                    </q-expansion-item>
-                    <q-separator />
-                  </q-list>
+                        </q-card>
+                      </q-card-section>
+                    </q-card>
+                  </q-expansion-item>
+                  <q-separator />
                 </q-card>
               </q-card-section>
             </q-card>
           </q-expansion-item>
-        </q-list>
+        </q-card>
       </q-card>
     </div>
   </div>
