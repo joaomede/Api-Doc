@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import DialogAddApi from '../components/dialog/DialogAddApi'
+import DialogAddApi from '../components/dialog/addDialog/DialogAddApi'
 export default {
   name: 'PrivateList',
   components: {

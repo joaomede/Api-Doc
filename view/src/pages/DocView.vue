@@ -260,9 +260,9 @@
 </template>
 
 <script>
-import DialogAddNewTags from '../components/dialog/DialogAddNewTags'
-import DialogAddNewPaths from '../components/dialog/DialogAddNewPaths'
-import DialogAddNewResponses from '../components/dialog/DialogAddNewResponses'
+import DialogAddNewTags from '../components/dialog/addDialog/DialogAddNewTags'
+import DialogAddNewPaths from '../components/dialog/addDialog/DialogAddNewPaths'
+import DialogAddNewResponses from '../components/dialog/addDialog/DialogAddNewResponses'
 
 import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
 
