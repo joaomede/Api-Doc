@@ -367,6 +367,9 @@ export default {
     init () {
       this.indexApiDoc()
     },
+    async updateTag () {},
+    async updatePath () {},
+    async updateResponse () {},
     async deleteTag () {
       try {
         const result = await this.$axios.delete(`api/tags/delete/${this.tag.id}`, { headers: this.user.headers })
