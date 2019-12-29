@@ -152,7 +152,7 @@
 
       <q-card-section v-if="form.body === true">
         <div class="text-p">
-          Informe valores para o headers da requisição
+          Informe os valores para o corpo da requisição
         </div>
         <JsonEditor
           v-model="form.bodyValue"
