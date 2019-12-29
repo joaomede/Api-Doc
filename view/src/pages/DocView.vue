@@ -361,7 +361,7 @@ export default {
     },
     async deletePath () {
       try {
-        const result = await this.$axios.delete(`api/paths/delete/${this.tag.id}`, { headers: this.user.headers })
+        const result = await this.$axios.delete(`api/paths/delete/${this.path.id}`, { headers: this.user.headers })
         this.dialogConfirmDeletePaths = false
         this.$delete(this.apiData.tags[this.tagIndex].paths, this.pathIndex)
         this.$notify(result.data.ok, 'green')
