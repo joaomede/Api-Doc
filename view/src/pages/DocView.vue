@@ -35,6 +35,34 @@
       @confirm="deleteResponse()"
     />
 
+    <DialogUpdateApi
+      :dialog="dialogUpdateApi"
+      :api-form="api"
+      @save="updateApi($event)"
+      @eventClose="dialogUpdateApi = false"
+    />
+
+    <DialogUpdateTag
+      :dialog="dialogUpdatetag"
+      :tag-form="tag"
+      @save="updateTag($event)"
+      @eventClose="dialogUpdatetag = false"
+    />
+
+    <DialogUpdatePath
+      :dialog="dialogUpdatePath"
+      :path-form="path"
+      @save="updatePath($event)"
+      @eventClose="dialogUpdatePath = false"
+    />
+
+    <DialogUpdateResponse
+      :dialog="dialogUpdateResponse"
+      :response-form="response"
+      @save="updateResponse($event)"
+      @eventClose="dialogUpdateResponse = false"
+    />
+
     <div
       class="centralDiv"
     >
@@ -264,6 +292,11 @@ import DialogAddNewTags from '../components/dialog/addDialog/DialogAddNewTags'
 import DialogAddNewPaths from '../components/dialog/addDialog/DialogAddNewPaths'
 import DialogAddNewResponses from '../components/dialog/addDialog/DialogAddNewResponses'
 
+import DialogUpdateApi from '../components/dialog/updateDialog/DialogUpdateApi'
+import DialogUpdateTag from '../components/dialog/updateDialog/DialogUpdateTags'
+import DialogUpdatePath from '../components/dialog/updateDialog/DialogUpdatePaths'
+import DialogUpdateResponse from '../components/dialog/updateDialog/DialogUpdateResponses'
+
 import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
 
 export default {
@@ -315,7 +348,11 @@ export default {
     DialogAddNewTags,
     DialogAddNewPaths,
     DialogAddNewResponses,
-    DialogConfirmDelete
+    DialogConfirmDelete,
+    DialogUpdateApi,
+    DialogUpdateTag,
+    DialogUpdatePath,
+    DialogUpdateResponse
   },
   props: {
     id: {
@@ -334,6 +371,15 @@ export default {
       dialogConfirmDeleteTag: false,
       dialogConfirmDeletePaths: false,
       dialogConfirmDeleteResponses: false,
+
+      dialogUpdateApi: false,
+      dialogUpdatetag: false,
+      dialogUpdatePath: false,
+      dialogUpdateResponse: false,
+
+      api: {
+        id: ''
+      },
 
       tag: {
         id: ''
@@ -367,6 +413,8 @@ export default {
     init () {
       this.indexApiDoc()
     },
+    async updateApi () {},
+
     async updateTag () {},
     async updatePath () {},
     async updateResponse () {},
