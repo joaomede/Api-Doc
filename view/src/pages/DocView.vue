@@ -447,8 +447,16 @@ export default {
       }
     },
 
-    async updateTag () {},
-    async updatePath () {},
+    async updateTag (newTag) {
+      try {
+        const result = await this.$axios.put(`api/tags/update/${newTag.id}`, newTag, { headers: this.user.headers })
+        this.dialogUpdateTag = false
+        this.$set(this.apiData.tags, this.tagIndex, newTag)
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
+    },
     async updateResponse () {},
     async deleteTag () {
       try {

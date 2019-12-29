@@ -29,7 +29,7 @@ routes.get('/api/api/getverbsandcodes/:endPointId', cApi.getVerbsAndCodes)
 routes.post('/api/tags/create/:apiId', tagsValidate.create, cTags.store)
 routes.get('/api/tags/getall/:apiId', cTags.index)
 routes.delete('/api/tags/delete/:id', cTags.destroy)
-routes.put('/api/tags/update/:id', tagsValidate.create, cTags.update)
+routes.put('/api/tags/update/:id', cTags.update)
 
 // * //
 // Verbs
