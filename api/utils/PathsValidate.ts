@@ -6,12 +6,13 @@ function verbSchema (): Joi.ObjectSchema<object> {
   return Joi.object().keys({
     verbType: Joi.string().required(),
     path: Joi.string().required(),
-    parameter: Joi.string().required(),
-    verbValue: Joi.string().required(),
     descriptionVerb: Joi.string().required(),
-    paramsType: Joi.string().required(),
-    respValue: Joi.string().required(),
-    dataType: Joi.string().required()
+    parameter1: Joi.boolean().required(),
+    parameter2: Joi.boolean().required(),
+    parameter3: Joi.boolean().required(),
+    headers: Joi.boolean().required(),
+    body: Joi.boolean().required(),
+    data: Joi.boolean().required()
   })
 }
 

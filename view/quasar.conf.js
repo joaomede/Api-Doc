@@ -9,6 +9,7 @@ module.exports = function (ctx) {
       'firebase',
       'axios',
       'notify',
+      'plugins',
       'globallyMixins'
     ],
 

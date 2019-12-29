@@ -41,50 +41,143 @@
       </q-card-section>
 
       <q-card-section>
+        <div class="q-gutter-sm">
+          <q-checkbox
+            v-model="form.parameter1"
+            label="Recebe Parametros?"
+          />
+        </div>
+      </q-card-section>
+
+      <q-card-section v-if="form.parameter1 === true">
         <q-form class="q-gutter-md">
           <q-input
-            v-model="form.parameter"
-            label="Informe os parametros"
+            v-model="form.parameterName1"
+            label="Informe o nome do parametro, ex.: userId"
+            required
+          />
+        </q-form>
+      </q-card-section>
+
+      <q-card-section v-if="form.parameter1 === true">
+        <q-form class="q-gutter-md">
+          <q-input
+            v-model="form.parameterValue1"
+            label="Informe o valor do primeiro parametro, ex.: 1"
+            required
+          />
+        </q-form>
+      </q-card-section>
+
+      <q-card-section v-if="form.parameter1 === true">
+        <div class="q-gutter-sm">
+          <q-checkbox
+            v-model="form.parameter2"
+            label="Outro parametro?"
+          />
+        </div>
+      </q-card-section>
+
+      <q-card-section v-if="form.parameter2 === true">
+        <q-form class="q-gutter-md">
+          <q-input
+            v-model="form.parameterName2"
+            label="Informe o nome do segundo parametro, ex.: grupoId"
+            required
+          />
+        </q-form>
+      </q-card-section>
+
+      <q-card-section v-if="form.parameter2 === true">
+        <q-form class="q-gutter-md">
+          <q-input
+            v-model="form.parameterValue2"
+            label="Informe o valor do segundo parametro, ex.: 23"
+            required
+          />
+        </q-form>
+      </q-card-section>
+
+      <q-card-section v-if="form.parameter2 === true">
+        <div class="q-gutter-sm">
+          <q-checkbox
+            v-model="form.parameter3"
+            label="Há um terceiro parametro?"
+          />
+        </div>
+      </q-card-section>
+
+      <q-card-section v-if="form.parameter3 === true">
+        <q-form class="q-gutter-md">
+          <q-input
+            v-model="form.parameterName3"
+            label="Informe o nome do terceiro parametro, ex.: cidadeId"
+            required
+          />
+        </q-form>
+      </q-card-section>
+
+      <q-card-section v-if="form.parameter3 === true">
+        <q-form class="q-gutter-md">
+          <q-input
+            v-model="form.parameterValue3"
+            label="Informe o valor do terceiro parametro, ex.: 12"
             required
           />
         </q-form>
       </q-card-section>
 
       <q-card-section>
-        <q-form class="q-gutter-md">
-          <q-input
-            v-model="form.paramsType"
-            label="Informe o tipo do parametro"
-            required
-          />
-        </q-form>
+        <div class="text-p">
+          Informe valores para o headers da requisição
+        </div>
+        <JsonEditor
+          v-model="form.headersValue"
+          :options="{
+            confirmText: 'confirm',
+            cancelText: 'cancel',
+          }"
+          :obj-data="form.headersValue"
+        />
       </q-card-section>
 
       <q-card-section>
-        <q-form class="q-gutter-md">
-          <q-input
-            v-model="form.verbValue"
-            label="Informe os valores"
-            required
+        <div class="q-gutter-sm">
+          <q-checkbox
+            v-model="form.body"
+            label="Essa requisitação um corpo?"
           />
-        </q-form>
+        </div>
+      </q-card-section>
+
+      <q-card-section v-if="form.body === true">
+        <div class="text-p">
+          Informe valores para o headers da requisição
+        </div>
+        <JsonEditor
+          v-model="form.bodyValue"
+          :options="{
+            confirmText: 'confirm',
+            cancelText: 'cancel',
+          }"
+          :obj-data="form.bodyValue"
+        />
       </q-card-section>
 
       <q-card-section>
-        <q-form class="q-gutter-md">
-          <q-input
-            v-model="form.respValue"
-            label="Informe o valor da resposta"
-            required
+        <div class="q-gutter-sm">
+          <q-checkbox
+            v-model="form.data"
+            label="Essa requisitação envia data?"
           />
-        </q-form>
+        </div>
       </q-card-section>
 
-      <q-card-section>
+      <q-card-section v-if="form.data === true">
         <q-form class="q-gutter-md">
           <q-input
-            v-model="form.dataType"
-            label="Informe o tipo dos dados que retornarão"
+            v-model="form.bodyValue"
+            label="Qual o tipo de data? ex.: audio/mp3"
             required
           />
         </q-form>
@@ -122,12 +215,22 @@ export default {
       form: {
         verbType: '',
         path: '',
-        parameter: '',
-        verbValue: '',
         descriptionVerb: '',
-        paramsType: '',
-        respValue: '',
-        dataType: ''
+        parameter1: false,
+        parameterName1: '',
+        parameterValue1: '',
+        parameter2: false,
+        parameterName2: '',
+        parameterValue2: '',
+        parameter3: false,
+        parameterName3: '',
+        parameterValue3: '',
+        headersValue: {},
+        body: false,
+        bodyValue: {},
+        data: false,
+        dataType: '',
+        dataValue: ''
       },
       dialogPopup: this.dialog
     }
@@ -151,12 +254,22 @@ export default {
       this.form = {
         verbType: '',
         path: '',
-        parameter: '',
-        verbValue: '',
         descriptionVerb: '',
-        paramsType: '',
-        respValue: '',
-        dataType: ''
+        parameter1: false,
+        parameterName1: '',
+        parameterValue1: '',
+        parameter2: false,
+        parameterName2: '',
+        parameterValue2: '',
+        parameter3: false,
+        parameterName3: '',
+        parameterValue3: '',
+        headersValue: '',
+        body: false,
+        bodyValue: '',
+        data: false,
+        dataType: '',
+        dataValue: ''
       }
     }
   }

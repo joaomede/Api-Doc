@@ -33,7 +33,7 @@ routes.put('/api/tags/update/:id', cTags.update)
 
 // * //
 // Verbs
-routes.post('/api/paths/create/:endPointId', pathsValidate.create, cPaths.store)
+routes.post('/api/paths/create/:endPointId', cPaths.store)
 routes.get('/api/paths/getall/:endPointId', cPaths.index)
 routes.delete('/api/paths/delete/:id', cPaths.destroy)
 routes.put('/api/paths/update/:id', cPaths.update)

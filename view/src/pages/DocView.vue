@@ -6,11 +6,13 @@
       @eventClose="dialogAddNewTags = false"
       @save="storeNewTag($event)"
     />
+
     <DialogAddNewPaths
       :dialog="dialogAddNewPaths"
       @eventClose="dialogAddNewPaths = false"
       @save="storeNewPath($event)"
     />
+
     <DialogAddNewResponses
       :dialog="dialogAddNewResponses"
       @eventClose="dialogAddNewResponses = false"
@@ -221,14 +223,96 @@
                         <q-card-section>
                           <q-item>
                             <q-item-section>
-                              Paths: {{ paths.path }} <br>
-                              Parameter: {{ paths.parameter }} <br>
-                              verbValue: {{ paths.verbValue }} <br>
-                              descriptionVerb: {{ paths.descriptionVerb }} <br>
-                              paramsType: {{ paths.paramsType }} <br>
-                              respValue: {{ paths.respValue }} <br>
-                              dataType: {{ paths.dataType }} <br>
+                              <q-card-section>
+                                <div
+                                  v-if="paths.parameter1 === false"
+                                  class="text-h6"
+                                  style="font-size: 18px"
+                                >
+                                  <strong>Paths:</strong> {{ paths.path }}
+                                </div>
+
+                                <div
+                                  v-if="(paths.parameter1 === true && paths.parameter2 === false && paths.parameter3 === false)"
+                                  class="text-h6"
+                                  style="font-size: 18px"
+                                >
+                                  <strong>Paths:</strong> {{ paths.path }}/{ {{ paths.parameterName1 }} }
+                                </div>
+                                <div
+                                  v-if="(paths.parameter2 === true && paths.parameter3 === false)"
+                                  class="text-h6"
+                                  style="font-size: 18px"
+                                >
+                                  <strong>Paths:</strong> {{ paths.path }}/{ {{ paths.parameterName1 }} }/{ {{ paths.parameterName2 }} }
+                                </div>
+                                <div
+                                  v-if="(paths.parameter3 === true)"
+                                  class="text-h6"
+                                  style="font-size: 18px"
+                                >
+                                  <strong>Paths:</strong> {{ paths.path }}/{ {{ paths.parameterName1 }} }/{ {{ paths.parameterName2 }} }/{ {{ paths.parameterName3 }} }
+                                </div>
+                                <div
+                                  class="text-h6"
+                                  style="font-size: 18px"
+                                >
+                                  <strong>Descrição:</strong> {{ paths.descriptionVerb }}
+                                </div>
+                                <q-separator spaced />
+                                Headers:
+                                <JsonEditor
+                                  v-model="paths.headersValue"
+                                  :options="{
+                                    confirmText: 'confirm',
+                                    cancelText: 'cancel',
+                                  }"
+                                  :obj-data="paths.headersValue"
+                                />
+                                <q-separator spaced />
+
+                                <div v-if="paths.parameter1 === true">
+                                  Parameter Name: {{ paths.parameterName1 }}<br>
+                                  Value: {{ paths.parameterValue1 }} <br>
+                                  <q-separator spaced />
+                                </div>
+                                <div v-if="paths.parameter2 === true">
+                                  Parameter Name: {{ paths.parameterName2 }}<br>
+                                  Value: {{ paths.parameterValue2 }} <br>
+                                  <q-separator spaced />
+                                </div>
+                                <div v-if="paths.parameter3 === true">
+                                  Parameter Name: {{ paths.parameterName3 }}<br>
+                                  Value: {{ paths.parameterValue3 }} <br>
+                                  <q-separator spaced />
+                                </div>
+
+                                <div v-if="paths.body === true">
+                                  Body:
+                                  <JsonEditor
+                                    v-model="paths.bodyValue"
+                                    :options="{
+                                      confirmText: 'confirm',
+                                      cancelText: 'cancel',
+                                    }"
+                                    :obj-data="paths.bodyValue"
+                                  />
+                                  <div>
+                                    <vue-json-pretty
+                                      :data="paths.bodyValue"
+                                    />
+                                  </div>
+
+                                  <q-separator spaced />
+                                </div>
+
+                                <div v-if="paths.data === true">
+                                  Data Type: {{ paths.dataType }}<br>
+                                  <q-separator spaced />
+                                </div>
+                              </q-card-section>
                             </q-item-section>
+
                             <q-item-section side>
                               <q-icon
                                 class="text-right"
@@ -341,8 +425,13 @@ import DialogUpdateResponse from '../components/dialog/updateDialog/DialogUpdate
 
 import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
 
+import VueJsonPretty from 'vue-json-pretty'
+
 export default {
   filters: {
+    JSONPARSE (item) {
+      return JSON.parse(item)
+    },
     filtrarCorBackground (item) {
       if (item === 'POST') {
         return 'background-color: #4caf5018'
@@ -394,7 +483,8 @@ export default {
     DialogUpdateApi,
     DialogUpdateTag,
     DialogUpdatePath,
-    DialogUpdateResponse
+    DialogUpdateResponse,
+    VueJsonPretty
   },
   props: {
     id: {
