@@ -41,89 +41,35 @@
       </q-card-section>
 
       <q-card-section>
-        <div class="q-gutter-sm">
-          <q-checkbox
-            v-model="form.parameter1"
-            label="Recebe Parametros?"
-          />
-        </div>
+        <q-btn @click="addParameter">
+          Adicionar Parametro
+        </q-btn>
+        <q-btn @click="removeParameter">
+          Remover
+        </q-btn>
       </q-card-section>
 
-      <q-card-section v-if="form.parameter1 === true">
-        <q-form class="q-gutter-md">
-          <q-input
-            v-model="form.parameterName1"
-            label="Informe o nome do parametro, ex.: userId"
-            required
-          />
-        </q-form>
-      </q-card-section>
-
-      <q-card-section v-if="form.parameter1 === true">
-        <q-form class="q-gutter-md">
-          <q-input
-            v-model="form.parameterValue1"
-            label="Informe o valor do primeiro parametro, ex.: 1"
-            required
-          />
-        </q-form>
-      </q-card-section>
-
-      <q-card-section v-if="form.parameter1 === true">
-        <div class="q-gutter-sm">
-          <q-checkbox
-            v-model="form.parameter2"
-            label="Outro parametro?"
-          />
-        </div>
-      </q-card-section>
-
-      <q-card-section v-if="form.parameter2 === true">
-        <q-form class="q-gutter-md">
-          <q-input
-            v-model="form.parameterName2"
-            label="Informe o nome do segundo parametro, ex.: grupoId"
-            required
-          />
-        </q-form>
-      </q-card-section>
-
-      <q-card-section v-if="form.parameter2 === true">
-        <q-form class="q-gutter-md">
-          <q-input
-            v-model="form.parameterValue2"
-            label="Informe o valor do segundo parametro, ex.: 23"
-            required
-          />
-        </q-form>
-      </q-card-section>
-
-      <q-card-section v-if="form.parameter2 === true">
-        <div class="q-gutter-sm">
-          <q-checkbox
-            v-model="form.parameter3"
-            label="Há um terceiro parametro?"
-          />
-        </div>
-      </q-card-section>
-
-      <q-card-section v-if="form.parameter3 === true">
-        <q-form class="q-gutter-md">
-          <q-input
-            v-model="form.parameterName3"
-            label="Informe o nome do terceiro parametro, ex.: cidadeId"
-            required
-          />
-        </q-form>
-      </q-card-section>
-
-      <q-card-section v-if="form.parameter3 === true">
-        <q-form class="q-gutter-md">
-          <q-input
-            v-model="form.parameterValue3"
-            label="Informe o valor do terceiro parametro, ex.: 12"
-            required
-          />
+      <q-card-section v-if="form.parameter.params.length > 0">
+        <q-form
+          v-for="(params, index) in form.parameter.params"
+          :key="index"
+        >
+          <q-item>
+            <q-item-section>
+              <q-input
+                v-model="params.parameterName"
+                label="Nome, ex.: userId"
+                required
+              />
+            </q-item-section>
+            <q-item-section>
+              <q-input
+                v-model="params.parameterValue"
+                label="Valor, ex.: 1"
+                required
+              />
+            </q-item-section>
+          </q-item>
         </q-form>
       </q-card-section>
 
@@ -216,21 +162,13 @@ export default {
         verbType: '',
         path: '',
         descriptionVerb: '',
-        parameter1: false,
-        parameterName1: '',
-        parameterValue1: '',
-        parameter2: false,
-        parameterName2: '',
-        parameterValue2: '',
-        parameter3: false,
-        parameterName3: '',
-        parameterValue3: '',
+        parameter: {
+          params: []
+        },
         headersValue: {},
         body: false,
         bodyValue: {},
-        data: false,
-        dataType: '',
-        dataValue: ''
+        data: []
       },
       dialogPopup: this.dialog
     }
@@ -247,6 +185,15 @@ export default {
       this.$emit('eventClose')
       this.reset()
     },
+    addParameter () {
+      this.form.parameter.params.push({
+        parameterName: '',
+        parameterValue: ''
+      })
+    },
+    removeParameter () {
+      this.form.parameter.params.pop()
+    },
     save () {
       this.$emit('save', this.form)
     },
@@ -255,21 +202,13 @@ export default {
         verbType: '',
         path: '',
         descriptionVerb: '',
-        parameter1: false,
-        parameterName1: '',
-        parameterValue1: '',
-        parameter2: false,
-        parameterName2: '',
-        parameterValue2: '',
-        parameter3: false,
-        parameterName3: '',
-        parameterValue3: '',
+        parameter: {
+          params: []
+        },
         headersValue: {},
         body: false,
         bodyValue: {},
-        data: false,
-        dataType: '',
-        dataValue: ''
+        data: []
       }
     }
   }
