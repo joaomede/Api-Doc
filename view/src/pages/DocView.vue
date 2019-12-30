@@ -240,35 +240,60 @@
                                 >
                                   <strong>Method:</strong> {{ paths.verbType }}
                                 </div>
+
                                 <div
-                                  v-if="paths.parameter1 === false"
                                   class="text-h6"
                                   style="font-size: 18px"
                                 >
                                   <strong>Paths:</strong> {{ paths.path }}
                                 </div>
+                                <q-separator spaced />
 
-                                <div
-                                  v-if="(paths.parameter1 === true && paths.parameter2 === false && paths.parameter3 === false)"
-                                  class="text-h6"
-                                  style="font-size: 18px"
-                                >
-                                  <strong>Paths:</strong> {{ paths.path }}/{ {{ paths.parameterName1 }} }
+                                <div>
+                                  <strong>Params:</strong>
+                                  <q-card-section>
+                                    <div class="text-center">
+                                      <q-icon
+                                        class="text-right"
+                                        side
+                                        name="add"
+                                        color="primary"
+                                        @click.stop="(paths.parameter.params.push({parameterName: '',parameterValue: ''}))"
+                                      />
+                                      <q-icon
+                                        class="text-right"
+                                        side
+                                        name="remove"
+                                        color="primary"
+                                        @click.stop="(paths.parameter.params.pop())"
+                                      />
                                 </div>
-                                <div
-                                  v-if="(paths.parameter2 === true && paths.parameter3 === false)"
-                                  class="text-h6"
-                                  style="font-size: 18px"
+                                  </q-card-section>
+
+                                  <q-form
+                                    v-for="(params, index) in paths.parameter.params"
+                                    :key="index"
                                 >
-                                  <strong>Paths:</strong> {{ paths.path }}/{ {{ paths.parameterName1 }} }/{ {{ paths.parameterName2 }} }
+                                    <q-item>
+                                      <q-item-section>
+                                        <q-input
+                                          v-model="params.parameterName"
+                                          label="Nome, ex.: userId"
+                                          required
+                                        />
+                                      </q-item-section>
+                                      <q-item-section>
+                                        <q-input
+                                          v-model="params.parameterValue"
+                                          label="Valor, ex.: 1"
+                                          required
+                                        />
+                                      </q-item-section>
+                                    </q-item>
+                                  </q-form>
                                 </div>
-                                <div
-                                  v-if="(paths.parameter3 === true)"
-                                  class="text-h6"
-                                  style="font-size: 18px"
-                                >
-                                  <strong>Paths:</strong> {{ paths.path }}/{ {{ paths.parameterName1 }} }/{ {{ paths.parameterName2 }} }/{ {{ paths.parameterName3 }} }
-                                </div>
+                                <q-separator spaced />
+
                                 <div
                                   class="text-h6"
                                   style="font-size: 18px"
