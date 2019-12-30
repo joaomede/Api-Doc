@@ -267,13 +267,13 @@
                                         color="primary"
                                         @click.stop="(paths.parameter.params.pop())"
                                       />
-                                </div>
+                                    </div>
                                   </q-card-section>
 
                                   <q-form
                                     v-for="(params, index) in paths.parameter.params"
                                     :key="index"
-                                >
+                                  >
                                     <q-item>
                                       <q-item-section>
                                         <q-input

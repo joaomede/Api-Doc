@@ -6,7 +6,7 @@ export async function up (knex: Knex): Promise<any> {
     table.increments()
     table.text('typeCode').notNullable()
     table.text('reason').notNullable()
-    table.text('responseModel').notNullable()
+    table.json('responseModel').notNullable()
     table.text('headers').notNullable()
     table.timestamps(true, true)
     table.integer('pathsIdFk').unsigned().references('id').inTable('paths').onDelete('CASCADE').index()

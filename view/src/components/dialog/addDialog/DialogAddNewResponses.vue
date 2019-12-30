@@ -31,13 +31,14 @@
       </q-card-section>
 
       <q-card-section>
-        <q-form class="q-gutter-md">
-          <q-input
-            v-model="form.responseModel"
-            label="Informe o modelo da resposta"
-            required
-          />
-        </q-form>
+        <JsonEditor
+          v-model="form.responseModel"
+          :options="{
+            confirmText: 'confirm',
+            cancelText: 'cancel',
+          }"
+          :obj-data="form.responseModel"
+        />
       </q-card-section>
 
       <q-card-section>
@@ -82,7 +83,7 @@ export default {
       form: {
         typeCode: '',
         reason: '',
-        responseModel: '',
+        responseModel: {},
         headers: ''
       },
       dialogPopup: this.dialog
@@ -107,7 +108,7 @@ export default {
       this.form = {
         typeCode: '',
         reason: '',
-        responseModel: '',
+        responseModel: {},
         headers: ''
       }
     }

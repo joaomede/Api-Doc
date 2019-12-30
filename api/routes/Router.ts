@@ -40,7 +40,7 @@ routes.put('/api/paths/update/:id', cPaths.update)
 
 // * //
 // Codes Response
-routes.post('/api/responses/create/:verbId', responsesValidade.create, cResponses.store)
+routes.post('/api/responses/create/:verbId', cResponses.store)
 routes.get('/api/responses/getall/:verbId', cResponses.index)
 routes.delete('/api/responses/delete/:id', cResponses.destroy)
 routes.put('/api/responses/update/:id', cResponses.update)
