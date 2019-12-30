@@ -459,50 +459,13 @@
 
                         <!-- vFor Responses -->
                         <q-card>
-                          <q-list
+                          <ListResponseEdit
                             v-for="(responses, indexResponse) in paths.responses"
                             :key="responses.id"
-                          >
-                            <q-card-section>
-                              <q-expansion-item
-                                icon="a"
-                                :label="responses.typeCode"
-                                header-class="a"
-                              >
-                                <q-card>
-                                  <q-card-section>
-                                    <q-item>
-                                      <q-item-section>
-                                        typeCode: {{ responses.typeCode }} <br>
-                                        reason: {{ responses.reason }} <br>
-                                        responseModel: {{ responses.responseModel }} <br>
-                                        headers: {{ responses.headers }} <br>
-                                      </q-item-section>
-                                      <q-item-section side>
-                                        <q-icon
-                                          class="text-right"
-                                          side
-                                          name="edit"
-                                          color="primary"
-                                          @click.stop="dialogUpdateResponse = true; response = responses; tagIndex = indexTags; pathIndex = indexPath; responseIndex = indexResponse"
-                                        />
-                                      </q-item-section>
-                                      <q-item-section side>
-                                        <q-icon
-                                          class="text-right"
-                                          side
-                                          name="delete"
-                                          color="primary"
-                                          @click.stop="dialogConfirmDeleteResponses = true; response = responses; tagIndex = indexTags; pathIndex = indexPath; responseIndex = indexResponse"
-                                        />
-                                      </q-item-section>
-                                    </q-item>
-                                  </q-card-section>
-                                </q-card>
-                              </q-expansion-item>
-                              <q-separator />
-                            </q-card-section>
-                          </q-list>
+                            :responses="responses"
+                            @edit="dialogUpdateResponse = true; response = responses; tagIndex = indexTags; pathIndex = indexPath; responseIndex = indexResponse"
+                            @delete="dialogConfirmDeleteResponses = true; response = responses; tagIndex = indexTags; pathIndex = indexPath; responseIndex = indexResponse"
+                          />
                         </q-card>
                       </q-card-section>
                     </q-card>
@@ -530,6 +493,8 @@ import DialogUpdateResponse from '../components/dialog/updateDialog/DialogUpdate
 
 import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
 
+import ListResponseEdit from '../components/listEdit/ListReseponses'
+
 import pathTest from '../mixins/pathTest'
 
 import VueJsonPretty from 'vue-json-pretty'
@@ -544,7 +509,8 @@ export default {
     DialogUpdateTag,
     DialogUpdatePath,
     DialogUpdateResponse,
-    VueJsonPretty
+    VueJsonPretty,
+    ListResponseEdit
   },
   mixins: [pathTest],
   props: {

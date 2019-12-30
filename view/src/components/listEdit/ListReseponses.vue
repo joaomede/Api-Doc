@@ -32,7 +32,7 @@
                   side
                   name="delete"
                   color="primary"
-                  @click.stop="dialogConfirmDeleteResponses = true; response = responses; tagIndex = indexTags; pathIndex = indexPath; responseIndex = indexResponse"
+                  @click.stop="deleteResponse"
                 />
               </q-item-section>
             </q-item>
@@ -52,29 +52,14 @@ export default {
       default: function () {
         return {}
       }
-    },
-    indexTags: {
-      type: Number,
-      default: 0
-    },
-    indexPath: {
-      type: Number,
-      default: 0
-    },
-    indexResponses: {
-      type: Number,
-      default: 0
     }
   },
   methods: {
     edit () {
-      this.$store.dispatch('setResponse', this.responses)
-      this.$store.dispatch('setTagIndex', this.indexTags)
-      this.$store.dispatch('setResponse', this.indexPath)
-      this.$store.dispatch('setResponse', this.indexResponses)
       this.$emit('edit')
-      console.log(this.tag)
-      // this.$emit('edit')
+    },
+    deleteResponse () {
+      this.$emit('delete')
     }
   }
 }
