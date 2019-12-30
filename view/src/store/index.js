@@ -11,7 +11,13 @@ export default new Vuex.Store({
     version: null,
     versionCloud: null,
     appFeedId: null,
-    apisList: null
+    apisList: null,
+    tag: null,
+    path: null,
+    response: null,
+    tagIndex: null,
+    pathIndex: null,
+    responseIndex: null
   },
   getters: {
     getUser: state => {
@@ -28,6 +34,24 @@ export default new Vuex.Store({
     },
     getAppFeedID (state) {
       return state.appFeedId
+    },
+    getTag (state) {
+      return state.tag
+    },
+    getPath (state) {
+      return state.path
+    },
+    getReseponse (state) {
+      return state.response
+    },
+    getTagIndex (state) {
+      return state.tagIndex
+    },
+    getPathIndex (state) {
+      return state.pathIndex
+    },
+    getResponse (state) {
+      return state.responseIndex
     }
   },
   mutations: {
@@ -106,6 +130,24 @@ export default new Vuex.Store({
     },
     setApisList (state, objeto) {
       state.apisList = objeto
+    },
+    setTag (state, tag) {
+      state.tag = tag
+    },
+    setPath (state, path) {
+      state.path = path
+    },
+    setResponse (state, response) {
+      state.response = response
+    },
+    setTagIndex (state, tagIndex) {
+      state.tagIndex = tagIndex
+    },
+    setPathIndex (state, pathIndex) {
+      state.pathIndex = pathIndex
+    },
+    setResponseIndex (state, responseIndex) {
+      state.responseIndex = responseIndex
     }
   },
   actions: {
@@ -117,6 +159,24 @@ export default new Vuex.Store({
     },
     setApisList ({ commit }, apislist) {
       commit('setApisList', apislist)
+    },
+    setTag ({ commit }, tag) {
+      commit('setTag', tag)
+    },
+    setPath ({ commit }, path) {
+      commit('setPath', path)
+    },
+    setResponse ({ commit }, response) {
+      commit('setResponse', response)
+    },
+    setTagIndex ({ commit }, tagIndex) {
+      commit('setTagIndex', tagIndex)
+    },
+    setPathIndex ({ commit }, pathIndex) {
+      commit('setPathIndex', pathIndex)
+    },
+    setResponseIndex ({ commit }, responseIndex) {
+      commit('setResponseIndex', responseIndex)
     }
   }
 })
