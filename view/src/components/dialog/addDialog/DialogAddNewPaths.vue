@@ -119,13 +119,29 @@
         </div>
       </q-card-section>
 
-      <q-card-section v-if="form.data === true">
-        <q-form class="q-gutter-md">
-          <q-input
-            v-model="form.bodyValue"
-            label="Qual o tipo de data? ex.: audio/mp3"
-            required
-          />
+      <q-card-section>
+        <q-btn @click="addData">
+          Adicionar Data
+        </q-btn>
+        <q-btn @click="removeData">
+          Remover Data
+        </q-btn>
+      </q-card-section>
+
+      <q-card-section v-if="form.data.data.length > 0">
+        <q-form
+          v-for="(data, index) in form.data.data"
+          :key="index"
+        >
+          <q-item>
+            <q-item-section>
+              <q-input
+                v-model="data.dataType"
+                label="Tipo de data, ex.: audio/mp3"
+                required
+              />
+            </q-item-section>
+          </q-item>
         </q-form>
       </q-card-section>
 
@@ -168,7 +184,9 @@ export default {
         headersValue: {},
         body: false,
         bodyValue: {},
-        data: []
+        data: {
+          data: []
+        }
       },
       dialogPopup: this.dialog
     }
@@ -194,6 +212,15 @@ export default {
     removeParameter () {
       this.form.parameter.params.pop()
     },
+    addData () {
+      this.form.data.data.push({
+        dataType: '',
+        dataValue: ''
+      })
+    },
+    removeData () {
+      this.form.data.data.pop()
+    },
     save () {
       this.$emit('save', this.form)
     },
@@ -208,7 +235,9 @@ export default {
         headersValue: {},
         body: false,
         bodyValue: {},
-        data: []
+        data: {
+          data: []
+        }
       }
     }
   }
