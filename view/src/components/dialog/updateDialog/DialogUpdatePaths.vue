@@ -203,7 +203,7 @@ export default {
   methods: {
     update () {
       this.dialogPopup = this.dialog
-      this.form = this.pathForm
+      this.form = this.path
     },
     eventClose () {
       this.dialogPopup = false

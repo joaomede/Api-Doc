@@ -52,10 +52,26 @@ export default {
       default: function () {
         return {}
       }
+    },
+    indexTags: {
+      type: Number,
+      default: 0
+    },
+    indexPath: {
+      type: Number,
+      default: 0
+    },
+    indexResponse: {
+      type: Number,
+      default: 0
     }
   },
   methods: {
     edit () {
+      this.$store.dispatch('setResponse', this.responses)
+      this.$store.dispatch('setTagIndex', this.indexTags)
+      this.$store.dispatch('setPathIndex', this.indexPath)
+      this.$store.dispatch('setResponseIndex', this.indexResponse)
       this.$emit('edit')
     },
     deleteResponse () {

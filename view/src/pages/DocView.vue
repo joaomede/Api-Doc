@@ -53,14 +53,12 @@
 
     <DialogUpdatePath
       :dialog="dialogUpdatePath"
-      :path-form="path"
       @save="updatePath($event)"
       @eventClose="dialogUpdatePath = false"
     />
 
     <DialogUpdateResponse
       :dialog="dialogUpdateResponse"
-      :response-form="response"
       @save="updateResponse($event)"
       @eventClose="dialogUpdateResponse = false"
     />
@@ -463,8 +461,10 @@
                             v-for="(responses, indexResponse) in paths.responses"
                             :key="responses.id"
                             :responses="responses"
-                            @edit="dialogUpdateResponse = true; response = responses; tagIndex = indexTags; pathIndex = indexPath; responseIndex = indexResponse"
-                            @delete="dialogConfirmDeleteResponses = true; response = responses; tagIndex = indexTags; pathIndex = indexPath; responseIndex = indexResponse"
+                            :index-tags="indexTags"
+                            :index-path="indexPath"
+                            :index-response="indexResponse"
+                            @edit="dialogUpdateResponse = true"
                           />
                         </q-card>
                       </q-card-section>
@@ -546,15 +546,7 @@ export default {
 
       path: {
         id: ''
-      },
-
-      response: {
-        id: ''
-      },
-
-      tagIndex: null,
-      pathIndex: null,
-      responseIndex: null
+      }
     }
   },
   computed: {

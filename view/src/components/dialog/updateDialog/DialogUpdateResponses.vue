@@ -76,13 +76,7 @@
 <script>
 export default {
   props: {
-    dialog: Boolean,
-    responseForm: {
-      type: Object,
-      default: function () {
-        return {}
-      }
-    }
+    dialog: Boolean
   },
   data () {
     return {
@@ -101,7 +95,7 @@ export default {
   methods: {
     update () {
       this.dialogPopup = this.dialog
-      this.form = this.responseForm
+      this.form = this.response
     },
     eventClose () {
       this.dialogPopup = false

@@ -26,6 +26,21 @@ export default {
       } else {
         return null
       }
+    },
+    path () {
+      return this.$store.getters.getPath
+    },
+    response () {
+      return this.$store.getters.getResponse
+    },
+    tagIndex () {
+      return this.$store.getters.getTagIndex
+    },
+    pathIndex () {
+      return this.$store.getters.getPathIndex
+    },
+    responseIndex () {
+      return this.$store.getters.getResponseIndex
     }
   }
 }

@@ -12,9 +12,15 @@ export default new Vuex.Store({
     versionCloud: null,
     appFeedId: null,
     apisList: null,
-    tag: null,
-    path: null,
-    response: null,
+    tag: {
+      id: ''
+    },
+    path: {
+      id: ''
+    },
+    response: {
+      id: ''
+    },
     tagIndex: null,
     pathIndex: null,
     responseIndex: null
@@ -41,7 +47,7 @@ export default new Vuex.Store({
     getPath (state) {
       return state.path
     },
-    getReseponse (state) {
+    getResponse (state) {
       return state.response
     },
     getTagIndex (state) {
@@ -50,7 +56,7 @@ export default new Vuex.Store({
     getPathIndex (state) {
       return state.pathIndex
     },
-    getResponse (state) {
+    getResponseIndex (state) {
       return state.responseIndex
     }
   },
