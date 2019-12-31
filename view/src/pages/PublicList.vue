@@ -64,7 +64,6 @@ export default {
       try {
         const result = await this.$axios.get('api/geral/listallpublicapi', { headers: this.user.headers })
         this.listOfApis = await result.data
-        console.log(await this.listOfApis)
       } catch (error) {
         this.$notify('Erro ao carregar lista de documentação publica', 'red')
       }

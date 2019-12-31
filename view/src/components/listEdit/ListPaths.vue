@@ -275,10 +275,11 @@
 
 <script>
 import VueJsonPretty from 'vue-json-pretty'
-import ListResponseEdit from '../listEdit/ListReseponses'
+import ListResponseEdit from '../listEdit/ListResponses'
 import DialogUpdatePath from '../dialog/updateDialog/DialogUpdatePaths'
 import DialogAddNewResponses from '../dialog/addDialog/DialogAddNewResponses'
 import DialogConfirmDelete from '../dialog/DialogConfirmDelete'
+import pathTest from '../../mixins/pathTest'
 
 export default {
   components: {
@@ -288,6 +289,7 @@ export default {
     DialogUpdatePath,
     DialogConfirmDelete
   },
+  mixins: [pathTest],
   props: {
     paths: {
       type: Object,

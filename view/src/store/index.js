@@ -31,9 +31,6 @@ export default new Vuex.Store({
     getUser: state => {
       return state.user
     },
-    getListApis: state => {
-      return state.apisList
-    },
     getApiData (state) {
       return state.apiData
     },
@@ -139,11 +136,20 @@ export default new Vuex.Store({
         }
       }, 2500)
     },
-    setApi (state, api) {
-
+    async setApiData (state, id) {
+      try {
+        const result = await http.get(`api/api/getapiandendpoints/${id}`, { headers: state.user.headers })
+        state.apiData = await result.data
+      } catch (error) {
+        console.log(error.response.data.error)
+      }
     },
-    setApisList (state, objeto) {
-      state.apisList = objeto
+    setPathsByTagIndex (state, tag) {
+      Vue.set(state.apiData.tags[state.tagIndex], 'paths', tag)
+    },
+    setResponseTest (state, response) {
+      const _ = state
+      Vue.set(_.apiData.tags[_.tagIndex].paths[_.pathIndex], 'response', response)
     },
     setTag (state, tag) {
       state.tag = tag
@@ -162,17 +168,6 @@ export default new Vuex.Store({
     },
     setResponseIndex (state, responseIndex) {
       state.responseIndex = responseIndex
-    },
-    async setApiData (state, id) {
-      try {
-        const result = await http.get(`api/api/getapiandendpoints/${id}`, { headers: state.user.headers })
-        state.apiData = await result.data
-      } catch (error) {
-        console.log(error.response.data.error)
-      }
-    },
-    setPathsByTagIndex (state, tag) {
-      Vue.set(state.apiData.tags[state.tagIndex], 'paths', tag)
     },
     setUpdateTag (state, newTag) {
       Vue.set(state.apiData.tags, state.tagIndex, newTag)
@@ -230,8 +225,14 @@ export default new Vuex.Store({
     versionCheck ({ commit }) {
       commit('versionCheck')
     },
-    setApisList ({ commit }, apislist) {
-      commit('setApisList', apislist)
+    setApiData ({ commit }, id) {
+      commit('setApiData', id)
+    },
+    setPathsByTagIndex ({ commit }, tag) {
+      commit('setPathsByTagIndex', tag)
+    },
+    setResponseTest ({ commit }, response) {
+      commit('setResponseTest', response)
     },
     setTag ({ commit }, tag) {
       commit('setTag', tag)
@@ -250,12 +251,6 @@ export default new Vuex.Store({
     },
     setResponseIndex ({ commit }, responseIndex) {
       commit('setResponseIndex', responseIndex)
-    },
-    setApiData ({ commit }, id) {
-      commit('setApiData', id)
-    },
-    setPathsByTagIndex ({ commit }, tag) {
-      commit('setPathsByTagIndex', tag)
     },
     setUpdateTag ({ commit }, newTag) {
       commit('setUpdateTag', newTag)
