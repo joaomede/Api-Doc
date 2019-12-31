@@ -25,12 +25,12 @@
       <q-item>
         <q-item-section>
           <q-item-label lines="5">
-            <div class="text-p">
+            <div class="text-p text-left">
               <strong>Tag:</strong> {{ tags.nameTag }}
             </div>
           </q-item-label>
           <q-item-label lines="5">
-            <div class="text-p">
+            <div class="text-p text-left">
               <strong>Descrição da Tag:</strong> {{ tags.descriptionTag }}
             </div>
           </q-item-label>
@@ -59,7 +59,7 @@
       <q-separator spaced />
 
       <q-card style="background-color: #fff9f0">
-        <q-card-section>
+        <q-card-section class="q-pa-xs">
           <q-item>
             <q-item-section>
               <div class="text-h6">
