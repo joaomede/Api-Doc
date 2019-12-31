@@ -105,8 +105,7 @@ export default {
     async updateResponse () {
       try {
         const result = await this.$axios.put(`api/responses/update/${this.form.id}`, this.form, { headers: this.user.headers })
-        this.dialogUpdateResponse = false
-        this.$store.dispatch('setUpdateResponse', await result.data)
+        this.$store.dispatch('setUpdateResponse', this.form)
         this.$notify(result.data.ok, 'green')
         this.eventClose()
       } catch (error) {
