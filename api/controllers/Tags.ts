@@ -19,8 +19,8 @@ class EndPoint {
       }
 
       try {
-        await knex('tags').insert(newEndPoint)
-        resp.returnSucessMessage(res, 'Novo EndPoint criado com sucesso')
+        const result = await knex('tags').insert(newEndPoint).returning('*')
+        resp.returnSucessObject(res, result)
       } catch (error) {
         resp.returnErrorMessage(res, 'Erro ao tentar criar EndPoint')
       }

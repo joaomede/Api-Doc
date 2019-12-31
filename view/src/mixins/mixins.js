@@ -27,6 +27,9 @@ export default {
         return null
       }
     },
+    cApi () {
+      return this.$store.getters.getApiData
+    },
     cTag () {
       return this.$store.getters.getTag
     },

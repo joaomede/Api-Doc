@@ -62,7 +62,7 @@
         <q-btn
           class="q-ma-xs"
           color="green"
-          @click="save"
+          @click="storeNewResponse"
         >
           Sim
         </q-btn>
@@ -101,8 +101,15 @@ export default {
       this.$emit('eventClose')
       this.reset()
     },
-    save () {
-      this.$emit('save', this.form)
+    async storeNewResponse () {
+      try {
+        const result = await this.$axios.post(`api/responses/create/${this.cPath.id}`, this.form, { headers: this.user.headers })
+        this.$store.dispatch('setNewResponse', result.data)
+        this.$notify('Novo verbo criado com sucesso', 'green')
+        this.eventClose()
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     },
     reset () {
       this.form = {

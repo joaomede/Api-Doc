@@ -41,7 +41,7 @@
         <q-btn
           class="q-ma-xs"
           color="green"
-          @click="save"
+          @click="storeNewTag"
         >
           Sim
         </q-btn>
@@ -78,8 +78,15 @@ export default {
       this.$emit('eventClose')
       this.reset()
     },
-    save () {
-      this.$emit('save', this.form)
+    async storeNewTag () {
+      try {
+        const result = await this.$axios.post(`api/tags/create/${this.cApi.id}`, this.form, { headers: this.user.headers })
+        this.$store.dispatch('setNewTag', result.data)
+        this.$notify(await result.data.ok, 'green')
+        this.eventClose()
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     },
     reset () {
       this.form = {

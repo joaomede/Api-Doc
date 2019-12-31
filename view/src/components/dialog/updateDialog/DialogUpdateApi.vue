@@ -92,7 +92,7 @@
         <q-btn
           class="q-ma-xs"
           color="green"
-          @click="save"
+          @click="updateApi"
         >
           Sim
         </q-btn>
@@ -106,16 +106,7 @@
 <script>
 export default {
   props: {
-    dialog: Boolean,
-    apiform: {
-      type: Object,
-      default: function () {
-        return {
-          id: '',
-          apiName: ''
-        }
-      }
-    }
+    dialog: Boolean
   },
   data () {
     return {
@@ -137,15 +128,20 @@ export default {
   methods: {
     update () {
       this.dialogPopup = this.dialog
-      this.form = this.apiform
+      this.form = this.cApi
     },
     eventClose () {
       this.dialogPopup = false
       this.$emit('eventClose')
     },
-    save () {
-      this.$emit('save', this.form)
-      this.reset()
+    async updateApi () {
+      try {
+        const result = await this.$axios.put(`api/api/update/${this.form.id}`, this.form, { headers: this.user.headers })
+        this.$notify(result.data.ok, 'green')
+        this.eventClose()
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     },
     reset () {
       this.form = {

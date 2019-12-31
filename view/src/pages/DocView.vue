@@ -15,7 +15,6 @@
     <DialogAddNewResponses
       :dialog="dialogAddNewResponses"
       @eventClose="dialogAddNewResponses = false"
-      @save="storeNewResponse($event)"
     />
 
     <DialogConfirmDelete
@@ -38,7 +37,6 @@
 
     <DialogUpdateApi
       :dialog="dialogUpdateApi"
-      :apiform="api"
       @save="updateApi($event)"
       @eventClose="dialogUpdateApi = false"
     />
@@ -50,13 +48,11 @@
 
     <DialogUpdatePath
       :dialog="dialogUpdatePath"
-      @save="updatePath($event)"
       @eventClose="dialogUpdatePath = false"
     />
 
     <DialogUpdateResponse
       :dialog="dialogUpdateResponse"
-      @save="updateResponse($event)"
       @eventClose="dialogUpdateResponse = false"
     />
 
@@ -552,7 +548,7 @@ export default {
   },
   methods: {
     init () {
-      this.indexApiDoc()
+      this.$store.dispatch('setApiData', this.id)
     },
     async setEditPath (paths, indexTags, indexPath) {
       this.$store.dispatch('setPath', paths)
@@ -562,15 +558,6 @@ export default {
     async settersAddNewPath (tags, indexTags) {
       this.$store.dispatch('setTag', tags)
       this.$store.dispatch('setTagIndex', indexTags)
-    },
-    async updateApi (newApi) {
-      try {
-        const result = await this.$axios.put(`api/api/update/${newApi.id}`, newApi, { headers: this.user.headers })
-        this.dialogUpdateApi = false
-        this.$notify(result.data.ok, 'green')
-      } catch (error) {
-        this.$notify(error.response.data.error, 'red')
-      }
     },
     async deleteTag () {
       try {
@@ -600,34 +587,6 @@ export default {
         this.$notify(result.data.ok, 'green')
       } catch (error) {
         this.$notify(error.data.response.error, 'red')
-      }
-    },
-    async storeNewTag (newEndPoint) {
-      try {
-        const result = await this.$axios.post(`api/tags/create/${this.id}`, newEndPoint, { headers: this.user.headers })
-        this.dialogAddNewTags = false
-        this.indexApiDoc()
-        this.$notify(await result.data.ok, 'green')
-      } catch (error) {
-        this.$notify(error.response.data.error, 'red')
-      }
-    },
-    async storeNewResponse (newResponses) {
-      try {
-        const result = await this.$axios.post(`api/responses/create/${this.cPath.id}`, newResponses, { headers: this.user.headers })
-        this.dialogAddNewResponses = false
-        this.$store.dispatch('setNewResponse', result.data)
-        this.$notify('Novo verbo criado com sucesso', 'green')
-      } catch (error) {
-        this.$notify(error.response.data.error, 'red')
-      }
-    },
-    async indexApiDoc () {
-      try {
-        const result = await this.$axios.get(`api/api/getapiandendpoints/${this.id}`, { headers: this.user.headers })
-        this.$store.dispatch('setApiData', result.data)
-      } catch (error) {
-        this.$notify(error.response.data.error, 'red')
       }
     },
     async getVerbsAndCodes (tagId, index) {

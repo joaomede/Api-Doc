@@ -2,6 +2,7 @@ import Vue, { ssrContext } from 'vue'
 import Vuex from 'vuex'
 import { Cookies, Loading, QSpinnerGears } from 'quasar'
 import { db } from '../boot/firebase'
+import { http } from '../boot/axios'
 
 Vue.use(Vuex)
 
@@ -138,6 +139,9 @@ export default new Vuex.Store({
         }
       }, 2500)
     },
+    setApi (state, api) {
+
+    },
     setApisList (state, objeto) {
       state.apisList = objeto
     },
@@ -159,8 +163,13 @@ export default new Vuex.Store({
     setResponseIndex (state, responseIndex) {
       state.responseIndex = responseIndex
     },
-    setApiData (state, apiData) {
-      state.apiData = apiData
+    async setApiData (state, id) {
+      try {
+        const result = await http.get(`api/api/getapiandendpoints/${id}`, { headers: state.user.headers })
+        state.apiData = await result.data
+      } catch (error) {
+        console.log(error.response.data.error)
+      }
     },
     setPathsByTagIndex (state, tag) {
       Vue.set(state.apiData.tags[state.tagIndex], 'paths', tag)
@@ -173,6 +182,16 @@ export default new Vuex.Store({
     },
     setUpdateResponse (state, newResponse) {
       Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses, state.responseIndex, newResponse)
+    },
+    setNewTag (state, tag) {
+      let index
+      if (state.apiData.tags === undefined) {
+        index = 0
+        Vue.set(state.apiData, 'tags', tag)
+      } else {
+        index = state.apiData.tags.length
+        Vue.set(state.apiData.tags, index, tag[0])
+      }
     },
     setNewPath (state, newPath) {
       let index
@@ -232,8 +251,8 @@ export default new Vuex.Store({
     setResponseIndex ({ commit }, responseIndex) {
       commit('setResponseIndex', responseIndex)
     },
-    setApiData ({ commit }, apiData) {
-      commit('setApiData', apiData)
+    setApiData ({ commit }, id) {
+      commit('setApiData', id)
     },
     setPathsByTagIndex ({ commit }, tag) {
       commit('setPathsByTagIndex', tag)
@@ -246,6 +265,9 @@ export default new Vuex.Store({
     },
     setUpdateResponse ({ commit }, newResponse) {
       commit('setUpdateResponse', newResponse)
+    },
+    setNewTag ({ commit }, tag) {
+      commit('setNewTag', tag)
     },
     setNewPath ({ commit }, path) {
       commit('setNewPath', path)
