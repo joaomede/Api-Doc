@@ -156,7 +156,7 @@
         <q-btn
           class="q-ma-xs"
           color="green"
-          @click="save"
+          @click="storeNewPath"
         >
           Sim
         </q-btn>
@@ -221,8 +221,15 @@ export default {
     removeData () {
       this.form.data.data.pop()
     },
-    save () {
-      this.$emit('save', this.form)
+    async storeNewPath () {
+      try {
+        const result = await this.$axios.post(`api/paths/create/${this.cTag.id}`, this.form, { headers: this.user.headers })
+        this.$store.dispatch('setNewPath', result.data)
+        this.$notify('Novo verbo criado com sucesso', 'green')
+        this.eventClose()
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     },
     reset () {
       this.form = {

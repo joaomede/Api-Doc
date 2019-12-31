@@ -10,7 +10,6 @@
     <DialogAddNewPaths
       :dialog="dialogAddNewPaths"
       @eventClose="dialogAddNewPaths = false"
-      @save="storeNewPath($event)"
     />
 
     <DialogAddNewResponses
@@ -609,16 +608,6 @@ export default {
         this.dialogAddNewTags = false
         this.indexApiDoc()
         this.$notify(await result.data.ok, 'green')
-      } catch (error) {
-        this.$notify(error.response.data.error, 'red')
-      }
-    },
-    async storeNewPath (newPath) {
-      try {
-        const result = await this.$axios.post(`api/paths/create/${this.cTag.id}`, newPath, { headers: this.user.headers })
-        this.dialogAddNewPaths = false
-        this.$store('setNewPath', result.data)
-        this.$notify('Novo verbo criado com sucesso', 'green')
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
       }
