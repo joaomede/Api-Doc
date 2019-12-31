@@ -228,7 +228,7 @@ export default {
     async updatePath () {
       try {
         const result = await this.$axios.put(`api/paths/update/${this.form.id}`, this.form, { headers: this.user.headers })
-        this.$store.dispatch('setUpdatePath', await result.data)
+        this.$store.dispatch('setUpdatePath', this.form)
         this.$notify(result.data.ok, 'green')
         this.eventClose()
       } catch (error) {
