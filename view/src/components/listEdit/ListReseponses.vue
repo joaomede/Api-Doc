@@ -75,6 +75,10 @@ export default {
       this.$emit('edit')
     },
     deleteResponse () {
+      this.$store.dispatch('setResponse', this.responses)
+      this.$store.dispatch('setTagIndex', this.indexTags)
+      this.$store.dispatch('setPathIndex', this.indexPath)
+      this.$store.dispatch('setResponseIndex', this.indexResponse)
       this.$emit('delete')
     }
   }

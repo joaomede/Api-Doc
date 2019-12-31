@@ -421,7 +421,7 @@
                                 side
                                 name="edit"
                                 color="primary"
-                                @click.stop="dialogUpdatePath = true; path = paths; tagIndex = indexTags; pathIndex = indexPath"
+                                @click.stop="dialogUpdatePath = true; settersPath(paths, indexTags, indexPath)"
                               />
                             </q-item-section>
                             <q-item-section side>
@@ -430,7 +430,7 @@
                                 side
                                 name="delete_sweep"
                                 color="primary"
-                                @click.stop="dialogConfirmDeletePaths = true; path = paths; tagIndex = indexTags; pathIndex = indexPath"
+                                @click.stop="dialogConfirmDeletePaths = true; settersPath(paths, indexTags, indexPath)"
                               />
                             </q-item-section>
                           </q-item>
@@ -450,7 +450,7 @@
                               side
                               name="add"
                               color="primary"
-                              @click.stop="dialogAddNewResponses = true; path.id = paths.id; tagIndex = indexTags; pathIndex = indexPath;"
+                              @click.stop="dialogAddNewResponses = true; settersPath(paths, indexTags, indexPath)"
                             />
                           </q-item-section>
                         </q-item>
@@ -465,6 +465,7 @@
                             :index-path="indexPath"
                             :index-response="indexResponse"
                             @edit="dialogUpdateResponse = true"
+                            @delete="dialogConfirmDeleteResponses = true"
                           />
                         </q-card>
                       </q-card-section>
@@ -542,10 +543,6 @@ export default {
 
       tag: {
         id: ''
-      },
-
-      path: {
-        id: ''
       }
     }
   },
@@ -563,6 +560,11 @@ export default {
   methods: {
     init () {
       this.indexApiDoc()
+    },
+    async settersPath (paths, indexTags, indexPath) {
+      this.$store.dispatch('setPath', paths)
+      this.$store.dispatch('setTagIndex', indexTags)
+      this.$store.dispatch('setPathIndex', indexPath)
     },
     async updateApi (newApi) {
       try {
