@@ -42,11 +42,8 @@
             side
             name="edit"
             color="primary"
-            @click.stop="dialogUshowEditTag()"
+            @click.stop="showEditTag()"
           />
-        </q-item-section>
-
-        <q-item-section side>
           <q-icon
             class="text-right"
             side
