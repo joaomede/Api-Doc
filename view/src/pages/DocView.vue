@@ -29,12 +29,6 @@
       @confirm="deletePath()"
     />
 
-    <DialogConfirmDelete
-      :dialog="dialogConfirmDeleteResponses"
-      @eventClose="dialogConfirmDeleteResponses = false"
-      @confirm="deleteResponse()"
-    />
-
     <DialogUpdateApi
       :dialog="dialogUpdateApi"
       @save="updateApi($event)"
@@ -49,11 +43,6 @@
     <DialogUpdatePath
       :dialog="dialogUpdatePath"
       @eventClose="dialogUpdatePath = false"
-    />
-
-    <DialogUpdateResponse
-      :dialog="dialogUpdateResponse"
-      @eventClose="dialogUpdateResponse = false"
     />
 
     <div
@@ -457,8 +446,6 @@
                             :index-tags="indexTags"
                             :index-path="indexPath"
                             :index-response="indexResponse"
-                            @edit="dialogUpdateResponse = true"
-                            @delete="dialogConfirmDeleteResponses = true"
                           />
                         </q-card>
                       </q-card-section>
@@ -483,7 +470,6 @@ import DialogAddNewResponses from '../components/dialog/addDialog/DialogAddNewRe
 import DialogUpdateApi from '../components/dialog/updateDialog/DialogUpdateApi'
 import DialogUpdateTag from '../components/dialog/updateDialog/DialogUpdateTags'
 import DialogUpdatePath from '../components/dialog/updateDialog/DialogUpdatePaths'
-import DialogUpdateResponse from '../components/dialog/updateDialog/DialogUpdateResponses'
 
 import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
 
@@ -502,7 +488,6 @@ export default {
     DialogUpdateApi,
     DialogUpdateTag,
     DialogUpdatePath,
-    DialogUpdateResponse,
     VueJsonPretty,
     ListResponseEdit
   },
@@ -574,16 +559,6 @@ export default {
         const result = await this.$axios.delete(`api/paths/delete/${this.cPath.id}`, { headers: this.user.headers })
         this.dialogConfirmDeletePaths = false
         this.$store.dispatch('removePath')
-        this.$notify(result.data.ok, 'green')
-      } catch (error) {
-        this.$notify(error.data.response.error, 'red')
-      }
-    },
-    async deleteResponse () {
-      try {
-        const result = await this.$axios.delete(`api/responses/delete/${this.cResponse.id}`, { headers: this.user.headers })
-        this.dialogConfirmDeleteResponses = false
-        this.$store.dispatch('removeResponse')
         this.$notify(result.data.ok, 'green')
       } catch (error) {
         this.$notify(error.data.response.error, 'red')

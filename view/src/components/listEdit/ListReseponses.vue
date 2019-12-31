@@ -1,6 +1,15 @@
 <template>
   <!-- vFor Responses -->
   <q-card>
+    <DialogUpdateResponse
+      :dialog="dialogUpdateResponse"
+      @eventClose="dialogUpdateResponse = false"
+    />
+    <DialogConfirmDelete
+      :dialog="dialogConfirmDeleteResponses"
+      @eventClose="dialogConfirmDeleteResponses = false"
+      @confirm="deleteResponse()"
+    />
     <q-card-section>
       <q-expansion-item
         icon="a"
@@ -22,7 +31,7 @@
                   side
                   name="edit"
                   color="primary"
-                  @click.stop="edit()"
+                  @click.stop="showEdit"
                 />
               </q-item-section>
               <q-item-section side>
@@ -31,7 +40,7 @@
                   side
                   name="delete"
                   color="primary"
-                  @click.stop="deleteResponse"
+                  @click.stop="showDelete"
                 />
               </q-item-section>
             </q-item>
@@ -44,7 +53,14 @@
 </template>
 
 <script>
+import DialogUpdateResponse from '../dialog/updateDialog/DialogUpdateResponses'
+import DialogConfirmDelete from '../dialog/DialogConfirmDelete'
+
 export default {
+  components: {
+    DialogUpdateResponse,
+    DialogConfirmDelete
+  },
   props: {
     responses: {
       type: Object,
@@ -65,20 +81,36 @@ export default {
       default: 0
     }
   },
+  data () {
+    return {
+      dialogUpdateResponse: false,
+      dialogConfirmDeleteResponses: false
+    }
+  },
   methods: {
-    edit () {
+    dispatchs () {
       this.$store.dispatch('setResponse', this.responses)
       this.$store.dispatch('setTagIndex', this.indexTags)
       this.$store.dispatch('setPathIndex', this.indexPath)
       this.$store.dispatch('setResponseIndex', this.indexResponse)
-      this.$emit('edit')
     },
-    deleteResponse () {
-      this.$store.dispatch('setResponse', this.responses)
-      this.$store.dispatch('setTagIndex', this.indexTags)
-      this.$store.dispatch('setPathIndex', this.indexPath)
-      this.$store.dispatch('setResponseIndex', this.indexResponse)
-      this.$emit('delete')
+    showEdit () {
+      this.dispatchs()
+      this.dialogUpdateResponse = true
+    },
+    showDelete () {
+      this.dispatchs()
+      this.dialogConfirmDeleteResponses = true
+    },
+    async deleteResponse () {
+      try {
+        const result = await this.$axios.delete(`api/responses/delete/${this.cResponse.id}`, { headers: this.user.headers })
+        this.dialogConfirmDeleteResponses = false
+        this.$store.dispatch('removeResponse')
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.data.response.error, 'red')
+      }
     }
   }
 }
