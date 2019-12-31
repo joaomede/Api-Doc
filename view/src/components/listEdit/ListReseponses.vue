@@ -3,8 +3,7 @@
   <q-card>
     <q-card-section>
       <q-expansion-item
-        icon="
-        a"
+        icon="a"
         :label="responses.typeCode"
         header-class="a"
       >

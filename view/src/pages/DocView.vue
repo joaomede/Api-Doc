@@ -46,8 +46,6 @@
 
     <DialogUpdateTag
       :dialog="dialogUpdateTag"
-      :tag-form="tag"
-      @save="updateTag($event)"
       @eventClose="dialogUpdateTag = false"
     />
 
@@ -173,7 +171,7 @@
                   side
                   name="edit"
                   color="primary"
-                  @click.stop="dialogUpdateTag = true; tag = tags; tagIndex = indexTags;"
+                  @click.stop="dialogUpdateTag = true; settersAddNewPath(tags, indexTags);"
                 />
               </q-item-section>
 
@@ -183,7 +181,7 @@
                   side
                   name="delete"
                   color="primary"
-                  @click.stop="dialogConfirmDeleteTag = true; tag = tags; tagIndex = indexTags;"
+                  @click.stop="dialogConfirmDeleteTag = true; settersAddNewPath(tags, indexTags);"
                 />
               </q-item-section>
             </q-item>
@@ -205,7 +203,7 @@
                       side
                       name="add"
                       color="primary"
-                      @click.stop="dialogAddNewPaths = true; tag = tags; tagIndex = indexTags;"
+                      @click.stop="dialogAddNewPaths = true; settersAddNewPath(tags, indexTags)"
                     />
                   </q-item-section>
                 </q-item>
@@ -421,7 +419,7 @@
                                 side
                                 name="edit"
                                 color="primary"
-                                @click.stop="dialogUpdatePath = true; settersPath(paths, indexTags, indexPath)"
+                                @click.stop="dialogUpdatePath = true; setEditPath(paths, indexTags, indexPath)"
                               />
                             </q-item-section>
                             <q-item-section side>
@@ -430,7 +428,7 @@
                                 side
                                 name="delete_sweep"
                                 color="primary"
-                                @click.stop="dialogConfirmDeletePaths = true; settersPath(paths, indexTags, indexPath)"
+                                @click.stop="dialogConfirmDeletePaths = true; setEditPath(paths, indexTags, indexPath)"
                               />
                             </q-item-section>
                           </q-item>
@@ -450,7 +448,7 @@
                               side
                               name="add"
                               color="primary"
-                              @click.stop="dialogAddNewResponses = true; settersPath(paths, indexTags, indexPath)"
+                              @click.stop="dialogAddNewResponses = true; setEditPath(paths, indexTags, indexPath)"
                             />
                           </q-item-section>
                         </q-item>
@@ -539,16 +537,12 @@ export default {
 
       api: {
         id: ''
-      },
-
-      tag: {
-        id: ''
       }
     }
   },
   computed: {
     lista () {
-      return Object.assign({}, this.apiData)
+      return this.$store.getters.getApiData
     }
   },
   watch: {
@@ -561,10 +555,14 @@ export default {
     init () {
       this.indexApiDoc()
     },
-    async settersPath (paths, indexTags, indexPath) {
+    async setEditPath (paths, indexTags, indexPath) {
       this.$store.dispatch('setPath', paths)
       this.$store.dispatch('setTagIndex', indexTags)
       this.$store.dispatch('setPathIndex', indexPath)
+    },
+    async settersAddNewPath (tags, indexTags) {
+      this.$store.dispatch('setTag', tags)
+      this.$store.dispatch('setTagIndex', indexTags)
     },
     async updateApi (newApi) {
       try {
@@ -575,40 +573,10 @@ export default {
         this.$notify(error.response.data.error, 'red')
       }
     },
-    async updateTag (newTag) {
-      try {
-        const result = await this.$axios.put(`api/tags/update/${newTag.id}`, newTag, { headers: this.user.headers })
-        this.dialogUpdateTag = false
-        this.$set(this.apiData.tags, this.tagIndex, newTag)
-        this.$notify(result.data.ok, 'green')
-      } catch (error) {
-        this.$notify(error.response.data.error, 'red')
-      }
-    },
-    async updatePath (newPath) {
-      try {
-        const result = await this.$axios.put(`api/paths/update/${newPath.id}`, newPath, { headers: this.user.headers })
-        this.dialogUpdatePath = false
-        this.$set(this.apiData.tags[this.tagIndex].paths, this.pathIndex, newPath)
-        this.$notify(result.data.ok, 'green')
-      } catch (error) {
-        this.$notify(error.response.data.error, 'red')
-      }
-    },
-    async updateResponse (newResponse) {
-      try {
-        const result = await this.$axios.put(`api/responses/update/${newResponse.id}`, newResponse, { headers: this.user.headers })
-        this.dialogUpdateResponse = false
-        this.$set(this.apiData.tags[this.tagIndex].paths[this.pathIndex].responses, this.responseIndex, newResponse)
-        this.$notify(result.data.ok, 'green')
-      } catch (error) {
-        this.$notify(error.response.data.error, 'red')
-      }
-    },
     async deleteTag () {
       try {
-        const result = await this.$axios.delete(`api/tags/delete/${this.tag.id}`, { headers: this.user.headers })
-        this.$delete(this.apiData.tags, this.tagIndex)
+        const result = await this.$axios.delete(`api/tags/delete/${this.cTag.id}`, { headers: this.user.headers })
+        this.$store.dispatch('removeTag')
         this.dialogConfirmDeleteTag = false
         this.$notify(result.data.ok, 'green')
       } catch (error) {
@@ -617,9 +585,9 @@ export default {
     },
     async deletePath () {
       try {
-        const result = await this.$axios.delete(`api/paths/delete/${this.path.id}`, { headers: this.user.headers })
+        const result = await this.$axios.delete(`api/paths/delete/${this.cPath.id}`, { headers: this.user.headers })
         this.dialogConfirmDeletePaths = false
-        this.$delete(this.apiData.tags[this.tagIndex].paths, this.pathIndex)
+        this.$store.dispatch('removePath')
         this.$notify(result.data.ok, 'green')
       } catch (error) {
         this.$notify(error.data.response.error, 'red')
@@ -627,18 +595,13 @@ export default {
     },
     async deleteResponse () {
       try {
-        const result = await this.$axios.delete(`api/responses/delete/${this.response.id}`, { headers: this.user.headers })
+        const result = await this.$axios.delete(`api/responses/delete/${this.cResponse.id}`, { headers: this.user.headers })
         this.dialogConfirmDeleteResponses = false
-        this.$delete(this.apiData.tags[this.tagIndex].paths[this.pathIndex].responses, this.responseIndex)
+        this.$store.dispatch('removeResponse')
         this.$notify(result.data.ok, 'green')
       } catch (error) {
         this.$notify(error.data.response.error, 'red')
       }
-    },
-    fakeDelete () {
-      console.log(this.apiData.tags[0].paths[0])
-      this.$delete(this.apiData.tags[0].paths, 0)
-      console.log(this.apiData.tags[0].paths[0])
     },
     async storeNewTag (newEndPoint) {
       try {
@@ -650,18 +613,11 @@ export default {
         this.$notify(error.response.data.error, 'red')
       }
     },
-    async storeNewPath (newVerb) {
+    async storeNewPath (newPath) {
       try {
-        const result = await this.$axios.post(`api/paths/create/${this.tag.id}`, newVerb, { headers: this.user.headers })
+        const result = await this.$axios.post(`api/paths/create/${this.cTag.id}`, newPath, { headers: this.user.headers })
         this.dialogAddNewPaths = false
-        let index
-        if (this.apiData.tags[this.tagIndex].paths === undefined) {
-          index = 0
-          this.$set(this.apiData.tags[this.tagIndex], 'paths', await result.data)
-        } else {
-          index = this.apiData.tags[this.tagIndex].paths.length
-          this.$set(this.apiData.tags[this.tagIndex].paths, index, await result.data[0])
-        }
+        this.$store('setNewPath', result.data)
         this.$notify('Novo verbo criado com sucesso', 'green')
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
@@ -669,16 +625,9 @@ export default {
     },
     async storeNewResponse (newResponses) {
       try {
-        const result = await this.$axios.post(`api/responses/create/${this.path.id}`, newResponses, { headers: this.user.headers })
+        const result = await this.$axios.post(`api/responses/create/${this.cPath.id}`, newResponses, { headers: this.user.headers })
         this.dialogAddNewResponses = false
-        let index
-        if (this.apiData.tags[this.tagIndex].paths[this.pathIndex].responses === undefined) {
-          index = 0
-          this.$set(this.apiData.tags[this.tagIndex].paths[this.pathIndex], 'responses', await result.data)
-        } else {
-          index = this.apiData.tags[this.tagIndex].paths[this.pathIndex].responses.length
-          this.$set(this.apiData.tags[this.tagIndex].paths[this.pathIndex].responses, index, await result.data[0])
-        }
+        this.$store.dispatch('setNewResponse', result.data)
         this.$notify('Novo verbo criado com sucesso', 'green')
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
@@ -687,16 +636,16 @@ export default {
     async indexApiDoc () {
       try {
         const result = await this.$axios.get(`api/api/getapiandendpoints/${this.id}`, { headers: this.user.headers })
-        this.apiData = await result.data
-        // console.log(this.apiData)
+        this.$store.dispatch('setApiData', result.data)
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
       }
     },
-    async getVerbsAndCodes (endPointId, index) {
+    async getVerbsAndCodes (tagId, index) {
+      this.$store.dispatch('setTagIndex', index)
       try {
-        const result = await this.$axios.get(`api/api/getverbsandcodes/${endPointId}`, { headers: this.user.headers })
-        this.$set(this.apiData.tags[index], 'paths', result.data)
+        const result = await this.$axios.get(`api/api/getverbsandcodes/${tagId}`, { headers: this.user.headers })
+        this.$store.dispatch('setPathsByTagIndex', await result.data)
       } catch (error) {
         if (error.response.data.error !== 'Não há verbos disponíveis') {
           this.$notify(error.response.data.error, 'red')

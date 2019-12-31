@@ -21,6 +21,7 @@ export default new Vuex.Store({
     response: {
       id: ''
     },
+    apiData: {},
     tagIndex: null,
     pathIndex: null,
     responseIndex: null
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     getListApis: state => {
       return state.apisList
+    },
+    getApiData (state) {
+      return state.apiData
     },
     getVersion (state) {
       return state.version
@@ -154,6 +158,50 @@ export default new Vuex.Store({
     },
     setResponseIndex (state, responseIndex) {
       state.responseIndex = responseIndex
+    },
+    setApiData (state, apiData) {
+      state.apiData = apiData
+    },
+    setPathsByTagIndex (state, tag) {
+      Vue.set(state.apiData.tags[state.tagIndex], 'paths', tag)
+    },
+    setUpdateTag (state, newTag) {
+      Vue.set(state.apiData.tags, state.tagIndex, newTag)
+    },
+    setUpdatePath (state, newPath) {
+      Vue.set(state.apiData.tags[state.tagIndex].paths, state.pathIndex, newPath)
+    },
+    setUpdateResponse (state, newResponse) {
+      Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses, state.responseIndex, newResponse)
+    },
+    setNewPath (state, newPath) {
+      let index
+      if (state.apiData.tags[state.tagIndex].paths === undefined) {
+        index = 0
+        Vue.set(state.apiData.tags[state.tagIndex], 'paths', newPath)
+      } else {
+        index = state.apiData.tags[state.tagIndex].paths.length
+        Vue.set(state.apiData.tags[state.tagIndex].paths, index, newPath[0])
+      }
+    },
+    setNewResponse (state, newResponse) {
+      let index
+      if (state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses === undefined) {
+        index = 0
+        Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex], 'responses', newResponse)
+      } else {
+        index = state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses.length
+        Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses, index, newResponse[0])
+      }
+    },
+    removeTag (state) {
+      Vue.delete(state.apiData.tags, state.tagIndex)
+    },
+    removePath (state) {
+      Vue.delete(state.apiData.tags[state.tagIndex].paths, state.pathIndex)
+    },
+    removeResponse (state) {
+      Vue.delete(state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses, state.responseIndex)
     }
   },
   actions: {
@@ -183,6 +231,36 @@ export default new Vuex.Store({
     },
     setResponseIndex ({ commit }, responseIndex) {
       commit('setResponseIndex', responseIndex)
+    },
+    setApiData ({ commit }, apiData) {
+      commit('setApiData', apiData)
+    },
+    setPathsByTagIndex ({ commit }, tag) {
+      commit('setPathsByTagIndex', tag)
+    },
+    setUpdateTag ({ commit }, newTag) {
+      commit('setUpdateTag', newTag)
+    },
+    setUpdatePath ({ commit }, newPath) {
+      commit('setUpdatePath', newPath)
+    },
+    setUpdateResponse ({ commit }, newResponse) {
+      commit('setUpdateResponse', newResponse)
+    },
+    setNewPath ({ commit }, path) {
+      commit('setNewPath', path)
+    },
+    setNewResponse ({ commit }, response) {
+      commit('setNewResponse', response)
+    },
+    removeTag ({ commit }) {
+      commit('removeTag')
+    },
+    removePath ({ commit }) {
+      commit('removePath')
+    },
+    removeResponse ({ commit }) {
+      commit('removeResponse')
     }
   }
 })

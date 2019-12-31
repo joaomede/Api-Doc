@@ -41,7 +41,7 @@
         <q-btn
           class="q-ma-xs"
           color="green"
-          @click="save"
+          @click="updateTag"
         >
           Sim
         </q-btn>
@@ -55,13 +55,7 @@
 <script>
 export default {
   props: {
-    dialog: Boolean,
-    tagForm: {
-      type: Object,
-      default: function () {
-        return {}
-      }
-    }
+    dialog: Boolean
   },
   data () {
     return {
@@ -77,16 +71,23 @@ export default {
   },
   methods: {
     update () {
+      this.form = this.cTag
       this.dialogPopup = this.dialog
-      this.form = this.tagForm
     },
     eventClose () {
       this.dialogPopup = false
       this.$emit('eventClose')
       this.reset()
     },
-    save () {
-      this.$emit('save', this.form)
+    async updateTag () {
+      try {
+        const result = await this.$axios.put(`api/tags/update/${this.form.id}`, this.form, { headers: this.user.headers })
+        this.$store.dispatch('setUpdateTag', this.form)
+        this.$notify(result.data.ok, 'green')
+        this.eventClose()
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     },
     reset () {
       this.form = {

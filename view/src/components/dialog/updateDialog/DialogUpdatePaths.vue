@@ -156,7 +156,7 @@
         <q-btn
           class="q-ma-xs"
           color="green"
-          @click="save"
+          @click="updatePath"
         >
           Sim
         </q-btn>
@@ -170,13 +170,7 @@
 <script>
 export default {
   props: {
-    dialog: Boolean,
-    pathForm: {
-      type: Object,
-      default: function () {
-        return {}
-      }
-    }
+    dialog: Boolean
   },
   data () {
     return {
@@ -203,7 +197,7 @@ export default {
   methods: {
     update () {
       this.dialogPopup = this.dialog
-      this.form = this.path
+      this.form = this.cPath
     },
     eventClose () {
       this.dialogPopup = false
@@ -230,6 +224,16 @@ export default {
     },
     save () {
       this.$emit('save', this.form)
+    },
+    async updatePath () {
+      try {
+        const result = await this.$axios.put(`api/paths/update/${this.form.id}`, this.form, { headers: this.user.headers })
+        this.$store.dispatch('setUpdatePath', await result.data)
+        this.$notify(result.data.ok, 'green')
+        this.eventClose()
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     },
     reset () {
       this.form = {

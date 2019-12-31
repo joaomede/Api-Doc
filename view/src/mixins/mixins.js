@@ -27,10 +27,13 @@ export default {
         return null
       }
     },
-    path () {
+    cTag () {
+      return this.$store.getters.getTag
+    },
+    cPath () {
       return this.$store.getters.getPath
     },
-    response () {
+    cResponse () {
       return this.$store.getters.getResponse
     },
     tagIndex () {

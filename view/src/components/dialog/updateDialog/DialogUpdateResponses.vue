@@ -62,7 +62,7 @@
         <q-btn
           class="q-ma-xs"
           color="green"
-          @click="save"
+          @click="updateResponse"
         >
           Sim
         </q-btn>
@@ -95,15 +95,23 @@ export default {
   methods: {
     update () {
       this.dialogPopup = this.dialog
-      this.form = this.response
+      this.form = this.cResponse
     },
     eventClose () {
       this.dialogPopup = false
       this.$emit('eventClose')
       this.reset()
     },
-    save () {
-      this.$emit('save', this.form)
+    async updateResponse () {
+      try {
+        const result = await this.$axios.put(`api/responses/update/${this.form.id}`, this.form, { headers: this.user.headers })
+        this.dialogUpdateResponse = false
+        this.$store.dispatch('setUpdateResponse', await result.data)
+        this.$notify(result.data.ok, 'green')
+        this.eventClose()
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     },
     reset () {
       this.form = {
