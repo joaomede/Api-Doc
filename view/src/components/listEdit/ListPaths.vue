@@ -27,6 +27,24 @@
           class="text-left q-pa-xs"
           :style="paths.verbType | filtrarCorBackground"
         >
+          <div class="text-center">
+            <q-icon
+              style="font-size: 24px"
+              class="text-right"
+              side
+              name="edit"
+              color="primary"
+              @click.stop="showEditPath()"
+            />
+            <q-icon
+              style="font-size: 24px"
+              class="text-right"
+              side
+              name="delete_sweep"
+              color="primary"
+              @click.stop="showDeletePath()"
+            />
+          </div>
           <q-item class="q-pa-xs">
             <q-item-section>
               <q-card-section>
@@ -131,7 +149,9 @@
                   <q-separator spaced />
                 </div>
 
-                <div v-if="paths.body === true">
+                <div
+                  v-if="paths.body === true"
+                >
                   Body:
                   <JsonEditor
                     v-model="paths.bodyValue"
@@ -158,7 +178,10 @@
                     Enviar Requisitação
                   </q-btn>
                   <br><br>
-                  <div v-if="paths.response !== undefined">
+                  <div
+                    v-if="paths.response !== undefined"
+                    class="q-pa-md bg-grey-8 text-white"
+                  >
                     Status: {{ paths.response.status }} <br>
                     Resultado da requisição:
                     <vue-json-pretty
@@ -167,7 +190,9 @@
                   </div>
                 </div>
 
-                <div v-if="paths.verbType === 'DELETE'">
+                <div
+                  v-if="paths.verbType === 'DELETE'"
+                >
                   <q-btn
                     color="red"
                     @click="pathTest(paths, indexTags, indexPath)"
@@ -175,7 +200,10 @@
                     Enviar Requisitação
                   </q-btn>
                   <br><br>
-                  <div v-if="paths.response !== undefined">
+                  <div
+                    v-if="paths.response !== undefined"
+                    class="q-pa-md bg-grey-8 text-white"
+                  >
                     Status: {{ paths.response.status }} <br>
                     Resultado da requisição:
                     <vue-json-pretty
@@ -192,7 +220,10 @@
                     Enviar Requisitação
                   </q-btn>
                   <br><br>
-                  <div v-if="paths.response !== undefined">
+                  <div
+                    v-if="paths.response !== undefined"
+                    class="q-pa-md bg-grey-8 text-white"
+                  >
                     Status: {{ paths.response.status }} <br>
                     Resultado da requisição:
                     <vue-json-pretty
@@ -209,7 +240,10 @@
                     Enviar Requisitação
                   </q-btn>
                   <br><br>
-                  <div v-if="paths.response !== undefined">
+                  <div
+                    v-if="paths.response !== undefined"
+                    class="q-pa-md bg-grey-8 text-white"
+                  >
                     Status: {{ paths.response.status }} <br>
                     Resultado da requisição:
                     <vue-json-pretty
@@ -218,23 +252,6 @@
                   </div>
                 </div>
               </q-card-section>
-            </q-item-section>
-
-            <q-item-section side>
-              <q-icon
-                class="text-right"
-                side
-                name="edit"
-                color="primary"
-                @click.stop="showEditPath()"
-              />
-              <q-icon
-                class="text-right"
-                side
-                name="delete_sweep"
-                color="primary"
-                @click.stop="showDeletePath()"
-              />
             </q-item-section>
           </q-item>
 
