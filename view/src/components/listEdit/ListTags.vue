@@ -25,6 +25,22 @@
       <q-item>
         <q-item-section>
           <q-item-label lines="5">
+            <q-icon
+              style="font-size: 24px"
+              class="text-right"
+              side
+              name="edit"
+              color="primary"
+              @click.stop="showEditTag()"
+            />
+            <q-icon
+              style="font-size: 24px"
+              class="text-right"
+              side
+              name="delete"
+              color="primary"
+              @click.stop="showDeleteTag()"
+            />
             <div class="text-p text-left">
               <strong>Tag:</strong> {{ tags.nameTag }}
             </div>
@@ -34,23 +50,6 @@
               <strong>Descrição da Tag:</strong> {{ tags.descriptionTag }}
             </div>
           </q-item-label>
-        </q-item-section>
-
-        <q-item-section side>
-          <q-icon
-            class="text-right"
-            side
-            name="edit"
-            color="primary"
-            @click.stop="showEditTag()"
-          />
-          <q-icon
-            class="text-right"
-            side
-            name="delete"
-            color="primary"
-            @click.stop="showDeleteTag()"
-          />
         </q-item-section>
       </q-item>
       <q-separator spaced />
