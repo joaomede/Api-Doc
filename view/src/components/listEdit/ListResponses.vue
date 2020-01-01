@@ -18,30 +18,38 @@
       >
         <q-card>
           <q-card-section>
+            <div class="text-center">
+              <q-icon
+                style="font-size: 24px"
+                class="text-right"
+                side
+                name="edit"
+                color="primary"
+                @click.stop="showEdit"
+              />
+              <q-icon
+                style="font-size: 24px"
+                class="text-right"
+                side
+                name="delete"
+                color="primary"
+                @click.stop="showDelete"
+              />
+            </div>
             <q-item>
               <q-item-section>
-                typeCode: {{ responses.typeCode }} <br>
-                reason: {{ responses.reason }} <br>
-                responseModel: {{ responses.responseModel }} <br>
+                Code: {{ responses.typeCode }} <br>
+                Reason: {{ responses.reason }} <br>
+                <div
+                  class="q-pa-md bg-grey-8 text-white"
+                >
+                  Status: {{ responses.typeCode }} <br>
+                  Body Response:
+                  <vue-json-pretty
+                    :data="responses.responseModel"
+                  />
+                </div>
                 headers: {{ responses.headers }} <br>
-              </q-item-section>
-              <q-item-section side>
-                <q-icon
-                  class="text-right"
-                  side
-                  name="edit"
-                  color="primary"
-                  @click.stop="showEdit"
-                />
-              </q-item-section>
-              <q-item-section side>
-                <q-icon
-                  class="text-right"
-                  side
-                  name="delete"
-                  color="primary"
-                  @click.stop="showDelete"
-                />
               </q-item-section>
             </q-item>
           </q-card-section>
@@ -55,11 +63,13 @@
 <script>
 import DialogUpdateResponse from '../dialog/updateDialog/DialogUpdateResponses'
 import DialogConfirmDelete from '../dialog/DialogConfirmDelete'
+import VueJsonPretty from 'vue-json-pretty'
 
 export default {
   components: {
     DialogUpdateResponse,
-    DialogConfirmDelete
+    DialogConfirmDelete,
+    VueJsonPretty
   },
   props: {
     responses: {
