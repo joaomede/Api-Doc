@@ -3,7 +3,7 @@ import { NewRequest } from '../interface/NewRequest'
 import { Response } from 'express'
 import resp from 'resp-express'
 
-class Verb {
+class Path {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async store (req: NewRequest, res: Response): Promise<any> {
     const {
@@ -98,4 +98,4 @@ class Verb {
   }
 }
 
-export default new Verb()
+export default new Path()
