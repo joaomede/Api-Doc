@@ -59,7 +59,7 @@
                   class="text-h6"
                   style="font-size: 18px"
                 >
-                  <strong>Path:</strong> {{ paths.path }}
+                  <strong>Path:</strong> {{ paths.path }}{{ paths.parameter.params | filterParamsName }}
                 </div>
                 <div>
                   <q-card-section>
@@ -132,22 +132,6 @@
                   :obj-data="paths.headersValue"
                 />
                 <q-separator spaced />
-
-                <div v-if="paths.parameter1 === true">
-                  Parameter Name: {{ paths.parameterName1 }}<br>
-                  Value: {{ paths.parameterValue1 }} <br>
-                  <q-separator spaced />
-                </div>
-                <div v-if="paths.parameter2 === true">
-                  Parameter Name: {{ paths.parameterName2 }}<br>
-                  Value: {{ paths.parameterValue2 }} <br>
-                  <q-separator spaced />
-                </div>
-                <div v-if="paths.parameter3 === true">
-                  Parameter Name: {{ paths.parameterName3 }}<br>
-                  Value: {{ paths.parameterValue3 }} <br>
-                  <q-separator spaced />
-                </div>
 
                 <div
                   v-if="paths.body === true"

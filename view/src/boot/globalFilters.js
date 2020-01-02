@@ -44,3 +44,12 @@ Vue.filter('filtrarCorBackground', function (item) {
     return 'background-color: #ff980018'
   }
 })
+
+Vue.filter('filterParamsName', function (param) {
+  let params = ''
+  for (let index = 0; index < param.length; index++) {
+    console.log(params)
+    params = `${params}/{${param[index].parameterName}}`
+  }
+  return params
+})
