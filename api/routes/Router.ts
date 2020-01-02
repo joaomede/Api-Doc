@@ -1,17 +1,25 @@
 import { Router } from 'express'
 import apiValidate from '../utils/ApiValidate'
 import tagsValidate from '../utils/TagsValidation'
-import pathsValidate from '../utils/PathsValidate'
-import responsesValidade from '../utils/ResponsesValidation'
+// import pathsValidate from '../utils/PathsValidate'
+// import responsesValidade from '../utils/ResponsesValidation'
 import CheckJwt from '../middlewares/CheckJwt'
 
+import cTeam from '../controllers/Team'
 import cApi from '../controllers/Api'
 import cTags from '../controllers/Tags'
-import cPaths from '../controllers/Paths'
+import cPaths from '../controllers/Path'
 import cResponses from '../controllers/Responses'
 const routes = Router()
 
 routes.use(CheckJwt.checkJwt)
+
+// * //
+// Teams
+routes.post('/api/team/create', cTeam.store)
+routes.get('/api/team/getall', cTeam.index)
+routes.put('/api/team/update/:id', cTeam.update)
+routes.delete('/api/team/delete/:id', cTeam.destroy)
 
 // * //
 // API

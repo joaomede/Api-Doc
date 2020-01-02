@@ -3,6 +3,7 @@ import * as fs from 'fs'
 import * as http from 'http'
 import * as https from 'https'
 import router from './routes/Router'
+import routesTeam from './routes/RoutesTeam'
 import routerAuth from './routes/RouterAuth'
 import routerCheckin from './routes/RouterCheckin'
 import routerGeral from './routes/RouterPublic'
@@ -28,6 +29,7 @@ class App {
     this.express.use(routerGeral)
     this.express.use(routerCheckin)
     this.express.use(router)
+    this.express.use(routesTeam)
   }
 
   private middlewares (): void {
