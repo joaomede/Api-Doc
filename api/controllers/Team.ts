@@ -79,17 +79,18 @@ class Team {
   public async addMember (req: NewRequest, res: Response): Promise<any> {
     const { teamIdFk, email } = req.body
     try {
-      const team = await knex('team').select().where({
+      const team = await knex('teams').select().where({
         id: teamIdFk,
         managerIdFk: req.userId
       })
       const user = await knex('users').select().where({ email: email })
+
       if (team.length !== 0) {
         if (user.length !== 0) {
           if (team[0].managerIdFk === req.userId) {
             const result = await knex('team_rules').insert({
               teamIdFk: teamIdFk,
-              userIdFK: user[0].id
+              userIdFk: user[0].id
             }).returning('*')
             resp.returnSucessObject(res, result)
           } else {
