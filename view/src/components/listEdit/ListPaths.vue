@@ -48,13 +48,27 @@
           <q-item class="q-pa-xs">
             <q-item-section>
               <q-card-section>
-                <div
-                  class="text-h6"
-                  style="font-size: 18px"
-                >
-                  <strong>Method:</strong> {{ paths.verbType }}
-                </div>
+                <q-item-section>
+                  Method
+                </q-item-section>
 
+                <q-item-section>
+                  <q-checkbox
+                    v-model="pathEditOption"
+                    color="secondary"
+                    label="Edição desabilitada"
+                  />
+                </q-item-section>
+
+                <q-input
+                  v-model="paths.verbType"
+                  class="text-white"
+                  square
+                  dense
+
+                  outlined
+                  :disable="pathEditOption"
+                />
                 <div
                   class="text-h6"
                   style="font-size: 18px"
@@ -66,6 +80,7 @@
                     <div class="text-left">
                       <strong>Params:  </strong>
                       <q-icon
+                        v-if="pathEditOption === false"
                         style="font-size: 20px"
                         class="text-right"
                         side
@@ -74,6 +89,7 @@
                         @click.stop="(paths.parameter.params.push({parameterName: '',parameterValue: ''}))"
                       />
                       <q-icon
+                        v-if="pathEditOption === false"
                         style="font-size: 20px"
                         class="text-right"
                         side
@@ -93,8 +109,10 @@
                       <q-item-section>
                         <q-input
                           v-model="params.parameterName"
+                          :disable="pathEditOption"
                           class="bg-black text-blue"
                           square
+                          dense
                           dark
                           outlined
                           label="Nome, ex.: userId"
@@ -103,8 +121,10 @@
                       <q-item-section>
                         <q-input
                           v-model="params.parameterValue"
+                          :disable="pathEditOption"
                           class="bg-black text-blue"
                           square
+                          dense
                           dark
                           outlined
                           label="Valor, ex.: 1"
@@ -313,7 +333,9 @@ export default {
     return {
       dialogAddNewResponses: false,
       dialogConfirmDeletePaths: false,
-      dialogUpdatePath: false
+      dialogUpdatePath: false,
+
+      pathEditOption: true
     }
   },
   methods: {
