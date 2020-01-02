@@ -85,16 +85,25 @@ class Team {
       })
       const user = await knex('users').select().where({ email: email })
 
+      const rules = await knex('team_rules').select().where({
+        teamIdFk: teamIdFk,
+        userIdFk: user[0].id
+      })
+
       if (team.length !== 0) {
         if (user.length !== 0) {
-          if (team[0].managerIdFk === req.userId) {
-            const result = await knex('team_rules').insert({
-              teamIdFk: teamIdFk,
-              userIdFk: user[0].id
-            }).returning('*')
-            resp.returnSucessObject(res, result)
+          if (rules.length === 1) {
+            if (team[0].managerIdFk === req.userId) {
+              const result = await knex('team_rules').insert({
+                teamIdFk: teamIdFk,
+                userIdFk: user[0].id
+              }).returning('*')
+              resp.returnSucessObject(res, result)
+            } else {
+              resp.returnErrorMessage(res, 'Você não tem autorização para adicionar membros')
+            }
           } else {
-            resp.returnErrorMessage(res, 'Você não tem autorização para adicionar membros')
+            resp.returnErrorMessage(res, 'Esse usuário já está no time')
           }
         } else {
           resp.returnErrorMessage(res, 'O email informado não pertence a nenhum usuário')
