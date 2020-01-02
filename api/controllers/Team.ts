@@ -35,19 +35,22 @@ class Team {
 
   public async update (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
-    const { apiIdFk, nameTeam } = req.body
+    const { teamName } = req.body
 
     const team = await knex('teams').select().where({ id: id })
 
     try {
-      if (team[0].managerIdFk === req.userId) {
-        const newTeam = await knex('teams').update({
-          nameTeam: nameTeam,
-          apiIdFk: apiIdFk
-        }).returning('*')
-        resp.returnSucessObject(res, newTeam)
+      if (team.length !== 0) {
+        if (team[0].managerIdFk === req.userId) {
+          const newTeam = await knex('teams').update({
+            teamName: teamName
+          }).returning('*')
+          resp.returnSucessObject(res, newTeam)
+        } else {
+          resp.returnErrorMessage(res, 'Você não tem autorização para atualizar o time')
+        }
       } else {
-        resp.returnErrorMessage(res, 'Você não tem autorização para atualizar o time')
+        resp.returnErrorMessage(res, 'O time informado não foi encontrado')
       }
     } catch (error) {
       resp.returnErrorMessage(res, error)
