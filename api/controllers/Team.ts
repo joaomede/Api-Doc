@@ -5,25 +5,30 @@ import resp from 'resp-express'
 
 class Team {
   public async store (req: NewRequest, res: Response): Promise<any> {
-    const { apiIdFk, nameTeam } = req.body
+    const { apiIdFk, teamName } = req.body
     try {
       const api = await knex('api').select().where({ id: apiIdFk })
 
       if (api.length !== 0) {
-        if (api[0].userIdFK === req.userId && api[0].isPublic === false) {
-          const newTeam = await knex('teams').insert({
-            nameTeam: nameTeam,
-            apiIdFk: apiIdFk,
-            managerIdFk: req.userId
-          }).returning('*')
-          resp.returnSucessObject(res, newTeam)
+        if (api[0].isPublic === false) {
+          if (api[0].userIdFk === req.userId) {
+            const newTeam = await knex('teams').insert({
+              teamName: teamName,
+              apiIdFk: apiIdFk,
+              managerIdFk: req.userId
+            }).returning('*')
+            resp.returnSucessObject(res, await newTeam)
+          } else {
+            resp.returnErrorMessage(res, 'A Api informada não é sua')
+          }
         } else {
-          resp.returnErrorMessage(res, 'A Api informada não é sua ou ela não é publica')
+          resp.returnErrorMessage(res, 'A API não pode ser Pública')
         }
       } else {
         resp.returnErrorMessage(res, 'Api relacionada não existe')
       }
     } catch (error) {
+      console.log(error)
       resp.returnErrorMessage(res, error)
     }
   }
