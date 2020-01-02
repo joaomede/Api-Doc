@@ -18,41 +18,55 @@
         style="max-width: 100%; background-color: #fff9f0"
       >
         <q-card-section>
-          <q-item>
+          <q-item class="text-left">
             <q-item-section>
               <div class="text-h5">
                 <strong>API:</strong> {{ cApi.apiName }}
+                <q-badge color="primary">
+                  {{ cApi.version }}
+                </q-badge>
               </div>
+
               <div class="text-h6">
-                <strong>Versão:</strong> {{ cApi.version }}
+                <strong>Descrição:</strong> {{ cApi.descriptionApi }}
               </div>
-              <div
-                v-if="cApi.isPublic"
-                class="text-h6"
-              >
-                <strong>Documentação Pública</strong>
-              </div>
+
               <div
                 v-if="!cApi.isPublic"
-                class="text-p"
+                class="text-h6"
+                style="font-size: 20px;"
               >
-                <strong>Documentação Privada</strong>
+                Private
+                <q-icon
+                  name="fas fa-lock"
+                  color="red"
+                />
+              </div>
+
+              <div>
+                <div
+                  v-if="cApi.isPublic"
+                  class="text-h6"
+                  style="font-size: 20px;"
+                >
+                  Public
+                  <q-icon
+                    name="fas fa-lock-open"
+                    color="green"
+                  />
+                </div>
               </div>
 
               <div class="text-p">
                 <strong>E-mail:</strong> {{ cApi.email }}
               </div>
 
-              <div class="text-h6">
+              <div class="text-p">
                 <strong>Licença:</strong> {{ cApi.license }}
               </div>
 
-              <div class="text-h6">
-                <strong>Base URL:</strong> {{ cApi.baseURL }}
-              </div>
-
               <div class="text-p">
-                <strong>Descrição:</strong> {{ cApi.descriptionApi }}
+                <strong>Base URL:</strong> {{ cApi.baseURL }}
               </div>
             </q-item-section>
 
