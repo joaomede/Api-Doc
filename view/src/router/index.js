@@ -40,6 +40,18 @@ export default function ({ ssrContext }) {
       meta: { requerAuth: true }
     },
     {
+      path: '/teamdocs',
+      name: 'TeamDocs',
+      component: () => import('../pages/TeamDocs'),
+      meta: { requerAuth: true }
+    },
+    {
+      path: '/teammanager',
+      name: 'TeamManager',
+      component: () => import('../pages/TeamManager'),
+      meta: { requerAuth: true }
+    },
+    {
       path: '/feedversion',
       name: 'FeedVersion',
       component: () => import('../pages/FeedVersion'),
