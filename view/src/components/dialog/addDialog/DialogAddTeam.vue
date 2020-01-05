@@ -17,6 +17,7 @@
             v-model="form.teamName"
             label="Informe um nome para a equipe"
             required
+            dense
           />
         </q-form>
       </q-card-section>

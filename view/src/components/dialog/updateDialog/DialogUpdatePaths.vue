@@ -16,6 +16,7 @@
             v-model="form.verbType"
             label="Informe o tipo de verbo, ex.: POST"
             required
+            dense
           />
         </q-form>
       </q-card-section>
@@ -26,6 +27,7 @@
             v-model="form.descriptionVerb"
             label="Informe a descrição"
             required
+            dense
           />
         </q-form>
       </q-card-section>
@@ -36,6 +38,7 @@
             v-model="form.path"
             label="Informe o endereço do path, ex.: api/login"
             required
+            dense
           />
         </q-form>
       </q-card-section>
@@ -60,6 +63,7 @@
                 v-model="params.parameterName"
                 label="Nome, ex.: userId"
                 required
+                dense
               />
             </q-item-section>
             <q-item-section>
@@ -67,6 +71,7 @@
                 v-model="params.parameterValue"
                 label="Valor, ex.: 1"
                 required
+                dense
               />
             </q-item-section>
           </q-item>

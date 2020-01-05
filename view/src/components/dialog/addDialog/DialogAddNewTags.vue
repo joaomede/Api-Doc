@@ -16,6 +16,7 @@
             v-model="form.nameTag"
             label="Informe o nome do Tag"
             required
+            dense
           />
         </q-form>
       </q-card-section>
@@ -26,6 +27,7 @@
             v-model="form.descriptionTag"
             label="Informe a descrição do Tag"
             required
+            dense
           />
         </q-form>
       </q-card-section>

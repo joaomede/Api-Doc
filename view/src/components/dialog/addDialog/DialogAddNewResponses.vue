@@ -16,6 +16,7 @@
             v-model="form.typeCode"
             label="Informe o tipo de código"
             required
+            dense
           />
         </q-form>
       </q-card-section>
@@ -26,6 +27,7 @@
             v-model="form.reason"
             label="Informe o motivo do retorno"
             required
+            dense
           />
         </q-form>
       </q-card-section>
@@ -47,6 +49,7 @@
             v-model="form.headers"
             label="Informe o cabeçalho"
             required
+            dense
           />
         </q-form>
       </q-card-section>

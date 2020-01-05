@@ -16,6 +16,7 @@
             v-model="form.email"
             label="Informe o email do membro que deseja adicionar"
             required
+            dense
           />
         </q-form>
       </q-card-section>

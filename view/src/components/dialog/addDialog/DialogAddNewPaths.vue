@@ -60,6 +60,7 @@
                 v-model="params.parameterName"
                 label="Nome, ex.: userId"
                 required
+                dense
               />
             </q-item-section>
             <q-item-section>
@@ -67,6 +68,7 @@
                 v-model="params.parameterValue"
                 label="Valor, ex.: 1"
                 required
+                dense
               />
             </q-item-section>
           </q-item>
@@ -139,6 +141,7 @@
                 v-model="data.dataType"
                 label="Tipo de data, ex.: audio/mp3"
                 required
+                dense
               />
             </q-item-section>
           </q-item>

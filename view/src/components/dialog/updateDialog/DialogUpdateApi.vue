@@ -16,6 +16,7 @@
             v-model="form.apiName"
             label="Informe um nome para a nova documentação"
             required
+            dense
           />
         </q-form>
       </q-card-section>
@@ -26,6 +27,7 @@
             v-model="form.descriptionApi"
             label="Informe uma descrição"
             required
+            dense
           />
         </q-form>
       </q-card-section>
@@ -36,6 +38,7 @@
             v-model="form.version"
             label="Informe a versão atual da api"
             required
+            dense
           />
         </q-form>
       </q-card-section>
@@ -46,6 +49,7 @@
             v-model="form.email"
             label="Informe um e-mail para contato"
             required
+            dense
           />
         </q-form>
       </q-card-section>
@@ -56,6 +60,7 @@
             v-model="form.license"
             label="Informe o tipo de licença ou link"
             required
+            dense
           />
         </q-form>
       </q-card-section>
@@ -77,6 +82,7 @@
             v-model="form.baseURL"
             label="Informe o endereço a URL da API"
             required
+            dense
           />
         </q-form>
       </q-card-section>
