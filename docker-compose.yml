@@ -12,6 +12,7 @@ services:
       - "5432"
     volumes:
       - ./postgres:/var/lib/postgresql/data
+      - "/etc/localtime:/etc/localtime:ro"
     networks:
       - redePostgres
 
@@ -46,6 +47,7 @@ services:
       - ${APIPORT}
     volumes:
       - .:/usr/src/app
+      - "/etc/localtime:/etc/localtime:ro"
     networks:
       - redePostgres
 
