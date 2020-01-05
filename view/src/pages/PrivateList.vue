@@ -1,14 +1,20 @@
 <template>
   <div class="centralDiv q-pa-xs text-center">
-    <q-btn
-      round
-      color="orange darken-2"
-      class="fixed"
-      style="right: 18px; bottom: 60px"
-      @click.stop="dialogAddApi = true"
-    >
-      <q-icon name="add" />
-    </q-btn>
+    <BackMobile />
+    <BackDesktop />
+
+    <AddMobile
+      @eventClick="dialogAddApi = true"
+    />
+    <AddDesktop
+      @eventClick="dialogAddApi = true"
+    />
+
+    <DialogConfirmDelete
+      :dialog="showDelete"
+      @eventClose="showDelete = false"
+      @confirm="deleteApi()"
+    />
 
     <DialogAddApi
       :dialog="dialogAddApi"
@@ -82,16 +88,28 @@
 </template>
 
 <script>
+import BackMobile from '../components/fab/FabBtnBackMobile'
+import BackDesktop from '../components/fab/FabBtnBackDesktop'
+import AddMobile from '../components/fab/FabBtnAddMobile'
+import AddDesktop from '../components/fab/FabBtnAddDesktop'
+import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
+
 import DialogAddApi from '../components/dialog/addDialog/DialogAddApi'
 export default {
   name: 'PrivateList',
   components: {
-    DialogAddApi
+    DialogAddApi,
+    DialogConfirmDelete,
+    BackMobile,
+    BackDesktop,
+    AddMobile,
+    AddDesktop
   },
   data () {
     return {
       listOfApis: [],
       dialogAddApi: false,
+      showDelete: false,
       api: null
     }
   },
@@ -102,24 +120,34 @@ export default {
   },
   methods: {
     async init () {
-      this.indexPublicListDocs()
+      this.indexMyDocList()
     },
     async storeNewApi (api) {
       try {
         await this.$axios.post('api/api/create', api, { headers: this.user.headers })
-        this.indexPublicListDocs()
+        this.indexMyDocList()
         this.dialogAddApi = false
         this.$notify('Nova Api criada com sucesso', 'green')
       } catch (error) {
-        this.$notify('Erro ao tentar criar a API', 'red')
+        this.$notify(error.response.data.error, 'red')
       }
     },
-    async indexPublicListDocs () {
+    async indexMyDocList () {
       try {
         const result = await this.$axios.get('api/api/getall', { headers: this.user.headers })
         this.listOfApis = await result.data
       } catch (error) {
-        this.$notify('Erro ao carregar lista de documentação publica', 'red')
+        this.$notify(error.response.data.error, 'red')
+      }
+    },
+    async deleteApi () {
+      try {
+        const result = await this.$axios.delete(`api/api/delete/${this.api.id}`, { headers: this.user.headers })
+        this.showDelete = false
+        this.indexMyDocList()
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
       }
     },
     toPageCompletePublicDoc (item) {
