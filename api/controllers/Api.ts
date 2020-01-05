@@ -61,6 +61,19 @@ class Api {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public async indexPrivate (req: NewRequest, res: Response): Promise<any> {
+    // const { sortValue, campo } = req.params
+
+    // esse metodo precisa fazer o SORT
+    try {
+      const allApiByUser = await knex('api').select().where({ userIdFk: req.userId, isPublic: false })
+      resp.returnSucessObject(res, allApiByUser)
+    } catch (error) {
+      resp.returnErrorMessage(res, "Erro ao carregar a lista de Api's privadas")
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async indexOne (req: NewRequest, res: Response): Promise<any> {
     const { apiId } = req.params
 
