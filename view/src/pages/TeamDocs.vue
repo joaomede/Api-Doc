@@ -1,5 +1,8 @@
 <template>
   <div class="centralDiv q-pa-xs text-center">
+    <BackMobile />
+    <BackDesktop />
+
     <DialogConfirmDelete
       :dialog="dialogconfirmExitTeam"
       @eventClose="dialogconfirmExitTeam = false"
@@ -63,10 +66,16 @@
 
 <script>
 import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
+
+import BackMobile from '../components/fab/FabBtnBackMobile'
+import BackDesktop from '../components/fab/FabBtnBackDesktop'
+
 export default {
   name: 'PrivateList',
   components: {
-    DialogConfirmDelete
+    DialogConfirmDelete,
+    BackMobile,
+    BackDesktop
   },
   data () {
     return {

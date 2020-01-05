@@ -1,14 +1,14 @@
 <template>
   <div class="centralDiv q-pa-xs text-center">
-    <q-btn
-      round
-      color="orange darken-2"
-      class="fixed"
-      style="right: 18px; bottom: 60px"
-      @click.stop="dialogAddTeam = true"
-    >
-      <q-icon name="add" />
-    </q-btn>
+    <BackMobile />
+    <BackDesktop />
+
+    <AddMobile
+      @eventClick="dialogAddTeam = true"
+    />
+    <AddDesktop
+      @eventClick="dialogAddTeam = true"
+    />
 
     <DialogAddTeam
       :dialog="dialogAddTeam"
@@ -76,11 +76,21 @@
 <script>
 import DialogAddTeam from '../components/dialog/addDialog/DialogAddTeam'
 import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
+
+import BackMobile from '../components/fab/FabBtnBackMobile'
+import BackDesktop from '../components/fab/FabBtnBackDesktop'
+import AddMobile from '../components/fab/FabBtnAddMobile'
+import AddDesktop from '../components/fab/FabBtnAddDesktop'
+
 export default {
   name: 'PrivateList',
   components: {
     DialogAddTeam,
-    DialogConfirmDelete
+    DialogConfirmDelete,
+    BackMobile,
+    BackDesktop,
+    AddMobile,
+    AddDesktop
   },
   data () {
     return {

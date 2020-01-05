@@ -1,15 +1,24 @@
 
 <template>
   <div>
+    <BackMobile />
+    <BackDesktop />
     <ListApi class="centralDiv q-pa-xs text-center" />
   </div>
 </template>
 
 <script>
+import BackMobile from '../components/fab/FabBtnBackMobile'
+import BackDesktop from '../components/fab/FabBtnBackDesktop'
+
 import ListApi from '../components/listEdit/ListApi'
 export default {
   components: {
-    ListApi
+    ListApi,
+
+    BackMobile,
+    BackDesktop
+
   },
   props: {
     id: {

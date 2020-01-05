@@ -1,5 +1,8 @@
 <template>
   <div class="centralDiv q-pa-xs text-center">
+    <BackMobile />
+    <BackDesktop />
+
     <q-card class="my-card text-center">
       <q-list
         bordered
@@ -48,8 +51,15 @@
 </template>
 
 <script>
+import BackMobile from '../components/fab/FabBtnBackMobile'
+import BackDesktop from '../components/fab/FabBtnBackDesktop'
+
 export default {
   name: 'PublicList',
+  components: {
+    BackMobile,
+    BackDesktop
+  },
   data () {
     return {
       listOfApis: []
