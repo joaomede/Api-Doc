@@ -52,7 +52,27 @@
           <q-btn
             v-ripple
             class="btnMenu"
-            to="/teammanager"
+            to="/teamdocs"
+            dense
+          >
+            <q-icon
+              name="list"
+              class="text-black"
+              style="font-size: 4.4em;"
+            />
+            <div class="text-p">
+              My Team Api
+            </div>
+          </q-btn>
+        </div>
+
+        <div
+          class="col-xs-auto"
+        >
+          <q-btn
+            v-ripple
+            class="btnMenu"
+            to="/manageteams"
             dense
           >
             <q-icon
@@ -61,29 +81,9 @@
               style="font-size: 4.4em;"
             />
             <div class="text-p">
-              Gerenciar Time
+              Manage Teams
             </div>
           </q-btn>
-
-          <div
-            class="col-xs-auto"
-          >
-            <q-btn
-              v-ripple
-              class="btnMenu"
-              to="/teamdocs"
-              dense
-            >
-              <q-icon
-                name="list"
-                class="text-black"
-                style="font-size: 4.4em;"
-              />
-              <div class="text-p">
-                Api Team
-              </div>
-            </q-btn>
-          </div>
         </div>
       </div>
     </q-card>

@@ -46,9 +46,9 @@ export default function ({ ssrContext }) {
       meta: { requerAuth: true }
     },
     {
-      path: '/teammanager',
-      name: 'TeamManager',
-      component: () => import('../pages/TeamManager'),
+      path: '/manageteams',
+      name: 'ManageTeams',
+      component: () => import('../pages/ManageTeams'),
       meta: { requerAuth: true }
     },
     {
