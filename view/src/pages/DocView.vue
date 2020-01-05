@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ListApi from '../components/listEdit/ListApi'
+import ListApi from '../components/listPublicDoc/ListApi'
 export default {
   components: {
     ListApi
@@ -18,7 +18,7 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('setApiData', this.id)
+    this.$store.dispatch('setApiData', [this.id, this.$router.currentRoute.name])
   }
 }
 </script>

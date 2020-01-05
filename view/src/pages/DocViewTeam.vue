@@ -18,7 +18,7 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('setApiDataTeam', this.id)
+    this.$store.dispatch('setApiData', [this.id, this.$router.currentRoute.name])
   }
 }
 </script>

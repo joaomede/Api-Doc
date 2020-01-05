@@ -69,7 +69,7 @@ export default {
       }
     },
     toPageCompletePublicDoc (item) {
-      this.$router.push({ name: 'DocView', params: { id: ('' + item.id) } })
+      this.$router.push({ name: 'DocViewPublic', params: { id: ('' + item.id) } })
     }
   }
 }
