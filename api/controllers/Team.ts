@@ -4,6 +4,7 @@ import { NewRequest } from '../interface/NewRequest'
 import resp from 'resp-express'
 
 class Team {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async store (req: NewRequest, res: Response): Promise<any> {
     const { apiIdFk, teamName } = req.body
     try {
@@ -33,6 +34,7 @@ class Team {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async update (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
     const { teamName } = req.body
@@ -57,6 +59,7 @@ class Team {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async index (req: NewRequest, res: Response): Promise<any> {
     try {
       const team = await knex('teams').select().where({ managerIdFk: req.userId })
@@ -66,6 +69,7 @@ class Team {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async destroy (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
     try {
@@ -76,6 +80,7 @@ class Team {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async addMember (req: NewRequest, res: Response): Promise<any> {
     const { teamIdFk, email } = req.body
     try {
@@ -116,6 +121,7 @@ class Team {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async removeMember (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
     try {
