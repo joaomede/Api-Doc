@@ -177,7 +177,12 @@ export default new Vuex.Store({
         }
       }
       if (tag[1] === 'DocViewPublic') {
-
+        try {
+          const result = await http.get(`api/geral/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
+          Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
+        } catch (error) {
+          console.log(error.response.data.error)
+        }
       }
     },
     setResponseTest (state, response) {

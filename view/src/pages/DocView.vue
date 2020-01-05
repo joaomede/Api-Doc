@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ListApi from '../components/listPublicDoc/ListApi'
+import ListApi from '../components/listEdit/ListApi'
 export default {
   components: {
     ListApi
