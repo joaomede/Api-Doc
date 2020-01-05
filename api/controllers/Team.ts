@@ -8,25 +8,21 @@ class Team {
   public async store (req: NewRequest, res: Response): Promise<any> {
     const { apiIdFk, teamName } = req.body
     try {
-      const api = await knex('api').select().where({ id: apiIdFk })
-
-      if (api.length !== 0) {
-        if (api[0].isPublic === false) {
-          if (api[0].userIdFk === req.userId) {
-            await knex('teams').insert({
-              teamName: teamName,
-              apiIdFk: apiIdFk,
-              managerIdFk: req.userId
-            }).returning('*')
-            resp.returnSucessMessage(res, `O time ${teamName} foi criado com sucesso`)
-          } else {
-            resp.returnErrorMessage(res, 'A Api informada não é sua')
-          }
+      const api = await knex('api').select().where({ id: apiIdFk, isPublic: false, userIdFk: req.userId })
+      const team = await knex('teams').select().where({ apiIdFk: apiIdFk })
+      if (team.length === 0) {
+        if (api.length !== 0) {
+          await knex('teams').insert({
+            teamName: teamName,
+            apiIdFk: apiIdFk,
+            managerIdFk: req.userId
+          }).returning('*')
+          resp.returnSucessMessage(res, `O time ${teamName} foi criado com sucesso`)
         } else {
-          resp.returnErrorMessage(res, 'A API não pode ser Pública')
+          resp.returnErrorMessage(res, 'Api relacionada não existe')
         }
       } else {
-        resp.returnErrorMessage(res, 'Api relacionada não existe')
+        resp.returnErrorMessage(res, 'Já existe um time associado a essa Api')
       }
     } catch (error) {
       console.log(error)

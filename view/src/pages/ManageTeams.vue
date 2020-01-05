@@ -106,7 +106,7 @@ export default {
         this.dialogAddTeam = false
         this.$notify(result.data.ok, 'green')
       } catch (error) {
-        this.$notify(error.data.response.error, 'red')
+        this.$notify(error.response.data.error, 'red')
       }
     },
     async indexAllTeamsManager () {
@@ -125,7 +125,7 @@ export default {
         this.$notify(result.data.ok, 'green')
       } catch (error) {
         this.dialogConfirmDeleteTeam = false
-        this.$notify(error.data.response.error, 'red')
+        this.$notify(error.response.data.error, 'red')
       }
     },
     toEditMembers (item) {
