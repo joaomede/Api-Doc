@@ -125,6 +125,26 @@ class Team {
       resp.returnErrorMessage(res, error)
     }
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public async listAllMembers (req: NewRequest, res: Response): Promise<any> {
+    const { teamIdFk } = req.params
+
+    try {
+      const team = await knex('teams').select().where({ id: teamIdFk, managerIdFk: req.userId })
+      if (team[0].length !== 0) {
+        const result = await knex('team_rules').where({
+          teamIdFk: teamIdFk
+        }).join('users', 'users.id', 'team_rules.userIdFk').select('users.name', 'team_rules.id')
+        resp.returnSucessObject(res, result)
+      } else {
+        resp.returnErrorMessage(res, 'Esse time não existe')
+      }
+    } catch (error) {
+      console.log(error)
+      resp.returnErrorMessage(res, error)
+    }
+  }
 }
 
 export default new Team()
