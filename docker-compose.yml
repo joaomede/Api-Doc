@@ -16,18 +16,18 @@ services:
     networks:
       - redePostgres
 
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
-      PGADMIN_DEFAULT_PASSWORD: "admin"
-    ports:
-      - "8888:80"
-    depends_on:
-      - pg
-    networks:
-      - redePostgres
+  # pgadmin:
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+  #     PGADMIN_DEFAULT_PASSWORD: "admin"
+  #   ports:
+  #     - "8888:80"
+  #   depends_on:
+  #     - pg
+  #   networks:
+  #     - redePostgres
 
   server:
     image: joaomede/nodejs12prod:1.0
@@ -41,7 +41,7 @@ services:
       - pg
     env_file:
       - .env
-    command: node dist/server
+    command: node dist/Server
     expose:
       - ${HTTPSERVERPORT}
       - ${APIPORT}
