@@ -142,23 +142,43 @@ export default new Vuex.Store({
     },
     async setApiData (state, id) {
       try {
-        const result = await http.get(`api/api/getapiandendpoints/${id}`, { headers: state.user.headers })
-        state.apiData = await result.data
+        if (id[1] === 'DocView') {
+          const result = await http.get(`api/api/getapiandendpoints/${id[0]}`, { headers: state.user.headers })
+          state.apiData = await result.data
+        }
+        if (id[1] === 'DocViewTeam') {
+          state.rulesId = id[0]
+          const result = await http.get(`api/teamdocs/api/getapiandendpoints/${id[0]}`, { headers: state.user.headers })
+          state.apiData = await result.data
+        }
+        if (id[1] === 'DocViewPublic') {
+          const result = await http.get(`api/geral/getapiandtags/${id[0]}`, { headers: state.user.headers })
+          state.apiData = await result.data
+        }
       } catch (error) {
         console.log(error.response.data.error)
       }
     },
-    async setApiDataTeam (state, id) {
-      state.rulesId = id
-      try {
-        const result = await http.get(`api/teamdocs/api/getapiandendpoints/${id}`, { headers: state.user.headers })
-        state.apiData = await result.data
-      } catch (error) {
-        console.log(error.response.data.error)
+    async setPathsByTagIndex (state, tag) {
+      if (tag[1] === 'DocView') {
+        try {
+          const result = await http.get(`api/api/getverbsandcodes/${tag[0]}`, { headers: state.user.headers })
+          Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
+        } catch (error) {
+          console.log(error.response.data.error)
+        }
       }
-    },
-    setPathsByTagIndex (state, tag) {
-      Vue.set(state.apiData.tags[state.tagIndex], 'paths', tag)
+      if (tag[1] === 'DocViewTeam') {
+        try {
+          const result = await http.get(`api/teamdocs/api/getverbsandcodes/${state.rulesId}/${tag[0]}`, { headers: state.user.headers })
+          Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
+        } catch (error) {
+          console.log(error.response.data.error)
+        }
+      }
+      if (tag[1] === 'DocViewPublic') {
+
+      }
     },
     setResponseTest (state, response) {
       const _ = state
@@ -240,9 +260,6 @@ export default new Vuex.Store({
     },
     setApiData ({ commit }, id) {
       commit('setApiData', id)
-    },
-    setApiDataTeam ({ commit }, id) {
-      commit('setApiDataTeam', id)
     },
     setPathsByTagIndex ({ commit }, tag) {
       commit('setPathsByTagIndex', tag)
