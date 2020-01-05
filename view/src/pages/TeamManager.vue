@@ -1,13 +1,139 @@
 <template>
-  <div />
+  <div class="centralDiv q-pa-xs text-center">
+    <q-btn
+      round
+      color="orange darken-2"
+      class="fixed"
+      style="right: 18px; bottom: 60px"
+      @click.stop="dialogAddTeam = true"
+    >
+      <q-icon name="add" />
+    </q-btn>
+
+    <DialogAddTeam
+      :dialog="dialogAddTeam"
+      @eventClose="dialogAddTeam = false"
+      @save="storeNewTeam($event)"
+    />
+
+    <DialogConfirmDelete
+      :dialog="dialogConfirmDeleteTeam"
+      @eventClose="dialogConfirmDeleteTeam = false"
+      @confirm="deleteMyTeam()"
+    />
+
+    <q-card class="my-card text-center">
+      <q-list
+        bordered
+        style="max-width: 900px; margin: auto;"
+      >
+        <div class="text-h6">
+          Lista de Equipes
+        </div>
+        <q-separator spaced />
+        <q-item
+          v-for="item in listAllTeams"
+          :key="item.idApi"
+          v-ripple
+          clickable
+          style="font-size: 18px;"
+          @click="toEditMembers(item)"
+        >
+          <q-item-section
+            avatar
+            top
+          >
+            <i
+              class="fas fa-users text-black"
+              style="font-size: 3em;"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label lines="5">
+              {{ item.teamName }}
+            </q-item-label>
+
+            <q-item-label caption>
+              {{ item.descriptionApi }}
+            </q-item-label>
+          </q-item-section>
+
+          <q-item-section side>
+            <q-icon
+              name="delete_sweep"
+              color="primary"
+              @click.stop="dialogConfirmDeleteTeam = true, team = item"
+            />
+          </q-item-section>
+
+          <q-separator spaced />
+        </q-item>
+      </q-list>
+    </q-card>
+  </div>
 </template>
 
 <script>
+import DialogAddTeam from '../components/dialog/addDialog/DialogAddTeam'
+import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
 export default {
-
+  name: 'PrivateList',
+  components: {
+    DialogAddTeam,
+    DialogConfirmDelete
+  },
+  data () {
+    return {
+      listAllTeams: [],
+      dialogConfirmDeleteTeam: false,
+      dialogAddTeam: false,
+      team: null
+    }
+  },
+  computed: {
+  },
+  created () {
+    this.init()
+  },
+  methods: {
+    async init () {
+      this.indexAllTeamsManager()
+    },
+    async storeNewTeam (api) {
+      try {
+        const result = await this.$axios.post('api/team/create', api, { headers: this.user.headers })
+        this.indexAllTeamsManager()
+        this.dialogAddTeam = false
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.data.response.error, 'red')
+      }
+    },
+    async indexAllTeamsManager () {
+      try {
+        const result = await this.$axios.get('api/team/getall', { headers: this.user.headers })
+        this.listAllTeams = await result.data
+      } catch (error) {
+        this.$notify('Erro ao carregar lista de documentação publica', 'red')
+      }
+    },
+    async deleteMyTeam () {
+      try {
+        const result = await this.$axios.delete(`api/team/delete/${this.team.id}`, { headers: this.user.headers })
+        this.indexAllTeamsManager()
+        this.dialogConfirmDeleteTeam = false
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.dialogConfirmDeleteTeam = false
+        this.$notify(error.data.response.error, 'red')
+      }
+    },
+    toEditMembers (item) {
+      this.$router.push({ name: 'MemberManager', params: { id: ('' + item.id) } })
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-
 </style>
