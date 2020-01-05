@@ -41,7 +41,7 @@
               style="font-size: 4.4em;"
             />
             <div class="text-p">
-              Private API's
+              My API's
             </div>
           </q-btn>
         </div>
