@@ -77,14 +77,7 @@ export default {
     },
     async getVerbsAndCodes (tagId, index) {
       this.$store.dispatch('setTagIndex', index)
-      try {
-        const result = await this.$axios.get(`api/teamdocs/api/getverbsandcodes/${this.rulesId}/${tagId}`, { headers: this.user.headers })
-        this.$store.dispatch('setPathsByTagIndex', await result.data)
-      } catch (error) {
-        if (error.response.data.error !== 'Não há verbos disponíveis') {
-          this.$notify(error.response.data.error, 'red')
-        }
-      }
+      this.$store.dispatch('setPathsByTagIndex', [tagId, this.$router.currentRoute.name])
     }
   }
 }
