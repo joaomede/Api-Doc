@@ -68,16 +68,6 @@
               Todas as Tags
             </div>
           </q-item-section>
-
-          <q-item-section side>
-            <q-icon
-              class="text-right"
-              side
-              name="add"
-              color="primary"
-              @click.stop="dialogAddNewTags = true"
-            />
-          </q-item-section>
         </q-item>
 
         <!-- vfor Tags -->
