@@ -97,18 +97,18 @@ class Team {
 
       if (team.length !== 0) {
         if (user.length !== 0) {
-          if (rules.length === 1) {
-            if (team[0].managerIdFk === req.userId) {
-              const result = await knex('team_rules').insert({
+          if (user[0].id !== req.userId) {
+            if (rules.length === 0) {
+              await knex('team_rules').insert({
                 teamIdFk: teamIdFk,
                 userIdFk: user[0].id
-              }).returning('*')
-              resp.returnSucessObject(res, result)
+              })
+              resp.returnSucessMessage(res, 'Membro adicionado com sucesso')
             } else {
-              resp.returnErrorMessage(res, 'Você não tem autorização para adicionar membros')
+              resp.returnErrorMessage(res, 'Esse usuário já está no time')
             }
           } else {
-            resp.returnErrorMessage(res, 'Esse usuário já está no time')
+            resp.returnErrorMessage(res, 'Não é permitido adicionar você mesmo')
           }
         } else {
           resp.returnErrorMessage(res, 'O email informado não pertence a nenhum usuário')
