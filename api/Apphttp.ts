@@ -26,13 +26,13 @@ class HttpServer {
   }
 
   private routes (): void {
-    this.express.use(express.static(path.join(__dirname, '../view/dist/spa')))
+    this.express.use(express.static(path.join(__dirname, '../view/dist/pwa')))
     this.express.use(
       history({
         index: '/index.html'
       })
     )
-    this.express.use(express.static(path.join(__dirname, '../view/dist/spa')))
+    this.express.use(express.static(path.join(__dirname, '../view/dist/pwa')))
     this.express.use(cors())
   }
 
