@@ -11,7 +11,7 @@ class ApiTeam {
     const { id } = req.params
 
     const rules = await knex('team_rules')
-      .where({ id: id, userIdFk: req.userId })
+      .where({ 'team_rules.id': id, userIdFk: req.userId })
       .join('teams', 'teams.id', 'team_rules.teamIdFk')
       .select('teams.apiIdFk')
 
@@ -39,7 +39,7 @@ class ApiTeam {
     const { id, endPointId } = req.params
 
     const rules = await knex('team_rules')
-      .where({ id: id, userIdFk: req.userId })
+      .where({ 'team_rules.id': id, userIdFk: req.userId })
       .join('teams', 'teams.id', 'team_rules.teamIdFk')
       .select('teams.apiIdFk')
 

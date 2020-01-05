@@ -72,6 +72,13 @@ export default function ({ ssrContext }) {
       meta: { requerAuth: true }
     },
     {
+      path: '/docviewteam/:id',
+      name: 'DocViewTeam',
+      props: true,
+      component: () => import('../pages/DocViewTeam'),
+      meta: { requerAuth: true }
+    },
+    {
       path: '/changepassword',
       name: 'ChangePassword',
       component: () => import('../pages/ChangePassword'),

@@ -105,7 +105,7 @@ export default {
       }
     },
     toDocView (item) {
-      // this.$router.push({ name: 'MemberManager', params: { id: ('' + item.id) } })
+      this.$router.push({ name: 'DocViewTeam', params: { id: ('' + item.id) } })
     }
   }
 }

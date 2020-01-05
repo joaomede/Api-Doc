@@ -47,6 +47,9 @@ export default {
     },
     responseIndex () {
       return this.$store.getters.getResponseIndex
+    },
+    rulesId () {
+      return this.$store.getters.getRulesId
     }
   }
 }

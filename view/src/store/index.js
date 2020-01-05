@@ -25,7 +25,8 @@ export default new Vuex.Store({
     apiData: {},
     tagIndex: null,
     pathIndex: null,
-    responseIndex: null
+    responseIndex: null,
+    rulesId: null
   },
   getters: {
     getUser: state => {
@@ -60,6 +61,9 @@ export default new Vuex.Store({
     },
     getResponseIndex (state) {
       return state.responseIndex
+    },
+    getRulesId (state) {
+      return state.rulesId
     }
   },
   mutations: {
@@ -139,6 +143,15 @@ export default new Vuex.Store({
     async setApiData (state, id) {
       try {
         const result = await http.get(`api/api/getapiandendpoints/${id}`, { headers: state.user.headers })
+        state.apiData = await result.data
+      } catch (error) {
+        console.log(error.response.data.error)
+      }
+    },
+    async setApiDataTeam (state, id) {
+      state.rulesId = id
+      try {
+        const result = await http.get(`api/teamdocs/api/getapiandendpoints/${id}`, { headers: state.user.headers })
         state.apiData = await result.data
       } catch (error) {
         console.log(error.response.data.error)
@@ -227,6 +240,9 @@ export default new Vuex.Store({
     },
     setApiData ({ commit }, id) {
       commit('setApiData', id)
+    },
+    setApiDataTeam ({ commit }, id) {
+      commit('setApiDataTeam', id)
     },
     setPathsByTagIndex ({ commit }, tag) {
       commit('setPathsByTagIndex', tag)
