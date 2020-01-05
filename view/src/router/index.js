@@ -52,6 +52,13 @@ export default function ({ ssrContext }) {
       meta: { requerAuth: true }
     },
     {
+      path: '/membermanager/:id',
+      props: true,
+      name: 'MemberManager',
+      component: () => import('../pages/MemberManager'),
+      meta: { requerAuth: true }
+    },
+    {
       path: '/feedversion',
       name: 'FeedVersion',
       component: () => import('../pages/FeedVersion'),
