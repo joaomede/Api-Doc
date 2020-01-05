@@ -53,7 +53,11 @@ class Geral {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async listAllPublicApi (req: NewRequest, res: Response): Promise<any> {
     try {
-      const allPublicList = await knex('api').select().where({ isPublic: true })
+      const allPublicList = await knex('api')
+        .where({ isPublic: true })
+        .join('users', 'users.id', 'api.userIdFk')
+        .select('api.id', 'api.descriptionApi', 'api.apiName', 'users.name')
+
       resp.returnSucessObject(res, allPublicList)
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao tentar listar documentação')

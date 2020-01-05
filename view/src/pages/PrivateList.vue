@@ -44,11 +44,11 @@
           </q-item-section>
           <q-item-section>
             <q-item-label lines="5">
-              {{ item.apiName }}
+              <strong> Name:</strong> {{ item.apiName }}
             </q-item-label>
 
             <q-item-label caption>
-              {{ item.descriptionApi }}
+              <strong> Descrição:</strong>{{ item.descriptionApi }}
             </q-item-label>
           </q-item-section>
 
@@ -56,13 +56,21 @@
             <q-icon
               v-if="item.isPublic == true"
               name="fas fa-lock-open"
-              color="blue"
+              color="green"
             />
 
             <q-icon
               v-if="item.isPublic == false"
               name="fas fa-lock"
+              color="red"
+            />
+          </q-item-section>
+
+          <q-item-section side>
+            <q-icon
+              name="delete"
               color="blue"
+              @click.stop="showDelete = true, api = item"
             />
           </q-item-section>
 
@@ -83,7 +91,8 @@ export default {
   data () {
     return {
       listOfApis: [],
-      dialogAddApi: false
+      dialogAddApi: false,
+      api: null
     }
   },
   computed: {

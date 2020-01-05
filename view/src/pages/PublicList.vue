@@ -28,11 +28,15 @@
           </q-item-section>
           <q-item-section>
             <q-item-label lines="5">
-              {{ item.apiName }}
+              <strong> Name:</strong> {{ item.apiName }}
+            </q-item-label>
+
+            <q-item-label lines="5">
+              <strong> Publicado por:</strong> {{ item.name }}
             </q-item-label>
 
             <q-item-label caption>
-              {{ item.descriptionApi }}
+              <strong> Descrição:</strong>{{ item.descriptionApi }}
             </q-item-label>
           </q-item-section>
 
