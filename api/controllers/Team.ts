@@ -13,12 +13,12 @@ class Team {
       if (api.length !== 0) {
         if (api[0].isPublic === false) {
           if (api[0].userIdFk === req.userId) {
-            const newTeam = await knex('teams').insert({
+            await knex('teams').insert({
               teamName: teamName,
               apiIdFk: apiIdFk,
               managerIdFk: req.userId
             }).returning('*')
-            resp.returnSucessObject(res, await newTeam)
+            resp.returnSucessMessage(res, `O time ${teamName} foi criado com sucesso`)
           } else {
             resp.returnErrorMessage(res, 'A Api informada não é sua')
           }
