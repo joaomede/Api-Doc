@@ -31,7 +31,7 @@ export default {
     },
     async postMethod (o, path) {
       try {
-        const result = await this.$axios.post(path, o.bodyValue, o.headersValue)
+        const result = await this.$axios.post(path, o.bodyValue, { headers: o.headersValue })
         this.$store.dispatch('setResponseTest', result)
       } catch (error) {
         this.$store.dispatch('setResponseTest', error.response)
