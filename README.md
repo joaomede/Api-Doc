@@ -32,9 +32,6 @@ $ docker-compose up -d
 $ yarn dev
 # or
 $ npm run dev
-
-or
-$ npm install
 ```
 
 ### How to Install
@@ -47,9 +44,10 @@ $ ./install.sh
 # Development without Docker
 $ yarn install
 $ cd view && yarn install
+# or
 
-or
-$ npm install
+$ yarn run install
+$ cd view && yarn run install
 ```
 
 ### How to Build
@@ -62,8 +60,6 @@ $ ./build.sh
 # Development without Docker
 $ yarn build
 $ yarn build:pwa
-# or
-$ cd view && npm install
 ```
 
 ### How to Migrate
