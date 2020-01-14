@@ -8,7 +8,7 @@ export default {
       let path = ''
       forParams(object.parameter.params)
       path = this.cApi.baseURL + '/' + o.path + params
-      switch (o.verbType) {
+      switch (o.methodType) {
         case 'DELETE':
           await this.deleteMethod(o, path)
           break

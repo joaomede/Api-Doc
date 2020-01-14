@@ -7,7 +7,7 @@ class Path {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async store (req: NewRequest, res: Response): Promise<any> {
     const {
-      verbType,
+      methodType,
       path,
       descriptionVerb,
       parameter,
@@ -23,7 +23,7 @@ class Path {
     }
     try {
       const result = await knex('paths').insert({
-        verbType: verbType,
+        methodType: methodType,
         descriptionVerb: descriptionVerb,
         path: path,
         parameter: parameter,
@@ -61,7 +61,7 @@ class Path {
     const { id } = req.params
 
     const newVerb = {
-      verbType: req.body.verbType,
+      methodType: req.body.methodType,
       descriptionVerb: req.body.descriptionVerb,
       path: req.body.path,
       parameter: req.body.parameter,

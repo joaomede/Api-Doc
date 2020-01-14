@@ -17,15 +17,15 @@
 
     <q-expansion-item
       expand-separator
-      :icon="paths.verbType | verificaLetra"
-      :label="paths.verbType"
+      :icon="paths.methodType | verificaLetra"
+      :label="paths.methodType"
       :caption="`Path: ${paths.path}`"
-      :header-class="paths.verbType | verificaCor"
+      :header-class="paths.methodType | verificaCor"
     >
       <q-card>
         <q-card-section
           class="text-left q-pa-xs"
-          :style="paths.verbType | filtrarCorBackground"
+          :style="paths.methodType | filtrarCorBackground"
         >
           <div class="text-center">
             <q-icon
@@ -61,7 +61,7 @@
                 </q-item-section>
 
                 <q-input
-                  v-model="paths.verbType"
+                  v-model="paths.methodType"
                   class="text-white"
                   square
                   dense
@@ -174,7 +174,7 @@
                   <q-separator spaced />
                 </div>
 
-                <div v-if="paths.verbType === 'POST'">
+                <div v-if="paths.methodType === 'POST'">
                   <q-btn
                     color="green"
                     @click="pathTest(paths, indexTags, indexPath)"
@@ -195,7 +195,7 @@
                 </div>
 
                 <div
-                  v-if="paths.verbType === 'DELETE'"
+                  v-if="paths.methodType === 'DELETE'"
                 >
                   <q-btn
                     color="red"
@@ -216,7 +216,7 @@
                   </div>
                 </div>
 
-                <div v-if="paths.verbType === 'GET'">
+                <div v-if="paths.methodType === 'GET'">
                   <q-btn
                     color="purple"
                     @click="pathTest(paths, indexTags, indexPath)"
@@ -236,7 +236,7 @@
                   </div>
                 </div>
 
-                <div v-if="paths.verbType === 'PUT'">
+                <div v-if="paths.methodType === 'PUT'">
                   <q-btn
                     color="orange"
                     @click="pathTest(paths, indexTags, indexPath)"

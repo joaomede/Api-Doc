@@ -18,7 +18,7 @@
                   "verbId": {
                     "verbId": "id do verbo",
                     "idPai": "",
-                    "verbType": "post",
+                    "methodType": "post",
                     "path": "/pasta",
                     "parameter": "body, headers, params",
                     "verbValue": "array de dados estruturando com o objeto é passado",

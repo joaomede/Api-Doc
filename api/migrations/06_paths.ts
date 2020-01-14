@@ -4,17 +4,13 @@ import * as Knex from 'knex'
 export async function up (knex: Knex): Promise<any> {
   return knex.schema.createTable('paths', table => {
     table.increments()
-    table.text('verbType').notNullable()
+    table.text('methodType').notNullable()
     table.text('descriptionVerb').notNullable()
     table.text('path').notNullable()
 
     table.json('parameter').notNullable()
-
     table.json('headersValue').notNullable()
-
-    table.boolean('body').notNullable()
     table.json('bodyValue').nullable()
-
     table.json('data').notNullable()
 
     table.timestamps(true, true)
