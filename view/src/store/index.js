@@ -26,7 +26,25 @@ export default new Vuex.Store({
     tagIndex: null,
     pathIndex: null,
     responseIndex: null,
-    rulesId: null
+    rulesId: null,
+    typeMethods: [
+      {
+        label: 'Get',
+        value: 'GET'
+      },
+      {
+        label: 'Post',
+        value: 'POST'
+      },
+      {
+        label: 'Put',
+        value: 'PUT'
+      },
+      {
+        label: 'Delete',
+        value: 'DELETE'
+      }
+    ]
   },
   getters: {
     getUser: state => {
@@ -43,6 +61,9 @@ export default new Vuex.Store({
     },
     getAppFeedID (state) {
       return state.appFeedId
+    },
+    getTypeMethods (state) {
+      return state.typeMethods
     },
     getTag (state) {
       return state.tag

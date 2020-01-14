@@ -44,26 +44,25 @@
             <q-item-section>
               <q-card-section>
                 <q-item-section>
-                  Method
-                </q-item-section>
-
-                <q-item-section>
                   <q-checkbox
                     v-model="pathEditOption"
                     color="secondary"
                     label="Edição desabilitada"
                   />
                 </q-item-section>
-
-                <q-input
+                <q-item-section>
+                  Method
+                </q-item-section>
+                <q-select
                   v-model="paths.methodType"
-                  class="text-white"
-                  square
+                  filled
                   dense
-
-                  outlined
+                  :options="cTypeMethods"
+                  emit-value
                   :disable="pathEditOption"
+                  label="Method"
                 />
+
                 <div
                   class="text-h6"
                   style="font-size: 18px"

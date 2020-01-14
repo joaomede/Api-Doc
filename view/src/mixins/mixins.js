@@ -27,6 +27,9 @@ export default {
         return null
       }
     },
+    cTypeMethods () {
+      return this.$store.getters.getTypeMethods
+    },
     cApi () {
       return this.$store.getters.getApiData
     },
