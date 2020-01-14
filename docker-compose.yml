@@ -47,6 +47,7 @@ services:
       - ${APIPORT}
     volumes:
       - .:/usr/src/app
+      - /etc/letsencrypt:/etc/letsencrypt
       - "/etc/localtime:/etc/localtime:ro"
     networks:
       - redePostgres
