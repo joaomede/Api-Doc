@@ -1,10 +1,5 @@
 <template>
   <div>
-    <DialogAddNewTags
-      :dialog="dialogAddNewTags"
-      @eventClose="dialogAddNewTags = false"
-    />
-
     <DialogUpdateApi
       :dialog="dialogUpdateApi"
       @eventClose="dialogUpdateApi = false"
@@ -95,7 +90,7 @@
               side
               name="add"
               color="primary"
-              @click.stop="dialogAddNewTags = true"
+              @click.stop="storeNewTag()"
             />
           </q-item-section>
         </q-item>
@@ -119,25 +114,37 @@
 </template>
 
 <script>
-import DialogAddNewTags from '../dialog/addDialog/DialogAddNewTags'
 import DialogUpdateApi from '../dialog/updateDialog/DialogUpdateApi'
 import ListTags from '../listEdit/ListTags'
 
 export default {
   components: {
-    DialogAddNewTags,
     DialogUpdateApi,
     ListTags
   },
   data () {
     return {
       dialogAddNewTags: false,
-      dialogUpdateApi: false
+      dialogUpdateApi: false,
+
+      newTag: {
+        nameTag: 'Default',
+        descriptionTag: 'Default'
+      }
     }
   },
   methods: {
     showEditApi () {
       this.dialogUpdateApi = true
+    },
+    async storeNewTag () {
+      try {
+        const result = await this.$axios.post(`api/tags/create/${this.cApi.id}`, this.newTag, { headers: this.user.headers })
+        this.$store.dispatch('setNewTag', result.data)
+        this.$notify(await result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     }
   }
 }

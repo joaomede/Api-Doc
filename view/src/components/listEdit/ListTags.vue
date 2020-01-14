@@ -1,10 +1,5 @@
 <template>
   <div>
-    <DialogUpdateTag
-      :dialog="dialogUpdateTag"
-      @eventClose="dialogUpdateTag = false"
-    />
-
     <DialogConfirmDelete
       :dialog="dialogConfirmDeleteTag"
       @eventClose="dialogConfirmDeleteTag = false"
@@ -24,9 +19,9 @@
               style="font-size: 24px"
               class="text-right"
               side
-              name="edit"
+              name="save"
               color="primary"
-              @click.stop="showEditTag()"
+              @click.stop="updateTag(tags)"
             />
             <q-icon
               style="font-size: 24px"
@@ -36,14 +31,49 @@
               color="primary"
               @click.stop="showDeleteTag()"
             />
-            <div class="text-p text-left">
+          </q-item-label>
+
+          <q-item-section>
+            <q-checkbox
+              v-model="pathEditOption"
+              color="secondary"
+              label="Edição desabilitada"
+            />
+          </q-item-section>
+
+          <q-item-label lines="5">
+            <div
+              v-if="pathEditOption === true"
+              class="text-p text-left"
+            >
               <strong>Tag:</strong> {{ tags.nameTag }}
             </div>
-          </q-item-label>
-          <q-item-label lines="5">
-            <div class="text-p text-left">
-              <strong>Descrição da Tag:</strong> {{ tags.descriptionTag }}
+            <div
+              v-if="pathEditOption === true"
+              class="text-p text-left"
+            >
+              <strong>Descrição da Tag:</strong>{{ tags.descriptionTag }}
             </div>
+            <q-input
+              v-if="pathEditOption === false"
+              v-model="tags.nameTag"
+              class="text-white q-ma-xs"
+              square
+              dense
+              label="Tag:"
+              outlined
+              :disable="pathEditOption"
+            />
+            <q-input
+              v-if="pathEditOption === false"
+              v-model="tags.descriptionTag"
+              class="text-white q-ma-xs"
+              square
+              dense
+              label="Descrição da Tag:"
+              outlined
+              :disable="pathEditOption"
+            />
           </q-item-label>
         </q-item-section>
       </q-item>
@@ -86,13 +116,11 @@
 
 <script>
 import ListPaths from '../listEdit/ListPaths'
-import DialogUpdateTag from '../dialog/updateDialog/DialogUpdateTags'
 import DialogConfirmDelete from '../dialog/DialogConfirmDelete'
 
 export default {
   components: {
     ListPaths,
-    DialogUpdateTag,
     DialogConfirmDelete
   },
   props: {
@@ -111,8 +139,9 @@ export default {
     return {
       dialogConfirmDeleteTag: false,
       dialogUpdateTag: false,
+      pathEditOption: true,
 
-      form: {
+      newPath: {
         methodType: '',
         pathName: '',
         path: '',
@@ -136,7 +165,7 @@ export default {
     async addNewPath () {
       this.dispatchs()
       try {
-        const result = await this.$axios.post(`api/paths/create/${this.cTag.id}`, this.form, { headers: this.user.headers })
+        const result = await this.$axios.post(`api/paths/create/${this.cTag.id}`, this.newPath, { headers: this.user.headers })
         this.$store.dispatch('setNewPath', result.data)
         this.$notify('Novo verbo criado com sucesso', 'green')
         // this.eventClose()
@@ -144,9 +173,13 @@ export default {
         this.$notify(error.response.data.error, 'red')
       }
     },
-    showEditTag () {
-      this.dispatchs()
-      this.dialogUpdateTag = true
+    async updateTag (tag) {
+      try {
+        const result = await this.$axios.put(`api/tags/update/${tag.id}`, tag, { headers: this.user.headers })
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     },
     showDeleteTag () {
       this.dispatchs()
