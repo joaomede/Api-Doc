@@ -20,19 +20,42 @@ Some dependencies I would like to leave the reference and thanks
 [vue-json-edit](https://github.com/jinkin1995/vue-json-edit),
 [vue-json-pretty](https://leezng.github.io/vue-json-pretty),
 
-
-
-### How to Serve
+### The Environment
+> There are 2 environments in the project, one for API and one for View.
 ```shell
-# Production with Docker
+# for create .env files
+$ cp .env.example .env
+$ cd view && .env.example .env
 
-$ docker-compose up -d
+# the .env api
+HTTPSERVERPORT # port view, ex.: 80
+APIPORT # port api, ex.:8080
+PORTDB # port database, ex.: 5432
 
-# Development without Docker
-$ yarn dev
-# or
-$ npm run dev
+# database postgres or mysql settings
+HOSTDB # ip for host database "external" ex.: 168.168.168.16 
+POSTGRES_USER=admin # user database, default is admin or postgres
+POSTGRES_PASSWORD # password database
+POSTGRES_DB # database name
+
+NODE_ENV # mode system: dev or prod
+DOMAIN # the name your domain, ex.: example.com
+
+# setting for your smtp, to recovery password user and etc.
+HOSTSMTP=smtp.gmail.com
+PORTSMTP=587
+EMAIL=@gmail.com
+PASSSWORDSMTP=123
+
+SECRET # the key for your api
+
+
+# the .env view
+APIURL # path to api, ex.: https://example.com:8080
 ```
+
+### The Firebase
+> I used firebase as version manager, this application will not be available in the project, so it is necessary to comment out the code contained in path "view/boot/firebase.js" and also line 44 of the App.vue file.
 
 ### How to Install
 ```shell
@@ -45,9 +68,8 @@ $ ./install.sh
 $ yarn install
 $ cd view && yarn install
 # or
-
-$ yarn run install
-$ cd view && yarn run install
+$ npm run install
+$ cd view && npm run install
 ```
 
 ### How to Build
@@ -59,19 +81,43 @@ $ ./build.sh
 
 # Development without Docker
 $ yarn build
-$ yarn build:pwa
+$ yarn build:view
+# or
+$ npm run build
+$ npm run build:view
+```
+
+### How to Serve
+```shell
+# Production with Docker
+
+$ docker-compose up -d
+
+# Development without Docker
+$ yarn dev
+$ cd view && yarn dev
+# or
+$ npm run dev
+$ cd view && npm run dev
 ```
 
 ### How to Migrate
 ```shell
 # Production with Docker
-# when you "./install.sh" migrate will be done
+# needed "docker-compose up -d pg" first, for up database
+$ chmod 777 migrate.sh
+$ ./migrate.sh
 
 # Development without Docker
+# for up
 $ yarn migrate
+# or
+$ npm run migrate
 
 # for down
 $ yarn migratedown
+# or
+$ npm run migratedown
 ```
 
 ### About Progress
@@ -94,7 +140,6 @@ $ yarn migratedown
 - [x] Send Body on test
 - [x] Send Params on test
 - [ ] Send DataForm on test
-- [ ] Send Auth on test 
 
 ### Very important information
 > I use a technology to manage development log versions, so in View will comment on line 44 where it has written "this.$store.dispatch ('versionCheck')"
