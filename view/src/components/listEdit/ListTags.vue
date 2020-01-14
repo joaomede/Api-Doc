@@ -1,10 +1,5 @@
 <template>
   <div>
-    <DialogAddNewPaths
-      :dialog="dialogAddNewPaths"
-      @eventClose="dialogAddNewPaths = false"
-    />
-
     <DialogUpdateTag
       :dialog="dialogUpdateTag"
       @eventClose="dialogUpdateTag = false"
@@ -91,14 +86,12 @@
 
 <script>
 import ListPaths from '../listEdit/ListPaths'
-import DialogAddNewPaths from '../dialog/addDialog/DialogAddNewPaths'
 import DialogUpdateTag from '../dialog/updateDialog/DialogUpdateTags'
 import DialogConfirmDelete from '../dialog/DialogConfirmDelete'
 
 export default {
   components: {
     ListPaths,
-    DialogAddNewPaths,
     DialogUpdateTag,
     DialogConfirmDelete
   },
@@ -118,7 +111,21 @@ export default {
     return {
       dialogConfirmDeleteTag: false,
       dialogUpdateTag: false,
-      dialogAddNewPaths: false
+
+      form: {
+        methodType: '',
+        pathName: '',
+        path: '',
+        descriptionVerb: '',
+        parameter: {
+          params: []
+        },
+        headersValue: {},
+        bodyValue: {},
+        data: {
+          data: []
+        }
+      }
     }
   },
   methods: {
@@ -126,9 +133,16 @@ export default {
       this.$store.dispatch('setTag', this.tags)
       this.$store.dispatch('setTagIndex', this.indexTags)
     },
-    addNewPath () {
+    async addNewPath () {
       this.dispatchs()
-      this.dialogAddNewPaths = true
+      try {
+        const result = await this.$axios.post(`api/paths/create/${this.cTag.id}`, this.form, { headers: this.user.headers })
+        this.$store.dispatch('setNewPath', result.data)
+        this.$notify('Novo verbo criado com sucesso', 'green')
+        // this.eventClose()
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     },
     showEditTag () {
       this.dispatchs()

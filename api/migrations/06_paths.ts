@@ -5,6 +5,7 @@ export async function up (knex: Knex): Promise<any> {
   return knex.schema.createTable('paths', table => {
     table.increments()
     table.text('methodType').notNullable()
+    table.text('pathName').notNullable()
     table.text('descriptionVerb').notNullable()
     table.text('path').notNullable()
 

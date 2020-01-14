@@ -10,11 +10,6 @@
       @confirm="deletePath()"
     />
 
-    <DialogUpdatePath
-      :dialog="dialogUpdatePath"
-      @eventClose="dialogUpdatePath = false"
-    />
-
     <q-expansion-item
       expand-separator
       :icon="paths.methodType | verificaLetra"
@@ -32,9 +27,9 @@
               style="font-size: 24px"
               class="text-right"
               side
-              name="edit"
+              name="save"
               color="primary"
-              @click.stop="showEditPath()"
+              @click.stop="updatePath(paths)"
             />
             <q-icon
               style="font-size: 24px"
@@ -299,7 +294,6 @@
 <script>
 import VueJsonPretty from 'vue-json-pretty'
 import ListResponseEdit from '../listEdit/ListResponses'
-import DialogUpdatePath from '../dialog/updateDialog/DialogUpdatePaths'
 import DialogAddNewResponses from '../dialog/addDialog/DialogAddNewResponses'
 import DialogConfirmDelete from '../dialog/DialogConfirmDelete'
 import pathTest from '../../mixins/pathTest'
@@ -309,7 +303,6 @@ export default {
     VueJsonPretty,
     ListResponseEdit,
     DialogAddNewResponses,
-    DialogUpdatePath,
     DialogConfirmDelete
   },
   mixins: [pathTest],
@@ -333,8 +326,6 @@ export default {
     return {
       dialogAddNewResponses: false,
       dialogConfirmDeletePaths: false,
-      dialogUpdatePath: false,
-
       pathEditOption: true
     }
   },
@@ -352,9 +343,13 @@ export default {
       this.dispatchs()
       this.dialogConfirmDeletePaths = true
     },
-    showEditPath () {
-      this.dispatchs()
-      this.dialogUpdatePath = true
+    async updatePath (path) {
+      try {
+        const result = await this.$axios.put(`api/paths/update/${path.id}`, path, { headers: this.user.headers })
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     },
     async deletePath () {
       try {

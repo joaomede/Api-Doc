@@ -8,11 +8,11 @@ class Path {
   public async store (req: NewRequest, res: Response): Promise<any> {
     const {
       methodType,
+      pathName,
       path,
       descriptionVerb,
       parameter,
       headersValue,
-      body,
       bodyValue,
       data
     } = req.body
@@ -24,11 +24,11 @@ class Path {
     try {
       const result = await knex('paths').insert({
         methodType: methodType,
+        pathName: pathName,
         descriptionVerb: descriptionVerb,
         path: path,
         parameter: parameter,
         headersValue: headersValue,
-        body: body,
         bodyValue: bodyValue,
         data: data,
         tagsIdFk: endPointId,
@@ -62,11 +62,11 @@ class Path {
 
     const newVerb = {
       methodType: req.body.methodType,
+      pathName: req.body.pathName,
       descriptionVerb: req.body.descriptionVerb,
       path: req.body.path,
       parameter: req.body.parameter,
       headersValue: req.body.headersValue,
-      body: req.body.body,
       bodyValue: req.body.bodyValue,
       data: req.body.data,
       dataType: req.body.dataType,
