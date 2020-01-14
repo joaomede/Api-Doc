@@ -1,10 +1,5 @@
 <template>
   <div>
-    <DialogUpdateApi
-      :dialog="dialogUpdateApi"
-      @eventClose="dialogUpdateApi = false"
-    />
-
     <div
       class="centralDiv"
     >
@@ -15,53 +10,116 @@
         <q-card-section>
           <q-item class="text-left">
             <q-item-section>
-              <div class="text-h5">
-                <strong>API:</strong> {{ cApi.apiName }}
-                <q-badge color="primary">
-                  {{ cApi.version }}
-                </q-badge>
-              </div>
+              <q-checkbox
+                v-model="pathEditOption"
+                color="secondary"
+                label="Edição desabilitada"
+              />
+              <q-input
+                v-if="pathEditOption === false"
+                v-model="cApi.apiName"
+                class="text-white q-ma-xs"
+                square
+                dense
+                label="Api Name:"
+                outlined
+                :disable="pathEditOption"
+              />
+              <q-input
+                v-if="pathEditOption === false"
+                v-model="cApi.descriptionApi"
+                class="text-white q-ma-xs"
+                square
+                dense
+                label="Descrição:"
+                outlined
+                :disable="pathEditOption"
+              />
+              <q-checkbox
+                v-if="pathEditOption === false"
+                v-model="cApi.isPublic"
+                color="secondary"
+                label="Public?"
+              />
+              <q-input
+                v-if="pathEditOption === false"
+                v-model="cApi.email"
+                class="text-white q-ma-xs"
+                square
+                dense
+                label="E-Mail:"
+                outlined
+                :disable="pathEditOption"
+              />
+              <q-input
+                v-if="pathEditOption === false"
+                v-model="cApi.license"
+                class="text-white q-ma-xs"
+                square
+                dense
+                label="License:"
+                outlined
+                :disable="pathEditOption"
+              />
+              <q-input
+                v-if="pathEditOption === false"
+                v-model="cApi.baseURL"
+                class="text-white q-ma-xs"
+                square
+                dense
+                label="Base URL:"
+                outlined
+                :disable="pathEditOption"
+              />
+              <div v-if="pathEditOption === true">
+                <div class="text-h5">
+                  <strong>API:</strong> {{ cApi.apiName }}
+                  <q-badge color="primary">
+                    {{ cApi.version }}
+                  </q-badge>
+                </div>
 
-              <div class="text-h6">
-                <strong>Descrição:</strong> {{ cApi.descriptionApi }}
-              </div>
+                <div class="text-h6">
+                  <strong>Descrição:</strong> {{ cApi.descriptionApi }}
+                </div>
 
-              <div
-                v-if="!cApi.isPublic"
-                class="text-h6"
-                style="font-size: 20px;"
-              >
-                Private
-                <q-icon
-                  name="fas fa-lock"
-                  color="red"
-                />
-              </div>
-
-              <div>
                 <div
-                  v-if="cApi.isPublic"
+                  v-if="!cApi.isPublic"
                   class="text-h6"
                   style="font-size: 20px;"
                 >
-                  Public
+                  Private
                   <q-icon
-                    name="fas fa-lock-open"
-                    color="green"
+                    name="fas fa-lock"
+                    color="red"
                   />
                 </div>
-              </div>
 
-              <div class="text-p">
-                <strong>E-mail:</strong> {{ cApi.email }}
-              </div>
+                <div>
+                  <div
+                    v-if="cApi.isPublic"
+                    class="text-h6"
+                    style="font-size: 20px;"
+                  >
+                    Public
+                    <q-icon
+                      name="fas fa-lock-open"
+                      color="green"
+                    />
+                  </div>
+                </div>
 
-              <div class="text-p">
-                <strong>Licença:</strong> {{ cApi.license }}
-              </div>
+                <div class="text-p">
+                  <strong>E-mail:</strong> {{ cApi.email }}
+                </div>
 
-              <div class="text-p">
-                <strong>Base URL:</strong> {{ cApi.baseURL }}
+                <div class="text-p">
+                  <strong>Licença:</strong> {{ cApi.license }}
+                </div>
+
+                <div class="text-p">
+                  <strong>Base URL:</strong> {{ cApi.baseURL }}
+                </div>
               </div>
             </q-item-section>
 
@@ -69,9 +127,9 @@
               <q-icon
                 class="text-right"
                 side
-                name="edit"
+                name="save"
                 color="primary"
-                @click.stop="showEditApi()"
+                @click.stop="updateApi(cApi)"
               />
             </q-item-section>
           </q-item>
@@ -114,18 +172,17 @@
 </template>
 
 <script>
-import DialogUpdateApi from '../dialog/updateDialog/DialogUpdateApi'
 import ListTags from '../listEdit/ListTags'
 
 export default {
   components: {
-    DialogUpdateApi,
     ListTags
   },
   data () {
     return {
       dialogAddNewTags: false,
       dialogUpdateApi: false,
+      pathEditOption: true,
 
       newTag: {
         nameTag: 'Default',
@@ -134,8 +191,13 @@ export default {
     }
   },
   methods: {
-    showEditApi () {
-      this.dialogUpdateApi = true
+    async updateApi (api) {
+      try {
+        const result = await this.$axios.put(`api/api/update/${api.id}`, api, { headers: this.user.headers })
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     },
     async storeNewTag () {
       try {
