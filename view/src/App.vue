@@ -1,7 +1,6 @@
 <template>
   <div
     id="q-app"
-    class="q-pa-xs"
   >
     <q-layout view="lHr lpR lFr">
       <Drawer
