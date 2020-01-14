@@ -70,22 +70,131 @@
                 />
                 <q-separator spaced />
 
+                <!-- Descrição -->
                 <div
+                  v-if="pathEditOption === true"
+                  class="text-h6"
+                  style="font-size: 18px"
+                >
+                  <strong>Nome:</strong> {{ paths.pathName }}
+                </div>
+                <div
+                  v-if="pathEditOption === false"
+                  class="text-h6"
+                  style="font-size: 18px"
+                >
+                  <strong>Nome:</strong>
+                  <q-input
+                    v-model="paths.pathName"
+                    :disable="pathEditOption"
+                    class="bg-black text-blue"
+                    square
+                    dense
+                    dark
+                    outlined
+                    label="Ex.: Login"
+                  />
+                </div>
+                <q-separator spaced />
+
+                <!-- Descrição -->
+                <div
+                  v-if="pathEditOption === true"
                   class="text-h6"
                   style="font-size: 18px"
                 >
                   <strong>Descrição:</strong> {{ paths.descriptionVerb }}
                 </div>
+
+                <!-- Descrição Edit -->
+                <div
+                  v-if="pathEditOption === false"
+                  class="text-h6"
+                  style="font-size: 18px"
+                >
+                  <strong>Descrição:</strong>
+                  <q-input
+                    v-model="paths.descriptionVerb"
+                    :disable="pathEditOption"
+                    class="bg-black text-blue"
+                    square
+                    dense
+                    dark
+                    outlined
+                    label="Ex.: About endpoint"
+                  />
+                </div>
                 <q-separator spaced />
 
+                <!-- Path View -->
                 <div
+                  v-if="pathEditOption === true"
                   class="text-h6"
                   style="font-size: 18px"
                 >
                   <strong>Path:</strong> {{ paths.path }}{{ paths.parameter.params | filterParamsName }}
                 </div>
+
+                <!-- Path Edit -->
+                <div
+                  v-if="pathEditOption === false"
+                  class="text-h6"
+                  style="font-size: 18px"
+                >
+                  <strong>Path:</strong>
+                  <q-input
+                    v-model="paths.path"
+                    :disable="pathEditOption"
+                    class="bg-black text-blue"
+                    square
+                    dense
+                    dark
+                    outlined
+                    label="Ex.: api/login"
+                  />
+                </div>
                 <q-separator spaced />
 
+                <!-- Headers -->
+                <div>
+                  <q-card-section>
+                    <div class="text-left">
+                      <strong>Headers:  </strong>
+                      <JsonEditor
+                        v-model="paths.headersValue"
+                        :options="{
+                          confirmText: 'confirm',
+                          cancelText: 'cancel',
+                        }"
+                        :obj-data="paths.headersValue"
+                      />
+                    </div>
+                  </q-card-section>
+                  <q-separator spaced />
+
+                  <div
+                    v-if="paths.body === true"
+                  >
+                    Body:
+                    <JsonEditor
+                      v-model="paths.bodyValue"
+                      :options="{
+                        confirmText: 'confirm',
+                        cancelText: 'cancel',
+                      }"
+                      :obj-data="paths.bodyValue"
+                    />
+
+                    <q-separator spaced />
+                  </div>
+
+                  <div v-if="paths.data === true">
+                    Data Type: {{ paths.dataType }}<br>
+                    <q-separator spaced />
+                  </div>
+                </div>
+
+                <!-- Param -->
                 <div>
                   <q-card-section>
                     <div class="text-left">
@@ -145,43 +254,26 @@
                 </div>
                 <q-separator spaced />
 
+                <!-- Body -->
                 <div>
                   <q-card-section>
                     <div class="text-left">
-                      <strong>Headers:  </strong>
+                      <strong>Body:  </strong>
                       <JsonEditor
-                        v-model="paths.headersValue"
+                        v-model="paths.bodyValue"
                         :options="{
                           confirmText: 'confirm',
                           cancelText: 'cancel',
                         }"
-                        :obj-data="paths.headersValue"
+                        :obj-data="paths.bodyValue"
                       />
                     </div>
                   </q-card-section>
-                  <q-separator spaced />
+                </div>
+                <q-separator spaced />
 
-                  <div
-                    v-if="paths.body === true"
-                  >
-                    Body:
-                    <JsonEditor
-                      v-model="paths.bodyValue"
-                      :options="{
-                        confirmText: 'confirm',
-                        cancelText: 'cancel',
-                      }"
-                      :obj-data="paths.bodyValue"
-                    />
-
-                    <q-separator spaced />
-                  </div>
-
-                  <div v-if="paths.data === true">
-                    Data Type: {{ paths.dataType }}<br>
-                    <q-separator spaced />
-                  </div>
-
+                <!-- Response Test -->
+                <div>
                   <div v-if="paths.methodType === 'POST'">
                     <q-btn
                       color="green"
@@ -202,9 +294,7 @@
                     </div>
                   </div>
 
-                  <div
-                    v-if="paths.methodType === 'DELETE'"
-                  >
+                  <div v-if="paths.methodType === 'DELETE'">
                     <q-btn
                       color="red"
                       @click="pathTest(paths, indexTags, indexPath)"
