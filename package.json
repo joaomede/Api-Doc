@@ -1,9 +1,23 @@
 {
   "name": "api-doc",
   "version": "1.0.0",
-  "description": "",
-  "author": "",
+  "description": "A crud for api documentation",
+  "author": "João Medeiros N. Jr - <symbol2studio@gmail.com> (https://symbol2.com.br/)",
+  "homepage": "http://github.com/joaomede/Api-Doc#readme",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+http://github.com/joaomede/Api-Doc.git"
+  },
+  "keywords": [
+    "documentation",
+    "api",
+    "express",
+    "typescript",
+    "vuejs",
+    "react",
+    "crud"
+  ],
   "private": true,
   "scripts": {
     "build": "rimraf dist/ && sucrase ./api -d ./dist --transforms typescript,imports",
