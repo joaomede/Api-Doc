@@ -12,10 +12,12 @@ class HttpServer {
   public express: express.Application
   private port: number
   private mode: string
+  private domain: string
 
   constructor () {
     this.port = (process.env.HTTPSERVERPORT as unknown as number)
     this.mode = process.env.NODE_ENV
+    this.domain = process.env.DOMAIN
     this.express = express()
     this.middlewares()
     this.routes()
@@ -39,15 +41,15 @@ class HttpServer {
   public server (): http.Server | https.Server {
     if (this.mode === 'prod') {
       const privateKey = fs.readFileSync(
-        '/etc/letsencrypt/live/symbol2.tk/privkey.pem',
+        `/etc/letsencrypt/live/${this.domain}/privkey.pem`,
         'utf8'
       )
       const certificate = fs.readFileSync(
-        '/etc/letsencrypt/live/symbol2.tk/cert.pem',
+        `/etc/letsencrypt/live/${this.domain}/cert.pem`,
         'utf8'
       )
       const ca = fs.readFileSync(
-        '/etc/letsencrypt/live/symbol2.tk/chain.pem',
+        `/etc/letsencrypt/live/${this.domain}/chain.pem`,
         'utf8'
       )
       const credentials = { key: privateKey, cert: certificate, ca: ca }
