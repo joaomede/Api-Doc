@@ -207,12 +207,6 @@ export default new Vuex.Store({
     setResponseIndex (state, responseIndex) {
       state.responseIndex = responseIndex
     },
-    setUpdateTag (state, newTag) {
-      Vue.set(state.apiData.tags, state.tagIndex, newTag)
-    },
-    setUpdatePath (state, newPath) {
-      Vue.set(state.apiData.tags[state.tagIndex].paths, state.pathIndex, newPath)
-    },
     setUpdateResponse (state, newResponse) {
       Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses, state.responseIndex, newResponse)
     },
@@ -289,12 +283,6 @@ export default new Vuex.Store({
     },
     setResponseIndex ({ commit }, responseIndex) {
       commit('setResponseIndex', responseIndex)
-    },
-    setUpdateTag ({ commit }, newTag) {
-      commit('setUpdateTag', newTag)
-    },
-    setUpdatePath ({ commit }, newPath) {
-      commit('setUpdatePath', newPath)
     },
     setUpdateResponse ({ commit }, newResponse) {
       commit('setUpdateResponse', newResponse)
