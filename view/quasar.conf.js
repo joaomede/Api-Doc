@@ -8,6 +8,7 @@ module.exports = function (ctx) {
     boot: [
       'firebase',
       'axios',
+      'i18n',
       'notify',
       'plugins',
       'globalFilters',
@@ -32,8 +33,7 @@ module.exports = function (ctx) {
 
     framework: {
       // iconSet: 'ionicons-v4',
-      // lang: 'de', // Quasar language
-
+      lang: 'pt-br', // Quasar language pack
       // all: true, // --- includes everything; for dev only!
 
       components: [
