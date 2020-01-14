@@ -36,14 +36,34 @@ export default {
   data () {
     return {
       title: 'Api Doc',
-      left: false
+      left: false,
+
+      langs: [
+        {
+          label: 'Brazilian - PT',
+          value: 'pt-br'
+        },
+        {
+          label: 'English - US',
+          value: 'en-us'
+        }
+      ]
     }
   },
   mounted () {
+    this.checkLanguage()
     this.$store.dispatch('versionCheck')
     this.$store.dispatch('boot')
   },
   methods: {
+    checkLanguage () {
+      const localeClientLang = this.$q.lang.getLocale()
+      for (const language of this.$i18n.availableLocales) {
+        if (language === localeClientLang) {
+          this.$i18n.locale = localeClientLang
+        }
+      }
+    },
     logout () {
       this.$q.cookies.remove('user')
       this.$store.dispatch('boot')
