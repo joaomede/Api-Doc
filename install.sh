@@ -10,6 +10,7 @@ migrate='yarn migrate'
 
 $dockerRun -v $(pwd):$workDir $dockerImage $install
 $dockerRun -v $(pwd):$workDir $dockerImage $buildApi
+cd view
 $dockerRun -v $(pwd):$workDir $dockerImage $install
 cd ..
 $dockerRun -v $(pwd):$workDir $dockerImage $buildView
