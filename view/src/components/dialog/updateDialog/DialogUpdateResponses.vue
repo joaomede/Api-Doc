@@ -43,17 +43,6 @@
         />
       </q-card-section>
 
-      <q-card-section>
-        <q-form class="q-gutter-md">
-          <q-input
-            v-model="form.headers"
-            label="Informe o cabeçalho"
-            required
-            dense
-          />
-        </q-form>
-      </q-card-section>
-
       <q-card-section align="center">
         <q-btn
           class="q-ma-xs"
@@ -86,8 +75,7 @@ export default {
       form: {
         typeCode: '',
         reason: '',
-        responseModel: {},
-        headers: ''
+        responseModel: {}
       },
       dialogPopup: this.dialog
     }
@@ -119,8 +107,7 @@ export default {
       this.form = {
         typeCode: '',
         reason: '',
-        responseModel: {},
-        headers: ''
+        responseModel: {}
       }
     }
   }

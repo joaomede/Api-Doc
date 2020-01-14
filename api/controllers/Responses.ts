@@ -6,7 +6,7 @@ import resp from 'resp-express'
 class Responses {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async store (req: NewRequest, res: Response): Promise<any> {
-    const { typeCode, reason, responseModel, headers } = req.body
+    const { typeCode, reason, responseModel } = req.body
     const { verbId } = req.params
 
     if (verbId === undefined || verbId === null) {
@@ -18,7 +18,6 @@ class Responses {
         typeCode: typeCode,
         reason: reason,
         responseModel: responseModel,
-        headers: headers,
         userIdFk: req.userId,
         pathsIdFk: verbId
       }).returning('*')
@@ -51,8 +50,7 @@ class Responses {
     const newCode = {
       typeCode: req.body.typeCode,
       reason: req.body.reason,
-      responseModel: req.body.responseModel,
-      headers: req.body.headers
+      responseModel: req.body.responseModel
     }
 
     try {

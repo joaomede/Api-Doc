@@ -49,7 +49,6 @@
                     :data="responses.responseModel"
                   />
                 </div>
-                headers: {{ responses.headers }} <br>
               </q-item-section>
             </q-item>
           </q-card-section>
