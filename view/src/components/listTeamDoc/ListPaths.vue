@@ -118,7 +118,6 @@
                       <q-item-section>
                         <q-input
                           v-model="params.parameterName"
-                          :disable="pathEditOption"
                           class="bg-black text-blue"
                           square
                           dense
@@ -130,7 +129,6 @@
                       <q-item-section>
                         <q-input
                           v-model="params.parameterValue"
-                          :disable="pathEditOption"
                           class="bg-black text-blue"
                           square
                           dense
@@ -163,7 +161,7 @@
                 <q-separator spaced />
 
                 <!-- Response Test -->
-                <div>
+                <div class="responsefield">
                   <div v-if="paths.methodType === 'POST'">
                     <q-btn
                       color="green"
@@ -282,7 +280,6 @@
     <q-separator />
   </div>
 </template>
-
 <script>
 import VueJsonPretty from 'vue-json-pretty'
 import ListResponseEdit from '../listTeamDoc/ListResponses'
