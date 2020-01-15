@@ -1,4 +1,4 @@
-
+import { i18n } from './i18n'
 import Vue from 'vue'
 Vue.filter('verificaLetra', function (item) {
   if (item === 'POST') {
@@ -52,4 +52,12 @@ Vue.filter('filterParamsName', function (param) {
     params = `${params}/{${param[index].parameterName}}`
   }
   return params
+})
+
+Vue.filter('filterReasonCode', function (code) {
+  return i18n.t(`commonCodes.${code}.reason`)
+})
+
+Vue.filter('filterCodeStatus', function (code) {
+  return i18n.t(`commonCodes.${code}.code`)
 })
