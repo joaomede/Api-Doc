@@ -477,7 +477,7 @@ export default {
       this.dispatchs()
       const response = {
         typeCode: resp.status,
-        responseModel: resp.data
+        responseModel: { response: resp.data }
       }
       try {
         const result = await this.$axios.post(`api/responses/create/${this.cPath.id}`, response, { headers: this.user.headers })
@@ -491,7 +491,7 @@ export default {
       this.dispatchs()
       const response = {
         typeCode: '100',
-        responseModel: {}
+        responseModel: { response: {} }
       }
       try {
         const result = await this.$axios.post(`api/responses/create/${this.cPath.id}`, response, { headers: this.user.headers })
