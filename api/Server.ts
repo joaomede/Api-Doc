@@ -12,9 +12,9 @@ const serverStatic = new Http()
 
 // const io = socketIO(server)
 
-// serverStatic.server().listen(serverStatic.apiPort(), () => {
-//   console.log(`Server http rodando na porta ${serverStatic.apiPort()}`)
-// })
+serverStatic.server().listen(serverStatic.apiPort(), () => {
+  console.log(`Server http rodando na porta ${serverStatic.apiPort()}`)
+})
 
 // const io = socket(app.server())
 // export function sendEvent (e: string): void {
