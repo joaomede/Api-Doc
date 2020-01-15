@@ -34,6 +34,16 @@
               outlined
               :disable="pathEditOption"
             />
+            <q-input
+              v-if="pathEditOption === false"
+              v-model="cApi.version"
+              class="text-white q-ma-xs"
+              square
+              dense
+              label="Version API:"
+              outlined
+              :disable="pathEditOption"
+            />
             <q-checkbox
               v-if="pathEditOption === false"
               v-model="cApi.isPublic"
