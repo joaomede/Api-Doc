@@ -118,7 +118,6 @@
                       <q-item-section>
                         <q-input
                           v-model="params.parameterName"
-                          :disable="pathEditOption"
                           class="bg-black text-blue"
                           square
                           dense
@@ -130,7 +129,6 @@
                       <q-item-section>
                         <q-input
                           v-model="params.parameterValue"
-                          :disable="pathEditOption"
                           class="bg-black text-blue"
                           square
                           dense
