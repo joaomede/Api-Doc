@@ -15,39 +15,83 @@
           <q-item class="q-pa-xs">
             <q-item-section>
               <q-card-section>
-                <q-item-section>
-                  Method
-                </q-item-section>
+                <div
+                  class="text-h6"
+                  style="font-size: 18px"
+                >
+                  <strong>Method:</strong> {{ paths.methodType }}
+                </div>
 
-                <q-item-section>
-                  <q-checkbox
-                    v-model="pathEditOption"
-                    color="secondary"
-                    label="Edição desabilitada"
-                  />
-                </q-item-section>
+                <!-- Descrição -->
+                <div
+                  class="text-h6"
+                  style="font-size: 18px"
+                >
+                  <strong>Nome:</strong> {{ paths.pathName }}
+                </div>
+                <q-separator spaced />
 
-                <q-input
-                  v-model="paths.methodType"
-                  class="text-white"
-                  square
-                  dense
+                <!-- Descrição -->
+                <div
+                  class="text-h6"
+                  style="font-size: 18px"
+                >
+                  <strong>Descrição:</strong> {{ paths.descriptionVerb }}
+                </div>
 
-                  outlined
-                  :disable="pathEditOption"
-                />
+                <!-- Path View -->
                 <div
                   class="text-h6"
                   style="font-size: 18px"
                 >
                   <strong>Path:</strong> {{ paths.path }}{{ paths.parameter.params | filterParamsName }}
                 </div>
+
+                <!-- Headers -->
+                <div>
+                  <q-card-section>
+                    <div class="text-left">
+                      <strong>Headers:  </strong>
+                      <JsonEditor
+                        v-model="paths.headersValue"
+                        :options="{
+                          confirmText: 'confirm',
+                          cancelText: 'cancel',
+                        }"
+                        :obj-data="paths.headersValue"
+                      />
+                    </div>
+                  </q-card-section>
+                  <q-separator spaced />
+
+                  <div
+                    v-if="paths.body === true"
+                  >
+                    Body:
+                    <JsonEditor
+                      v-model="paths.bodyValue"
+                      :options="{
+                        confirmText: 'confirm',
+                        cancelText: 'cancel',
+                      }"
+                      :obj-data="paths.bodyValue"
+                    />
+
+                    <q-separator spaced />
+                  </div>
+
+                  <div v-if="paths.data === true">
+                    Data Type: {{ paths.dataType }}<br>
+                    <q-separator spaced />
+                  </div>
+                </div>
+
+                <!-- Param -->
                 <div>
                   <q-card-section>
                     <div class="text-left">
                       <strong>Params:  </strong>
                       <q-icon
-                        v-if="pathEditOption === false"
                         style="font-size: 20px"
                         class="text-right"
                         side
@@ -56,7 +100,6 @@
                         @click.stop="(paths.parameter.params.push({parameterName: '',parameterValue: ''}))"
                       />
                       <q-icon
-                        v-if="pathEditOption === false"
                         style="font-size: 20px"
                         class="text-right"
                         side
@@ -65,7 +108,6 @@
                         @click.stop="(paths.parameter.params.pop())"
                       />
                     </div>
-                    <q-separator spaced />
                   </q-card-section>
 
                   <q-form
@@ -102,124 +144,112 @@
                 </div>
                 <q-separator spaced />
 
-                <div
-                  class="text-h6"
-                  style="font-size: 18px"
-                >
-                  <strong>Descrição:</strong> {{ paths.descriptionVerb }}
+                <!-- Body -->
+                <div>
+                  <q-card-section>
+                    <div class="text-left">
+                      <strong>Body:  </strong>
+                      <JsonEditor
+                        v-model="paths.bodyValue"
+                        :options="{
+                          confirmText: 'confirm',
+                          cancelText: 'cancel',
+                        }"
+                        :obj-data="paths.bodyValue"
+                      />
+                    </div>
+                  </q-card-section>
                 </div>
                 <q-separator spaced />
-                Headers:
-                <JsonEditor
-                  v-model="paths.headersValue"
-                  :options="{
-                    confirmText: 'confirm',
-                    cancelText: 'cancel',
-                  }"
-                  :obj-data="paths.headersValue"
-                />
-                <q-separator spaced />
 
-                <div
-                  v-if="paths.body === true"
-                >
-                  Body:
-                  <JsonEditor
-                    v-model="paths.bodyValue"
-                    :options="{
-                      confirmText: 'confirm',
-                      cancelText: 'cancel',
-                    }"
-                    :obj-data="paths.bodyValue"
-                  />
-
-                  <q-separator spaced />
-                </div>
-
-                <div v-if="paths.data === true">
-                  Data Type: {{ paths.dataType }}<br>
-                  <q-separator spaced />
-                </div>
-
-                <div v-if="paths.methodType === 'POST'">
-                  <q-btn
-                    color="green"
-                    @click="pathTest(paths, indexTags, indexPath)"
-                  >
-                    Enviar Requisitação
-                  </q-btn>
-                  <br><br>
-                  <div
-                    v-if="paths.response !== undefined"
-                    class="q-pa-md bg-grey-8 text-white"
-                  >
-                    Status: {{ paths.response.status }} <br>
-                    Resultado da requisição:
-                    <vue-json-pretty
-                      :data="paths.response.data"
-                    />
+                <!-- Response Test -->
+                <div>
+                  <div v-if="paths.methodType === 'POST'">
+                    <q-btn
+                      color="green"
+                      class="q-ma-xs"
+                      @click="pathTest(paths, indexTags, indexPath)"
+                    >
+                      Enviar Requisitação
+                    </q-btn>
+                    <br><br>
+                    <div
+                      v-if="paths.response !== undefined"
+                      class="q-pa-md bg-grey-8 text-white"
+                    >
+                      Status: {{ paths.response.status }} <br>
+                      Reason: {{ paths.response.status | filterReasonCode }} <br>
+                      Response:
+                      <vue-json-pretty
+                        :data="paths.response.data"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div
-                  v-if="paths.methodType === 'DELETE'"
-                >
-                  <q-btn
-                    color="red"
-                    @click="pathTest(paths, indexTags, indexPath)"
-                  >
-                    Enviar Requisitação
-                  </q-btn>
-                  <br><br>
-                  <div
-                    v-if="paths.response !== undefined"
-                    class="q-pa-md bg-grey-8 text-white"
-                  >
-                    Status: {{ paths.response.status }} <br>
-                    Resultado da requisição:
-                    <vue-json-pretty
-                      :data="paths.response.data"
-                    />
+                  <div v-if="paths.methodType === 'DELETE'">
+                    <q-btn
+                      color="red"
+                      class="q-ma-xs"
+                      @click="pathTest(paths, indexTags, indexPath)"
+                    >
+                      Enviar Requisitação
+                    </q-btn>
+                    <br><br>
+                    <div
+                      v-if="paths.response !== undefined"
+                      class="q-pa-md bg-grey-8 text-white"
+                    >
+                      Status: {{ paths.response.status }} <br>
+                      Reason: {{ paths.response.status | filterReasonCode }} <br>
+                      Response:
+                      <vue-json-pretty
+                        :data="paths.response.data"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div v-if="paths.methodType === 'GET'">
-                  <q-btn
-                    color="purple"
-                    @click="pathTest(paths, indexTags, indexPath)"
-                  >
-                    Enviar Requisitação
-                  </q-btn>
-                  <br><br>
-                  <div
-                    v-if="paths.response !== undefined"
-                    class="q-pa-md bg-grey-8 text-white"
-                  >
-                    Status: {{ paths.response.status }} <br>
-                    Resultado da requisição:
-                    <vue-json-pretty
-                      :data="paths.response.data"
-                    />
+                  <div v-if="paths.methodType === 'GET'">
+                    <q-btn
+                      color="purple"
+                      class="q-ma-xs"
+                      @click="pathTest(paths, indexTags, indexPath)"
+                    >
+                      Enviar Requisitação
+                    </q-btn>
+                    <br><br>
+                    <div
+                      v-if="paths.response !== undefined"
+                      class="q-pa-md bg-grey-8 text-white"
+                    >
+                      Status: {{ paths.response.status }} <br>
+                      Reason: {{ paths.response.status | filterReasonCode }} <br>
+                      Response:
+                      <vue-json-pretty
+                        :data="paths.response.data"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div v-if="paths.methodType === 'PUT'">
-                  <q-btn
-                    color="orange"
-                    @click="pathTest(paths, indexTags, indexPath)"
-                  >
-                    Enviar Requisitação
-                  </q-btn>
-                  <br><br>
-                  <div
-                    v-if="paths.response !== undefined"
-                    class="q-pa-md bg-grey-8 text-white"
-                  >
-                    Status: {{ paths.response.status }} <br>
-                    Resultado da requisição:
-                    <vue-json-pretty
-                      :data="paths.response.data"
-                    />
+                  <div v-if="paths.methodType === 'PUT'">
+                    <q-btn
+                      color="orange"
+                      class="q-ma-xs"
+                      @click="pathTest(paths, indexTags, indexPath)"
+                    >
+                      Enviar Requisitação
+                    </q-btn>
+                    <br><br>
+                    <div
+                      v-if="paths.response !== undefined"
+                      class="q-pa-md bg-grey-8 text-white"
+                    >
+                      Status: {{ paths.response.status }} <br>
+                      Reason: {{ paths.response.status | filterReasonCode }} <br>
+                      Response:
+                      <vue-json-pretty
+                        :data="paths.response.data"
+                      />
+                    </div>
                   </div>
                 </div>
               </q-card-section>
