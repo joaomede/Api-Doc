@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import { Cookies, Loading, QSpinnerGears } from 'quasar'
 import { db } from '../boot/firebase'
 import { http } from '../boot/axios'
+import listCodes from '../utils/commonCodes'
 
 Vue.use(Vuex)
 
@@ -44,7 +45,8 @@ export default new Vuex.Store({
         label: 'Delete',
         value: 'DELETE'
       }
-    ]
+    ],
+    typeCodes: listCodes
   },
   getters: {
     getUser: state => {
@@ -64,6 +66,9 @@ export default new Vuex.Store({
     },
     getTypeMethods (state) {
       return state.typeMethods
+    },
+    getTypeCodes (state) {
+      return state.typeCodes
     },
     getTag (state) {
       return state.tag
