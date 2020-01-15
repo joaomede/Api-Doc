@@ -177,8 +177,8 @@
                       v-if="paths.response !== undefined"
                       class="q-pa-md bg-grey-8 text-white"
                     >
-                      Status: {{ paths.response.status }} <br>
-                      Reason: {{ paths.response.status | filterReasonCode }} <br>
+                      <strong>Status:</strong> {{ paths.response.status | filterCodeStatus }} <br>
+                      <strong>Reason:</strong> {{ paths.response.status | filterReasonCode }} <br>
                       Response:
                       <vue-json-pretty
                         :data="paths.response.data"
@@ -199,8 +199,8 @@
                       v-if="paths.response !== undefined"
                       class="q-pa-md bg-grey-8 text-white"
                     >
-                      Status: {{ paths.response.status }} <br>
-                      Reason: {{ paths.response.status | filterReasonCode }} <br>
+                      <strong>Status:</strong> {{ paths.response.status | filterCodeStatus }} <br>
+                      <strong>Reason:</strong> {{ paths.response.status | filterReasonCode }} <br>
                       Response:
                       <vue-json-pretty
                         :data="paths.response.data"
@@ -221,8 +221,8 @@
                       v-if="paths.response !== undefined"
                       class="q-pa-md bg-grey-8 text-white"
                     >
-                      Status: {{ paths.response.status }} <br>
-                      Reason: {{ paths.response.status | filterReasonCode }} <br>
+                      <strong>Status:</strong> {{ paths.response.status | filterCodeStatus }} <br>
+                      <strong>Reason:</strong> {{ paths.response.status | filterReasonCode }} <br>
                       Response:
                       <vue-json-pretty
                         :data="paths.response.data"
@@ -243,8 +243,8 @@
                       v-if="paths.response !== undefined"
                       class="q-pa-md bg-grey-8 text-white"
                     >
-                      Status: {{ paths.response.status }} <br>
-                      Reason: {{ paths.response.status | filterReasonCode }} <br>
+                      <strong>Status:</strong> {{ paths.response.status | filterCodeStatus }} <br>
+                      <strong>Reason:</strong> {{ paths.response.status | filterReasonCode }} <br>
                       Response:
                       <vue-json-pretty
                         :data="paths.response.data"
