@@ -30,6 +30,9 @@ export default {
     cTypeMethods () {
       return this.$store.getters.getTypeMethods
     },
+    cTypeCodes () {
+      return this.$store.getters.getTypeCodes
+    },
     cApi () {
       return this.$store.getters.getApiData
     },
