@@ -47,7 +47,7 @@ export default {
     },
     async putMethod (o, path) {
       try {
-        const result = await this.$axios.get(path, o.bodyValue, { headers: o.headersValue })
+        const result = await this.$axios.put(path, o.bodyValue, { headers: o.headersValue })
         this.$store.dispatch('setResponseTest', result)
       } catch (error) {
         this.$store.dispatch('setResponseTest', error.response)
@@ -55,7 +55,7 @@ export default {
     },
     async deleteMethod (o, path) {
       try {
-        const result = await this.$axios.get(path, { headers: o.headersValue })
+        const result = await this.$axios.delete(path, { headers: o.headersValue })
         this.$store.dispatch('setResponseTest', result)
       } catch (error) {
         this.$store.dispatch('setResponseTest', error.response)
