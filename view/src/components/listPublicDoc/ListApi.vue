@@ -9,53 +9,55 @@
       <q-card-section>
         <q-item class="text-left">
           <q-item-section>
-            <div class="text-h5">
-              <strong>API:</strong> {{ cApi.apiName }}
-              <q-badge color="primary">
-                {{ cApi.version }}
-              </q-badge>
-            </div>
-
-            <div class="text-h6">
-              <strong>Descrição:</strong> {{ cApi.descriptionApi }}
-            </div>
-
-            <div
-              v-if="!cApi.isPublic"
-              class="text-h6"
-              style="font-size: 20px;"
-            >
-              Private
-              <q-icon
-                name="fas fa-lock"
-                color="red"
-              />
-            </div>
-
             <div>
+              <div class="text-h5">
+                <strong>API:</strong> {{ cApi.apiName }}
+                <q-badge color="primary">
+                  {{ cApi.version }}
+                </q-badge>
+              </div>
+
+              <div class="text-h6">
+                <strong>Descrição:</strong> {{ cApi.descriptionApi }}
+              </div>
+
               <div
-                v-if="cApi.isPublic"
+                v-if="!cApi.isPublic"
                 class="text-h6"
                 style="font-size: 20px;"
               >
-                Public
+                Private
                 <q-icon
-                  name="fas fa-lock-open"
-                  color="green"
+                  name="fas fa-lock"
+                  color="red"
                 />
               </div>
-            </div>
 
-            <div class="text-p">
-              <strong>E-mail:</strong> {{ cApi.email }}
-            </div>
+              <div>
+                <div
+                  v-if="cApi.isPublic"
+                  class="text-h6"
+                  style="font-size: 20px;"
+                >
+                  Public
+                  <q-icon
+                    name="fas fa-lock-open"
+                    color="green"
+                  />
+                </div>
+              </div>
 
-            <div class="text-p">
-              <strong>Licença:</strong> {{ cApi.license }}
-            </div>
+              <div class="text-p">
+                <strong>E-mail:</strong> {{ cApi.email }}
+              </div>
 
-            <div class="text-p">
-              <strong>Base URL:</strong> {{ cApi.baseURL }}
+              <div class="text-p">
+                <strong>Licença:</strong> {{ cApi.license }}
+              </div>
+
+              <div class="text-p">
+                <strong>Base URL:</strong> {{ cApi.baseURL }}
+              </div>
             </div>
           </q-item-section>
         </q-item>
@@ -85,7 +87,6 @@
     </q-card>
   </div>
 </template>
-
 <script>
 import ListTags from '../listPublicDoc/ListTags'
 

@@ -10,8 +10,8 @@
 <script>
 import BackMobile from '../components/fab/FabBtnBackMobile'
 import BackDesktop from '../components/fab/FabBtnBackDesktop'
-
 import ListApi from '../components/listEdit/ListApi'
+
 export default {
   components: {
     ListApi,
