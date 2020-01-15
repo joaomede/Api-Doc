@@ -1,10 +1,6 @@
 <template>
   <!-- vFor Responses -->
   <q-card>
-    <DialogUpdateResponse
-      :dialog="dialogUpdateResponse"
-      @eventClose="dialogUpdateResponse = false"
-    />
     <DialogConfirmDelete
       :dialog="dialogConfirmDeleteResponses"
       @eventClose="dialogConfirmDeleteResponses = false"
@@ -13,7 +9,7 @@
     <q-card-section>
       <q-expansion-item
         icon="a"
-        :label="responses.typeCode"
+        :label="responses.typeCode | filterCodeStatus"
         header-class="a"
       >
         <q-card>
@@ -23,9 +19,9 @@
                 style="font-size: 24px"
                 class="text-right"
                 side
-                name="edit"
+                name="save"
                 color="primary"
-                @click.stop="showEdit"
+                @click.stop="saveEdit(responses)"
               />
               <q-icon
                 style="font-size: 24px"
@@ -38,15 +34,48 @@
             </div>
             <q-item>
               <q-item-section>
-                Code: {{ responses.typeCode }} <br>
-                Reason: {{ responses.reason }} <br>
+                <q-checkbox
+                  v-model="responseEditOption"
+                  color="secondary"
+                  class="text-left"
+                  label="Edição desabilitada"
+                />
+                <q-select
+                  v-if="responseEditOption === false"
+                  v-model="responses.typeCode"
+                  filled
+                  dense
+                  :options="cTypeCodes"
+                  map-options
+                  emit-value
+                  :disable="responseEditOption"
+                  label="Codes"
+                />
+                <div v-if="responseEditOption === true">
+                  <strong>Code:</strong> {{ responses.typeCode | filterCodeStatus }}
+                </div>
+                <div>
+                  <strong>Reason:</strong> {{ responses.typeCode | filterReasonCode }}
+                </div>
+
                 <div
+                  v-if="responseEditOption === true"
                   class="q-pa-md bg-grey-8 text-white"
                 >
-                  Status: {{ responses.typeCode }} <br>
-                  Body Response:
                   <vue-json-pretty
                     :data="responses.responseModel"
+                  />
+                </div>
+
+                <div>
+                  <JsonEditor
+                    v-if="responseEditOption === false"
+                    v-model="responses.responseModel"
+                    :options="{
+                      confirmText: 'confirm',
+                      cancelText: 'cancel',
+                    }"
+                    :obj-data="responses.responseModel"
                   />
                 </div>
               </q-item-section>
@@ -60,13 +89,11 @@
 </template>
 
 <script>
-import DialogUpdateResponse from '../dialog/updateDialog/DialogUpdateResponses'
 import DialogConfirmDelete from '../dialog/DialogConfirmDelete'
 import VueJsonPretty from 'vue-json-pretty'
 
 export default {
   components: {
-    DialogUpdateResponse,
     DialogConfirmDelete,
     VueJsonPretty
   },
@@ -93,7 +120,8 @@ export default {
   data () {
     return {
       dialogUpdateResponse: false,
-      dialogConfirmDeleteResponses: false
+      dialogConfirmDeleteResponses: false,
+      responseEditOption: true
     }
   },
   methods: {
@@ -103,9 +131,13 @@ export default {
       this.$store.dispatch('setPathIndex', this.indexPath)
       this.$store.dispatch('setResponseIndex', this.indexResponse)
     },
-    showEdit () {
-      this.dispatchs()
-      this.dialogUpdateResponse = true
+    async saveEdit (response) {
+      try {
+        const result = await this.$axios.put(`api/responses/update/${response.id}`, response, { headers: this.user.headers })
+        this.$notify(result.data.ok, 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     },
     showDelete () {
       this.dispatchs()

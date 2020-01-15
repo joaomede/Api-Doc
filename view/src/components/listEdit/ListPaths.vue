@@ -1,9 +1,5 @@
 <template>
   <div>
-    <DialogAddNewResponses
-      :dialog="dialogAddNewResponses"
-      @eventClose="dialogAddNewResponses = false"
-    />
     <DialogConfirmDelete
       :dialog="dialogConfirmDeletePaths"
       @eventClose="dialogConfirmDeletePaths = false"
@@ -277,9 +273,18 @@
                   <div v-if="paths.methodType === 'POST'">
                     <q-btn
                       color="green"
+                      class="q-ma-xs"
                       @click="pathTest(paths, indexTags, indexPath)"
                     >
                       Enviar Requisitação
+                    </q-btn>
+                    <q-btn
+                      v-if="paths.response !== undefined"
+                      color="green"
+                      class="q-ma-xs"
+                      @click.stop="addNewResponse(paths.response)"
+                    >
+                      Salvar Modelo Resposta
                     </q-btn>
                     <br><br>
                     <div
@@ -287,7 +292,8 @@
                       class="q-pa-md bg-grey-8 text-white"
                     >
                       Status: {{ paths.response.status }} <br>
-                      Resultado da requisição:
+                      Reason: {{ paths.response.status | filterReasonCode }} <br>
+                      Response:
                       <vue-json-pretty
                         :data="paths.response.data"
                       />
@@ -297,9 +303,18 @@
                   <div v-if="paths.methodType === 'DELETE'">
                     <q-btn
                       color="red"
+                      class="q-ma-xs"
                       @click="pathTest(paths, indexTags, indexPath)"
                     >
                       Enviar Requisitação
+                    </q-btn>
+                    <q-btn
+                      v-if="paths.response !== undefined"
+                      color="red"
+                      class="q-ma-xs"
+                      @click.stop="addNewResponse(paths.response)"
+                    >
+                      Salvar Modelo Resposta
                     </q-btn>
                     <br><br>
                     <div
@@ -307,7 +322,8 @@
                       class="q-pa-md bg-grey-8 text-white"
                     >
                       Status: {{ paths.response.status }} <br>
-                      Resultado da requisição:
+                      Reason: {{ paths.response.status | filterReasonCode }} <br>
+                      Response:
                       <vue-json-pretty
                         :data="paths.response.data"
                       />
@@ -317,9 +333,18 @@
                   <div v-if="paths.methodType === 'GET'">
                     <q-btn
                       color="purple"
+                      class="q-ma-xs"
                       @click="pathTest(paths, indexTags, indexPath)"
                     >
                       Enviar Requisitação
+                    </q-btn>
+                    <q-btn
+                      v-if="paths.response !== undefined"
+                      color="purple"
+                      class="q-ma-xs"
+                      @click.stop="addNewResponse(paths.response)"
+                    >
+                      Salvar Modelo Resposta
                     </q-btn>
                     <br><br>
                     <div
@@ -327,7 +352,8 @@
                       class="q-pa-md bg-grey-8 text-white"
                     >
                       Status: {{ paths.response.status }} <br>
-                      Resultado da requisição:
+                      Reason: {{ paths.response.status | filterReasonCode }} <br>
+                      Response:
                       <vue-json-pretty
                         :data="paths.response.data"
                       />
@@ -337,9 +363,18 @@
                   <div v-if="paths.methodType === 'PUT'">
                     <q-btn
                       color="orange"
+                      class="q-ma-xs"
                       @click="pathTest(paths, indexTags, indexPath)"
                     >
                       Enviar Requisitação
+                    </q-btn>
+                    <q-btn
+                      v-if="paths.response !== undefined"
+                      color="orange"
+                      class="q-ma-xs"
+                      @click.stop="addNewResponse(paths.response)"
+                    >
+                      Salvar Modelo Resposta
                     </q-btn>
                     <br><br>
                     <div
@@ -347,7 +382,8 @@
                       class="q-pa-md bg-grey-8 text-white"
                     >
                       Status: {{ paths.response.status }} <br>
-                      Resultado da requisição:
+                      Reason: {{ paths.response.status | filterReasonCode }} <br>
+                      Response:
                       <vue-json-pretty
                         :data="paths.response.data"
                       />
@@ -372,7 +408,7 @@
                 side
                 name="add"
                 color="primary"
-                @click.stop="addNewResponse()"
+                @click.stop="addNewResponseEmpty(paths.response)"
               />
             </q-item-section>
           </q-item>
@@ -398,7 +434,6 @@
 <script>
 import VueJsonPretty from 'vue-json-pretty'
 import ListResponseEdit from '../listEdit/ListResponses'
-import DialogAddNewResponses from '../dialog/addDialog/DialogAddNewResponses'
 import DialogConfirmDelete from '../dialog/DialogConfirmDelete'
 import pathTest from '../../mixins/pathTest'
 
@@ -406,7 +441,6 @@ export default {
   components: {
     VueJsonPretty,
     ListResponseEdit,
-    DialogAddNewResponses,
     DialogConfirmDelete
   },
   mixins: [pathTest],
@@ -439,9 +473,33 @@ export default {
       this.$store.dispatch('setTagIndex', this.indexTags)
       this.$store.dispatch('setPathIndex', this.indexPath)
     },
-    addNewResponse () {
+    async addNewResponse (resp) {
       this.dispatchs()
-      this.dialogAddNewResponses = true
+      const response = {
+        typeCode: resp.status,
+        responseModel: resp.data
+      }
+      try {
+        const result = await this.$axios.post(`api/responses/create/${this.cPath.id}`, response, { headers: this.user.headers })
+        this.$store.dispatch('setNewResponse', result.data)
+        this.$notify('Novo verbo criado com sucesso', 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
+    },
+    async addNewResponseEmpty () {
+      this.dispatchs()
+      const response = {
+        typeCode: '100',
+        responseModel: {}
+      }
+      try {
+        const result = await this.$axios.post(`api/responses/create/${this.cPath.id}`, response, { headers: this.user.headers })
+        this.$store.dispatch('setNewResponse', result.data)
+        this.$notify('Novo verbo criado com sucesso', 'green')
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
     },
     showDeletePath () {
       this.dispatchs()
