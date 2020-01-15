@@ -6,7 +6,7 @@ import resp from 'resp-express'
 class Responses {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async store (req: NewRequest, res: Response): Promise<any> {
-    const { typeCode, reason, responseModel } = req.body
+    const { typeCode, responseModel } = req.body
     const { verbId } = req.params
 
     if (verbId === undefined || verbId === null) {
@@ -16,7 +16,6 @@ class Responses {
     try {
       const result = await knex('responses').insert({
         typeCode: typeCode,
-        reason: reason,
         responseModel: responseModel,
         userIdFk: req.userId,
         pathsIdFk: verbId
@@ -49,7 +48,6 @@ class Responses {
 
     const newCode = {
       typeCode: req.body.typeCode,
-      reason: req.body.reason,
       responseModel: req.body.responseModel
     }
 

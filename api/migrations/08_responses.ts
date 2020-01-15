@@ -5,7 +5,6 @@ export async function up (knex: Knex): Promise<any> {
   return knex.schema.createTable('responses', table => {
     table.increments()
     table.text('typeCode').notNullable()
-    table.text('reason').notNullable()
     table.json('responseModel').notNullable()
     table.timestamps(true, true)
     table.integer('pathsIdFk').unsigned().references('id').inTable('paths').onDelete('CASCADE').index()
