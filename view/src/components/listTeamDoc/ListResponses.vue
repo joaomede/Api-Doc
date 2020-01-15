@@ -12,7 +12,7 @@
             <q-item>
               <q-item-section>
                 <div>
-                  <strong>Code:</strong> {{ responses.typeCode | filterCodeStatus }}
+                  <strong>Status:</strong> {{ responses.typeCode | filterCodeStatus }}
                 </div>
                 <div>
                   <strong>Reason:</strong> {{ responses.typeCode | filterReasonCode }}
