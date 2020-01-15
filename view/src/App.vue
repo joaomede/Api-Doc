@@ -52,7 +52,7 @@ export default {
   },
   mounted () {
     this.checkLanguage()
-    this.$store.dispatch('versionCheck')
+    // this.$store.dispatch('versionCheck')
     this.$store.dispatch('boot')
   },
   methods: {
