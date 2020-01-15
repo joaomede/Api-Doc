@@ -4,25 +4,27 @@
     <q-card-section>
       <q-expansion-item
         icon="a"
-        :label="responses.typeCode"
+        :label="responses.typeCode | filterCodeStatus"
         header-class="a"
       >
         <q-card>
           <q-card-section>
             <q-item>
               <q-item-section>
-                Code: {{ responses.typeCode }} <br>
-                Reason: {{ responses.reason }} <br>
+                <div>
+                  <strong>Code:</strong> {{ responses.typeCode | filterCodeStatus }}
+                </div>
+                <div>
+                  <strong>Reason:</strong> {{ responses.typeCode | filterReasonCode }}
+                </div>
+
                 <div
                   class="q-pa-md bg-grey-8 text-white"
                 >
-                  Status: {{ responses.typeCode }} <br>
-                  Body Response:
                   <vue-json-pretty
                     :data="responses.responseModel"
                   />
                 </div>
-                headers: {{ responses.headers }} <br>
               </q-item-section>
             </q-item>
           </q-card-section>
