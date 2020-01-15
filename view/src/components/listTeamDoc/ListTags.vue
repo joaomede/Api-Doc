@@ -9,13 +9,15 @@
       <q-item>
         <q-item-section>
           <q-item-label lines="5">
-            <div class="text-p text-left">
+            <div
+              class="text-p text-left"
+            >
               <strong>Tag:</strong> {{ tags.nameTag }}
             </div>
-          </q-item-label>
-          <q-item-label lines="5">
-            <div class="text-p text-left">
-              <strong>Descrição da Tag:</strong> {{ tags.descriptionTag }}
+            <div
+              class="text-p text-left"
+            >
+              <strong>Descrição da Tag:</strong>{{ tags.descriptionTag }}
             </div>
           </q-item-label>
         </q-item-section>
