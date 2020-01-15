@@ -40,7 +40,7 @@ class Team {
     try {
       if (team.length !== 0) {
         if (team[0].managerIdFk === req.userId) {
-          const newTeam = await knex('teams').update({
+          const newTeam = await knex('teams').where({ id: id }).update({
             teamName: teamName
           }).returning('*')
           resp.returnSucessObject(res, newTeam)
