@@ -70,7 +70,7 @@
                 <div>
                   <JsonEditor
                     v-if="responseEditOption === false"
-                    v-model="responses.responseModel"
+                    v-model="responses.responseModel.response"
                     :options="{
                       confirmText: 'confirm',
                       cancelText: 'cancel',
