@@ -168,7 +168,7 @@
                       class="q-ma-xs"
                       @click="pathTest(paths, indexTags, indexPath)"
                     >
-                      Enviar Requisitação
+                      Enviar requisição
                     </q-btn>
                     <br><br>
                     <div
@@ -190,7 +190,7 @@
                       class="q-ma-xs"
                       @click="pathTest(paths, indexTags, indexPath)"
                     >
-                      Enviar Requisitação
+                      Enviar requisição
                     </q-btn>
                     <br><br>
                     <div
@@ -212,7 +212,7 @@
                       class="q-ma-xs"
                       @click="pathTest(paths, indexTags, indexPath)"
                     >
-                      Enviar Requisitação
+                      Enviar requisição
                     </q-btn>
                     <br><br>
                     <div
@@ -234,7 +234,7 @@
                       class="q-ma-xs"
                       @click="pathTest(paths, indexTags, indexPath)"
                     >
-                      Enviar Requisitação
+                      Enviar requisição
                     </q-btn>
                     <br><br>
                     <div

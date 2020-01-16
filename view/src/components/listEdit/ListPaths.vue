@@ -276,7 +276,7 @@
                       class="q-ma-xs"
                       @click="pathTest(paths, indexTags, indexPath)"
                     >
-                      Enviar Requisitação
+                      Enviar requisição
                     </q-btn>
                     <q-btn
                       v-if="paths.response !== undefined"
@@ -306,7 +306,7 @@
                       class="q-ma-xs"
                       @click="pathTest(paths, indexTags, indexPath)"
                     >
-                      Enviar Requisitação
+                      Enviar requisição
                     </q-btn>
                     <q-btn
                       v-if="paths.response !== undefined"
@@ -336,7 +336,7 @@
                       class="q-ma-xs"
                       @click="pathTest(paths, indexTags, indexPath)"
                     >
-                      Enviar Requisitação
+                      Enviar requisição
                     </q-btn>
                     <q-btn
                       v-if="paths.response !== undefined"
@@ -366,7 +366,7 @@
                       class="q-ma-xs"
                       @click="pathTest(paths, indexTags, indexPath)"
                     >
-                      Enviar Requisitação
+                      Enviar requisição
                     </q-btn>
                     <q-btn
                       v-if="paths.response !== undefined"
