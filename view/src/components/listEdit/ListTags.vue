@@ -52,7 +52,7 @@
               v-if="pathEditOption === true"
               class="text-p text-left"
             >
-              <strong>Descrição da Tag:</strong>{{ tags.descriptionTag }}
+              <strong>Descrição da Tag:</strong> {{ tags.descriptionTag }}
             </div>
             <q-input
               v-if="pathEditOption === false"

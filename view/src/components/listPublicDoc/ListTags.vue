@@ -17,7 +17,7 @@
             <div
               class="text-p text-left"
             >
-              <strong>Descrição da Tag:</strong>{{ tags.descriptionTag }}
+              <strong>Descrição da Tag:</strong> {{ tags.descriptionTag }}
             </div>
           </q-item-label>
         </q-item-section>
