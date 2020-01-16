@@ -63,7 +63,7 @@
                   class="q-pa-md bg-grey-8 text-white"
                 >
                   <vue-json-pretty
-                    :data="responses.responseModel"
+                    :data="responses.responseModel.response"
                   />
                 </div>
 
@@ -75,7 +75,7 @@
                       confirmText: 'confirm',
                       cancelText: 'cancel',
                     }"
-                    :obj-data="responses.responseModel"
+                    :obj-data="responses.responseModel.response"
                   />
                 </div>
               </q-item-section>

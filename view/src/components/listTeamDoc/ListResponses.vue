@@ -22,7 +22,7 @@
                   class="q-pa-md bg-grey-8 text-white"
                 >
                   <vue-json-pretty
-                    :data="responses.responseModel"
+                    :data="responses.responseModel.response"
                   />
                 </div>
               </q-item-section>
