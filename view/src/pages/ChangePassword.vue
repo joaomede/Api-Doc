@@ -73,7 +73,6 @@
 </template>
 
 <script>
-import firebase from 'firebase'
 export default {
   data: () => ({
     valid: false,
@@ -84,31 +83,6 @@ export default {
   }),
   computed: {},
   methods: {
-    notificacao (Mensagem, Cor) {
-      this.$q.notify({
-        message: Mensagem,
-        color: Cor
-      })
-    },
-    TrocarSenha () {
-      const user = firebase.auth().currentUser
-      if (this.senha1 === this.senha2) {
-        user
-          .updatePassword(this.senha1)
-          .then(() => {
-            this.notificacao('Senha atualizada com sucesso', 'green')
-            this.dialogoTrocaSenha = false
-          })
-          .catch(() => {
-            this.notificacao('Erro ao atualizar a senha', 'green')
-          })
-        this.senha1 = ''
-        this.senha2 = ''
-      } else {
-        this.notificacao('As senhas estão diferentes, elas precisam ser idênticas', 'red')
-        this.dialogoTrocaSenha = false
-      }
-    }
   }
 }
 </script>
