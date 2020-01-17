@@ -85,7 +85,7 @@ export default function ({ ssrContext }) {
       async boot (state) {
         const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies // otherwise we're on client
         const user = await cookies.get('user')
-  
+
         if (user !== undefined) {
           state.user = {
             id: user.id,
