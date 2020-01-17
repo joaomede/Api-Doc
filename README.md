@@ -138,6 +138,3 @@ $ yarn migratedown
 # or
 $ npm run migratedown
 ```
-
-### Very important information
-> I use a technology to manage development log versions, so in View will comment on line 44 where it has written "this.$store.dispatch ('versionCheck')"
