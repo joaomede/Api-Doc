@@ -1,3 +1,5 @@
+![GitHub](https://img.shields.io/github/license/joaomede/api-doc) ![GitHub package.json version](https://img.shields.io/github/package-json/v/joaomede/api-doc) ![GitHub repo size](https://img.shields.io/github/repo-size/joaomede/api-doc)
+
 # Api Doc
 
 Main Menu             |  List Api          |Paths
@@ -138,3 +140,7 @@ $ yarn migratedown
 # or
 $ npm run migratedown
 ```
+
+## License
+
+  [MIT](LICENSE)
