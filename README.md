@@ -52,13 +52,10 @@ SECRET # the key for your api
 
 # the .env view
 APIURL # path to api, ex.: https://example.com:8080
+VERSION # For Show Version in Footer and Header frontend
 ```
 ### The Database
 > In development, the database used was postgres, however, knex supports sqlite3 and mysql as well, probably mysql will work well in production, as sqlite3 is not advisable to use it in development or production, as knex's "returning" function doesn't work. it works on it and it is in this project.
-
-
-### The Firebase
-> I used firebase as version manager, this application will not be available in the project, so it is necessary to comment out the code contained in path "view/boot/firebase.js" and also line 44 of the App.vue file.
 
 ### How to Install
 ```shell
@@ -138,7 +135,6 @@ $ npm run migratedown
 - [x] Get
 - [x] Delete
 - [x] Put
-- [ ] Patch
 - [x] Send Headers on test
 - [x] Send Body on test
 - [x] Send Params on test
