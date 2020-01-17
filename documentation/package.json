@@ -1,0 +1,18 @@
+{
+  "name": "documentation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "doc:dev": "vuepress dev docs",
+    "doc:build": "vuepress build docs"
+  },
+  "dependencies": {
+    "markdown-it": "^10.0.0",
+    "markdown-it-emoji": "^1.4.0",
+    "markdown-it-katex": "^2.0.3"
+  },
+  "devDependencies": {
+    "vuepress": "^1.2.0"
+  }
+}

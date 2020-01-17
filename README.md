@@ -4,7 +4,7 @@
 
 Main Menu             |  List Api          |Paths
 :-----------------------:|:-------------------------:|:-----------------------:
-![](docs/1.png)      |![](docs/2.png)     |![](docs/3.png) 
+![](documentation/docs/image/1.png)      |![](documentation/docs/image/2.png)     |![](documentation/docs/image/3.png) 
 
 ### Features
 
