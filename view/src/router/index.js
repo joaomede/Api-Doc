@@ -78,6 +78,12 @@ export default function ({ ssrContext }) {
       component: () => import('../pages/DocViewPublic')
     },
     {
+      path: '/sharedviewdoc/:id',
+      name: 'SharedViewDoc',
+      props: true,
+      component: () => import('../pages/DocViewPublic')
+    },
+    {
       path: '/changepassword',
       name: 'ChangePassword',
       component: () => import('../pages/ChangePassword'),

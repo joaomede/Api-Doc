@@ -129,7 +129,7 @@ export default function ({ ssrContext }) {
             const result = await http.get(`api/api/getverbsandcodes/${tag[0]}`, { headers: state.user.headers })
             Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
           } catch (error) {
-            console.log(error.response.data.error)
+            // console.log(error.response.data.error)
           }
         }
         if (tag[1] === 'DocViewTeam') {
@@ -137,7 +137,7 @@ export default function ({ ssrContext }) {
             const result = await http.get(`api/teamdocs/api/getverbsandcodes/${state.rulesId}/${tag[0]}`, { headers: state.user.headers })
             Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
           } catch (error) {
-            console.log(error.response.data.error)
+            // console.log(error.response.data.error)
           }
         }
         if (tag[1] === 'DocViewPublic') {
@@ -145,7 +145,15 @@ export default function ({ ssrContext }) {
             const result = await http.get(`api/geral/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
             Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
           } catch (error) {
-            console.log(error.response.data.error)
+            // console.log(error.response.data.error)
+          }
+        }
+        if (tag[1] === 'SharedViewDoc') {
+          try {
+            const result = await http.get(`api/geral/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
+            Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
+          } catch (error) {
+            // console.log(error.response.data.error)
           }
         }
       },

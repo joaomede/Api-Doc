@@ -1,8 +1,8 @@
 
 <template>
   <div>
-    <BackMobile />
-    <BackDesktop />
+    <BackMobile v-if="this.$router.currentRoute.name !== 'SharedViewDoc'" />
+    <BackDesktop v-if="this.$router.currentRoute.name !== 'SharedViewDoc'" />
     <ListApi class="centralDiv q-pa-xs text-center" />
   </div>
 </template>

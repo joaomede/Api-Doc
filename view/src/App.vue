@@ -4,11 +4,13 @@
   >
     <q-layout view="lHr lpR lFr">
       <Drawer
+        v-if="this.$router.currentRoute.name !== 'SharedViewDoc'"
         :width="200"
         :left="left"
         @estadoMenu="left = $event"
       />
       <Header
+        v-if="this.$router.currentRoute.name !== 'SharedViewDoc'"
         :headertitle="title"
         :logout="logout"
         :left="left"
@@ -20,7 +22,7 @@
         <router-view />
       </q-page-container>
 
-      <Footer />
+      <Footer v-if="this.$router.currentRoute.name !== 'SharedViewDoc'" />
     </q-layout>
   </div>
 </template>

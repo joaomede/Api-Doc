@@ -2,6 +2,11 @@
   <div
     class="centralDiv"
   >
+    <SharedEmbed
+      v-if="this.$router.currentRoute.name !== 'SharedViewDoc'"
+      :dialog="dialogSharedEmbed"
+      @eventClose="dialogSharedEmbed = false"
+    />
     <q-card
       class="text-center my-card"
       style="max-width: 100%; background-color: #fff9f0"
@@ -60,6 +65,16 @@
               </div>
             </div>
           </q-item-section>
+
+          <q-item-section side>
+            <q-icon
+              class="text-right"
+              side
+              name="shared"
+              color="primary"
+              @click.stop="dialogSharedEmbed = true"
+            />
+          </q-item-section>
         </q-item>
       </q-card-section>
 
@@ -89,15 +104,17 @@
 </template>
 <script>
 import ListTags from '../listPublicDoc/ListTags'
-
+import SharedEmbed from '../../components/dialog/SharedEmbed'
 export default {
   components: {
-    ListTags
+    ListTags,
+    SharedEmbed
   },
   data () {
     return {
       dialogAddNewTags: false,
-      dialogUpdateApi: false
+      dialogUpdateApi: false,
+      dialogSharedEmbed: false
     }
   }
 }
