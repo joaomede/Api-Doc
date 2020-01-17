@@ -4,17 +4,6 @@ import * as path from 'path'
 dotenv.config()
 export default {
   dev: {
-    client: 'sqlite3',
-    connection: {
-      filename: './mydb.sqlite'
-    },
-    migrations: {
-      extension: 'ts',
-      directory: path.join(__dirname, './migrations')
-    },
-    useNullAsDefault: true
-  },
-  backup: {
     client: 'pg',
     connection: {
       port: process.env.PORTDB,
@@ -28,7 +17,17 @@ export default {
       directory: path.join(__dirname, './migrations')
     }
   },
-
+  dev1: {
+    client: 'sqlite3',
+    connection: {
+      filename: './mydb.sqlite'
+    },
+    migrations: {
+      extension: 'ts',
+      directory: path.join(__dirname, './migrations')
+    },
+    useNullAsDefault: true
+  },
   prod: {
     client: 'pg',
     connection: {
