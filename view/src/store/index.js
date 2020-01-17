@@ -1,7 +1,6 @@
 import Vue, { ssrContext } from 'vue'
 import Vuex from 'vuex'
 import { Cookies, Loading, QSpinnerGears } from 'quasar'
-import { db } from '../boot/firebase'
 import { http } from '../boot/axios'
 import listCodes from '../utils/commonCodes'
 
