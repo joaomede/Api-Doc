@@ -19,19 +19,7 @@
 
           <q-item-section>Tela Inicial</q-item-section>
         </q-item>
-
-        <q-item
-          v-if="user.id !== null"
-          v-ripple
-          clickable
-          to="feedversion"
-        >
-          <q-item-section avatar>
-            <q-icon name="fas fa-sync-alt" />
-          </q-item-section>
-          <q-item-section>Atualizações</q-item-section>
-        </q-item>
-
+        
         <q-item
           v-if="user.id !== null"
           v-ripple

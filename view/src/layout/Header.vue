@@ -15,24 +15,6 @@
 
         <q-toolbar-title>{{ headertitle }}</q-toolbar-title>
         <q-btn
-          v-if="user.id !== null"
-          class="q-mr-xs"
-          dense
-          round
-          flat
-          icon="new_releases"
-          to="/feedversion"
-        >
-          <q-badge
-            color="red"
-            floating
-            transparent
-          >
-            {{ versionCloud }}
-          </q-badge>
-        </q-btn>
-        <q-btn
-          v-if="user.id === null"
           class="q-mr-xs"
           dense
           round
@@ -44,7 +26,7 @@
             floating
             transparent
           >
-            {{ versionCloud }}
+            {{ version }}
           </q-badge>
         </q-btn>
         <q-btn

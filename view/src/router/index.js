@@ -59,12 +59,6 @@ export default function ({ ssrContext }) {
       meta: { requerAuth: true }
     },
     {
-      path: '/feedversion',
-      name: 'FeedVersion',
-      component: () => import('../pages/FeedVersion'),
-      meta: { requerAuth: true }
-    },
-    {
       path: '/docview/:id',
       name: 'DocView',
       props: true,

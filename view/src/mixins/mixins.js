@@ -17,16 +17,6 @@ export default {
     version () {
       return this.$store.getters.getVersion
     },
-    versionCloud () {
-      return this.$store.getters.getVersionCloud
-    },
-    feedID () {
-      if (this.$store.getters.getAppFeedID != null) {
-        return this.$store.getters.getAppFeedID
-      } else {
-        return null
-      }
-    },
     cTypeMethods () {
       return this.$store.getters.getTypeMethods
     },
