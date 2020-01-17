@@ -9,7 +9,7 @@ export default function ({ ssrContext }) {
   let allRoutes = [
     {
       path: '/',
-      redirect: '/login'
+      redirect: '/publicdocs'
     },
     {
       path: '/login',
@@ -94,7 +94,7 @@ export default function ({ ssrContext }) {
   if (process.env.MODE !== 'ssr') {
     allRoutes.push({
       path: '*',
-      redirect: '/login'
+      redirect: '/publicdocs'
     })
   }
   const router = new VueRouter({
