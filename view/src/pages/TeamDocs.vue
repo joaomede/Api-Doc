@@ -41,11 +41,11 @@
             </q-item-label>
 
             <q-item-label>
-              Doc:  {{ item.apiName }}
+              Doc: {{ item.apiName }}
             </q-item-label>
 
             <q-item-label caption>
-              Manager:  {{ item.name }}
+              Manager: {{ item.name }}
             </q-item-label>
           </q-item-section>
 

@@ -50,11 +50,11 @@
           </q-item-section>
           <q-item-section>
             <q-item-label lines="5">
-              <strong> Name:</strong> {{ item.apiName }}
+              <strong>Name:</strong> {{ item.apiName }}
             </q-item-label>
 
             <q-item-label caption>
-              <strong> Descrição:</strong>{{ item.descriptionApi }}
+              <strong>Descrição:</strong> {{ item.descriptionApi }}
             </q-item-label>
           </q-item-section>
 
