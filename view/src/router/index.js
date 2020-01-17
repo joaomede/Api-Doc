@@ -30,8 +30,7 @@ export default function ({ ssrContext }) {
     {
       path: '/publicdocs',
       name: 'PublicList',
-      component: () => import('../pages/PublicList'),
-      meta: { requerAuth: true }
+      component: () => import('../pages/PublicList')
     },
     {
       path: '/privatedocs',
@@ -76,8 +75,7 @@ export default function ({ ssrContext }) {
       path: '/docviewpublic/:id',
       name: 'DocViewPublic',
       props: true,
-      component: () => import('../pages/DocViewPublic'),
-      meta: { requerAuth: true }
+      component: () => import('../pages/DocViewPublic')
     },
     {
       path: '/changepassword',
