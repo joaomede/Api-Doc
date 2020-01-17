@@ -76,9 +76,6 @@ export default new Vuex.Store({
     getPathIndex (state) {
       return state.pathIndex
     },
-    getResponseIndex (state) {
-      return state.responseIndex
-    },
     getRulesId (state) {
       return state.rulesId
     }
@@ -173,9 +170,6 @@ export default new Vuex.Store({
     setResponseIndex (state, responseIndex) {
       state.responseIndex = responseIndex
     },
-    setUpdateResponse (state, newResponse) {
-      Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses, state.responseIndex, newResponse)
-    },
     setNewTag (state, tag) {
       let index
       if (state.apiData.tags === undefined) {
@@ -246,9 +240,6 @@ export default new Vuex.Store({
     },
     setResponseIndex ({ commit }, responseIndex) {
       commit('setResponseIndex', responseIndex)
-    },
-    setUpdateResponse ({ commit }, newResponse) {
-      commit('setUpdateResponse', newResponse)
     },
     setNewTag ({ commit }, tag) {
       commit('setNewTag', tag)
