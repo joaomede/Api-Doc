@@ -34,7 +34,10 @@ function genSidebarConfig (title) {
       collapsable: false,
       children: [
         'Introduction',
-        'Installation'
+        'Installation',
+        'Contribution',
+        'Internalization',
+        'About',
       ]
     }
   ]
