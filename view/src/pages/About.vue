@@ -24,7 +24,7 @@
       <q-card-section class="q-gutter-md">
         <q-btn
           color="green"
-          to="/dash"
+          @click="toHome()"
         >
           Volta para Página Inicial
         </q-btn>
@@ -40,6 +40,13 @@ export default {
     }
   },
   methods: {
+    toHome () {
+      if (this.user.id === null) {
+        this.$router.replace('publicdocs')
+      } else {
+        this.$router.replace('dash')
+      }
+    }
   }
 }
 </script>

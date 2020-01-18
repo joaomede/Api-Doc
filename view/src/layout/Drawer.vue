@@ -9,6 +9,7 @@
     <q-scroll-area class="scrollArea">
       <q-list padding>
         <q-item
+          v-if="user.id !== null"
           v-ripple
           clickable
           to="/dash"
@@ -18,6 +19,19 @@
           </q-item-section>
 
           <q-item-section>Tela Inicial</q-item-section>
+        </q-item>
+
+        <q-item
+          v-if="user.id === null"
+          v-ripple
+          clickable
+          to="/publicdocs"
+        >
+          <q-item-section avatar>
+            <q-icon name="vpn_key" />
+          </q-item-section>
+
+          <q-item-section>Public List</q-item-section>
         </q-item>
 
         <q-item
