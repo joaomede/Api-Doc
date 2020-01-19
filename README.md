@@ -13,7 +13,7 @@ Api doc is a CRUD api documenter, this system is part of my personal portfolio, 
 
 ### Features
 
-- [x] Login and Register
+- [x] Login and Register, Change Password
 - [x] Team System
 - [x] Api Private
 - [x] Api Public
