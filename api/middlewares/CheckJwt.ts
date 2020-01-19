@@ -2,6 +2,7 @@ import * as jwt from 'jsonwebtoken'
 import * as dotenv from 'dotenv'
 import { Response, NextFunction } from 'express'
 import { NewRequest } from '../interface/NewRequest'
+import resp from 'resp-express'
 dotenv.config()
 
 const secret = process.env.SECRET || ''
@@ -11,19 +12,19 @@ class CheckJwt {
     const authHeader = req.headers.authorization
     let jwtPayload
     if (!authHeader) {
-      return res.status(401).send({ error: 'No token provided' })
+      resp.returnErrorCode(res, 401, 'No token provided')
     }
 
     // Bearer klasjdasodajs5fd4s6
     const parts: Array<string> = authHeader.split(' ')
     if (parts.length !== 2) {
-      return res.status(401).send({ error: 'Token error' })
+      resp.returnErrorCode(res, 401, 'Token error')
     }
 
     const [scheme, token] = parts
 
     if (!/^Bearer$/i.test(scheme)) {
-      return res.status(401).send({ error: 'Token malformatted' })
+      resp.returnErrorCode(res, 401, 'Token malformatted')
     }
 
     try {
@@ -31,7 +32,7 @@ class CheckJwt {
       req.userId = jwtPayload.id
       return next()
     } catch (error) {
-      return res.status(401).send({ error: 'Token invalid' })
+      resp.returnErrorCode(res, 401, 'Token invalid')
     }
   }
 }
