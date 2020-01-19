@@ -28,11 +28,11 @@ class CheckJwt {
 
     try {
       jwtPayload = jwt.verify(token, secret)
+      req.userId = jwtPayload.id
+      return next()
     } catch (error) {
       return res.status(401).send({ error: 'Token invalid' })
     }
-    req.userId = jwtPayload.id
-    return next()
   }
 }
 
