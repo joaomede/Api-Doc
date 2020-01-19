@@ -1,100 +1,87 @@
 <template>
-  <div class="q-pa-md">
+  <div class="centralDiv q-pa-xs text-center">
     <q-form>
       <q-card class="my-card">
         <q-card-section>
           <div class="text-h6">
-            Alterar senha
+            Change Password
           </div>
         </q-card-section>
 
         <q-card-section>
           <q-form class="q-gutter-md">
             <q-input
-              v-model="senha1"
-              type="password"
-              :rules="senhaRules"
-              label="Senha"
-              required
+              v-model="userLogged.passwordOne"
               filled
               lazy-rules
+              :rules="passwordRules"
+              type="Password"
+              label="New Password"
+              required
             />
             <q-input
-              v-model="senha2"
-              type="password"
-              :rules="senhaRules"
-              label="Repita a senha"
-              required
+              v-model="userLogged.passwordTwo"
               filled
+              type="Password"
+              label="Repeat a new Password"
               lazy-rules
+              required
+              :rules="passwordRules"
             />
           </q-form>
         </q-card-section>
 
         <q-card-section>
           <q-btn
-            color="primary"
-            @click.stop="dialogoTrocaSenha = true"
+            class="q-ma-xs"
+            color="black"
+            to="/dash"
           >
-            Alterar Senha
+            Home
+          </q-btn>
+          <q-btn
+            class="q-ma-xs"
+            color="green"
+            @click="changePassword"
+          >
+            Change
           </q-btn>
         </q-card-section>
       </q-card>
     </q-form>
-
-    <q-dialog v-model="dialogoTrocaSenha">
-      <q-card>
-        <q-card-section>
-          <div class="text-h6">
-            Desenha realmente alterar a senha?
-          </div>
-        </q-card-section>
-
-        <q-card-section>
-          <q-btn
-            color="primary"
-            @click="TrocarSenha"
-          >
-            Trocar Senha
-          </q-btn>
-        </q-card-section>
-
-        <q-card-section>
-          <q-btn
-            color="primary"
-            @click.stop="dialogoTrocaSenha = false"
-          >
-            Cancelar
-          </q-btn>
-        </q-card-section>
-      </q-card>
-    </q-dialog>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'Login',
   data: () => ({
     valid: false,
-    dialogoTrocaSenha: false,
-    senha1: '',
-    senha2: '',
-    senhaRules: [v => !!v || 'Senha é requerida', v => v.length >= 6 || 'Precisa ter mais de 6 dígitos']
+    userLogged: {
+      passwordOne: '',
+      passwordTwo: ''
+    },
+    passwordRules: [v => !!v || 'Senha é requerida', v => v.length >= 6 || 'Precisa ter mais de 6 dígitos']
   }),
-  computed: {},
   methods: {
+    async changePassword () {
+      try {
+        const result = await this.$axios.put('api/auth/changepassword', { passwordOne: this.userLogged.passwordOne, passwordTwo: this.userLogged.passwordTwo }, { headers: this.user.headers })
+        this.$notify(result.data.ok, 'green')
+        this.resetForm()
+      } catch (error) {
+        this.$notify(error.response.data.error, 'red')
+      }
+    },
+    resetForm () {
+      this.userLogged = {
+        passwordOne: '',
+        passwordTwo: ''
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-form > * {
-  display: block;
-}
 </style>
