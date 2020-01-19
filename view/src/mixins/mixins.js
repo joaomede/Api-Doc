@@ -14,7 +14,7 @@ export default {
         }
       }
     },
-    version () {
+    cVersion () {
       return this.$store.getters.getVersion
     },
     cTypeMethods () {

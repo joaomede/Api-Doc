@@ -26,7 +26,7 @@
             floating
             transparent
           >
-            {{ version }}
+            {{ cVersion }}
           </q-badge>
         </q-btn>
         <q-btn

@@ -5,7 +5,7 @@
     class="bg-grey-8 text-white"
   >
     <q-toolbar>
-      <q-toolbar-title>{{ version }}</q-toolbar-title>
+      <q-toolbar-title>{{ cVersion }}</q-toolbar-title>
     </q-toolbar>
   </q-footer>
 </template>
