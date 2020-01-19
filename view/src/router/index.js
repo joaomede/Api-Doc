@@ -17,6 +17,17 @@ export default function ({ ssrContext }) {
       component: () => import('../pages/Login')
     },
     {
+      path: '/register',
+      name: 'Register',
+      component: () => import('../pages/Register')
+    },
+    {
+      path: '/changepassword',
+      name: 'ChangePassword',
+      component: () => import('../pages/ChangePassword'),
+      meta: { requerAuth: true }
+    },
+    {
       path: '/about',
       name: 'About',
       component: () => import('../pages/About')
@@ -82,12 +93,6 @@ export default function ({ ssrContext }) {
       name: 'SharedViewDoc',
       props: true,
       component: () => import('../pages/DocViewPublic')
-    },
-    {
-      path: '/changepassword',
-      name: 'ChangePassword',
-      component: () => import('../pages/ChangePassword'),
-      meta: { requerAuth: true }
     }
   ]
 

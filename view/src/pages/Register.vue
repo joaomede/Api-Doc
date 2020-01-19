@@ -4,46 +4,54 @@
       <q-card class="my-card">
         <q-card-section>
           <div class="text-h6">
-            Login
+            Register
           </div>
         </q-card-section>
 
         <q-card-section>
           <q-form class="q-gutter-md">
             <q-input
-              v-model="email"
+              v-model="newUser.name"
               filled
-              lazy-rules
-              :rules="emailRules"
-              type="Email"
-              label="E-mail"
+              type="Text"
+              label="Your name"
               required
             />
             <q-input
-              v-model="senha"
+              v-model="newUser.email"
+              filled
+              lazy-rules
+              type="email"
+              label="Your email"
+              :rules="emailRules"
+              required
+            />
+            <q-input
+              v-model="newUser.password"
               filled
               type="Password"
-              label="Senha"
+              label="Password"
               lazy-rules
+              :rules="passwordRules"
               required
-              :rules="senhaRules"
             />
           </q-form>
         </q-card-section>
 
         <q-btn
           class="q-ma-xs"
-          color="primary"
-          to="/register"
+          color="black"
+          to="/login"
         >
-          Register
+          Back
         </q-btn>
+
         <q-btn
           class="q-ma-xs"
           color="green"
-          @click="login"
+          @click="register()"
         >
-          Entrar
+          Register
         </q-btn>
       </q-card>
     </q-form>
@@ -55,17 +63,19 @@ export default {
   name: 'Login',
   data: () => ({
     valid: false,
-    dialogoEsqueciSenha: false,
-    email: '',
-    senha: '',
-    emailRecuperacao: '',
+    newUser: {
+      name: '',
+      email: '',
+      password: ''
+    },
     emailRules: [v => !!v || 'E-mail é requerido', v => /.+@.+/.test(v) || 'E-mail precisa ser válido'],
-    senhaRules: [v => !!v || 'Senha é requerida', v => v.length >= 6 || 'Precisa ter mais de 6 dígitos']
+    passwordRules: [v => !!v || 'Senha é requerida', v => v.length >= 6 || 'Precisa ter mais de 6 dígitos']
   }),
   methods: {
-    async login () {
+    async register () {
       try {
-        const result = await this.$axios.post('api/auth/login', { email: this.email, password: this.senha })
+        await this.$axios.post('api/auth/register', this.newUser)
+        const result = await this.$axios.post('api/auth/login', { email: this.newUser.email, password: this.newUser.password })
         const { id, email, name } = await result.data.user
         const token = await result.data.token
         const user = {
@@ -79,9 +89,9 @@ export default {
         await this.$q.cookies.set('user', user)
         await this.$store.dispatch('boot')
         this.$router.replace('dash')
-        this.$notify(`Bem vindo de volta ${result.data.user.name}!`, 'green')
+        this.$notify(`Bem vindo ${result.data.user.name}!`, 'green')
       } catch (error) {
-        this.$notify('Erro ao tentar efetuar o login', 'red')
+        this.$notify(error.response.data.error, 'red')
       }
     }
   }
@@ -89,13 +99,4 @@ export default {
 </script>
 
 <style scoped>
-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-form > * {
-  display: block;
-}
 </style>
