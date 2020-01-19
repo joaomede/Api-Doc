@@ -34,18 +34,6 @@ export default {
     },
     cResponse () {
       return this.$store.getters.getResponse
-    },
-    tagIndex () {
-      return this.$store.getters.getTagIndex
-    },
-    pathIndex () {
-      return this.$store.getters.getPathIndex
-    },
-    responseIndex () {
-      return this.$store.getters.getResponseIndex
-    },
-    rulesId () {
-      return this.$store.getters.getRulesId
     }
   }
 }
