@@ -18,7 +18,7 @@
     "react",
     "crud"
   ],
-  "private": true,
+  "private": false,
   "scripts": {
     "build": "rimraf dist/ && sucrase ./api -d ./dist --transforms typescript,imports",
     "dev": "nodemon api/Server.ts",
