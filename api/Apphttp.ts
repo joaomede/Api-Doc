@@ -39,24 +39,7 @@ class HttpServer {
   }
 
   public server (): http.Server | https.Server {
-    if (this.mode === 'prod') {
-      const privateKey = fs.readFileSync(
-        `/etc/letsencrypt/live/${this.domain}/privkey.pem`,
-        'utf8'
-      )
-      const certificate = fs.readFileSync(
-        `/etc/letsencrypt/live/${this.domain}/cert.pem`,
-        'utf8'
-      )
-      const ca = fs.readFileSync(
-        `/etc/letsencrypt/live/${this.domain}/chain.pem`,
-        'utf8'
-      )
-      const credentials = { key: privateKey, cert: certificate, ca: ca }
-      return https.createServer(credentials, this.express)
-    } else {
-      return http.createServer(this.express)
-    }
+    return http.createServer(this.express)
   }
 
   public apiPort (): number {
