@@ -12,11 +12,9 @@ const serverStatic = new Http()
 
 // const io = socketIO(server)
 
-if (process.env.NODE_ENV === 'prod') {
-  serverStatic.server().listen(serverStatic.apiPort(), () => {
-    console.log(`Running Http in ${serverStatic.apiPort()}`)
-  })
-}
+serverStatic.server().listen(serverStatic.apiPort(), () => {
+  console.log(`Running Http in ${serverStatic.apiPort()}`)
+})
 // const io = socket(app.server())
 // export function sendEvent (e: string): void {
 //   io.sockets.emit(e)
