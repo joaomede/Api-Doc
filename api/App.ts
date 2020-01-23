@@ -16,7 +16,7 @@ class App {
   private port: number
 
   constructor () {
-    this.port = env.port as unknown as number
+    this.port = env.port
     this.express = express()
     this.middlewares()
     this.routes()
