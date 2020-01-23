@@ -7,8 +7,7 @@ For the application to work correctly, it is necessary to first configure the en
 
 #### The .env file for backend
 
-**HTTPSERVERPORT**: HTTP server port; ex.: 80  
-**APIPORT**: API port; ex.:8080  
+**PORTHOST**: HTTP server port; ex.: 80  
 **PORTDB**: Database port; ex.:5432  
 **HOSTDB**: Ip for host database "external" ex.: 168.168.168.16  
 **POSTGRES_USER**: User database, default is admin or postgres  
@@ -23,7 +22,7 @@ For the application to work correctly, it is necessary to first configure the en
 **SECRET**: The key for your api  
 
 #### The .env file for frontend
-**APIURL**: Path to api, ex.: https://example.com:8080  
+**APIURL**: Path to api, ex.: https://example.com  
 **VERSION**: For Show Version in Footer and Header frontend
 
 ## How to Install
