@@ -2,8 +2,7 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 export const env = {
-  portHttp: process.env.HTTPSERVERPORT,
-  portApi: process.env.APIPORT,
+  port: process.env.PORTHOST,
   portDB: process.env.PORTDB,
   hostDB: process.env.HOSTDB,
   postgresUser: process.env.POSTGRES_USER,
