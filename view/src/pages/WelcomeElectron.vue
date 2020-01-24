@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     addApiURL () {
-      this.$q.cookies.set('urlAPI', this.urlField)
+      this.$q.localStorage.set('urlAPI', this.urlField)
       this.$router.push('login')
       this.$store.dispatch('setUrlApi')
     }

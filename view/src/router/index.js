@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { Cookies } from 'quasar'
+import { LocalStorage } from 'quasar'
 import axios from 'axios'
 
 Vue.use(VueRouter)
@@ -116,16 +116,14 @@ export default function ({ ssrContext }) {
   router.beforeEach((to, from, next) => {
     let autorizacao = to.matched.some(record => record.meta.requerAuth)
     let user
-    let cookies
     let url
 
     if (process.env.MODE !== 'ssr') {
-      user = Cookies.get('user')
-      url = Cookies.get('urlAPI')
+      user = LocalStorage.getItem('user')
+      url = LocalStorage.getItem('urlAPI')
     } else {
-      cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies // otherwise we're on client
-      user = cookies.get('user')
-      url = cookies.get('urlAPI')
+      user = LocalStorage.getItem('user')
+      url = LocalStorage.getItem('urlAPI')
     }
     if (autorizacao) {
       if (user) {

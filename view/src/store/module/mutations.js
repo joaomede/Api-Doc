@@ -1,10 +1,9 @@
 import Vue from 'vue'
-import { Cookies, Platform } from 'quasar'
+import { LocalStorage, Platform } from 'quasar'
 import axios from 'axios'
 
 export async function boot (state) {
-  // const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies // otherwise we're on client
-  const user = Cookies.get('user')
+  const user = LocalStorage.getItem('user')
 
   if (user !== undefined && user !== null) {
     state.user = {
@@ -27,7 +26,7 @@ export async function boot (state) {
 
 export async function setUrlApi (state) {
   if (Platform.is.electron) {
-    const url = Cookies.get('urlAPI')
+    const url = LocalStorage.getItem('urlAPI')
     state.urlApi = url
     Vue.use({
       install (Vue) {

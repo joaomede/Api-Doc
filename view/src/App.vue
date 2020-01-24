@@ -68,14 +68,14 @@ export default {
     },
     checkElectron () {
       if (this.$q.platform.is.electron) {
-        const url = this.$q.cookies.get('urlAPI')
+        const url = this.$q.localStorage.getItem('urlAPI')
         if (url === null || url === undefined) {
           this.$router.push('electron')
         }
       }
     },
     logout () {
-      this.$q.cookies.remove('user')
+      this.$q.localStorage.remove('user')
       this.$store.dispatch('boot')
       this.$router.replace('login')
     }

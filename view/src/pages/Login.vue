@@ -76,7 +76,7 @@ export default {
             Authorization: 'Bearer ' + token
           }
         }
-        await this.$q.cookies.set('user', user)
+        await this.$q.localStorage.set('user', user)
         await this.$store.dispatch('boot')
         this.$router.replace('dash')
         this.$notify(`Bem vindo de volta ${result.data.user.name}!`, 'green')

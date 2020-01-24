@@ -96,7 +96,7 @@ module.exports = function (ctx) {
       ],
 
       // Quasar plugins
-      plugins: ['Notify', 'Cookies', 'Loading'],
+      plugins: ['Notify', 'Cookies', 'Loading', 'LocalStorage'],
       config: {
         loading: { /* Loading defaults */ }
       }
