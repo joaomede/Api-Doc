@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import { http } from '../../boot/axios'
-import { Cookies } from 'quasar'
+import { Cookies, Platform } from 'quasar'
+import axios from 'axios'
 
 export async function boot (state) {
   // const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies // otherwise we're on client
-  const user = await Cookies.get('user')
+  const user = Cookies.get('user')
 
   if (user !== undefined && user !== null) {
     state.user = {
@@ -25,19 +25,42 @@ export async function boot (state) {
   }
 }
 
+export async function setUrlApi (state) {
+  if (Platform.is.electron) {
+    const url = Cookies.get('urlAPI')
+    state.urlApi = url
+    Vue.use({
+      install (Vue) {
+        Vue.prototype.$axios = axios.create({
+          baseURL: state.urlApi
+        })
+      }
+    })
+  } else {
+    state.urlApi = process.env.APIURL
+    Vue.use({
+      install (Vue) {
+        Vue.prototype.$axios = axios.create({
+          baseURL: state.urlApi
+        })
+      }
+    })
+  }
+}
+
 export async function setApiData (state, id) {
   try {
     if (id[1] === 'DocView') {
-      const result = await http.get(`api/api/getapiandendpoints/${id[0]}`, { headers: state.user.headers })
+      const result = await axios.get(state.urlApi + `api/api/getapiandendpoints/${id[0]}`, { headers: state.user.headers })
       state.apiData = await result.data
     }
     if (id[1] === 'DocViewTeam') {
       state.rulesId = id[0]
-      const result = await http.get(`api/teamdocs/api/getapiandendpoints/${id[0]}`, { headers: state.user.headers })
+      const result = await axios.get(state.urlApi + `api/teamdocs/api/getapiandendpoints/${id[0]}`, { headers: state.user.headers })
       state.apiData = await result.data
     }
     if (id[1] === 'DocViewPublic') {
-      const result = await http.get(`api/geral/getapiandtags/${id[0]}`)
+      const result = await axios.get(state.urlApi + `api/geral/getapiandtags/${id[0]}`)
       state.apiData = await result.data
     }
   } catch (error) {
@@ -49,7 +72,7 @@ export async function setApiData (state, id) {
 export async function setPathsByTagIndex (state, tag) {
   if (tag[1] === 'DocView') {
     try {
-      const result = await http.get(`api/api/getverbsandcodes/${tag[0]}`, { headers: state.user.headers })
+      const result = await axios.get(state.urlApi + `api/api/getverbsandcodes/${tag[0]}`, { headers: state.user.headers })
       Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
     } catch (error) {
       // console.log(error.response.data.error)
@@ -57,7 +80,7 @@ export async function setPathsByTagIndex (state, tag) {
   }
   if (tag[1] === 'DocViewTeam') {
     try {
-      const result = await http.get(`api/teamdocs/api/getverbsandcodes/${state.rulesId}/${tag[0]}`, { headers: state.user.headers })
+      const result = await axios.get(state.urlApi + `api/teamdocs/api/getverbsandcodes/${state.rulesId}/${tag[0]}`, { headers: state.user.headers })
       Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
     } catch (error) {
       // console.log(error.response.data.error)
@@ -65,7 +88,7 @@ export async function setPathsByTagIndex (state, tag) {
   }
   if (tag[1] === 'DocViewPublic') {
     try {
-      const result = await http.get(`api/geral/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
+      const result = await axios.get(state.urlApi + `api/geral/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
       Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
     } catch (error) {
       // console.log(error.response.data.error)
@@ -73,7 +96,7 @@ export async function setPathsByTagIndex (state, tag) {
   }
   if (tag[1] === 'SharedViewDoc') {
     try {
-      const result = await http.get(`api/geral/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
+      const result = await axios.get(state.urlApi + `api/geral/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
       Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
     } catch (error) {
       // console.log(error.response.data.error)

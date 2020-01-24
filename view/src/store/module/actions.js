@@ -2,6 +2,10 @@ export function boot ({ commit }) {
   commit('boot')
 }
 
+export function setUrlApi ({ commit }) {
+  commit('setUrlApi')
+}
+
 export function setApiData ({ commit }, id) {
   commit('setApiData', id)
 }

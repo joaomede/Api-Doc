@@ -55,6 +55,7 @@ export default {
   mounted () {
     this.checkLanguage()
     this.$store.dispatch('boot')
+    this.checkElectron()
   },
   methods: {
     checkLanguage () {
@@ -62,6 +63,14 @@ export default {
       for (const language of this.$i18n.availableLocales) {
         if (language === localeClientLang) {
           this.$i18n.locale = localeClientLang
+        }
+      }
+    },
+    checkElectron () {
+      if (this.$q.platform.is.electron) {
+        const url = this.$q.cookies.get('urlAPI')
+        if (url === null || url === undefined) {
+          this.$router.push('electron')
         }
       }
     },

@@ -5,6 +5,7 @@ export default function () {
     user: null,
     version: process.env.VERSION,
     apisList: null,
+    urlApi: null,
     tag: {
       id: ''
     },

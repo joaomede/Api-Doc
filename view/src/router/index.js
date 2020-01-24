@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { Cookies } from 'quasar'
-import { http } from '../boot/axios'
+import axios from 'axios'
 
 Vue.use(VueRouter)
 
@@ -31,6 +31,11 @@ export default function ({ ssrContext }) {
       path: '/about',
       name: 'About',
       component: () => import('../pages/About')
+    },
+    {
+      path: '/electron',
+      name: 'WelComeElectron',
+      component: () => import('../pages/WelcomeElectron')
     },
     {
       path: '/dash',
@@ -112,18 +117,20 @@ export default function ({ ssrContext }) {
     let autorizacao = to.matched.some(record => record.meta.requerAuth)
     let user
     let cookies
+    let url
 
     if (process.env.MODE !== 'ssr') {
       user = Cookies.get('user')
+      url = Cookies.get('urlAPI')
     } else {
       cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies // otherwise we're on client
       user = cookies.get('user')
+      url = cookies.get('urlAPI')
     }
-
     if (autorizacao) {
       if (user) {
-        http
-          .get('api/auth/checkin', { headers: user.headers })
+        axios
+          .get(url + 'api/auth/checkin', { headers: user.headers })
           .then(() => {
             next()
           })
