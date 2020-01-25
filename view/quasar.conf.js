@@ -217,12 +217,6 @@ module.exports = function (ctx) {
               'arch': [
                 'x64'
               ]
-            },
-            {
-              'target': 'tar.gz',
-              'arch': [
-                'x64'
-              ]
             }
           ]
         },
