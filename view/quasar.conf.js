@@ -192,7 +192,7 @@ module.exports = function (ctx) {
 
     // Full list of options: https://quasar.dev/quasar-cli/developing-electron-apps/configuring-electron
     electron: {
-      bundler: 'packager', // 'packager' or 'builder'
+      bundler: 'builder', // 'packager' or 'builder'
 
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
@@ -208,7 +208,34 @@ module.exports = function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'app'
+        appId: 'com.br.symbol2.api-doc',
+        'linux': {
+          'target': [
+            {
+              'target': 'AppImage',
+              'arch': [
+                'x64'
+              ]
+            },
+            {
+              'target': 'tar.gz',
+              'arch': [
+                'x64'
+              ]
+            }
+          ]
+        },
+        'win': {
+          'target': [
+            {
+              'target': 'nsis',
+              'arch': [
+                'x64',
+                'ia32'
+              ]
+            }
+          ]
+        }
       },
 
       // keep in sync with /src-electron/main-process/electron-main
