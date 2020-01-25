@@ -24,10 +24,11 @@ function createWindow () {
     width: 1000,
     height: 600,
     useContentSize: true,
+    frame: false,
     webPreferences: {
       // Change from /quasar.conf.js > electron > nodeIntegration;
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
-      nodeIntegration: QUASAR_NODE_INTEGRATION,
+      nodeIntegration: QUASAR_NODE_INTEGRATION
 
       // More info: /quasar-cli/developing-electron-apps/electron-preload-script
       // preload: path.resolve(__dirname, 'electron-preload.js')

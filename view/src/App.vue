@@ -10,12 +10,17 @@
         @estadoMenu="left = $event"
       />
       <Header
-        v-if="this.$router.currentRoute.name !== 'SharedViewDoc'"
+        v-if="this.$router.currentRoute.name !== 'SharedViewDoc' & (!this.$q.platform.is.electron)"
         :headertitle="title"
         :logout="logout"
         :left="left"
         @logout="logout()"
         @estadoMenu="left = $event"
+      />
+
+      <HeaderElectron
+        v-if="this.$q.platform.is.electron"
+        @logout="logout()"
       />
 
       <q-page-container>
@@ -31,10 +36,11 @@
 import Footer from './layout/Footer'
 import Header from './layout/Header'
 import Drawer from './layout/Drawer'
+import HeaderElectron from './layout/HeaderElectron'
 
 export default {
   name: 'App',
-  components: { Footer, Header, Drawer },
+  components: { Footer, Header, Drawer, HeaderElectron },
   data () {
     return {
       title: 'Api Doc',

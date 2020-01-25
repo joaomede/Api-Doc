@@ -48,19 +48,6 @@
         </q-item>
 
         <q-item
-          v-if="this.$q.platform.is.electron"
-          v-ripple
-          clickable
-          to="/electron"
-        >
-          <q-item-section avatar>
-            <q-icon name="settings" />
-          </q-item-section>
-
-          <q-item-section>Remote Server URL</q-item-section>
-        </q-item>
-
-        <q-item
           v-ripple
           clickable
           to="/about"
