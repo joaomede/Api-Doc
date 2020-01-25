@@ -10,8 +10,8 @@ Main Menu             |  List Api          |Paths
 Api doc is a CRUD api documenter, this system is part of my personal portfolio, but it was born out of a need to document my APIs and test it on one platform, any resemblance to swagger, insomnia or postman is not a conscience, I love it these applications and I was inspired by them to do the research needed to build "Api Doc"
 
 ### Client Electron for Desktop
-![Destkop Electron](documentation/docs/image/electronDesktop.png)
-[![Linux Client](https://img.shields.io/badge/Linux_Client:_AppImage-v1.4.0-blue.svg)](https://sourceforge.net/projects/api-doc/files/Api-Doc-1.4.0.AppImage/download)
+![Destkop Electron](documentation/docs/image/electronDesktop.png)  
+[![Linux Client](https://img.shields.io/badge/Linux_Client:_AppImage-v1.4.0-blue.svg)](https://sourceforge.net/projects/api-doc/files/Api-Doc-1.4.0.AppImage/download)  
 
 
 ## Get Started
