@@ -1,7 +1,7 @@
 <template>
   <div class="centralDiv q-pa-xs text-center">
     <BackMobile />
-    <BackDesktop />
+    <BackDesktop v-if="!this.$q.platform.is.electron" />
 
     <q-card class="my-card text-center">
       <q-list
