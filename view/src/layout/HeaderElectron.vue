@@ -1,8 +1,12 @@
 <template>
   <q-header elevated>
-    <q-bar class="q-electron-drag">
-      <q-icon name="laptop_chromebook" />
-      <div>Api Doc</div>
+    <q-bar
+      class="bg-indigo-8 q-electron-drag"
+    >
+      <q-icon name="assignment" />
+      <div>
+        Api Doc
+      </div>
 
       <q-space />
 
@@ -26,7 +30,7 @@
       />
     </q-bar>
 
-    <div class="q-pa-sm q-pl-md row items-center">
+    <div class="bg-blue q-pa-sm q-pl-md row items-center">
       <div
         v-if="user.id !== null"
         class="cursor-pointer non-selectable"
