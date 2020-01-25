@@ -8,21 +8,16 @@ Here are some of the functions that the software has to offer
 
 - [x] Login and Register, Change Password
 - [x] Team System
-- [x] Api Private
-- [x] Api Public
-- [x] Api In Team
-- [x] Tags
-- [x] Paths
-- [x] Responses
+- [x] Api Documentation "private and public"
+- [x] Client Electron for Windows, Mac And Linux Dist
+- [x] PWA/SPA Works
+- [ ] SSR Builder
+- [ ] Cordova Android / iOS
 - [x] Test Request
-- [x] Post
-- [x] Get
-- [x] Delete
-- [x] Put
-- [x] Send Headers on test
-- [x] Send Body on test
-- [x] Send Params on test
-- [ ] Send DataForm on test
+- [x] Register Responses and Codes Definitions
+- [x] Methods Accept: Post, Get, Delete, Put
+- [x] Accept: Headers, Params Path and Body
+- [ ] Accept: DataForm, in Dev
 
 ## The Database
 
