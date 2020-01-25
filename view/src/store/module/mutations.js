@@ -28,21 +28,13 @@ export async function setUrlApi (state) {
   if (Platform.is.electron) {
     const url = LocalStorage.getItem('urlAPI')
     state.urlApi = url
-    Vue.use({
-      install (Vue) {
-        Vue.prototype.$axios = axios.create({
-          baseURL: state.urlApi
-        })
-      }
+    Vue.prototype.$axios = axios.create({
+      baseURL: state.urlApi
     })
   } else {
     state.urlApi = process.env.APIURL
-    Vue.use({
-      install (Vue) {
-        Vue.prototype.$axios = axios.create({
-          baseURL: state.urlApi
-        })
-      }
+    Vue.prototype.$axios = axios.create({
+      baseURL: state.urlApi
     })
   }
 }
