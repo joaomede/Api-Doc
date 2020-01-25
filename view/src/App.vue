@@ -59,6 +59,7 @@ export default {
     }
   },
   mounted () {
+    this.$store.dispatch('setUrlApi')
     this.checkLanguage()
     this.$store.dispatch('boot')
     this.checkElectron()
