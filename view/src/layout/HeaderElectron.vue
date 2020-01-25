@@ -104,6 +104,15 @@
               <q-item-section>Logout</q-item-section>
             </q-item>
 
+            <q-item
+              v-if="user.id !== null"
+              v-close-popup
+              clickable
+              to="/changepassword"
+            >
+              <q-item-section>Change Password</q-item-section>
+            </q-item>
+
             <q-separator />
           </q-list>
         </q-menu>
@@ -153,6 +162,24 @@
               to="/electron"
             >
               <q-item-section>Remote Server URL</q-item-section>
+            </q-item>
+          </q-list>
+        </q-menu>
+      </div>
+
+      <div class="q-ml-md cursor-pointer non-selectable">
+        About
+        <q-menu>
+          <q-list
+            dense
+            style="min-width: 100px"
+          >
+            <q-item
+              v-close-popup
+              clickable
+              to="/about"
+            >
+              <q-item-section>About</q-item-section>
             </q-item>
           </q-list>
         </q-menu>
