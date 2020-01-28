@@ -6,7 +6,7 @@ import resp from 'resp-express'
 import knexPopulate from 'knex-populate'
 
 class ApiTeam {
-  public async getApiAndEndPoints (req: NewRequest, res: Response): Promise<any> {
+  public async getApiAndEndPoints (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     const rules = await knex('team_rules')
@@ -33,7 +33,7 @@ class ApiTeam {
     }
   }
 
-  public async getVerbsAndCodes (req: NewRequest, res: Response): Promise<any> {
+  public async getVerbsAndCodes (req: NewRequest, res: Response): Promise<void> {
     const { id, endPointId } = req.params
 
     const rules = await knex('team_rules')
@@ -61,7 +61,7 @@ class ApiTeam {
     }
   }
 
-  public async listTeamsIAmMember (req: NewRequest, res: Response): Promise<any> {
+  public async listTeamsIAmMember (req: NewRequest, res: Response): Promise<void> {
     try {
       const teamsAmMember = await knex('team_rules')
         .where({ 'team_rules.userIdFk': req.userId })
@@ -75,7 +75,7 @@ class ApiTeam {
     }
   }
 
-  public async exitTeam (req: NewRequest, res: Response): Promise<any> {
+  public async exitTeam (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     try {

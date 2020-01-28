@@ -4,7 +4,7 @@ import { Response } from 'express'
 import resp from 'resp-express'
 
 class Responses {
-  public async store (req: NewRequest, res: Response): Promise<any> {
+  public async store (req: NewRequest, res: Response): Promise<void> {
     const { typeCode, responseModel } = req.body
     const { verbId } = req.params
 
@@ -25,7 +25,7 @@ class Responses {
     }
   }
 
-  public async index (req: NewRequest, res: Response): Promise<any> {
+  public async index (req: NewRequest, res: Response): Promise<void> {
     const { verbId } = req.params
 
     if (verbId === undefined || verbId === null) {
@@ -40,7 +40,7 @@ class Responses {
     }
   }
 
-  public async update (req: NewRequest, res: Response): Promise<any> {
+  public async update (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     const newCode = {
@@ -56,7 +56,7 @@ class Responses {
     }
   }
 
-  public async destroy (req: NewRequest, res: Response): Promise<any> {
+  public async destroy (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     if (id === undefined || id === null) {

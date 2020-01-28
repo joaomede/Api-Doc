@@ -4,7 +4,7 @@ import { Response } from 'express'
 import resp from 'resp-express'
 
 class Path {
-  public async store (req: NewRequest, res: Response): Promise<any> {
+  public async store (req: NewRequest, res: Response): Promise<void> {
     const {
       methodType,
       pathName,
@@ -39,7 +39,7 @@ class Path {
     }
   }
 
-  public async index (req: NewRequest, res: Response): Promise<any> {
+  public async index (req: NewRequest, res: Response): Promise<void> {
     const { endPointId } = req.params
 
     if (endPointId === undefined || endPointId === null) {
@@ -54,7 +54,7 @@ class Path {
     }
   }
 
-  public async update (req: NewRequest, res: Response): Promise<any> {
+  public async update (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     const newVerb = {
@@ -78,7 +78,7 @@ class Path {
     }
   }
 
-  public async destroy (req: NewRequest, res: Response): Promise<any> {
+  public async destroy (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     if (id === undefined || id === null) {

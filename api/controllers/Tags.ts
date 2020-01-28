@@ -4,7 +4,7 @@ import { knex } from '../db/connection'
 import resp from 'resp-express'
 
 class EndPoint {
-  public async store (req: NewRequest, res: Response): Promise<any> {
+  public async store (req: NewRequest, res: Response): Promise<void> {
     const { apiId } = req.params
 
     if (apiId === undefined || apiId === null) {
@@ -26,7 +26,7 @@ class EndPoint {
     }
   }
 
-  public async update (req: NewRequest, res: Response): Promise<any> {
+  public async update (req: NewRequest, res: Response): Promise<void> {
     const id = req.params.id
 
     if (id === undefined || id === null) {
@@ -45,7 +45,7 @@ class EndPoint {
     }
   }
 
-  public async index (req: NewRequest, res: Response): Promise<any> {
+  public async index (req: NewRequest, res: Response): Promise<void> {
     const { apiId } = req.params
 
     try {
@@ -56,7 +56,7 @@ class EndPoint {
     }
   }
 
-  public async destroy (req: NewRequest, res: Response): Promise<any> {
+  public async destroy (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     if (id === undefined || id === null) {

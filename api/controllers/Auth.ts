@@ -8,7 +8,7 @@ import * as jwt from 'jsonwebtoken'
 import bcrypt = require('bcrypt')
 
 class Auth {
-  public async register (req: Request, res: Response): Promise<any> {
+  public async register (req: Request, res: Response): Promise<void> {
     const { email, password } = req.body
     try {
       const result = await knex('users').select().where('email', email)
@@ -31,7 +31,7 @@ class Auth {
     }
   }
 
-  public async auth (req: Request, res: Response): Promise<any> {
+  public async auth (req: Request, res: Response): Promise<void> {
     const { email, password } = req.body
 
     try {
@@ -55,11 +55,11 @@ class Auth {
     }
   }
 
-  public async changePassword (req: NewRequest, res: Response): Promise<any> {
+  public async changePassword (req: NewRequest, res: Response): Promise<void> {
     const { passwordOne, passwordTwo } = req.body
     const authHeader = req.headers.authorization
 
-    async function changePass (decoded): Promise<any> {
+    async function changePass (decoded): Promise<void> {
       try {
         const password = await bcrypt.hash(passwordOne, 10)
         await knex('users').where({ id: decoded.id }).update({ password: password })

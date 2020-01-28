@@ -5,7 +5,7 @@ import { Response } from 'express'
 import knexPopulate from 'knex-populate'
 
 class Geral {
-  public async getApiAndEndPoints (req: NewRequest, res: Response): Promise<any> {
+  public async getApiAndEndPoints (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     try {
@@ -29,7 +29,7 @@ class Geral {
     }
   }
 
-  public async getVerbsAndCodes (req: NewRequest, res: Response): Promise<any> {
+  public async getVerbsAndCodes (req: NewRequest, res: Response): Promise<void> {
     const { endPointId } = req.params
 
     try {
@@ -48,7 +48,7 @@ class Geral {
     }
   }
 
-  public async listAllPublicApi (req: NewRequest, res: Response): Promise<any> {
+  public async listAllPublicApi (req: NewRequest, res: Response): Promise<void> {
     try {
       const allPublicList = await knex('api')
         .where({ isPublic: true })

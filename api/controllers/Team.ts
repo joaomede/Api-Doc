@@ -4,7 +4,7 @@ import { NewRequest } from '../interface/NewRequest'
 import resp from 'resp-express'
 
 class Team {
-  public async store (req: NewRequest, res: Response): Promise<any> {
+  public async store (req: NewRequest, res: Response): Promise<void> {
     const { apiIdFk, teamName } = req.body
     try {
       const api = await knex('api').select().where({ id: apiIdFk, isPublic: false, userIdFk: req.userId })
@@ -29,7 +29,7 @@ class Team {
     }
   }
 
-  public async update (req: NewRequest, res: Response): Promise<any> {
+  public async update (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
     const { teamName } = req.body
 
@@ -53,7 +53,7 @@ class Team {
     }
   }
 
-  public async index (req: NewRequest, res: Response): Promise<any> {
+  public async index (req: NewRequest, res: Response): Promise<void> {
     try {
       const team = await knex('teams').select().where({ managerIdFk: req.userId })
       resp.returnSucessObject(res, team)
@@ -62,7 +62,7 @@ class Team {
     }
   }
 
-  public async destroy (req: NewRequest, res: Response): Promise<any> {
+  public async destroy (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
     try {
       await knex('teams').where({ id: id }).del()
@@ -72,7 +72,7 @@ class Team {
     }
   }
 
-  public async addMember (req: NewRequest, res: Response): Promise<any> {
+  public async addMember (req: NewRequest, res: Response): Promise<void> {
     const { teamIdFk, email } = req.body
     try {
       const team = await knex('teams').select().where({
@@ -112,7 +112,7 @@ class Team {
     }
   }
 
-  public async removeMember (req: NewRequest, res: Response): Promise<any> {
+  public async removeMember (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
     try {
       await knex('team_rules').where({ id: id }).del()
@@ -122,7 +122,7 @@ class Team {
     }
   }
 
-  public async listAllMembers (req: NewRequest, res: Response): Promise<any> {
+  public async listAllMembers (req: NewRequest, res: Response): Promise<void> {
     const { teamIdFk } = req.params
 
     try {

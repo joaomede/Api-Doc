@@ -5,7 +5,7 @@ import resp from 'resp-express'
 import knexPopulate from 'knex-populate'
 
 class Api {
-  public async store (req: NewRequest, res: Response): Promise<any> {
+  public async store (req: NewRequest, res: Response): Promise<void> {
     try {
       await knex('api').insert({
         apiName: req.body.apiName,
@@ -25,7 +25,7 @@ class Api {
     }
   }
 
-  public async update (req: NewRequest, res: Response): Promise<any> {
+  public async update (req: NewRequest, res: Response): Promise<void> {
     const id = req.params.id
 
     const newApi = {
@@ -45,7 +45,7 @@ class Api {
     }
   }
 
-  public async index (req: NewRequest, res: Response): Promise<any> {
+  public async index (req: NewRequest, res: Response): Promise<void> {
     // const { sortValue, campo } = req.params
 
     // esse metodo precisa fazer o SORT
@@ -57,7 +57,7 @@ class Api {
     }
   }
 
-  public async indexPrivate (req: NewRequest, res: Response): Promise<any> {
+  public async indexPrivate (req: NewRequest, res: Response): Promise<void> {
     // const { sortValue, campo } = req.params
 
     // esse metodo precisa fazer o SORT
@@ -69,7 +69,7 @@ class Api {
     }
   }
 
-  public async indexOne (req: NewRequest, res: Response): Promise<any> {
+  public async indexOne (req: NewRequest, res: Response): Promise<void> {
     const { apiId } = req.params
 
     /// esse metodo precisa de algo similar a populate
@@ -82,7 +82,7 @@ class Api {
     }
   }
 
-  public async destroy (req: NewRequest, res: Response): Promise<any> {
+  public async destroy (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     if (id === undefined || id === null) {
@@ -97,7 +97,7 @@ class Api {
     }
   }
 
-  public async getApiAndEndPoints (req: NewRequest, res: Response): Promise<any> {
+  public async getApiAndEndPoints (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     try {
@@ -121,7 +121,7 @@ class Api {
     }
   }
 
-  public async getVerbsAndCodes (req: NewRequest, res: Response): Promise<any> {
+  public async getVerbsAndCodes (req: NewRequest, res: Response): Promise<void> {
     const { endPointId } = req.params
 
     try {
