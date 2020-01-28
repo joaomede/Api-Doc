@@ -33,18 +33,19 @@ services:
     image: joaomede/nodejs12prod:1.0
     container_name: "server-api-doc"
     ports:
-      - ${HTTPSERVERPORT}:${HTTPSERVERPORT}
-      - ${APIPORT}:${APIPORT}
+      - ${PORTHOST}:${PORTHOST}
+
     depends_on:
       - pg
     links:
       - pg
+    environment:
+      HOSTDB: pg
     env_file:
       - .env
     command: node dist/Server
     expose:
-      - ${HTTPSERVERPORT}
-      - ${APIPORT}
+      - ${PORTHOST}
     volumes:
       - .:/usr/src/app
       - /etc/letsencrypt:/etc/letsencrypt
