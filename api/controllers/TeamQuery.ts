@@ -6,7 +6,7 @@ import resp from 'resp-express'
 import knexPopulate from 'knex-populate'
 
 class ApiTeam {
-  public async getApiAndEndPoints (req: NewRequest, res: Response): Promise<void> {
+  public async getApiAndTags (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     const rules = await knex('team_rules')

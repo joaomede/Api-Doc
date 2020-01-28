@@ -5,7 +5,7 @@ import { Response } from 'express'
 import knexPopulate from 'knex-populate'
 
 class Geral {
-  public async getApiAndEndPoints (req: NewRequest, res: Response): Promise<void> {
+  public async getApiAndTags (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     try {

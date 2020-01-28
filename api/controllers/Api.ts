@@ -67,12 +67,10 @@ class Api {
     }
   }
 
-  public async getApiAndEndPoints (req: NewRequest, res: Response): Promise<void> {
+  public async getApiAndTags (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     try {
-      // const doc = await knex('api').where({ id: id })
-
       const api = await knex('api').where({ id: id })
       const tags = await knex('tags').where({ apiIdFk: id })
       api[0].tags = tags

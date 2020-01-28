@@ -103,6 +103,10 @@ class ApiQuery {
     }
   }
 
+  /**
+   * @description Get a list Path[Responses]
+   * @param tagId Tag ID
+   */
   public async getPathAndResponsesQuery (tagId: string): Promise<I.Path[]> {
     try {
       const list = await knexPopulate(knex, 'paths')

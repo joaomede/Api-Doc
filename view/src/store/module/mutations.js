@@ -42,12 +42,12 @@ export async function setUrlApi (state) {
 export async function setApiData (state, id) {
   try {
     if (id[1] === 'DocView') {
-      const result = await axios.get(state.urlApi + `api/api/getapiandendpoints/${id[0]}`, { headers: state.user.headers })
+      const result = await axios.get(state.urlApi + `api/api/getapiandtags/${id[0]}`, { headers: state.user.headers })
       state.apiData = await result.data
     }
     if (id[1] === 'DocViewTeam') {
       state.rulesId = id[0]
-      const result = await axios.get(state.urlApi + `api/teamdocs/api/getapiandendpoints/${id[0]}`, { headers: state.user.headers })
+      const result = await axios.get(state.urlApi + `api/teamdocs/api/getapiandtags/${id[0]}`, { headers: state.user.headers })
       state.apiData = await result.data
     }
     if (id[1] === 'DocViewPublic') {
