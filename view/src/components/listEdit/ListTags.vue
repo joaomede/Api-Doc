@@ -10,7 +10,7 @@
       expand-separator
       :label="tags.nameTag"
       header-class="text-black text-left"
-      @show="getVerbsAndCodes(tags.id, indexTags)"
+      @show="getPathAndResponses(tags.id, indexTags)"
     >
       <q-item>
         <q-item-section>
@@ -195,7 +195,7 @@ export default {
         this.$notify(error.response.data.error, 'red')
       }
     },
-    async getVerbsAndCodes (tagId, index) {
+    async getPathAndResponses (tagId, index) {
       this.$store.dispatch('setTagIndex', index)
       this.$store.dispatch('setPathsByTagIndex', [tagId, this.$router.currentRoute.name])
     }

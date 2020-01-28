@@ -63,7 +63,7 @@ export async function setApiData (state, id) {
 export async function setPathsByTagIndex (state, tag) {
   if (tag[1] === 'DocView') {
     try {
-      const result = await axios.get(state.urlApi + `api/api/getverbsandcodes/${tag[0]}`, { headers: state.user.headers })
+      const result = await axios.get(state.urlApi + `api/api/getPathAndResponses/${tag[0]}`, { headers: state.user.headers })
       Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
     } catch (error) {
       // console.log(error.response.data.error)
@@ -71,7 +71,7 @@ export async function setPathsByTagIndex (state, tag) {
   }
   if (tag[1] === 'DocViewTeam') {
     try {
-      const result = await axios.get(state.urlApi + `api/teamdocs/api/getverbsandcodes/${state.rulesId}/${tag[0]}`, { headers: state.user.headers })
+      const result = await axios.get(state.urlApi + `api/teamdocs/api/getPathAndResponses/${state.rulesId}/${tag[0]}`, { headers: state.user.headers })
       Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
     } catch (error) {
       // console.log(error.response.data.error)

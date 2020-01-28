@@ -29,7 +29,7 @@ class Geral {
     }
   }
 
-  public async getVerbsAndCodes (req: NewRequest, res: Response): Promise<void> {
+  public async getPathAndResponses (req: NewRequest, res: Response): Promise<void> {
     const { endPointId } = req.params
 
     try {

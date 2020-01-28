@@ -92,14 +92,11 @@ class Api {
     }
   }
 
-  public async getVerbsAndCodes (req: NewRequest, res: Response): Promise<void> {
+  public async getPathAndResponses (req: NewRequest, res: Response): Promise<void> {
     const { endPointId } = req.params
 
     try {
-      const verbAndCodes = await knexPopulate(knex, 'paths')
-        .find({ tagsIdFk: endPointId })
-        .populate('responses', 'pathsIdFk', 'responses')
-        .exec()
+      const verbAndCodes = await query.api.getPathAndResponsesQuery(endPointId)
 
       if (verbAndCodes.length === 0) {
         resp.returnErrorMessage(res, 'Não há verbos disponíveis')
@@ -111,7 +108,7 @@ class Api {
         }
       }
     } catch (error) {
-      resp.returnErrorMessage(res, 'Erro ao tentar expandir')
+      resp.returnErrorMessage(res, error.message)
     }
   }
 }

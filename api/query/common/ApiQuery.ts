@@ -1,5 +1,6 @@
 import { knex } from '../../db/connection'
 import * as I from '../../interface/Interfaces'
+import knexPopulate from 'knex-populate'
 
 class ApiQuery {
   /**
@@ -99,6 +100,18 @@ class ApiQuery {
       await knex('api').where({ id: id, userIdFk: userId }).del()
     } catch (error) {
       throw new Error('Erro ao tentar deletar documentação')
+    }
+  }
+
+  public async getPathAndResponsesQuery (tagId: string): Promise<I.Path[]> {
+    try {
+      const list = await knexPopulate(knex, 'paths')
+        .find({ tagsIdFk: tagId })
+        .populate('responses', 'pathsIdFk', 'responses')
+        .exec()
+      return list
+    } catch (error) {
+      throw new Error('Erro ao tentar expandir')
     }
   }
 }

@@ -33,7 +33,7 @@ class ApiTeam {
     }
   }
 
-  public async getVerbsAndCodes (req: NewRequest, res: Response): Promise<void> {
+  public async getPathAndResponses (req: NewRequest, res: Response): Promise<void> {
     const { id, endPointId } = req.params
 
     const rules = await knex('team_rules')

@@ -34,7 +34,7 @@ routes.delete('/api/api/delete/:id', cApi.destroy)
 routes.put('/api/api/update/:id', cApi.update)
 // API populate
 routes.get('/api/api/getapiandendpoints/:id', cApi.getApiAndEndPoints)
-routes.get('/api/api/getverbsandcodes/:endPointId', cApi.getVerbsAndCodes)
+routes.get('/api/api/getPathAndResponses/:endPointId', cApi.getPathAndResponses)
 
 // * //
 // Endpoint
