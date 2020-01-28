@@ -3,82 +3,53 @@ import { NewRequest } from '../interface/NewRequest'
 import { Response } from 'express'
 import resp from 'resp-express'
 import knexPopulate from 'knex-populate'
+import query from '../query'
 
 class Api {
   public async store (req: NewRequest, res: Response): Promise<void> {
     try {
-      await knex('api').insert({
-        apiName: req.body.apiName,
-        version: req.body.version,
-        descriptionApi: req.body.descriptionApi,
-        email: req.body.email,
-        license: req.body.license,
-        isPublic: req.body.isPublic,
-        baseURL: req.body.baseURL,
-        userIdFk: req.userId
-      })
-
+      await query.api.createNewApiDoc(req.body, req.userId)
       resp.returnSucessMessage(res, 'Api adicionada com sucesso')
     } catch (error) {
-      // resp.returnErrorMessage(res, 'Erro ao tentar criar api')
-      resp.returnErrorMessage(res, error)
+      resp.returnErrorMessage(res, error.message)
     }
   }
 
   public async update (req: NewRequest, res: Response): Promise<void> {
     const id = req.params.id
-
-    const newApi = {
-      apiName: req.body.apiName,
-      version: req.body.version,
-      email: req.body.email,
-      license: req.body.license,
-      isPublic: req.body.isPublic,
-      baseURL: req.body.baseURL,
-      descriptionApi: req.body.descriptionApi
-    }
     try {
-      await knex('api').where({ id: id, userIdFk: req.userId }).update(newApi)
+      await query.api.updateApi(id, req.body, req.userId)
       resp.returnSucessMessage(res, 'Api atualizada com sucesso')
     } catch (error) {
-      resp.returnErrorMessage(res, 'Erro ao tentar atualizar as informações da api')
+      resp.returnErrorMessage(res, error.message)
     }
   }
 
   public async index (req: NewRequest, res: Response): Promise<void> {
-    // const { sortValue, campo } = req.params
-
-    // esse metodo precisa fazer o SORT
     try {
-      const allApiByUser = await knex('api').select().where({ userIdFk: req.userId })
+      const allApiByUser = await query.api.getAllApiByUser(req.userId)
       resp.returnSucessObject(res, allApiByUser)
     } catch (error) {
-      resp.returnErrorMessage(res, "Erro ao carregar a lista de Api's")
+      resp.returnErrorMessage(res, error.message)
     }
   }
 
   public async indexPrivate (req: NewRequest, res: Response): Promise<void> {
-    // const { sortValue, campo } = req.params
-
-    // esse metodo precisa fazer o SORT
     try {
-      const allApiByUser = await knex('api').select().where({ userIdFk: req.userId, isPublic: false })
+      const allApiByUser = await query.api.getAllApiByUserAndVisibility(req.userId, false)
       resp.returnSucessObject(res, allApiByUser)
     } catch (error) {
-      resp.returnErrorMessage(res, "Erro ao carregar a lista de Api's privadas")
+      resp.returnErrorMessage(res, error.message)
     }
   }
 
   public async indexOne (req: NewRequest, res: Response): Promise<void> {
     const { apiId } = req.params
-
-    /// esse metodo precisa de algo similar a populate
-
     try {
-      const api = await knex('api').select().where({ id: apiId, userIdFk: req.userId })
+      const api = await query.api.getOneApi(apiId, req.userId)
       resp.returnSucessObject(res, api)
     } catch (error) {
-      resp.returnErrorMessage(res, 'Erro ao tentar carregar as informações da api')
+      resp.returnErrorMessage(res, error.message)
     }
   }
 
@@ -88,12 +59,12 @@ class Api {
     if (id === undefined || id === null) {
       resp.returnErrorMessage(res, 'Não foi identificado a referência da Api')
     }
-    // precisa remover em cascata
+
     try {
-      await knex('api').where({ id: id, userIdFk: req.userId }).del()
+      await query.api.deleteApi(id, req.userId)
       resp.returnSucessMessage(res, 'Documentação deletada com sucesso')
     } catch (error) {
-      resp.returnErrorMessage(res, 'Erro ao tentar deletar documentação')
+      resp.returnErrorMessage(res, error.message)
     }
   }
 
