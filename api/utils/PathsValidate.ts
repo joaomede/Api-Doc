@@ -17,7 +17,7 @@ function verbSchema (): Joi.ObjectSchema<object> {
 }
 
 class VerbValidade {
-  public async create (req: Request, res: Response, next: NextFunction): Promise<any> {
+  public async create (req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await verbSchema().validateAsync(await req.body)
       next()

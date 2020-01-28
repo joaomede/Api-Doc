@@ -27,7 +27,7 @@ function registerSchema (): Joi.ObjectSchema<object> {
 }
 
 class Validation {
-  public async register (req: Request, res: Response, next: NextFunction): Promise<any> {
+  public async register (req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await registerSchema().validateAsync(await req.body)
       next()
@@ -36,7 +36,7 @@ class Validation {
     }
   }
 
-  public async login (req: Request, res: Response, next: NextFunction): Promise<any> {
+  public async login (req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await loginSchema().validateAsync(await req.body)
       next()

@@ -10,7 +10,7 @@ function endPointSchema (): Joi.ObjectSchema<object> {
 }
 
 class EndPointValidade {
-  public async create (req: Request, res: Response, next: NextFunction): Promise<any> {
+  public async create (req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await endPointSchema().validateAsync(await req.body)
       next()

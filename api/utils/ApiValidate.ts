@@ -15,7 +15,7 @@ function apiSchema (): Joi.ObjectSchema<object> {
 }
 
 class ApiValidade {
-  public async create (req: Request, res: Response, next: NextFunction): Promise<any> {
+  public async create (req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await apiSchema().validateAsync(await req.body)
       next()
