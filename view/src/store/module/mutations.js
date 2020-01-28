@@ -33,6 +33,7 @@ export async function setUrlApi (state) {
     })
   } else {
     state.urlApi = process.env.APIURL
+    LocalStorage.set('urlAPI', state.urlApi)
     Vue.prototype.$axios = axios.create({
       baseURL: state.urlApi
     })
