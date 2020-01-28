@@ -15,7 +15,6 @@ function apiSchema (): Joi.ObjectSchema<object> {
 }
 
 class ApiValidade {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async create (req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       await apiSchema().validateAsync(await req.body)

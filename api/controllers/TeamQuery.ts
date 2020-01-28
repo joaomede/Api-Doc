@@ -6,7 +6,6 @@ import resp from 'resp-express'
 import knexPopulate from 'knex-populate'
 
 class ApiTeam {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async getApiAndEndPoints (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
 
@@ -34,7 +33,6 @@ class ApiTeam {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async getVerbsAndCodes (req: NewRequest, res: Response): Promise<any> {
     const { id, endPointId } = req.params
 
@@ -63,7 +61,6 @@ class ApiTeam {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async listTeamsIAmMember (req: NewRequest, res: Response): Promise<any> {
     try {
       const teamsAmMember = await knex('team_rules')
@@ -78,7 +75,6 @@ class ApiTeam {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async exitTeam (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
 

@@ -4,7 +4,6 @@ import { Response } from 'express'
 import resp from 'resp-express'
 
 class Responses {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async store (req: NewRequest, res: Response): Promise<any> {
     const { typeCode, responseModel } = req.body
     const { verbId } = req.params
@@ -26,7 +25,6 @@ class Responses {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async index (req: NewRequest, res: Response): Promise<any> {
     const { verbId } = req.params
 
@@ -42,7 +40,6 @@ class Responses {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async update (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
 
@@ -59,7 +56,6 @@ class Responses {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async destroy (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
 

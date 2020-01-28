@@ -10,7 +10,6 @@ function endPointSchema (): Joi.ObjectSchema<object> {
 }
 
 class EndPointValidade {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async create (req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       await endPointSchema().validateAsync(await req.body)

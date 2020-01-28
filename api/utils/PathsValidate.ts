@@ -17,7 +17,6 @@ function verbSchema (): Joi.ObjectSchema<object> {
 }
 
 class VerbValidade {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async create (req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       await verbSchema().validateAsync(await req.body)

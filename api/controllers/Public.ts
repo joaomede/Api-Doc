@@ -5,7 +5,6 @@ import { Response } from 'express'
 import knexPopulate from 'knex-populate'
 
 class Geral {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async getApiAndEndPoints (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
 
@@ -30,7 +29,6 @@ class Geral {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async getVerbsAndCodes (req: NewRequest, res: Response): Promise<any> {
     const { endPointId } = req.params
 
@@ -50,7 +48,6 @@ class Geral {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async listAllPublicApi (req: NewRequest, res: Response): Promise<any> {
     try {
       const allPublicList = await knex('api')

@@ -5,7 +5,6 @@ import resp from 'resp-express'
 import knexPopulate from 'knex-populate'
 
 class Api {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async store (req: NewRequest, res: Response): Promise<any> {
     try {
       await knex('api').insert({
@@ -26,7 +25,6 @@ class Api {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async update (req: NewRequest, res: Response): Promise<any> {
     const id = req.params.id
 
@@ -47,7 +45,6 @@ class Api {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async index (req: NewRequest, res: Response): Promise<any> {
     // const { sortValue, campo } = req.params
 
@@ -60,7 +57,6 @@ class Api {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async indexPrivate (req: NewRequest, res: Response): Promise<any> {
     // const { sortValue, campo } = req.params
 
@@ -73,7 +69,6 @@ class Api {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async indexOne (req: NewRequest, res: Response): Promise<any> {
     const { apiId } = req.params
 
@@ -87,7 +82,6 @@ class Api {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async destroy (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
 
@@ -103,7 +97,6 @@ class Api {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async getApiAndEndPoints (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
 
@@ -128,7 +121,6 @@ class Api {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async getVerbsAndCodes (req: NewRequest, res: Response): Promise<any> {
     const { endPointId } = req.params
 

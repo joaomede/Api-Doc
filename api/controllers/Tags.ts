@@ -4,7 +4,6 @@ import { knex } from '../db/connection'
 import resp from 'resp-express'
 
 class EndPoint {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async store (req: NewRequest, res: Response): Promise<any> {
     const { apiId } = req.params
 
@@ -27,7 +26,6 @@ class EndPoint {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async update (req: NewRequest, res: Response): Promise<any> {
     const id = req.params.id
 
@@ -47,7 +45,6 @@ class EndPoint {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async index (req: NewRequest, res: Response): Promise<any> {
     const { apiId } = req.params
 
@@ -59,7 +56,6 @@ class EndPoint {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async destroy (req: NewRequest, res: Response): Promise<any> {
     const { id } = req.params
 

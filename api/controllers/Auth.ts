@@ -8,7 +8,6 @@ import * as jwt from 'jsonwebtoken'
 import bcrypt = require('bcrypt')
 
 class Auth {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async register (req: Request, res: Response): Promise<any> {
     const { email, password } = req.body
     try {
@@ -32,7 +31,6 @@ class Auth {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async auth (req: Request, res: Response): Promise<any> {
     const { email, password } = req.body
 
