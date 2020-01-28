@@ -55,6 +55,10 @@ export async function setApiData (state, id) {
       const result = await axios.get(state.urlApi + `api/geral/getapiandtags/${id[0]}`)
       state.apiData = await result.data
     }
+    if (id[1] === 'SharedViewDoc') {
+      const result = await axios.get(state.urlApi + `api/geral/getapiandtags/${id[0]}`)
+      state.apiData = await result.data
+    }
   } catch (error) {
     console.log(error)
     console.log(error.response.data.error)
