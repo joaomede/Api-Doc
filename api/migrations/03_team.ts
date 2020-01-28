@@ -1,7 +1,6 @@
 import * as Knex from 'knex'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function up (knex: Knex): Promise<any> {
+export async function up (knex: Knex): Promise<void> {
   return knex.schema.createTable('teams', table => {
     table.increments()
     table.text('teamName').notNullable()
@@ -11,7 +10,6 @@ export async function up (knex: Knex): Promise<any> {
   })
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function down (knex: Knex): Promise<any> {
+export async function down (knex: Knex): Promise<void> {
   return knex.schema.dropTableIfExists('teams')
 }
