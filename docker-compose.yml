@@ -30,7 +30,6 @@ services:
     container_name: "server-api-doc"
     ports:
       - ${PORTHOST}:${PORTHOST}
-
     depends_on:
       - pg
     links:
