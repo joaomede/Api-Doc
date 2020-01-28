@@ -34,7 +34,7 @@ class ApiTeam {
   }
 
   public async getPathAndResponses (req: NewRequest, res: Response): Promise<void> {
-    const { id, endPointId } = req.params
+    const { id, tagId } = req.params
 
     const rules = await knex('team_rules')
       .where({ 'team_rules.id': id, userIdFk: req.userId })
@@ -44,7 +44,7 @@ class ApiTeam {
     try {
       if (rules.length !== 0) {
         const verbAndCodes = await knexPopulate(knex, 'paths')
-          .find({ tagsIdFk: endPointId })
+          .find({ tagsIdFk: tagId })
           .populate('responses', 'pathsIdFk', 'responses')
           .exec()
 

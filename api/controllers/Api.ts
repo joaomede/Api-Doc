@@ -2,7 +2,6 @@ import { knex } from '../db/connection'
 import { NewRequest } from '../interface/NewRequest'
 import { Response } from 'express'
 import resp from 'resp-express'
-import knexPopulate from 'knex-populate'
 import query from '../query'
 
 class Api {
@@ -93,10 +92,10 @@ class Api {
   }
 
   public async getPathAndResponses (req: NewRequest, res: Response): Promise<void> {
-    const { endPointId } = req.params
+    const { tagId } = req.params
 
     try {
-      const verbAndCodes = await query.api.getPathAndResponsesQuery(endPointId)
+      const verbAndCodes = await query.api.getPathAndResponsesQuery(tagId)
 
       if (verbAndCodes.length === 0) {
         resp.returnErrorMessage(res, 'Não há verbos disponíveis')

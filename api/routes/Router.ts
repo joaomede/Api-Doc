@@ -34,7 +34,7 @@ routes.delete('/api/api/delete/:id', cApi.destroy)
 routes.put('/api/api/update/:id', cApi.update)
 // API populate
 routes.get('/api/api/getapiandendpoints/:id', cApi.getApiAndEndPoints)
-routes.get('/api/api/getPathAndResponses/:endPointId', cApi.getPathAndResponses)
+routes.get('/api/api/getPathAndResponses/:tagId', cApi.getPathAndResponses)
 
 // * //
 // Endpoint
@@ -45,8 +45,8 @@ routes.put('/api/tags/update/:id', cTags.update)
 
 // * //
 // Verbs
-routes.post('/api/paths/create/:endPointId', cPaths.store)
-routes.get('/api/paths/getall/:endPointId', cPaths.index)
+routes.post('/api/paths/create/:tagId', cPaths.store)
+routes.get('/api/paths/getall/:tagId', cPaths.index)
 routes.delete('/api/paths/delete/:id', cPaths.destroy)
 routes.put('/api/paths/update/:id', cPaths.update)
 

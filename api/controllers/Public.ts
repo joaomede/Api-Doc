@@ -30,11 +30,11 @@ class Geral {
   }
 
   public async getPathAndResponses (req: NewRequest, res: Response): Promise<void> {
-    const { endPointId } = req.params
+    const { tagId } = req.params
 
     try {
       const verbAndCodes = await knexPopulate(knex, 'paths')
-        .find({ tagsIdFk: endPointId })
+        .find({ tagsIdFk: tagId })
         .populate('responses', 'pathsIdFk', 'responses')
         .exec()
 

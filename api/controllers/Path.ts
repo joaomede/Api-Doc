@@ -15,9 +15,9 @@ class Path {
       bodyValue,
       data
     } = req.body
-    const { endPointId } = req.params
+    const { tagId } = req.params
 
-    if (endPointId === undefined || endPointId === null) {
+    if (tagId === undefined || tagId === null) {
       resp.returnErrorMessage(res, 'Não foi identificado o path referência')
     }
     try {
@@ -30,7 +30,7 @@ class Path {
         headersValue: headersValue,
         bodyValue: bodyValue,
         data: data,
-        tagsIdFk: endPointId,
+        tagsIdFk: tagId,
         userIdFk: req.userId
       }).returning('*')
       resp.returnSucessObject(res, result)
@@ -40,14 +40,14 @@ class Path {
   }
 
   public async index (req: NewRequest, res: Response): Promise<void> {
-    const { endPointId } = req.params
+    const { tagId } = req.params
 
-    if (endPointId === undefined || endPointId === null) {
+    if (tagId === undefined || tagId === null) {
       resp.returnErrorMessage(res, 'Não foi identificado o path relacionado')
     }
 
     try {
-      const path = await knex('paths').where({ userIdFk: req.userId, tagsIdFk: endPointId })
+      const path = await knex('paths').where({ userIdFk: req.userId, tagsIdFk: tagId })
       resp.returnSucessObject(res, path)
     } catch (error) {
       resp.returnErrorMessage(res, 'Erro ao tentar carregar todos os EndPoints')
