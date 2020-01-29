@@ -1,6 +1,4 @@
 #!/bin/bash
 ## By João Medeiros - <symbol2studio@gmail.com>
 
-sleep 5s
-yarn migrate
-yarn start
+docker-compose up dev-view

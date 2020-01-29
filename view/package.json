@@ -8,6 +8,7 @@
   "private": true,
   "scripts": {
     "dev": "quasar dev",
+    "dev:pwa": "quasar dev -m pwa",
     "dev:electron": "quasar dev -m electron",
     "build": "quasar build",
     "build:electron": "quasar build -m electron",

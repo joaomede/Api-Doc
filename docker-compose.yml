@@ -25,11 +25,13 @@ services:
   #   networks:
   #     - redePostgres
 
-  server:
+  dev-api:
     image: joaomede/nodejs12prod:1.0
-    container_name: "server-api-doc"
+    container_name: "dev-api"
     ports:
-      - 8080:80
+      - 8081:80
+    expose:
+      - 8081
     depends_on:
       - pg
     links:
@@ -41,8 +43,22 @@ services:
     command: yarn dev
     volumes:
       - .:/usr/src/app
-      - /etc/letsencrypt:/etc/letsencrypt
       - "/etc/localtime:/etc/localtime:ro"
+    networks:
+      - redePostgres
+  
+  dev-view:
+    image: joaomede/nodejs12prod:1.0
+    container_name: "dev-view"
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    env_file:
+      - .env
+    command: yarn dev:pwa
+    volumes:
+      - ./view:/usr/src/app
     networks:
       - redePostgres
 
