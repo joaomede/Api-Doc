@@ -16,7 +16,7 @@ Api doc is a CRUD api documenter, this system is part of my personal portfolio, 
 
 ## Get Started
 ### See Full [Documentation](https://joaomede.github.io/Api-Doc)
-### Precisa começar rápido? vá de docker [Docker Compose Settings](https://joaomede.github.io/Api-Doc/pages/Docker.html)
+### Need to get started fast? go docker [Docker Compose Settings](https://joaomede.github.io/Api-Doc/pages/Docker.html)
 
 
 ### Features
