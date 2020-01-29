@@ -104,7 +104,7 @@ class ApiQuery {
   }
 
   /**
-   * @description Get a list Path[Responses]
+   * @description Get a Path and all Responses related
    * @param tagId Tag ID
    */
   public async getPathAndResponsesQuery (tagId: string): Promise<I.Path[]> {
@@ -116,6 +116,30 @@ class ApiQuery {
       return list
     } catch (error) {
       throw new Error('Erro ao tentar expandir')
+    }
+  }
+
+  /**
+   * @description Get a Api and all Tags related
+   * @param apiId API ID
+   * @param userId User ID
+   */
+  public async getApiAndTagsQuery (apiId: number, userId: number): Promise<I.Api> {
+    try {
+      const api = await knex('api').where({ id: apiId })
+      const tags = await knex('tags').where({ apiIdFk: apiId })
+      if (api.length === 0) {
+        throw new Error('A api que você está tentando acessar não foi encontrada')
+      } else {
+        api[0].tags = tags
+        if (api[0].userIdFk === userId) {
+          return api[0]
+        } else {
+          throw new Error('Você não tem autorização para acessar essa documentação')
+        }
+      }
+    } catch (error) {
+      throw new Error('Erro ao tentar carregar a documentação')
     }
   }
 }

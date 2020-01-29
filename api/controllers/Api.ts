@@ -1,4 +1,3 @@
-import { knex } from '../db/connection'
 import { NewRequest } from '../interface/NewRequest'
 import { Response } from 'express'
 import resp from 'resp-express'
@@ -69,23 +68,13 @@ class Api {
 
   public async getApiAndTags (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
+    const apiId = Number(id)
 
     try {
-      const api = await knex('api').where({ id: id })
-      const tags = await knex('tags').where({ apiIdFk: id })
-      api[0].tags = tags
-
-      if (api.length === 0) {
-        resp.returnErrorMessage(res, 'A api que você está tentando acessar não foi encontrada')
-      } else {
-        if (api[0].userIdFk === req.userId) {
-          resp.returnSucessObject(res, api[0])
-        } else {
-          resp.returnErrorMessage(res, 'Você não tem autorização para acessar essa documentação')
-        }
-      }
+      const api = await query.api.getApiAndTagsQuery(apiId, req.userId)
+      resp.returnSucessObject(res, api)
     } catch (error) {
-      resp.returnErrorMessage(res, 'Erro ao tentar carregar a documentação')
+      resp.returnErrorMessage(res, error.message)
     }
   }
 
