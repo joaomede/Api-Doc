@@ -6,6 +6,7 @@ Api Doc is an OpenSource application developed to help in the documentation of A
 ## Features
 Here are some of the functions that the software has to offer
 
+- [x] Dockerized? Yes!
 - [x] Login and Register, Change Password
 - [x] Team System
 - [x] Api Documentation "private and public"

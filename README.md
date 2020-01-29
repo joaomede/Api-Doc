@@ -16,9 +16,12 @@ Api doc is a CRUD api documenter, this system is part of my personal portfolio, 
 
 ## Get Started
 ### See Full [Documentation](https://joaomede.github.io/Api-Doc)
+### Precisa começar rápido? vá de docker [Docker Compose Settings](https://joaomede.github.io/Api-Doc/pages/Docker.html)
+
 
 ### Features
 
+- [x] Dockerized? Yes!
 - [x] Login and Register, Change Password
 - [x] Team System
 - [x] Api Documentation "private and public"

@@ -7,14 +7,10 @@ For the application to work correctly, it is necessary to first configure the en
 
 #### The .env file for backend
 
-**PORTHOST**: HTTP server port; ex.: 80  
-**PORTDB**: Database port; ex.:5432  
-**HOSTDB**: Ip for host database "external" ex.: 168.168.168.16  
 **POSTGRES_USER**: User database, default is admin or postgres  
 **POSTGRES_PASSWORD**: Database password  
 **POSTGRES_DB**: Database name  
 **NODE_ENV**: Mode system: dev or prod  
-**DOMAIN**: The name your domain, ex.: example.com  
 **HOSTSMTP**: smtp.gmail.com  
 **PORTSMTP**: 587  
 **EMAIL**: @gmail.com  
@@ -22,7 +18,7 @@ For the application to work correctly, it is necessary to first configure the en
 **SECRET**: The key for your api  
 
 #### The .env file for frontend
-**APIURL**: Path to api, ex.: https://example.com  
+**APIURL**: "FOR DEV", default http://localhost:8081  
 **VERSION**: For Show Version in Footer and Header frontend
 
 ## How to Install
