@@ -29,7 +29,7 @@ services:
     image: joaomede/nodejs12prod:1.0
     container_name: "server-api-doc"
     ports:
-      - ${PORTHOST}:${PORTHOST}
+      - 8080:80
     depends_on:
       - pg
     links:
@@ -38,9 +38,7 @@ services:
       HOSTDB: pg
     env_file:
       - .env
-    command: node dist/Server
-    expose:
-      - ${PORTHOST}
+    command: yarn dev
     volumes:
       - .:/usr/src/app
       - /etc/letsencrypt:/etc/letsencrypt
