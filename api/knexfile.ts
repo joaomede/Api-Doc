@@ -6,7 +6,7 @@ export default {
   dev: {
     client: 'pg',
     connection: {
-      port: process.env.PORTDB,
+      port: 5432,
       host: process.env.HOSTDB,
       user: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
@@ -31,7 +31,7 @@ export default {
   prod: {
     client: 'pg',
     connection: {
-      port: process.env.PORTDB,
+      port: 5432,
       host: process.env.HOSTDB,
       user: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
