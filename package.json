@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@hapi/joi": "^16.1.8",
+    "api-doc-js-sdk": "^1.0.0",
     "bcrypt": "^3.0.7",
     "connect-history-api-fallback": "^1.6.0",
     "cors": "^2.8.5",
