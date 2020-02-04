@@ -22,7 +22,8 @@ For the application to work correctly, it is necessary to first configure the en
 **VERSION**: For Show Version in Footer and Header frontend
 
 ## How to Install
-The use of the docker in production is highly recommended
+The use of the docker in production is highly recommended,
+OBS: All scripts are in the "scripts" folder
 
 #### Production
 ```shell
