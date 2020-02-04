@@ -1,4 +1,4 @@
-import { knex } from '../db/connection'
+import apiDoc from '../config/api'
 import { NewRequest } from '../interface/NewRequest'
 import resp from 'resp-express'
 import { Response } from 'express'

@@ -2,6 +2,7 @@ import * as jwt from 'jsonwebtoken'
 import * as dotenv from 'dotenv'
 import { Response, NextFunction } from 'express'
 import { NewRequest } from '../interface/NewRequest'
+import apiDoc from '../config/api'
 import resp from 'resp-express'
 dotenv.config()
 

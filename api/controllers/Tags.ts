@@ -1,6 +1,6 @@
 import { NewRequest } from '../interface/NewRequest'
 import { Response } from 'express'
-import { knex } from '../db/connection'
+import apiDoc from '../config/api'
 import resp from 'resp-express'
 
 class EndPoint {

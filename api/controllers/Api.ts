@@ -1,7 +1,7 @@
 import { NewRequest } from '../interface/NewRequest'
 import { Response } from 'express'
 import resp from 'resp-express'
-import query from '../query'
+import apiDoc from '../config/api'
 
 class Api {
   public async store (req: NewRequest, res: Response): Promise<void> {
