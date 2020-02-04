@@ -8,7 +8,7 @@ export default new class EndPoint {
     const { apiId } = req.params
 
     try {
-      const result = apiDoc.createNewTag(req.userId, Number(apiId), req.body)
+      const result = await apiDoc.createNewTag(req.userId, Number(apiId), req.body)
       resp.returnSucessObject(res, result)
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
@@ -18,7 +18,7 @@ export default new class EndPoint {
   public async update (req: NewRequest, res: Response): Promise<void> {
     const id = req.params.id
     try {
-      apiDoc.updateResponse(req.userId, Number(id), req.body)
+      await apiDoc.updateTag(req.userId, Number(id), req.body)
       resp.returnSucessMessage(res, 'Api atualizada com sucesso')
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
@@ -29,7 +29,7 @@ export default new class EndPoint {
     const { apiId } = req.params
 
     try {
-      const tags = apiDoc.findAllTagByUserIdAndApiId(req.userId, Number(apiId))
+      const tags = await apiDoc.findAllTagByUserIdAndApiId(req.userId, Number(apiId))
       resp.returnSucessObject(res, tags)
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
