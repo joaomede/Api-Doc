@@ -44,7 +44,7 @@ routes.delete('/api/tags/delete/:id', cTags.destroy)
 routes.put('/api/tags/update/:id', cTags.update)
 
 // * //
-// Verbs
+// Paths
 routes.post('/api/paths/create/:tagId', cPaths.store)
 routes.get('/api/paths/getall/:tagId', cPaths.index)
 routes.delete('/api/paths/delete/:id', cPaths.destroy)
@@ -52,8 +52,8 @@ routes.put('/api/paths/update/:id', cPaths.update)
 
 // * //
 // Codes Response
-routes.post('/api/responses/create/:verbId', cResponses.store)
-routes.get('/api/responses/getall/:verbId', cResponses.index)
+routes.post('/api/responses/create/:pathId', cResponses.store)
+routes.get('/api/responses/getall/:pathId', cResponses.index)
 routes.delete('/api/responses/delete/:id', cResponses.destroy)
 routes.put('/api/responses/update/:id', cResponses.update)
 
