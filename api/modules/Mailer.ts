@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import hbs from 'nodemailer-express-handlebars'
-import { config } from '../config/config'
+import { config } from '../config/smtp'
 import path = require('path')
 
 const { host, port, secure, user, pass, tls } = config
