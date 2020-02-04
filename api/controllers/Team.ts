@@ -25,7 +25,7 @@ class Team {
 
   public async index (req: NewRequest, res: Response): Promise<void> {
     try {
-      const team = await apiDoc.listTeamsOwner(req.userId)
+      const team = await apiDoc.getAllTeamByUserId(req.userId)
       resp.returnSucessObject(res, team)
     } catch (error) {
       resp.returnErrorMessage(res, error)
