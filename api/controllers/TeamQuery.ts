@@ -4,7 +4,7 @@ import { NewRequest } from '../interface/NewRequest'
 import { Response } from 'express'
 import resp from 'resp-express'
 
-class ApiTeam {
+export default new class ApiTeam {
   public async getApiAndTags (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
 
@@ -44,6 +44,4 @@ class ApiTeam {
       resp.returnErrorMessage(res, error.message)
     }
   }
-}
-
-export default new ApiTeam()
+}()

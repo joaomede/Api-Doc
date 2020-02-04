@@ -3,7 +3,7 @@ import { Response, Request } from 'express'
 import resp from 'resp-express'
 import { NewRequest } from '../interface/NewRequest'
 
-class Auth {
+export default new class Auth {
   public async register (req: Request, res: Response): Promise<void> {
     const { name, email, password } = req.body
     try {
@@ -62,6 +62,4 @@ class Auth {
     //   })
     // }
   }
-}
-
-export default new Auth()
+}()

@@ -3,7 +3,7 @@ import { NewRequest } from '../interface/NewRequest'
 import { Response } from 'express'
 import resp from 'resp-express'
 
-class Path {
+export default new class Path {
   public async store (req: NewRequest, res: Response): Promise<void> {
     const { tagId } = req.params
     try {
@@ -43,6 +43,4 @@ class Path {
       resp.returnErrorMessage(res, error.message)
     }
   }
-}
-
-export default new Path()
+}()

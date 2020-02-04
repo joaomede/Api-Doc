@@ -3,7 +3,7 @@ import apiDoc from '../config/api'
 import { NewRequest } from '../interface/NewRequest'
 import resp from 'resp-express'
 
-class Team {
+export default new class Team {
   public async store (req: NewRequest, res: Response): Promise<void> {
     try {
       const message = await apiDoc.createTeam(req.userId, req.body)
@@ -71,6 +71,4 @@ class Team {
       resp.returnErrorMessage(res, error.message)
     }
   }
-}
-
-export default new Team()
+}()
