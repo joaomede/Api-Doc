@@ -18,8 +18,8 @@ export default new class Geral {
   public async getPathAndResponses (req: NewRequest, res: Response): Promise<void> {
     const { tagId } = req.params
     try {
-      const pathAndCores = await apiDoc.getPathAndResponsesPublic(Number(tagId))
-      resp.returnSucessObject(res, pathAndCores)
+      const pathAndResponses = await apiDoc.getPathAndResponsesPublic(apiDoc.knex(), Number(tagId))
+      resp.returnSucessObject(res, pathAndResponses)
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
     }

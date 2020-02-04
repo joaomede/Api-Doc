@@ -19,7 +19,7 @@ export default new class ApiTeam {
   public async getPathAndResponses (req: NewRequest, res: Response): Promise<void> {
     const { id, tagId } = req.params
     try {
-      const pathAndResponse = await apiDoc.getPathAndResponsesTeam(req.userId, Number(tagId), Number(id))
+      const pathAndResponse = await apiDoc.getPathAndResponsesTeam(apiDoc.knex(), req.userId, Number(tagId), Number(id))
       resp.returnSucessObject(res, pathAndResponse)
     } catch (error) {
       resp.returnErrorMessage(res, error.message)

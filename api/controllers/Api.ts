@@ -82,13 +82,13 @@ export default new class Api {
     const { tagId } = req.params
 
     try {
-      const verbAndCodes = await apiDoc.getPathAndResponses(tagId)
+      const pathAndResponses = await apiDoc.getPathAndResponses(apiDoc.knex(), tagId)
 
-      if (verbAndCodes.length === 0) {
+      if (pathAndResponses.length === 0) {
         resp.returnErrorMessage(res, 'Não há verbos disponíveis')
       } else {
-        if (verbAndCodes[0].userIdFk === req.userId) {
-          resp.returnSucessObject(res, verbAndCodes)
+        if (pathAndResponses[0].userIdFk === req.userId) {
+          resp.returnSucessObject(res, pathAndResponses)
         } else {
           resp.returnErrorMessage(res, 'Você não tem autorização para acessar essa documentação')
         }
