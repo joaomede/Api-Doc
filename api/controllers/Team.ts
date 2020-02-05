@@ -47,7 +47,7 @@ export default new class Team {
       await apiDoc.addMember(req.userId, req.body)
       resp.returnSucessMessage(res, 'Membro adicionado com sucesso')
     } catch (error) {
-      resp.returnErrorMessage(res, error)
+      resp.returnErrorMessage(res, error.message)
     }
   }
 
@@ -65,7 +65,7 @@ export default new class Team {
     const { teamIdFk } = req.params
 
     try {
-      const team = apiDoc.listAllMembers(req.userId, Number(teamIdFk))
+      const team = await apiDoc.listAllMembers(req.userId, Number(teamIdFk))
       resp.returnSucessObject(res, team)
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
