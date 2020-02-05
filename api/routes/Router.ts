@@ -18,7 +18,7 @@ routes.use(CheckJwt.checkJwt)
 // Teams
 routes.post('/api/team/create', cTeam.store)
 routes.get('/api/team/getall', cTeam.index)
-routes.put('/api/team/update/:id', cTeam.update)
+// routes.put('/api/team/update/:id', cTeam.update)
 routes.delete('/api/team/delete/:id', cTeam.destroy)
 routes.post('/api/team/addmember', cTeam.addMember)
 routes.delete('/api/team/deletemember/:id', cTeam.removeMember)
