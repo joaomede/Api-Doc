@@ -7,6 +7,4 @@ install='yarn -i'
 
 cd ..
 $dockerRun -v $(pwd):$workDir $dockerImage $install
-cd view
-$dockerRun -v $(pwd):$workDir $dockerImage $install
-cd ..
+$dockerRun -v $(pwd)/view:$workDir $dockerImage $install

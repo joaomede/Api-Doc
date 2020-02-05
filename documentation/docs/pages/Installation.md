@@ -25,71 +25,33 @@ For the application to work correctly, it is necessary to first configure the en
 The use of the docker in production is highly recommended,
 OBS: All scripts are in the "scripts" folder
 
-#### Production
+## Install
+It is highly recommended to use the docker image that already brings the environment ready for production
+
 ```shell
-$ chmod 777 install.sh
-$ ./install.sh
-```
-#### Development
-```shell
-$ yarn install
-$ cd view && yarn install
-# or
-$ npm run install
-$ cd view && npm run install
+$ sudo chmod 777 scripts/install.sh
+$ sudo ./scripts/install.sh
 ```
 
-## How to Build
-#### Production
+## Development
 ```shell
-$ chmod 777 build.sh
-$ ./build.sh
+$ sudo docker-compose up
 ```
 
-#### Development
+## Build (not necessary for production using offical docker image)
 ```shell
-$ yarn build
-$ yarn build:view
-# or
-$ npm run build
-$ npm run build:view
+$ sudo chmod 777 /scripts/build.sh
+$ sudo ./scripts/build.sh
 ```
 
-## How to Serve
-
-#### Production
+## Serve
 ```shell
-$ docker-compose up -d
+$ cd .docker && sudo docker-compose up -d
 ```
 
-#### Development
+## Migrate
+For the migration to work, it is necessary first, that the database is running, for that, it is possible to up the database with the command "sudo docker-compose up in dev or serve production", running directly from the project root
 ```shell
-$ yarn dev
-$ cd view && yarn dev
-# or
-$ npm run dev
-$ cd view && npm run dev
-```
-
-## How to Migrate
-For the migration to work, it is necessary first, that the database is running, for that, it is possible to up the database with the command "sudo docker-compose up -d", running directly from the project root
-
-#### Production
-```shell
-$ chmod 777 migrate.sh
-$ ./migrate.sh
-```
-
-#### Development
-##### Migration Up
-```shell
-$ yarn migrate
-# or
-$ npm run migrate
-```
-##### Migration Down
-```shell
-$ yarn migratedown
-# or
-$ npm run migratedown
+$ sudo chmod /scripts/migrate.sh
+$ sudo ./scripts/migrate.sh
 ```
