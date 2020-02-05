@@ -7,7 +7,7 @@ export default new class Path {
   public async store (req: NewRequest, res: Response): Promise<void> {
     const { tagId } = req.params
     try {
-      const result = await apiDoc.createPath(req.userId, Number(tagId), req.body)
+      const result = await apiDoc.createNewPath(req.userId, Number(tagId), req.body)
       resp.returnSucessObject(res, result)
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
@@ -37,7 +37,7 @@ export default new class Path {
   public async destroy (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
     try {
-      await apiDoc.deletePath(req.userId, Number(id))
+      await apiDoc.deletePathById(req.userId, Number(id))
       resp.returnSucessMessage(res, 'Verbo apagado com sucesso')
     } catch (error) {
       resp.returnErrorMessage(res, error.message)

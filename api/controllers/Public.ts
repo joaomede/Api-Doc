@@ -27,7 +27,7 @@ export default new class Geral {
 
   public async listAllPublicApi (req: NewRequest, res: Response): Promise<void> {
     try {
-      const allPublicList = await apiDoc.listAllPublicApi()
+      const allPublicList = await apiDoc.getAllPublicApi()
       resp.returnSucessObject(res, allPublicList)
     } catch (error) {
       resp.returnErrorMessage(res, error.message)

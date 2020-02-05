@@ -16,7 +16,7 @@ export default new class Api {
   public async update (req: NewRequest, res: Response): Promise<void> {
     const id = req.params.id
     try {
-      await apiDoc.updateApi(req.userId, Number(id), req.body)
+      await apiDoc.updateApiById(req.userId, Number(id), req.body)
       resp.returnSucessMessage(res, 'Api atualizada com sucesso')
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
@@ -59,7 +59,7 @@ export default new class Api {
     }
 
     try {
-      await apiDoc.deleteApi(req.userId, Number(id))
+      await apiDoc.deleteApiById(req.userId, Number(id))
       resp.returnSucessMessage(res, 'Documentação deletada com sucesso')
     } catch (error) {
       resp.returnErrorMessage(res, error.message)

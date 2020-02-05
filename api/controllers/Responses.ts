@@ -37,7 +37,7 @@ export default new class Responses {
   public async destroy (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
     try {
-      await apiDoc.deleteResponse(req.userId, Number(id))
+      await apiDoc.deleteResponseById(req.userId, Number(id))
       resp.returnSucessMessage(res, 'Código resposta apagado com sucesso')
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
