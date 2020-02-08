@@ -18,6 +18,7 @@ Api doc is a CRUD api documenter, this system is part of my personal portfolio, 
 ### See Full [Documentation](https://joaomede.github.io/Api-Doc)
 ### Need to get started fast? go docker [Docker Compose Settings](https://joaomede.github.io/Api-Doc/pages/Docker.html)
 
+<a href="https://www.buymeacoffee.com/iSTozIC" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/arial-blue.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
 
 ### Features
 
