@@ -12,19 +12,6 @@ services:
     networks:
       - redePostgres
 
-  # pgadmin:
-  #   container_name: pgadmin
-  #   image: dpage/pgadmin4
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
-  #     PGADMIN_DEFAULT_PASSWORD: "admin"
-  #   ports:
-  #     - "8888:80"
-  #   depends_on:
-  #     - pg
-  #   networks:
-  #     - redePostgres
-
   dev-api:
     image: joaomede/nodejs12prod:1.0
     container_name: "dev-api"
@@ -40,7 +27,7 @@ services:
       HOSTDB: pg
     env_file:
       - .env
-    command: yarn dev
+    command: ./scripts/dev.sh
     volumes:
       - .:/usr/src/app
       - "/etc/localtime:/etc/localtime:ro"
@@ -54,8 +41,10 @@ services:
       - 8080:8080
     expose:
       - 8080
-    env_file:
-      - .env
+    depends_on:
+      - dev-api
+    links:
+      - dev-api
     command: yarn dev:pwa
     volumes:
       - ./view:/usr/src/app
