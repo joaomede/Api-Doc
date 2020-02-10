@@ -19,8 +19,6 @@ API Doc is an API Rest test technology, it works as a CRUD, where you can access
 ### See Full [Documentation](https://joaomede.github.io/Api-Doc)
 ### Need to get started fast? go docker [Docker Compose Settings](https://joaomede.github.io/Api-Doc/pages/Docker.html)
 
-<a href="https://www.buymeacoffee.com/iSTozIC" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-blue.png" alt="Buy Me A Coffee" style="height: 30px !important;width 150px !important;" ></a>
-
 ### Features
 
 - [x] Dockerized? Yes!
