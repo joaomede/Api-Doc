@@ -1,9 +1,7 @@
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-export const config = {
-  host: process.env.HOSTSMTP,
-  port: process.env.PORTSMTP,
+export const smtp = {
   secure: false,
   user: process.env.EMAIL,
   pass: process.env.PASSWORDSMPT,

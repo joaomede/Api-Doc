@@ -5,7 +5,6 @@ dockerImage='joaomede/nodejs12prod:1.0'
 workDir='/usr/src/app'
 install='yarn -i'
 
-$dockerRun -v $(pwd):$workDir $dockerImage $install
-cd view
-$dockerRun -v $(pwd):$workDir $dockerImage $install
 cd ..
+$dockerRun -v $(pwd):$workDir $dockerImage $install
+$dockerRun -v $(pwd)/view:$workDir $dockerImage $install

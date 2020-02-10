@@ -3,7 +3,7 @@
 
 version='v1.4.1'
 
-chmod 777 init.sh
+cd ..
 yarn build
 yarn build:view
 docker build -t joaomede/apidoc:${version} . 

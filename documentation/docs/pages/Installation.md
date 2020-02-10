@@ -7,14 +7,19 @@ For the application to work correctly, it is necessary to first configure the en
 
 #### The .env file for backend
 
+# Database Settings
 **POSTGRES_USER**: User database, default is admin or postgres  
 **POSTGRES_PASSWORD**: Database password  
 **POSTGRES_DB**: Database name  
+
+# MODE
 **NODE_ENV**: Mode system: dev or prod  
-**HOSTSMTP**: smtp.gmail.com  
-**PORTSMTP**: 587  
+
+# SMTP Settings
 **EMAIL**: @gmail.com  
 **PASSSWORDSMTP**: 123  
+
+# Secrete KEY (API KEY)
 **SECRET**: The key for your api  
 
 #### The .env file for frontend
@@ -22,73 +27,37 @@ For the application to work correctly, it is necessary to first configure the en
 **VERSION**: For Show Version in Footer and Header frontend
 
 ## How to Install
-The use of the docker in production is highly recommended
+The use of the docker in production is highly recommended,
+OBS: All scripts are in the "scripts" folder
 
-#### Production
+## Install
+It is highly recommended to use the docker image that already brings the environment ready for production
+
 ```shell
-$ chmod 777 install.sh
-$ ./install.sh
-```
-#### Development
-```shell
-$ yarn install
-$ cd view && yarn install
-# or
-$ npm run install
-$ cd view && npm run install
+$ sudo chmod 777 scripts/install.sh
+$ sudo ./scripts/install.sh
 ```
 
-## How to Build
-#### Production
+## Development
+first make a .env file, and...
 ```shell
-$ chmod 777 build.sh
-$ ./build.sh
+$ sudo docker-compose up
 ```
 
-#### Development
+## Build (needed only if you are not going to create a build docker)
 ```shell
-$ yarn build
-$ yarn build:view
-# or
-$ npm run build
-$ npm run build:view
+$ sudo chmod 777 /scripts/build.sh
+$ sudo ./scripts/build.sh
 ```
 
-## How to Serve
-
-#### Production
+## Serve
 ```shell
-$ docker-compose up -d
+$ cd .docker && sudo docker-compose up -d
 ```
 
-#### Development
+## Migrate
+when executing the development container the migrate command will be executed automatically, however, if you need to perform the migration for any other reason, follow the instruction:
 ```shell
-$ yarn dev
-$ cd view && yarn dev
-# or
-$ npm run dev
-$ cd view && npm run dev
-```
-
-## How to Migrate
-For the migration to work, it is necessary first, that the database is running, for that, it is possible to up the database with the command "sudo docker-compose up -d", running directly from the project root
-
-#### Production
-```shell
-$ chmod 777 migrate.sh
-$ ./migrate.sh
-```
-
-#### Development
-##### Migration Up
-```shell
-$ yarn migrate
-# or
-$ npm run migrate
-```
-##### Migration Down
-```shell
-$ yarn migratedown
-# or
-$ npm run migratedown
+$ sudo chmod 777 /scripts/migrate.sh
+$ sudo ./scripts/migrate.sh
 ```

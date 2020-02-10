@@ -1,29 +1,13 @@
-import nodemailer from 'nodemailer'
-import hbs from 'nodemailer-express-handlebars'
-import { config } from '../config/config'
-import path = require('path')
+import { smtp } from '../config/smtp'
+import nodemailer = require('nodemailer')
 
-const { host, port, secure, user, pass, tls } = config
+const { secure, user, pass, tls } = smtp
 
 const transport = nodemailer.createTransport({
-  host,
-  port,
+  service: 'gmail',
   secure,
   auth: { user, pass },
   tls
 })
-
-const handlebarOptions = {
-  viewEngine: {
-    extname: '.html',
-    defaultLayout: 'forgot_password',
-    partialsDir: path.join(__dirname, '../resources/mail/auth/'),
-    layoutsDir: path.join(__dirname, '../resources/mail/auth/')
-  },
-  viewPath: 'src/resources/mail',
-  extName: '.html'
-}
-
-transport.use('compile', hbs(handlebarOptions))
 
 export default transport

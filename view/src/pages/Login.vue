@@ -66,8 +66,7 @@ export default {
     async login () {
       try {
         const result = await this.$axios.post('api/auth/login', { email: this.email, password: this.senha })
-        const { id, email, name } = await result.data.user
-        const token = await result.data.token
+        const { id, email, name, token } = await result.data
         const user = {
           id: id,
           name: name,
@@ -79,7 +78,7 @@ export default {
         this.$q.localStorage.set('user', user)
         this.$store.dispatch('boot')
         this.$router.replace('dash')
-        this.$notify(`Bem vindo de volta ${result.data.user.name}!`, 'green')
+        this.$notify(`Bem vindo de volta ${result.data.name}!`, 'green')
       } catch (error) {
         this.$notify('Erro ao tentar efetuar o login', 'red')
       }

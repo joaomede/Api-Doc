@@ -73,7 +73,7 @@ export async function setApiData (state, id) {
 export async function setPathsByTagIndex (state, tag) {
   if (tag[1] === 'DocView') {
     try {
-      const result = await axios.get(state.urlApi + `api/api/getPathAndResponses/${tag[0]}`, { headers: state.user.headers })
+      const result = await axios.get(state.urlApi + `api/api/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
       Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
     } catch (error) {
       // console.log(error.response.data.error)
@@ -81,7 +81,7 @@ export async function setPathsByTagIndex (state, tag) {
   }
   if (tag[1] === 'DocViewTeam') {
     try {
-      const result = await axios.get(state.urlApi + `api/teamdocs/api/getPathAndResponses/${state.rulesId}/${tag[0]}`, { headers: state.user.headers })
+      const result = await axios.get(state.urlApi + `api/teamdocs/api/getpathsandresponses/${state.rulesId}/${tag[0]}`, { headers: state.user.headers })
       Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
     } catch (error) {
       // console.log(error.response.data.error)
@@ -135,35 +135,29 @@ export function setResponseIndex (state, responseIndex) {
 }
 
 export function setNewTag (state, tag) {
-  let index
   if (state.apiData.tags === undefined) {
-    index = 0
-    Vue.set(state.apiData, 'tags', tag)
+    Vue.set(state.apiData[0], 'tags', tag)
   } else {
-    index = state.apiData.tags.length
-    Vue.set(state.apiData.tags, index, tag[0])
+    let index = state.apiData.tags.length
+    Vue.set(state.apiData.tags, index, tag)
   }
 }
 
 export function setNewPath (state, newPath) {
-  let index
   if (state.apiData.tags[state.tagIndex].paths === undefined) {
-    index = 0
-    Vue.set(state.apiData.tags[state.tagIndex], 'paths', newPath)
+    Vue.set(state.apiData.tags[0], 'paths', [newPath])
   } else {
-    index = state.apiData.tags[state.tagIndex].paths.length
-    Vue.set(state.apiData.tags[state.tagIndex].paths, index, newPath[0])
+    let index = state.apiData.tags[state.tagIndex].paths.length
+    Vue.set(state.apiData.tags[state.tagIndex].paths, index, newPath)
   }
 }
 
 export function setNewResponse (state, newResponse) {
-  let index
   if (state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses === undefined) {
-    index = 0
-    Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex], 'responses', newResponse)
+    Vue.set(state.apiData.tags[state.tagIndex].paths[0], 'responses', [newResponse])
   } else {
-    index = state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses.length
-    Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses, index, newResponse[0])
+    let index = state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses.length
+    Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses, index, newResponse)
   }
 }
 

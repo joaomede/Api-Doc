@@ -1,12 +1,12 @@
 import { NewRequest } from '../interface/NewRequest'
 import { Response } from 'express'
 import resp from 'resp-express'
-import query from '../query'
+import apiDoc from '../config/api'
 
-class Api {
+export default new class Api {
   public async store (req: NewRequest, res: Response): Promise<void> {
     try {
-      await query.api.createNewApiDoc(req.body, req.userId)
+      await apiDoc.createNewApiDoc(req.userId, req.body)
       resp.returnSucessMessage(res, 'Api adicionada com sucesso')
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
@@ -16,7 +16,7 @@ class Api {
   public async update (req: NewRequest, res: Response): Promise<void> {
     const id = req.params.id
     try {
-      await query.api.updateApi(id, req.body, req.userId)
+      await apiDoc.updateApiById(req.userId, Number(id), req.body)
       resp.returnSucessMessage(res, 'Api atualizada com sucesso')
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
@@ -25,7 +25,7 @@ class Api {
 
   public async index (req: NewRequest, res: Response): Promise<void> {
     try {
-      const allApiByUser = await query.api.getAllApiByUser(req.userId)
+      const allApiByUser = await apiDoc.getAllApiByUser(req.userId)
       resp.returnSucessObject(res, allApiByUser)
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
@@ -34,7 +34,7 @@ class Api {
 
   public async indexPrivate (req: NewRequest, res: Response): Promise<void> {
     try {
-      const allApiByUser = await query.api.getAllApiByUserAndVisibility(req.userId, false)
+      const allApiByUser = await apiDoc.getAllApiByUserAndVisibility(req.userId, false)
       resp.returnSucessObject(res, allApiByUser)
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
@@ -44,7 +44,7 @@ class Api {
   public async indexOne (req: NewRequest, res: Response): Promise<void> {
     const { apiId } = req.params
     try {
-      const api = await query.api.getOneApi(apiId, req.userId)
+      const api = await apiDoc.getOneApi(req.userId, Number(apiId))
       resp.returnSucessObject(res, api)
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
@@ -59,7 +59,7 @@ class Api {
     }
 
     try {
-      await query.api.deleteApi(id, req.userId)
+      await apiDoc.deleteApiById(req.userId, Number(id))
       resp.returnSucessMessage(res, 'Documentação deletada com sucesso')
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
@@ -71,7 +71,7 @@ class Api {
     const apiId = Number(id)
 
     try {
-      const api = await query.api.getApiAndTagsQuery(apiId, req.userId)
+      const api = await apiDoc.getApiAndTags(req.userId, apiId)
       resp.returnSucessObject(res, api)
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
@@ -82,13 +82,13 @@ class Api {
     const { tagId } = req.params
 
     try {
-      const verbAndCodes = await query.api.getPathAndResponsesQuery(tagId)
+      const pathAndResponses = await apiDoc.getPathAndResponses(apiDoc.knex(), tagId)
 
-      if (verbAndCodes.length === 0) {
+      if (pathAndResponses.length === 0) {
         resp.returnErrorMessage(res, 'Não há verbos disponíveis')
       } else {
-        if (verbAndCodes[0].userIdFk === req.userId) {
-          resp.returnSucessObject(res, verbAndCodes)
+        if (pathAndResponses[0].userIdFk === req.userId) {
+          resp.returnSucessObject(res, pathAndResponses)
         } else {
           resp.returnErrorMessage(res, 'Você não tem autorização para acessar essa documentação')
         }
@@ -97,6 +97,4 @@ class Api {
       resp.returnErrorMessage(res, error.message)
     }
   }
-}
-
-export default new Api()
+}()

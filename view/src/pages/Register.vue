@@ -74,10 +74,8 @@ export default {
   methods: {
     async register () {
       try {
-        await this.$axios.post('api/auth/register', this.newUser)
-        const result = await this.$axios.post('api/auth/login', { email: this.newUser.email, password: this.newUser.password })
-        const { id, email, name } = await result.data.user
-        const token = await result.data.token
+        const result = await this.$axios.post('api/auth/register', this.newUser)
+        const { id, email, name, token } = await result.data
         const user = {
           id: id,
           name: name,
@@ -89,7 +87,7 @@ export default {
         this.$q.localStorage.set('user', user)
         this.$store.dispatch('boot')
         this.$router.replace('dash')
-        this.$notify(`Bem vindo ${result.data.user.name}!`, 'green')
+        this.$notify(`Bem vindo ${result.data.name}!`, 'green')
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
       }

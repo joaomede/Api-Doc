@@ -37,6 +37,7 @@ function genSidebarConfig (title) {
         'Docker',
         'Installation',
         'Contribution',
+        'SDK',
         'Internalization',
         'About',
       ]

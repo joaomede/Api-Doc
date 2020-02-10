@@ -1,21 +1,18 @@
-import * as dotenv from 'dotenv'
-import * as knex from 'knex'
+import ApiDoc from 'api-doc-js-sdk'
+import * as env from './env'
 import * as path from 'path'
-dotenv.config()
-export default {
+
+const config = {
   dev: {
     client: 'pg',
     connection: {
-      port: 5432,
+      port: process.env.PORTDB,
       host: process.env.HOSTDB,
       user: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB
     },
-    migrations: {
-      extension: 'ts',
-      directory: path.join(__dirname, './migrations')
-    }
+    pool: { min: 0, max: 10, idleTimeoutMillis: 500 }
   },
   dev1: {
     client: 'sqlite3',
@@ -31,7 +28,7 @@ export default {
   prod: {
     client: 'pg',
     connection: {
-      port: 5432,
+      port: process.env.PORTDB,
       host: process.env.HOSTDB,
       user: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
@@ -42,4 +39,6 @@ export default {
       directory: path.join(__dirname, './migrations')
     }
   }
-} as knex.Config
+}
+
+export default new ApiDoc(config.dev, env.env.secret)

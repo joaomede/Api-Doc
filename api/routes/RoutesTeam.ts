@@ -13,6 +13,6 @@ routes.delete('/api/teamdocs/delete/:id', cTeamQuery.exitTeam)
 
 // // API populate
 routes.get('/api/teamdocs/api/getapiandtags/:id', cTeamQuery.getApiAndTags)
-routes.get('/api/teamdocs/api/getPathAndResponses/:id/:tagId', cTeamQuery.getPathAndResponses)
+routes.get('/api/teamdocs/api/getpathsandresponses/:id/:tagId', cTeamQuery.getPathAndResponses)
 
 export default routes

@@ -8,6 +8,6 @@ COPY node_modules /usr/src/app/node_modules
 COPY package.json /usr/src/app/package.json
 COPY yarn.lock /usr/src/app/yarn.lock
 COPY view/dist /usr/src/app/view/dist
-COPY init.sh /usr/src/app/init.sh
+COPY scripts/init.sh /usr/src/app/init.sh
 
 ENTRYPOINT [ "./init.sh" ]

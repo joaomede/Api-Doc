@@ -33,8 +33,6 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: databaseName
       NODE_ENV: dev
-      HOSTSMTP: smtp.gmail.com
-      PORTSMTP: '587'
       EMAIL: a@gmail.com
       PASSSWORDSMTP: 123
       SECRET: teste

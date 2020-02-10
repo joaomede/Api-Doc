@@ -1,1 +1,0 @@
-<p>Você esqueceu sua senha? Não tem problema, utilize esse token: {{token}}</p>
