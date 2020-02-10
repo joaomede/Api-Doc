@@ -7,14 +7,19 @@ For the application to work correctly, it is necessary to first configure the en
 
 #### The .env file for backend
 
+# Database Settings
 **POSTGRES_USER**: User database, default is admin or postgres  
 **POSTGRES_PASSWORD**: Database password  
 **POSTGRES_DB**: Database name  
+
+# MODE
 **NODE_ENV**: Mode system: dev or prod  
-**HOSTSMTP**: smtp.gmail.com  
-**PORTSMTP**: 587  
+
+# SMTP Settings
 **EMAIL**: @gmail.com  
 **PASSSWORDSMTP**: 123  
+
+# Secrete KEY (API KEY)
 **SECRET**: The key for your api  
 
 #### The .env file for frontend
@@ -34,11 +39,12 @@ $ sudo ./scripts/install.sh
 ```
 
 ## Development
+first make a .env file, and...
 ```shell
 $ sudo docker-compose up
 ```
 
-## Build (not necessary for production using offical docker image)
+## Build (needed only if you are not going to create a build docker)
 ```shell
 $ sudo chmod 777 /scripts/build.sh
 $ sudo ./scripts/build.sh
@@ -50,8 +56,8 @@ $ cd .docker && sudo docker-compose up -d
 ```
 
 ## Migrate
-For the migration to work, it is necessary first, that the database is running, for that, it is possible to up the database with the command "sudo docker-compose up in dev or serve production", running directly from the project root
+when executing the development container the migrate command will be executed automatically, however, if you need to perform the migration for any other reason, follow the instruction:
 ```shell
-$ sudo chmod /scripts/migrate.sh
+$ sudo chmod 777 /scripts/migrate.sh
 $ sudo ./scripts/migrate.sh
 ```
