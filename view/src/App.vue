@@ -4,7 +4,6 @@
   >
     <q-layout
       view="lHr lpR lFr"
-      class="non-selectable"
     >
       <Drawer
         v-if="this.$router.currentRoute.name !== 'SharedViewDoc'"
