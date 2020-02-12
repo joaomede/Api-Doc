@@ -34,7 +34,7 @@ services:
       POSTGRES_DB: databaseName
       NODE_ENV: dev
       EMAIL: a@gmail.com
-      PASSSWORDSMTP: 123
+      PASSWORDSMTP: 123
       SECRET: teste
     ports:
       - 8080:80

@@ -17,7 +17,7 @@ For the application to work correctly, it is necessary to first configure the en
 
 # SMTP Settings
 **EMAIL**: @gmail.com  
-**PASSSWORDSMTP**: 123  
+**PASSWORDSMTP**: 123  
 
 # Secrete KEY (API KEY)
 **SECRET**: The key for your api  
