@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - "9.11"
+  - "10.15"
+  - "11.15"
+  - "12.3"
+matrix:
+  include:
+    - node_js: "13"
+      env: "NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly"
+  allow_failures:
+    # Allow the nightly installs to fail
+    - env: "NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly"
+cache:
+  directories:
+    - node_modules
+
+script: echo "npm test temporarily disabled"
+
+scripts:
+  - npm install codecov -g
+after_success:
+  - codecov
