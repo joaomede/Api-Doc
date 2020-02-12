@@ -1,4 +1,5 @@
-![GitHub](https://img.shields.io/github/license/joaomede/api-doc) ![GitHub package.json version](https://img.shields.io/github/package-json/v/joaomede/api-doc) ![GitHub repo size](https://img.shields.io/github/repo-size/joaomede/api-doc)
+[![Build Status](https://travis-ci.com/joaomede/Api-Doc.svg?branch=master)](https://travis-ci.com/joaomede/Api-Doc) [![codecov](https://codecov.io/gh/joaomede/Api-Doc/branch/master/graph/badge.svg)](https://codecov.io/gh/joaomede/Api-Doc)
+ ![GitHub](https://img.shields.io/github/license/joaomede/api-doc) ![GitHub package.json version](https://img.shields.io/github/package-json/v/joaomede/api-doc) ![GitHub repo size](https://img.shields.io/github/repo-size/joaomede/api-doc)
 # Api Doc
 
 ### Mobile
