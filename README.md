@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9442678777064036b2f9d607b6515202)](https://app.codacy.com/manual/joaomede/Api-Doc?utm_source=github.com&utm_medium=referral&utm_content=joaomede/Api-Doc&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.com/joaomede/Api-Doc.svg?branch=master)](https://travis-ci.com/joaomede/Api-Doc) [![codecov](https://codecov.io/gh/joaomede/Api-Doc/branch/master/graph/badge.svg)](https://codecov.io/gh/joaomede/Api-Doc)
  ![GitHub](https://img.shields.io/github/license/joaomede/api-doc) ![GitHub package.json version](https://img.shields.io/github/package-json/v/joaomede/api-doc) ![GitHub repo size](https://img.shields.io/github/repo-size/joaomede/api-doc)
 # Api Doc
