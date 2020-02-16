@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.com/joaomede/Api-Doc.svg?branch=master)](https://travis-ci.com/joaomede/Api-Doc) [![codecov](https://codecov.io/gh/joaomede/Api-Doc/branch/master/graph/badge.svg)](https://codecov.io/gh/joaomede/Api-Doc)
- ![GitHub](https://img.shields.io/github/license/joaomede/api-doc) ![GitHub package.json version](https://img.shields.io/github/package-json/v/joaomede/api-doc) ![GitHub repo size](https://img.shields.io/github/repo-size/joaomede/api-doc)
+[![Build Status](https://travis-ci.com/joaomede/Api-Doc.svg?branch=master)](https://travis-ci.com/joaomede/Api-Doc)
+ ![GitHub](https://img.shields.io/github/license/joaomede/api-doc) ![GitHub package.json version](https://img.shields.io/github/package-json/v/joaomede/api-doc) ![GitHub repo size](https://img.shields.io/github/repo-size/joaomede/api-doc) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cb8e4c89586a43809c7a817a07f56309)](https://www.codacy.com/manual/joaomede/Api-Doc?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=joaomede/Api-Doc&amp;utm_campaign=Badge_Grade)
 # Api Doc
 
 ### Mobile
@@ -34,6 +34,7 @@ API Doc is an API Rest test technology, it works as a CRUD, where you can access
 - [x] Register Responses and Codes Definitions
 - [x] Methods Accept: Post, Get, Delete, Put
 - [x] Accept: Headers, Params Path and Body
+- [x] Accept: Query Params
 - [ ] Accept: DataForm, in Dev
 
 ## License

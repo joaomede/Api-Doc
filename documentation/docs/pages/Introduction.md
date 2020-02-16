@@ -18,6 +18,7 @@ Here are some of the functions that the software has to offer
 - [x] Register Responses and Codes Definitions
 - [x] Methods Accept: Post, Get, Delete, Put
 - [x] Accept: Headers, Params Path and Body
+- [x] Accept: Query Params
 - [ ] Accept: DataForm, in Dev
 
 ## The Database
