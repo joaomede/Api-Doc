@@ -1,5 +1,6 @@
 #!/bin/bash
 ## By João Medeiros - <symbol2studio@gmail.com>
 
-yarn migrate
+sleep 5s
+yarn migrate:dev
 yarn dev
