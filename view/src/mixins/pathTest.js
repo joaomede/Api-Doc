@@ -5,9 +5,11 @@ export default {
       this.$store.dispatch('setTagIndex', indexTag)
       this.$store.dispatch('setPathIndex', indexPath)
       let params = ''
+      let querys = ''
       let path = ''
       forParams(object.parameter.params)
-      path = this.cApi.baseURL + '/' + o.path + params
+      forQuerys(object.query.querys)
+      path = this.cApi.baseURL + '/' + o.path + params + querys
       switch (o.methodType) {
         case 'DELETE':
           await this.deleteMethod(o, path)
@@ -27,6 +29,20 @@ export default {
         for (let index = 0; index < param.length; index++) {
           params = `${params}/${param[index].parameterValue}`
         }
+      }
+
+      function forQuerys (query) {
+        if (query.length > 0) {
+          querys = '?'
+        }
+
+        for (let index = 0; index < query.length; index++) {
+          querys = `${querys}${query[index].queryName}=${query[index].queryValue}&`
+          if (index + 1 === query.length) {
+            querys = querys.slice(0, -1)
+          }
+        }
+        return querys
       }
     },
     async postMethod (o, path) {

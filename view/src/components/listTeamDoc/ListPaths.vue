@@ -44,7 +44,7 @@
                   class="text-h6"
                   style="font-size: 18px"
                 >
-                  <strong>Path:</strong> {{ paths.path }}{{ paths.parameter.params | filterParamsName }}
+                  <strong>Path:</strong> {{ paths.path }}{{ paths.parameter.params | filterParamsName }}{{ paths.query.querys | filterQueryName }}
                 </div>
 
                 <!-- Headers -->
@@ -129,6 +129,66 @@
                       <q-item-section>
                         <q-input
                           v-model="params.parameterValue"
+                          class="bg-black text-blue"
+                          square
+                          dense
+                          dark
+                          outlined
+                          label="Valor, ex.: 1"
+                        />
+                      </q-item-section>
+                    </q-item>
+                  </q-form>
+                </div>
+                <q-separator spaced />
+
+                <!-- Query -->
+                <div>
+                  <q-card-section>
+                    <div class="text-left">
+                      <strong>Querys:  </strong>
+                      <q-icon
+                        v-if="pathEditOption === false"
+                        style="font-size: 20px"
+                        class="text-right"
+                        side
+                        name="add"
+                        color="primary"
+                        @click.stop="(paths.query.querys.push({ queryName: '', queryValue: '' }))"
+                      />
+                      <q-icon
+                        v-if="pathEditOption === false"
+                        style="font-size: 20px"
+                        class="text-right"
+                        side
+                        name="remove"
+                        color="primary"
+                        @click.stop="(paths.query.querys.pop())"
+                      />
+                    </div>
+                  </q-card-section>
+
+                  <q-form
+                    v-for="(querys, index) in paths.query.querys"
+                    :key="index"
+                  >
+                    <q-item>
+                      <q-item-section>
+                        <q-input
+                          v-model="querys.queryName"
+                          :disable="pathEditOption"
+                          class="bg-black text-blue"
+                          square
+                          dense
+                          dark
+                          outlined
+                          label="Nome, ex.: userId"
+                        />
+                      </q-item-section>
+                      <q-item-section>
+                        <q-input
+                          v-model="querys.queryValue"
+                          :disable="pathEditOption"
                           class="bg-black text-blue"
                           square
                           dense

@@ -149,6 +149,9 @@ export default {
         parameter: {
           params: []
         },
+        query: {
+          querys: []
+        },
         headersValue: {},
         bodyValue: {},
         data: {

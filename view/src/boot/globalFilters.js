@@ -53,6 +53,21 @@ Vue.filter('filterParamsName', function (param) {
   return params
 })
 
+Vue.filter('filterQueryName', function (query) {
+  let querys = ''
+  if (query.length > 0) {
+    querys = '?'
+  }
+
+  for (let index = 0; index < query.length; index++) {
+    querys = `${querys}${query[index].queryName}=${query[index].queryValue}&`
+    if (index + 1 === query.length) {
+      querys = querys.slice(0, -1)
+    }
+  }
+  return querys
+})
+
 Vue.filter('filterReasonCode', function (code) {
   return i18n.t(`commonCodes.${code}.reason`)
 })
