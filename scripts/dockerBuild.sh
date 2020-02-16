@@ -5,4 +5,4 @@ read -p "New Tag Version: " version
 
 yarn build
 yarn build:view
-docker build -t joaomede/apidoc:${version} . 
+sudo docker build -t joaomede/apidoc:${version} . 
