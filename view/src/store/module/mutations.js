@@ -74,6 +74,11 @@ export async function setPathsByTagIndex (state, tag) {
   if (tag[1] === 'DocView') {
     try {
       const result = await axios.get(state.urlApi + `api/api/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
+      for (let i = 0; i < result.data.length; i++) {
+        if (result.data[i].query === null) {
+          result.data[i].query = { querys: [] }
+        }
+      }
       Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
     } catch (error) {
       // console.log(error.response.data.error)
@@ -82,6 +87,11 @@ export async function setPathsByTagIndex (state, tag) {
   if (tag[1] === 'DocViewTeam') {
     try {
       const result = await axios.get(state.urlApi + `api/teamdocs/api/getpathsandresponses/${state.rulesId}/${tag[0]}`, { headers: state.user.headers })
+      for (let i = 0; i < result.data.length; i++) {
+        if (result.data[i].query === null) {
+          result.data[i].query = { querys: [] }
+        }
+      }
       Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
     } catch (error) {
       // console.log(error.response.data.error)
@@ -90,6 +100,11 @@ export async function setPathsByTagIndex (state, tag) {
   if (tag[1] === 'DocViewPublic') {
     try {
       const result = await axios.get(state.urlApi + `api/geral/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
+      for (let i = 0; i < result.data.length; i++) {
+        if (result.data[i].query === null) {
+          result.data[i].query = { querys: [] }
+        }
+      }
       Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
     } catch (error) {
       // console.log(error.response.data.error)
@@ -98,6 +113,11 @@ export async function setPathsByTagIndex (state, tag) {
   if (tag[1] === 'SharedViewDoc') {
     try {
       const result = await axios.get(state.urlApi + `api/geral/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
+      for (let i = 0; i < result.data.length; i++) {
+        if (result.data[i].query === null) {
+          result.data[i].query = { querys: [] }
+        }
+      }
       Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
     } catch (error) {
       // console.log(error.response.data.error)
