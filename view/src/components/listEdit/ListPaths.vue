@@ -8,15 +8,15 @@
 
     <q-expansion-item
       expand-separator
-      :icon="paths.methodType | verificaLetra"
+      :icon="paths.methodType | checksLetters"
       :label="paths.methodType"
       :caption="`Path: ${paths.path}`"
-      :header-class="paths.methodType | verificaCor"
+      :header-class="paths.methodType | checkMethodColor"
     >
       <q-card>
         <q-card-section
           class="text-left q-pa-xs"
-          :style="paths.methodType | filtrarCorBackground"
+          :style="paths.methodType | filterColorBackground"
         >
           <div class="text-center">
             <q-icon

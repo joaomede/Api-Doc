@@ -1,6 +1,6 @@
 import { i18n } from './i18n'
 import Vue from 'vue'
-Vue.filter('verificaLetra', function (item) {
+Vue.filter('checksLetters', function (item) {
   if (item === 'POST') {
     return 'fa fa-p'
   }
@@ -15,7 +15,7 @@ Vue.filter('verificaLetra', function (item) {
   }
 })
 
-Vue.filter('verificaCor', function (item) {
+Vue.filter('checkMethodColor', function (item) {
   if (item === 'POST') {
     return 'text-green'
   }
@@ -30,7 +30,7 @@ Vue.filter('verificaCor', function (item) {
   }
 })
 
-Vue.filter('filtrarCorBackground', function (item) {
+Vue.filter('filterColorBackground', function (item) {
   if (item === 'POST') {
     return 'background-color: #4caf5018'
   }
