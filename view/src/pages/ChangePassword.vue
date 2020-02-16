@@ -66,7 +66,7 @@ export default {
   methods: {
     async changePassword () {
       try {
-        const result = await this.$axios.put('api/auth/changepassword', { passwordOne: this.userLogged.passwordOne, passwordTwo: this.userLogged.passwordTwo }, { headers: this.user.headers })
+        const result = await this.$axios.put('api/auth/changepassword', { passwordOne: this.userLogged.passwordOne, passwordTwo: this.userLogged.passwordTwo }, { headers: this.cUser.headers })
         this.$notify(result.data.ok, 'green')
         this.resetForm()
       } catch (error) {

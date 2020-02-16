@@ -76,7 +76,7 @@ export default {
     },
     async indexPublicListDocs () {
       try {
-        const result = await this.$axios.get('api/geral/listallpublicapi', { headers: this.user.headers })
+        const result = await this.$axios.get('api/geral/listallpublicapi', { headers: this.cUser.headers })
         this.listOfApis = await result.data
       } catch (error) {
         this.$notify('Erro ao carregar lista de documentação publica', 'red')

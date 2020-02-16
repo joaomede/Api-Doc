@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     toHome () {
-      if (this.user.id === null) {
+      if (this.cUser.id === null) {
         this.$router.replace('publicdocs')
       } else {
         this.$router.replace('dash')

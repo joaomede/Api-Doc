@@ -96,7 +96,7 @@ export default {
     },
     async indexAllTeamsIAm () {
       try {
-        const result = await this.$axios.get('api/teamdocs/listall/', { headers: this.user.headers })
+        const result = await this.$axios.get('api/teamdocs/listall/', { headers: this.cUser.headers })
         this.listAllTeamsAm = await result.data
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
@@ -104,7 +104,7 @@ export default {
     },
     async exitTeam () {
       try {
-        const result = await this.$axios.delete(`api/teamdocs/delete/${this.rules.id}`, { headers: this.user.headers })
+        const result = await this.$axios.delete(`api/teamdocs/delete/${this.rules.id}`, { headers: this.cUser.headers })
         this.indexAllTeamsIAm()
         this.dialogconfirmExitTeam = false
         this.$notify(result.data.ok, 'green')

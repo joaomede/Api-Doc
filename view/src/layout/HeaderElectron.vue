@@ -32,7 +32,7 @@
 
     <div class="bg-blue q-pa-sm q-pl-md row items-center">
       <div
-        v-if="user.id !== null"
+        v-if="cUser.id !== null"
         class="cursor-pointer non-selectable"
       >
         Menu
@@ -70,7 +70,7 @@
             </q-item>
 
             <q-item
-              v-if="user.id !== null"
+              v-if="cUser.id !== null"
               v-close-popup
               clickable
               to="/privatedocs"
@@ -91,7 +91,7 @@
             style="min-width: 100px"
           >
             <q-item
-              v-if="user.id === null"
+              v-if="cUser.id === null"
               v-close-popup
               clickable
               to="/login"
@@ -100,7 +100,7 @@
             </q-item>
 
             <q-item
-              v-if="user.id !== null"
+              v-if="cUser.id !== null"
               v-close-popup
               clickable
               @click="logout"
@@ -109,7 +109,7 @@
             </q-item>
 
             <q-item
-              v-if="user.id !== null"
+              v-if="cUser.id !== null"
               v-close-popup
               clickable
               to="/changepassword"
@@ -123,7 +123,7 @@
       </div>
 
       <div
-        v-if="user.id !== null"
+        v-if="cUser.id !== null"
         class="q-ml-md cursor-pointer non-selectable"
       >
         Team

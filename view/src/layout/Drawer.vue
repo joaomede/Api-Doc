@@ -9,7 +9,7 @@
     <q-scroll-area class="scrollArea">
       <q-list padding>
         <q-item
-          v-if="user.id !== null"
+          v-if="cUser.id !== null"
           v-ripple
           clickable
           to="/dash"
@@ -22,7 +22,7 @@
         </q-item>
 
         <q-item
-          v-if="user.id === null"
+          v-if="cUser.id === null"
           v-ripple
           clickable
           to="/publicdocs"
@@ -35,7 +35,7 @@
         </q-item>
 
         <q-item
-          v-if="user.id !== null"
+          v-if="cUser.id !== null"
           v-ripple
           clickable
           to="/changepassword"
@@ -74,9 +74,9 @@
           <!-- <img src="../statics/boy-avatar.png"> -->
         </q-avatar>
         <div class="text-weight-bold">
-          {{ user.name }}
+          {{ cUser.name }}
         </div>
-        <div>{{ user.email }}</div>
+        <div>{{ cUser.email }}</div>
       </div>
     </q-img>
     <div

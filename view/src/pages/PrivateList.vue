@@ -124,7 +124,7 @@ export default {
     },
     async storeNewApi (api) {
       try {
-        await this.$axios.post('api/api/create', api, { headers: this.user.headers })
+        await this.$axios.post('api/api/create', api, { headers: this.cUser.headers })
         this.indexMyDocList()
         this.dialogAddApi = false
         this.$notify('Nova Api criada com sucesso', 'green')
@@ -134,7 +134,7 @@ export default {
     },
     async indexMyDocList () {
       try {
-        const result = await this.$axios.get('api/api/getall', { headers: this.user.headers })
+        const result = await this.$axios.get('api/api/getall', { headers: this.cUser.headers })
         this.listOfApis = await result.data
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
@@ -142,7 +142,7 @@ export default {
     },
     async deleteApi () {
       try {
-        const result = await this.$axios.delete(`api/api/delete/${this.api.id}`, { headers: this.user.headers })
+        const result = await this.$axios.delete(`api/api/delete/${this.api.id}`, { headers: this.cUser.headers })
         this.showDelete = false
         this.indexMyDocList()
         this.$notify(result.data.ok, 'green')

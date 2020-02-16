@@ -133,7 +133,7 @@ export default {
     },
     async saveEdit (response) {
       try {
-        const result = await this.$axios.put(`api/responses/update/${response.id}`, response, { headers: this.user.headers })
+        const result = await this.$axios.put(`api/responses/update/${response.id}`, response, { headers: this.cUser.headers })
         this.$notify(result.data.ok, 'green')
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
@@ -145,7 +145,7 @@ export default {
     },
     async deleteResponse () {
       try {
-        const result = await this.$axios.delete(`api/responses/delete/${this.cResponse.id}`, { headers: this.user.headers })
+        const result = await this.$axios.delete(`api/responses/delete/${this.cResponse.id}`, { headers: this.cUser.headers })
         this.dialogConfirmDeleteResponses = false
         this.$store.dispatch('removeResponse')
         this.$notify(result.data.ok, 'green')

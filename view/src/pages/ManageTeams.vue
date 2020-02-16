@@ -111,7 +111,7 @@ export default {
     },
     async storeNewTeam (api) {
       try {
-        const result = await this.$axios.post('api/team/create', api, { headers: this.user.headers })
+        const result = await this.$axios.post('api/team/create', api, { headers: this.cUser.headers })
         this.indexAllTeamsManager()
         this.dialogAddTeam = false
         this.$notify(result.data.ok, 'green')
@@ -121,7 +121,7 @@ export default {
     },
     async indexAllTeamsManager () {
       try {
-        const result = await this.$axios.get('api/team/getall', { headers: this.user.headers })
+        const result = await this.$axios.get('api/team/getall', { headers: this.cUser.headers })
         this.listAllTeams = await result.data
       } catch (error) {
         this.$notify('Erro ao carregar lista de documentação publica', 'red')
@@ -129,7 +129,7 @@ export default {
     },
     async deleteMyTeam () {
       try {
-        const result = await this.$axios.delete(`api/team/delete/${this.team.id}`, { headers: this.user.headers })
+        const result = await this.$axios.delete(`api/team/delete/${this.team.id}`, { headers: this.cUser.headers })
         this.indexAllTeamsManager()
         this.dialogConfirmDeleteTeam = false
         this.$notify(result.data.ok, 'green')

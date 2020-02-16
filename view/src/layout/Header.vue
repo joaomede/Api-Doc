@@ -30,7 +30,7 @@
           </q-badge>
         </q-btn>
         <q-btn
-          v-if="user.id === null"
+          v-if="cUser.id === null"
           flat
           round
           dense
@@ -39,7 +39,7 @@
           to="/login"
         />
         <q-btn
-          v-if="user.id !== null"
+          v-if="cUser.id !== null"
           alt="Sair"
           flat
           round

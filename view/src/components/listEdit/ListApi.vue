@@ -201,7 +201,7 @@ export default {
   methods: {
     async updateApi (api) {
       try {
-        const result = await this.$axios.put(`api/api/update/${api.id}`, api, { headers: this.user.headers })
+        const result = await this.$axios.put(`api/api/update/${api.id}`, api, { headers: this.cUser.headers })
         this.$notify(result.data.ok, 'green')
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
@@ -209,7 +209,7 @@ export default {
     },
     async storeNewTag () {
       try {
-        const result = await this.$axios.post(`api/tags/create/${this.cApi.id}`, this.newTag, { headers: this.user.headers })
+        const result = await this.$axios.post(`api/tags/create/${this.cApi.id}`, this.newTag, { headers: this.cUser.headers })
         this.$store.dispatch('setNewTag', result.data)
         this.$notify(await result.data.ok, 'green')
       } catch (error) {

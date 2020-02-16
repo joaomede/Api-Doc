@@ -118,7 +118,7 @@ export default {
         const result = await this.$axios.post('api/team/addmember', {
           teamIdFk: this.id,
           email: member.email
-        }, { headers: this.user.headers })
+        }, { headers: this.cUser.headers })
         this.indexAllMembers()
         this.dialogAddNewMember = false
         this.$notify(result.data.ok, 'green')
@@ -129,7 +129,7 @@ export default {
     },
     async indexAllMembers () {
       try {
-        const result = await this.$axios.get(`api/team/listallmembers/${this.id}`, { headers: this.user.headers })
+        const result = await this.$axios.get(`api/team/listallmembers/${this.id}`, { headers: this.cUser.headers })
         this.listAllMembers = await result.data
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
@@ -137,7 +137,7 @@ export default {
     },
     async deleteMember () {
       try {
-        const result = await this.$axios.delete(`api/team/deletemember/${this.team.id}`, { headers: this.user.headers })
+        const result = await this.$axios.delete(`api/team/deletemember/${this.team.id}`, { headers: this.cUser.headers })
         this.indexAllMembers()
         this.dialogConfirmDeleteMember = false
         this.$notify(result.data.ok, 'green')

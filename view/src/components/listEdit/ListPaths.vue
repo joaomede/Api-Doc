@@ -480,7 +480,7 @@ export default {
         responseModel: { response: resp.data }
       }
       try {
-        const result = await this.$axios.post(`api/responses/create/${this.cPath.id}`, response, { headers: this.user.headers })
+        const result = await this.$axios.post(`api/responses/create/${this.cPath.id}`, response, { headers: this.cUser.headers })
         this.$store.dispatch('setNewResponse', result.data)
         this.$notify('Novo verbo criado com sucesso', 'green')
       } catch (error) {
@@ -494,7 +494,7 @@ export default {
         responseModel: { response: {} }
       }
       try {
-        const result = await this.$axios.post(`api/responses/create/${this.cPath.id}`, response, { headers: this.user.headers })
+        const result = await this.$axios.post(`api/responses/create/${this.cPath.id}`, response, { headers: this.cUser.headers })
         this.$store.dispatch('setNewResponse', result.data)
         this.$notify('Novo verbo criado com sucesso', 'green')
       } catch (error) {
@@ -507,7 +507,7 @@ export default {
     },
     async updatePath (path) {
       try {
-        const result = await this.$axios.put(`api/paths/update/${path.id}`, path, { headers: this.user.headers })
+        const result = await this.$axios.put(`api/paths/update/${path.id}`, path, { headers: this.cUser.headers })
         this.$notify(result.data.ok, 'green')
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
@@ -515,7 +515,7 @@ export default {
     },
     async deletePath () {
       try {
-        const result = await this.$axios.delete(`api/paths/delete/${this.cPath.id}`, { headers: this.user.headers })
+        const result = await this.$axios.delete(`api/paths/delete/${this.cPath.id}`, { headers: this.cUser.headers })
         this.dialogConfirmDeletePaths = false
         this.$store.dispatch('removePath')
         this.$notify(result.data.ok, 'green')

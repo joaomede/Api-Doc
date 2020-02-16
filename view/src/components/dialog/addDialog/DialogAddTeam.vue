@@ -87,7 +87,7 @@ export default {
     },
     async listAllPrivateAPI () {
       try {
-        const result = await this.$axios.get(`api/api/getallprivate`, { headers: this.user.headers })
+        const result = await this.$axios.get(`api/api/getallprivate`, { headers: this.cUser.headers })
         this.listApis = []
         result.data.forEach(element => {
           this.listApis.push({

@@ -1,6 +1,6 @@
 export default {
   computed: {
-    user () {
+    cUser () {
       if (this.$store.getters.getUser != null) {
         return this.$store.getters.getUser
       } else {

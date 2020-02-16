@@ -165,7 +165,7 @@ export default {
     async addNewPath () {
       this.dispatchs()
       try {
-        const result = await this.$axios.post(`api/paths/create/${this.cTag.id}`, this.newPath, { headers: this.user.headers })
+        const result = await this.$axios.post(`api/paths/create/${this.cTag.id}`, this.newPath, { headers: this.cUser.headers })
         this.$store.dispatch('setNewPath', result.data)
         this.$notify('Novo verbo criado com sucesso', 'green')
       } catch (error) {
@@ -174,7 +174,7 @@ export default {
     },
     async updateTag (tag) {
       try {
-        const result = await this.$axios.put(`api/tags/update/${tag.id}`, tag, { headers: this.user.headers })
+        const result = await this.$axios.put(`api/tags/update/${tag.id}`, tag, { headers: this.cUser.headers })
         this.$notify(result.data.ok, 'green')
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
@@ -186,7 +186,7 @@ export default {
     },
     async deleteTag () {
       try {
-        const result = await this.$axios.delete(`api/tags/delete/${this.cTag.id}`, { headers: this.user.headers })
+        const result = await this.$axios.delete(`api/tags/delete/${this.cTag.id}`, { headers: this.cUser.headers })
         this.dialogConfirmDeleteTag = false
         this.$store.dispatch('removeTag')
         this.$notify(result.data.ok, 'green')
