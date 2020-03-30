@@ -8,12 +8,12 @@
     </div>
 
     <q-list
-      bordered
+      v-for="item in listOfApis"
+      :key="item.idApi"
       style="width:100%"
     >
+      <q-separator />
       <q-item
-        v-for="item in listOfApis"
-        :key="item.idApi"
         v-ripple
         clickable
         style="font-size: 18px;"
@@ -41,8 +41,6 @@
             <strong>Descrição:</strong> {{ item.descriptionApi }}
           </q-item-label>
         </q-item-section>
-
-        <q-separator spaced />
       </q-item>
     </q-list>
   </q-card>
@@ -63,8 +61,7 @@ export default {
       listOfApis: []
     }
   },
-  computed: {
-  },
+  computed: {},
   created () {
     this.init()
   },
@@ -74,18 +71,22 @@ export default {
     },
     async indexPublicListDocs () {
       try {
-        const result = await this.$axios.get('api/geral/listallpublicapi', { headers: this.cUser.headers })
+        const result = await this.$axios.get('api/geral/listallpublicapi', {
+          headers: this.cUser.headers
+        })
         this.listOfApis = await result.data
       } catch (error) {
         this.$notify('Erro ao carregar lista de documentação publica', 'red')
       }
     },
     toPageCompletePublicDoc (item) {
-      this.$router.push({ name: 'DocViewPublic', params: { id: ('' + item.id) } })
+      this.$router.push({
+        name: 'DocViewPublic',
+        params: { id: '' + item.id }
+      })
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -27,17 +27,18 @@
     </div>
 
     <q-list
+      v-for="item in listOfApis"
+      :key="item.idApi"
       bordered
       style="width:100%"
     >
       <q-item
-        v-for="item in listOfApis"
-        :key="item.idApi"
         v-ripple
         clickable
         style="font-size: 18px;"
         @click="toPageCompletePublicDoc(item)"
       >
+        <q-separator />
         <q-item-section
           avatar
           top
@@ -78,8 +79,6 @@
             @click.stop="showDelete = true, api = item"
           />
         </q-item-section>
-
-        <q-separator spaced />
       </q-item>
     </q-list>
   </q-card>

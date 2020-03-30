@@ -14,12 +14,14 @@
     </div>
 
     <q-list
+      v-for="(item, index) in listAllTeamsAm"
+      :key="index"
       bordered
       style="width:100%"
     >
+      <q-separator />
+
       <q-item
-        v-for="(item, index) in listAllTeamsAm"
-        :key="index"
         v-ripple
         clickable
         style="font-size: 18px;"
@@ -55,8 +57,6 @@
             @click.stop="dialogconfirmExitTeam = true, rules = item"
           />
         </q-item-section>
-
-        <q-separator spaced />
       </q-item>
     </q-list>
   </q-card>

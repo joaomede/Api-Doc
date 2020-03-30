@@ -27,12 +27,14 @@
     </div>
 
     <q-list
+      v-for="item in listAllMembers"
+      :key="item.idApi"
       bordered
       style="width:100%"
     >
+      <q-separator />
+
       <q-item
-        v-for="item in listAllMembers"
-        :key="item.idApi"
         v-ripple
         clickable
         style="font-size: 18px;"
@@ -60,8 +62,6 @@
             @click.stop="dialogConfirmDeleteMember = true, team = item"
           />
         </q-item-section>
-
-        <q-separator spaced />
       </q-item>
     </q-list>
   </q-card>
