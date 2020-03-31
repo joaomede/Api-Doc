@@ -1,9 +1,9 @@
 <template>
   <q-card
-    class="row justify-center"
+    class="row justify-center text-center"
     style="min-height: 200px"
   >
-    <div class="text-h5 text-center">
+    <div class="text-h5">
       {{ title }}
     </div>
 
