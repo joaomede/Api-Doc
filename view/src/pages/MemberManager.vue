@@ -29,7 +29,6 @@
     <q-list
       v-for="item in listAllMembers"
       :key="item.idApi"
-      bordered
       style="width:100%"
     >
       <q-separator />

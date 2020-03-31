@@ -29,7 +29,6 @@
     <q-list
       v-for="item in listAllTeams"
       :key="item.idApi"
-      bordered
       style="width:100%"
     >
       <q-separator />

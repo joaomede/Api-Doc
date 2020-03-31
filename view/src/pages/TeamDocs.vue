@@ -16,7 +16,6 @@
     <q-list
       v-for="(item, index) in listAllTeamsAm"
       :key="index"
-      bordered
       style="width:100%"
     >
       <q-separator />
