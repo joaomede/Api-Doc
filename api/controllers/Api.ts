@@ -3,7 +3,7 @@ import { Response } from 'express'
 import resp from 'resp-express'
 import apiDoc from '../config/api'
 
-export default new class Api {
+class Api {
   public async store (req: NewRequest, res: Response): Promise<void> {
     try {
       await apiDoc.createNewApiDoc(req.userId, req.body)
@@ -97,4 +97,6 @@ export default new class Api {
       resp.returnErrorMessage(res, error.message)
     }
   }
-}()
+}
+
+export default new Api()

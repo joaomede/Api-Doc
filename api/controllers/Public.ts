@@ -4,7 +4,7 @@ import { NewRequest } from '../interface/NewRequest'
 import resp from 'resp-express'
 import { Response } from 'express'
 
-export default new class Geral {
+class Geral {
   public async getApiAndTags (req: NewRequest, res: Response): Promise<void> {
     const { id } = req.params
     try {
@@ -33,4 +33,6 @@ export default new class Geral {
       resp.returnErrorMessage(res, error.message)
     }
   }
-}()
+}
+
+export default new Geral()

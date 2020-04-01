@@ -3,7 +3,7 @@ import { Response } from 'express'
 import apiDoc from '../config/api'
 import resp from 'resp-express'
 
-export default new class EndPoint {
+class EndPoint {
   public async store (req: NewRequest, res: Response): Promise<void> {
     const { apiId } = req.params
 
@@ -46,4 +46,6 @@ export default new class EndPoint {
       resp.returnErrorMessage(res, error.message)
     }
   }
-}()
+}
+
+export default new EndPoint()
