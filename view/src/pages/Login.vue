@@ -1,5 +1,5 @@
 <template>
-  <div class="centralDiv q-pa-xs text-center">
+  <div class="centralDiv">
     <q-form>
       <q-card class="my-card">
         <q-card-section>
@@ -31,20 +31,22 @@
           </q-form>
         </q-card-section>
 
-        <q-btn
-          class="q-ma-xs"
-          color="primary"
-          to="/register"
-        >
-          Register
-        </q-btn>
-        <q-btn
-          class="q-ma-xs"
-          color="green"
-          @click="login"
-        >
-          Entrar
-        </q-btn>
+        <div class="justify-center">
+          <q-btn
+            class="q-ma-xs"
+            color="primary"
+            to="/register"
+          >
+            Register
+          </q-btn>
+          <q-btn
+            class="q-ma-xs"
+            color="green"
+            @click="login"
+          >
+            Entrar
+          </q-btn>
+        </div>
       </q-card>
     </q-form>
   </div>

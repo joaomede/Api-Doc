@@ -1,5 +1,5 @@
 <template>
-  <div class="centralDiv q-pa-xs text-center">
+  <q-card class="centralDiv">
     <BackMobile />
     <BackDesktop />
 
@@ -22,50 +22,49 @@
       @confirm="deleteMember()"
     />
 
-    <q-card class="my-card text-center">
-      <q-list
-        bordered
-        style="max-width: 900px; margin: auto;"
+    <div class="text-h6 text-center">
+      Lista de Equipes
+    </div>
+
+    <q-list
+      bordered
+      style="width:100%"
+    >
+      <q-item
+        v-for="item in listAllMembers"
+        :key="item.idApi"
+        v-ripple
+        clickable
+        style="font-size: 18px;"
+        @click="toEditMembers(item)"
       >
-        <div class="text-h6">
-          Lista de Equipes
-        </div>
-        <q-separator spaced />
-        <q-item
-          v-for="item in listAllMembers"
-          :key="item.idApi"
-
-          style="font-size: 18px;"
-          @click="toEditMembers(item)"
+        <q-item-section
+          avatar
+          top
         >
-          <q-item-section
-            avatar
-            top
-          >
-            <i
-              class="fas fa-user text-black"
-              style="font-size: 3em;"
-            />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label lines="5">
-              {{ item.name }}
-            </q-item-label>
-          </q-item-section>
+          <i
+            class="fas fa-user text-black"
+            style="font-size: 3em;"
+          />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label lines="5">
+            {{ item.name }}
+          </q-item-label>
+        </q-item-section>
 
-          <q-item-section side>
-            <q-icon
-              name="delete_sweep"
-              color="primary"
-              @click.stop="dialogConfirmDeleteMember = true, team = item"
-            />
-          </q-item-section>
+        <q-item-section side>
+          <q-icon
+            name="delete_sweep"
+            color="primary"
+            @click.stop="dialogConfirmDeleteMember = true, team = item"
+          />
+        </q-item-section>
 
-          <q-separator spaced />
-        </q-item>
-      </q-list>
-    </q-card>
-  </div>
+        <q-separator spaced />
+      </q-item>
+    </q-list>
+  </q-card>
 </template>
 
 <script>

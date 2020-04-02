@@ -1,6 +1,6 @@
 
 <template>
-  <div>
+  <div class="centralDiv">
     <BackMobile />
     <BackDesktop />
     <ListApi class="centralDiv q-pa-xs text-center" />

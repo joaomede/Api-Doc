@@ -1,9 +1,8 @@
-
 <template>
-  <div>
+  <div class="centralDiv">
     <BackMobile />
     <BackDesktop />
-    <ListApi class="centralDiv q-pa-xs text-center" />
+    <ListApi class="text-center" />
   </div>
 </template>
 
@@ -32,5 +31,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

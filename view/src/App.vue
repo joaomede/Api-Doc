@@ -3,7 +3,7 @@
     id="q-app"
   >
     <q-layout
-      view="lHr lpR lFr"
+      view="hHh lpR fFf"
     >
       <Drawer
         v-if="this.$router.currentRoute.name !== 'SharedViewDoc'"
@@ -25,7 +25,9 @@
         @logout="logout()"
       />
 
-      <q-page-container>
+      <q-page-container
+        class="row justify-center"
+      >
         <router-view />
       </q-page-container>
 

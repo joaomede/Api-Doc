@@ -1,9 +1,9 @@
 <template>
-  <div class="centralDiv q-pa-xs text-center">
+  <div class="centralDiv">
     <q-form>
       <q-card class="my-card">
         <q-card-section>
-          <div class="text-h6">
+          <div class="text-h6 text-center">
             Register
           </div>
         </q-card-section>
@@ -38,21 +38,23 @@
           </q-form>
         </q-card-section>
 
-        <q-btn
-          class="q-ma-xs"
-          color="black"
-          to="/login"
-        >
-          Back
-        </q-btn>
+        <div class="justify-center row">
+          <q-btn
+            class="q-ma-xs"
+            color="black"
+            to="/login"
+          >
+            Back
+          </q-btn>
 
-        <q-btn
-          class="q-ma-xs"
-          color="green"
-          @click="register()"
-        >
-          Register
-        </q-btn>
+          <q-btn
+            class="q-ma-xs"
+            color="green"
+            @click="register()"
+          >
+            Register
+          </q-btn>
+        </div>
       </q-card>
     </q-form>
   </div>

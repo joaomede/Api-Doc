@@ -1,10 +1,8 @@
 <template>
-  <div class="centralDiv q-pa-xs text-center">
-    <MainMenu
-      class="centralDiv"
-      title="Main Menu"
-    />
-  </div>
+  <MainMenu
+    class="centralDiv"
+    title="Main Menu"
+  />
 </template>
 
 <script>

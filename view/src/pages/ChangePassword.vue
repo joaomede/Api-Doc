@@ -1,5 +1,5 @@
 <template>
-  <div class="centralDiv q-pa-xs text-center">
+  <div class="centralDiv">
     <q-form>
       <q-card class="my-card">
         <q-card-section>

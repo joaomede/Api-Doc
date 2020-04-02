@@ -1,9 +1,9 @@
 
 <template>
-  <div>
+  <div class="centralDiv">
     <BackMobile v-if="this.$router.currentRoute.name !== 'SharedViewDoc'" />
     <BackDesktop v-if="this.$router.currentRoute.name !== 'SharedViewDoc'" />
-    <ListApi class="centralDiv q-pa-xs text-center" />
+    <ListApi class="text-center" />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="centralDiv q-pa-xs text-center">
+  <q-card class="centralDiv">
     <BackMobile />
     <BackDesktop />
 
@@ -9,59 +9,57 @@
       @confirm="exitTeam()"
     />
 
-    <q-card class="my-card text-center">
-      <q-list
-        bordered
-        style="max-width: 900px; margin: auto;"
+    <div class="text-h6 text-center">
+      Times que faço parte
+    </div>
+
+    <q-list
+      bordered
+      style="width:100%"
+    >
+      <q-item
+        v-for="(item, index) in listAllTeamsAm"
+        :key="index"
+        v-ripple
+        clickable
+        style="font-size: 18px;"
+        @click="toDocView(item)"
       >
-        <div class="text-h6">
-          Times que faço parte
-        </div>
-        <q-separator spaced />
-        <q-item
-          v-for="(item, index) in listAllTeamsAm"
-          :key="index"
-          v-ripple
-          clickable
-          style="font-size: 18px;"
-          @click="toDocView(item)"
+        <q-item-section
+          avatar
+          top
         >
-          <q-item-section
-            avatar
-            top
-          >
-            <i
-              class="fas fa-users text-black"
-              style="font-size: 3em;"
-            />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>
-              {{ item.teamName }}
-            </q-item-label>
+          <i
+            class="fas fa-users text-black"
+            style="font-size: 3em;"
+          />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>
+            {{ item.teamName }}
+          </q-item-label>
 
-            <q-item-label>
-              Doc: {{ item.apiName }}
-            </q-item-label>
+          <q-item-label>
+            Doc: {{ item.apiName }}
+          </q-item-label>
 
-            <q-item-label caption>
-              Manager: {{ item.name }}
-            </q-item-label>
-          </q-item-section>
+          <q-item-label caption>
+            Manager: {{ item.name }}
+          </q-item-label>
+        </q-item-section>
 
-          <q-item-section side>
-            <q-icon
-              name="fas fa-sign-out-alt"
-              color="primary"
-              @click.stop="dialogconfirmExitTeam = true, rules = item"
-            />
-          </q-item-section>
+        <q-item-section side>
+          <q-icon
+            name="fas fa-sign-out-alt"
+            color="primary"
+            @click.stop="dialogconfirmExitTeam = true, rules = item"
+          />
+        </q-item-section>
 
-          <q-separator spaced />
-        </q-item>
-      </q-list>
-    </q-card>
-  </div>
+        <q-separator spaced />
+      </q-item>
+    </q-list>
+  </q-card>
 </template>
 
 <script>

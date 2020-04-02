@@ -1,7 +1,6 @@
 <template>
   <q-footer
     reveal
-    elevated
     class="bg-grey-8 text-white"
   >
     <q-toolbar>

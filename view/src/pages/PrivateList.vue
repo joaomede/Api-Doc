@@ -1,5 +1,5 @@
 <template>
-  <div class="centralDiv q-pa-xs text-center">
+  <q-card class="centralDiv">
     <BackMobile />
     <BackDesktop />
 
@@ -22,69 +22,67 @@
       @save="storeNewApi($event)"
     />
 
-    <q-card class="my-card text-center">
-      <q-list
-        bordered
-        style="max-width: 900px; margin: auto;"
+    <div class="text-h6 text-center">
+      Lista de Api's Privadas
+    </div>
+
+    <q-list
+      bordered
+      style="width:100%"
+    >
+      <q-item
+        v-for="item in listOfApis"
+        :key="item.idApi"
+        v-ripple
+        clickable
+        style="font-size: 18px;"
+        @click="toPageCompletePublicDoc(item)"
       >
-        <div class="text-h6">
-          Lista de Api's Privadas
-        </div>
-        <q-separator spaced />
-        <q-item
-          v-for="item in listOfApis"
-          :key="item.idApi"
-          v-ripple
-          clickable
-          style="font-size: 18px;"
-          @click="toPageCompletePublicDoc(item)"
+        <q-item-section
+          avatar
+          top
         >
-          <q-item-section
-            avatar
-            top
-          >
-            <i
-              class="far fa-file-alt text-black"
-              style="font-size: 3em;"
-            />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label lines="5">
-              <strong>Name:</strong> {{ item.apiName }}
-            </q-item-label>
+          <i
+            class="far fa-file-alt text-black"
+            style="font-size: 3em;"
+          />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label lines="5">
+            <strong>Name:</strong> {{ item.apiName }}
+          </q-item-label>
 
-            <q-item-label caption>
-              <strong>Descrição:</strong> {{ item.descriptionApi }}
-            </q-item-label>
-          </q-item-section>
+          <q-item-label caption>
+            <strong>Descrição:</strong> {{ item.descriptionApi }}
+          </q-item-label>
+        </q-item-section>
 
-          <q-item-section side>
-            <q-icon
-              v-if="item.isPublic == true"
-              name="fas fa-lock-open"
-              color="green"
-            />
+        <q-item-section side>
+          <q-icon
+            v-if="item.isPublic == true"
+            name="fas fa-lock-open"
+            color="green"
+          />
 
-            <q-icon
-              v-if="item.isPublic == false"
-              name="fas fa-lock"
-              color="red"
-            />
-          </q-item-section>
+          <q-icon
+            v-if="item.isPublic == false"
+            name="fas fa-lock"
+            color="red"
+          />
+        </q-item-section>
 
-          <q-item-section side>
-            <q-icon
-              name="delete"
-              color="blue"
-              @click.stop="showDelete = true, api = item"
-            />
-          </q-item-section>
+        <q-item-section side>
+          <q-icon
+            name="delete"
+            color="blue"
+            @click.stop="showDelete = true, api = item"
+          />
+        </q-item-section>
 
-          <q-separator spaced />
-        </q-item>
-      </q-list>
-    </q-card>
-  </div>
+        <q-separator spaced />
+      </q-item>
+    </q-list>
+  </q-card>
 </template>
 
 <script>
