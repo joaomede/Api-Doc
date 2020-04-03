@@ -17,4 +17,8 @@ sudo $dockerRun -v $(pwd):$workDir $dockerImage yarn build
 sudo rm -r node_modules
 sudo rm yarn.lock
 sudo $dockerRun -v $(pwd):$workDir $dockerImage $installProd
-sudo docker build -t joaomede/apidoc:${version} . 
+sudo docker build -t joaomede/apidoc:${version} .
+
+sudo rm -r node_modules
+sudo rm yarn.lock
+sudo $dockerRun -v $(pwd):$workDir $dockerImage $install
