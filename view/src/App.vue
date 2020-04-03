@@ -26,7 +26,7 @@
       />
 
       <q-page-container
-        class="row justify-center"
+        class="row justify-center q-mb-lg"
       >
         <router-view />
       </q-page-container>
