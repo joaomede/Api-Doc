@@ -1,7 +1,6 @@
 <template>
   <div>
     <q-expansion-item
-      expand-separator
       :label="tags.nameTag"
       header-class="text-black text-left"
       @show="getPathAndResponses(tags.id, indexTags)"
@@ -37,12 +36,15 @@
           <q-card
             v-for="(paths, indexPath) in tags.paths"
             :key="indexPath"
+            bordered
+            class="bg-white rounded-borders"
           >
             <ListPaths
               :paths="paths"
               :index-tags="indexTags"
               :index-path="indexPath"
             />
+            <q-separator />
           </q-card>
         </q-card-section>
       </q-card>

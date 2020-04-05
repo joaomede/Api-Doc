@@ -72,18 +72,20 @@
     </q-item>
 
     <!-- vfor Tags -->
-    <q-card
-      v-for="(tags, indexTags) in cApi.tags"
-      :key="indexTags"
-      bordered
-      style="background-color: #f5f7f6"
-      class="rounded-borders"
-    >
-      <ListTags
-        :tags="tags"
-        :index-tags="indexTags"
-      />
-    </q-card>
+    <q-card-section class="q-pa-xs">
+      <q-list
+        v-for="(tags, indexTags) in cApi.tags"
+        :key="indexTags"
+        bordered
+        style="background-color: #f5f7f6"
+        class="rounded-borders"
+      >
+        <ListTags
+          :tags="tags"
+          :index-tags="indexTags"
+        />
+      </q-list>
+    </q-card-section>
   </q-card>
 </template>
 
