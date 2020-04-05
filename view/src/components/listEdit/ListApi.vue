@@ -123,7 +123,10 @@
               <strong>Licença:</strong> {{ cApi.license }}
             </div>
 
-            <div class="text-p">
+            <div
+              class="text-p"
+              style="word-break: break-word"
+            >
               <strong>Base URL:</strong> {{ cApi.baseURL }}
             </div>
           </div>
@@ -162,7 +165,7 @@
     <!-- vfor Tags -->
     <q-card
       v-for="(tags, indexTags) in cApi.tags"
-      :key="tags.id"
+      :key="indexTags"
       bordered
       style="background-color: #f5f7f6"
       class="rounded-borders"

@@ -52,7 +52,10 @@
               <strong>Licença:</strong> {{ cApi.license }}
             </div>
 
-            <div class="text-p">
+            <div
+              class="text-p"
+              style="word-break: break-word"
+            >
               <strong>Base URL:</strong> {{ cApi.baseURL }}
             </div>
           </div>

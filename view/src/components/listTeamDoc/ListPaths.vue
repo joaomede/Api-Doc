@@ -42,27 +42,25 @@
                 <!-- Path View -->
                 <div
                   class="text-h6"
-                  style="font-size: 18px"
+                  style="font-size: 18px; word-break: break-word"
                 >
                   <strong>Path:</strong> {{ paths.path }}{{ paths.parameter.params | filterParamsName }}{{ paths.query.querys | filterQueryName }}
                 </div>
 
                 <!-- Headers -->
                 <div>
-                  <q-card-section>
-                    <div class="text-left">
-                      <strong>Headers:  </strong>
-                      <JsonEditor
-                        v-model="paths.headersValue"
-                        :options="{
-                          confirmText: 'confirm',
-                          cancelText: 'cancel',
-                        }"
-                        :obj-data="paths.headersValue"
-                      />
-                    </div>
-                  </q-card-section>
-                  <q-separator spaced />
+                  <div class="text-left">
+                    <strong>Headers:  </strong>
+                    <JsonEditor
+                      v-model="paths.headersValue"
+                      :options="{
+                        confirmText: 'confirm',
+                        cancelText: 'cancel',
+                      }"
+                      :obj-data="paths.headersValue"
+                    />
+                    <q-separator spaced />
+                  </div>
 
                   <div
                     v-if="paths.body === true"
@@ -76,7 +74,6 @@
                       }"
                       :obj-data="paths.bodyValue"
                     />
-
                     <q-separator spaced />
                   </div>
 
@@ -88,119 +85,103 @@
 
                 <!-- Param -->
                 <div>
-                  <q-card-section>
-                    <div class="text-left">
-                      <strong>Params:  </strong>
-                      <q-icon
-                        style="font-size: 20px"
-                        class="text-right"
-                        side
-                        name="add"
-                        color="primary"
-                        @click.stop="(paths.parameter.params.push({parameterName: '',parameterValue: ''}))"
-                      />
-                      <q-icon
-                        style="font-size: 20px"
-                        class="text-right"
-                        side
-                        name="remove"
-                        color="primary"
-                        @click.stop="(paths.parameter.params.pop())"
-                      />
-                    </div>
-                  </q-card-section>
-
+                  <div class="text-left">
+                    <strong>Params:  </strong>
+                    <q-icon
+                      style="font-size: 20px"
+                      class="text-right"
+                      side
+                      name="add"
+                      color="primary"
+                      @click.stop="(paths.parameter.params.push({parameterName: '',parameterValue: ''}))"
+                    />
+                    <q-icon
+                      style="font-size: 20px"
+                      class="text-right"
+                      side
+                      name="remove"
+                      color="primary"
+                      @click.stop="(paths.parameter.params.pop())"
+                    />
+                  </div>
                   <q-form
                     v-for="(params, index) in paths.parameter.params"
                     :key="index"
                   >
-                    <q-item>
-                      <q-item-section>
-                        <q-input
-                          v-model="params.parameterName"
-                          class="bg-black text-blue"
-                          square
-                          dense
-                          dark
-                          outlined
-                          label="Nome, ex.: userId"
-                        />
-                      </q-item-section>
-                      <q-item-section>
-                        <q-input
-                          v-model="params.parameterValue"
-                          class="bg-black text-blue"
-                          square
-                          dense
-                          dark
-                          outlined
-                          label="Valor, ex.: 1"
-                        />
-                      </q-item-section>
-                    </q-item>
+                    <q-input
+                      v-model="params.parameterName"
+                      class="bg-blue-8 col-12 col-sm-6"
+                      square
+                      dense
+                      dark
+                      outlined
+                      label="Nome, ex.: userId"
+                    />
+                    <q-input
+                      v-model="params.parameterValue"
+                      class="bg-blue-8 col-12 col-sm-6"
+                      square
+                      dense
+                      dark
+                      outlined
+                      label="Valor, ex.: 1"
+                    />
+                    <div class="q-ma-xs" />
                   </q-form>
+                  <q-separator spaced />
                 </div>
-                <q-separator spaced />
 
                 <!-- Query -->
                 <div>
-                  <q-card-section>
-                    <div class="text-left">
-                      <strong>Querys:  </strong>
-                      <q-icon
-                        v-if="pathEditOption === false"
-                        style="font-size: 20px"
-                        class="text-right"
-                        side
-                        name="add"
-                        color="primary"
-                        @click.stop="(paths.query.querys.push({ queryName: '', queryValue: '' }))"
-                      />
-                      <q-icon
-                        v-if="pathEditOption === false"
-                        style="font-size: 20px"
-                        class="text-right"
-                        side
-                        name="remove"
-                        color="primary"
-                        @click.stop="(paths.query.querys.pop())"
-                      />
-                    </div>
-                  </q-card-section>
-
+                  <div class="text-left">
+                    <strong>Querys:  </strong>
+                    <q-icon
+                      v-if="pathEditOption === false"
+                      style="font-size: 20px"
+                      class="text-right"
+                      side
+                      name="add"
+                      color="primary"
+                      @click.stop="(paths.query.querys.push({ queryName: '', queryValue: '' }))"
+                    />
+                    <q-icon
+                      v-if="pathEditOption === false"
+                      style="font-size: 20px"
+                      class="text-right"
+                      side
+                      name="remove"
+                      color="primary"
+                      @click.stop="(paths.query.querys.pop())"
+                    />
+                  </div>
                   <q-form
                     v-for="(querys, index) in paths.query.querys"
                     :key="index"
                   >
-                    <q-item>
-                      <q-item-section>
-                        <q-input
-                          v-model="querys.queryName"
-                          :disable="pathEditOption"
-                          class="bg-black text-blue"
-                          square
-                          dense
-                          dark
-                          outlined
-                          label="Nome, ex.: userId"
-                        />
-                      </q-item-section>
-                      <q-item-section>
-                        <q-input
-                          v-model="querys.queryValue"
-                          :disable="pathEditOption"
-                          class="bg-black text-blue"
-                          square
-                          dense
-                          dark
-                          outlined
-                          label="Valor, ex.: 1"
-                        />
-                      </q-item-section>
-                    </q-item>
+                    <q-input
+                      v-model="querys.queryName"
+                      :disable="pathEditOption"
+                      class="bg-black text-blue"
+                      square
+                      dense
+                      dark
+                      outlined
+                      label="Nome, ex.: userId"
+                    />
+                    <q-input
+                      v-model="querys.queryValue"
+                      :disable="pathEditOption"
+                      class="bg-black text-blue"
+                      square
+                      dense
+                      dark
+                      outlined
+                      label="Valor, ex.: 1"
+                    />
+                    <div class="q-ma-xs" />
                   </q-form>
+                  <q-separator spaced />
                 </div>
-                <q-separator spaced />
 
                 <!-- Body -->
                 <div>
@@ -217,8 +198,8 @@
                       />
                     </div>
                   </q-card-section>
+                  <q-separator spaced />
                 </div>
-                <q-separator spaced />
 
                 <!-- Response Test -->
                 <div class="responsefield">
@@ -385,5 +366,9 @@ export default {
 <style>
 .add-form[data-v-01647a09]{
   font-size: 0.9em;
+}
+
+.q-field__control{
+  color: black
 }
 </style>
