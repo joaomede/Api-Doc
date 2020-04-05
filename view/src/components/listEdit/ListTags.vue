@@ -100,7 +100,7 @@
 
           <q-card
             v-for="(paths, indexPath) in tags.paths"
-            :key="paths.id"
+            :key="indexPath"
           >
             <ListPaths
               :paths="paths"

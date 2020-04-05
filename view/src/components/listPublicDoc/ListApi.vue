@@ -86,7 +86,7 @@
     <!-- vfor Tags -->
     <q-card
       v-for="(tags, indexTags) in cApi.tags"
-      :key="tags.id"
+      :key="indexTags"
       bordered
       style="background-color: #f5f7f6"
       class="rounded-borders"

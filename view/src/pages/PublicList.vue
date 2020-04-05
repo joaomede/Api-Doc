@@ -8,8 +8,8 @@
     </div>
 
     <q-list
-      v-for="item in listOfApis"
-      :key="item.idApi"
+      v-for="(item, index) in listOfApis"
+      :key="index"
       style="width:100%"
     >
       <q-separator />

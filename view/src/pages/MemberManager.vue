@@ -27,8 +27,8 @@
     </div>
 
     <q-list
-      v-for="item in listAllMembers"
-      :key="item.idApi"
+      v-for="(item, index) in listAllMembers"
+      :key="index"
       style="width:100%"
     >
       <q-separator />

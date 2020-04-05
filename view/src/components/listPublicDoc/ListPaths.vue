@@ -323,7 +323,7 @@
           <q-card>
             <ListResponseEdit
               v-for="(responses, indexResponse) in paths.responses"
-              :key="responses.id"
+              :key="indexResponse"
               :responses="responses"
               :index-tags="indexTags"
               :index-path="indexPath"
