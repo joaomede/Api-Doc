@@ -158,25 +158,25 @@ export function setNewTag (state, tag) {
   if (state.apiData.tags === undefined) {
     Vue.set(state.apiData[0], 'tags', tag)
   } else {
-    let index = state.apiData.tags.length
+    const index = state.apiData.tags.length
     Vue.set(state.apiData.tags, index, tag)
   }
 }
 
 export function setNewPath (state, newPath) {
   if (state.apiData.tags[state.tagIndex].paths === undefined) {
-    Vue.set(state.apiData.tags[0], 'paths', [newPath])
+    Vue.set(state.apiData.tags[state.tagIndex], 'paths', [newPath])
   } else {
-    let index = state.apiData.tags[state.tagIndex].paths.length
+    const index = state.apiData.tags[state.tagIndex].paths.length
     Vue.set(state.apiData.tags[state.tagIndex].paths, index, newPath)
   }
 }
 
 export function setNewResponse (state, newResponse) {
   if (state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses === undefined) {
-    Vue.set(state.apiData.tags[state.tagIndex].paths[0], 'responses', [newResponse])
+    Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex], 'responses', [newResponse])
   } else {
-    let index = state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses.length
+    const index = state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses.length
     Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses, index, newResponse)
   }
 }
