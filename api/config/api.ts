@@ -6,11 +6,11 @@ const config = {
   dev: {
     client: 'pg',
     connection: {
-      port: process.env.PORTDB,
-      host: process.env.HOSTDB,
-      user: process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_PASSWORD,
-      database: process.env.POSTGRES_DB
+      port: undefined,
+      host: env.env.host,
+      user: env.env.postgresUser,
+      password: env.env.postgresPassword,
+      database: env.env.postgresDatabase
     },
     pool: { min: 0, max: 10, idleTimeoutMillis: 500 }
   },
@@ -28,11 +28,11 @@ const config = {
   prod: {
     client: 'pg',
     connection: {
-      port: process.env.PORTDB,
-      host: process.env.HOSTDB,
-      user: process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_PASSWORD,
-      database: process.env.POSTGRES_DB
+      port: undefined,
+      host: env.env.host,
+      user: env.env.postgresUser,
+      password: env.env.postgresPassword,
+      database: env.env.postgresDatabase
     },
     migrations: {
       extension: 'ts',
