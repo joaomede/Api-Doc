@@ -31,13 +31,13 @@
       :key="index"
       style="width:100%"
     >
+      <q-separator />
       <q-item
         v-ripple
         clickable
         style="font-size: 18px;"
         @click="toPageCompletePublicDoc(item)"
       >
-        <q-separator />
         <q-item-section
           avatar
           top
