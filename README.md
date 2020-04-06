@@ -13,7 +13,8 @@ API Doc is an API Rest test technology, it works as a CRUD, where you can access
 
 ### Client Electron for Desktop
 ![Destkop Electron](documentation/docs/image/electronDesktop.png)  
-[![Linux Client](https://img.shields.io/badge/Linux_Client:_AppImage-v1.4.0-blue.svg)](https://sourceforge.net/projects/api-doc/files/Api-Doc-1.4.0.AppImage/download)  
+[![Linux Client](https://img.shields.io/badge/Linux_Client:_AppImage-v2.1.5-blue.svg)](https://sourceforge.net/projects/api-doc/files/Api%20Doc-2.1.5.AppImage/download)  
+[![Windows Client](https://img.shields.io/badge/Windows_Client:_Setup_EXE-v2.1.5-blue.svg)](https://sourceforge.net/projects/api-doc/files/Api%20Doc%202.1.5.exe/download)  
 
 
 ## Get Started
