@@ -45,27 +45,29 @@ export async function setUrlApi (state) {
   }
 }
 
+/**
+ * Set Api Data - Central Object
+ *
+ * @export
+ * @param {*} state
+ * @param {*} id ID Contains: "ID" and "Router View Name"
+ */
 export async function setApiData (state, id) {
+  const _ = state
+  let path
+  if (id[1] === 'DocView') path = `api/api/getapiandtags/${id[0]}`
+  if (id[1] === 'DocViewTeam') path = `api/teamdocs/api/getapiandtags/${id[0]}`
+  if (id[1] === 'DocViewPublic' || id[1] === 'SharedViewDoc') path = `api/geral/getapiandtags/${id[0]}`
   try {
-    if (id[1] === 'DocView') {
-      const result = await axios.get(state.urlApi + `api/api/getapiandtags/${id[0]}`, { headers: state.user.headers })
-      state.apiData = await result.data
-    }
-    if (id[1] === 'DocViewTeam') {
-      state.rulesId = id[0]
-      const result = await axios.get(state.urlApi + `api/teamdocs/api/getapiandtags/${id[0]}`, { headers: state.user.headers })
-      state.apiData = await result.data
-    }
-    if (id[1] === 'DocViewPublic') {
-      const result = await axios.get(state.urlApi + `api/geral/getapiandtags/${id[0]}`)
-      state.apiData = await result.data
-    }
-    if (id[1] === 'SharedViewDoc') {
-      const result = await axios.get(state.urlApi + `api/geral/getapiandtags/${id[0]}`)
-      state.apiData = await result.data
+    if (id[1] === 'DocViewTeam') _.rulesId = id[0]
+    if (id[1] === 'DocViewPublic' || id[1] === 'SharedViewDoc') {
+      const result = await axios.get(_.urlApi + path)
+      _.apiData = await result.data
+    } else if (id[1] === 'DocView' || id[1] === 'DocViewTeam') {
+      const result = await axios.get(_.urlApi + path, { headers: _.user.headers })
+      _.apiData = await result.data
     }
   } catch (error) {
-    console.log(error)
     console.log(error.response.data.error)
   }
 }
