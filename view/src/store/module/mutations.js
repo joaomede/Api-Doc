@@ -31,22 +31,23 @@ export async function boot (state) {
  * @param {*} state
  */
 export async function setUrlApi (state) {
+  const _ = state
   if (Platform.is.electron) {
     const url = LocalStorage.getItem('urlAPI')
-    state.urlApi = url
+    _.urlApi = url
     Vue.prototype.$axios = axios.create({
-      baseURL: state.urlApi
+      baseURL: _.urlApi
     })
   } else {
     if (process.env.NODE_ENV === 'development') {
-      state.urlApi = process.env.APIURL + '/'
-      LocalStorage.set('urlAPI', state.urlApi)
+      _.urlApi = process.env.APIURL + '/'
+      LocalStorage.set('urlAPI', _.urlApi)
     } else {
-      state.urlApi = window.location.origin + '/'
-      LocalStorage.set('urlAPI', state.urlApi)
+      _.urlApi = window.location.origin + '/'
+      LocalStorage.set('urlAPI', _.urlApi)
     }
     Vue.prototype.$axios = axios.create({
-      baseURL: state.urlApi
+      baseURL: _.urlApi
     })
   }
 }
@@ -204,11 +205,12 @@ export function setResponseIndex (state, responseIndex) {
  * @param {*} newPath
  */
 export function setNewTag (state, tag) {
-  if (state.apiData.tags === undefined) {
-    Vue.set(state.apiData[0], 'tags', tag)
+  const _ = state
+  if (_.apiData.tags === undefined) {
+    Vue.set(_.apiData[0], 'tags', tag)
   } else {
-    const index = state.apiData.tags.length
-    Vue.set(state.apiData.tags, index, tag)
+    const index = _.apiData.tags.length
+    Vue.set(_.apiData.tags, index, tag)
   }
 }
 
@@ -220,11 +222,12 @@ export function setNewTag (state, tag) {
  * @param {*} newPath
  */
 export function setNewPath (state, newPath) {
-  if (state.apiData.tags[state.tagIndex].paths === undefined) {
-    Vue.set(state.apiData.tags[state.tagIndex], 'paths', [newPath])
+  const _ = state
+  if (_.apiData.tags[_.tagIndex].paths === undefined) {
+    Vue.set(_.apiData.tags[_.tagIndex], 'paths', [newPath])
   } else {
-    const index = state.apiData.tags[state.tagIndex].paths.length
-    Vue.set(state.apiData.tags[state.tagIndex].paths, index, newPath)
+    const index = _.apiData.tags[_.tagIndex].paths.length
+    Vue.set(_.apiData.tags[_.tagIndex].paths, index, newPath)
   }
 }
 
@@ -236,11 +239,12 @@ export function setNewPath (state, newPath) {
  * @param {*} newResponse
  */
 export function setNewResponse (state, newResponse) {
-  if (state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses === undefined) {
-    Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex], 'responses', [newResponse])
+  const _ = state
+  if (state.apiData.tags[_.tagIndex].paths[_.pathIndex].responses === undefined) {
+    Vue.set(_.apiData.tags[_.tagIndex].paths[_.pathIndex], 'responses', [newResponse])
   } else {
-    const index = state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses.length
-    Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses, index, newResponse)
+    const index = _.apiData.tags[_.tagIndex].paths[_.pathIndex].responses.length
+    Vue.set(_.apiData.tags[_.tagIndex].paths[_.pathIndex].responses, index, newResponse)
   }
 }
 
