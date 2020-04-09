@@ -29,15 +29,3 @@ export function getPath (state) {
 export function getResponse (state) {
   return state.response
 }
-
-export function getTagIndex (state) {
-  return state.tagIndex
-}
-
-export function getPathIndex (state) {
-  return state.pathIndex
-}
-
-export function getRulesId (state) {
-  return state.rulesId
-}
