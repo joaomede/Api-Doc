@@ -24,6 +24,12 @@ export async function boot (state) {
   }
 }
 
+/**
+ * Set Url API - This function is for the electron mechanics to be able to point to a remote server
+ *
+ * @export
+ * @param {*} state
+ */
 export async function setUrlApi (state) {
   if (Platform.is.electron) {
     const url = LocalStorage.getItem('urlAPI')
@@ -112,35 +118,91 @@ export async function setPathsByTagIndex (state, tag) {
   }
 }
 
+/**
+ * Set a response test
+ *
+ * @export
+ * @param {*} state
+ * @param {*} response
+ */
 export function setResponseTest (state, response) {
   const _ = state
   Vue.set(_.apiData.tags[_.tagIndex].paths[_.pathIndex], 'response', response)
 }
 
+/**
+ * Set a Tags Object
+ *
+ * @export
+ * @param {*} state
+ * @param {*} tag
+ */
 export function setTag (state, tag) {
   state.tag = tag
 }
 
+/**
+ * Set a Paths Object
+ *
+ * @export
+ * @param {*} state
+ * @param {*} path
+ */
 export function setPath (state, path) {
   state.path = path
 }
 
+/**
+ * Set Index Responses
+ *
+ * @export
+ * @param {*} state
+ * @param {*} response
+ */
 export function setResponse (state, response) {
   state.response = response
 }
 
+/**
+ * Set Index Tags
+ *
+ * @export
+ * @param {*} state
+ * @param {*} tagIndex
+ */
 export function setTagIndex (state, tagIndex) {
   state.tagIndex = tagIndex
 }
 
+/**
+ * Set Index Paths
+ *
+ * @export
+ * @param {*} state
+ * @param {*} pathIndex
+ */
 export function setPathIndex (state, pathIndex) {
   state.pathIndex = pathIndex
 }
 
+/**
+ * Set Index Responses
+ *
+ * @export
+ * @param {*} state
+ * @param {*} responseIndex
+ */
 export function setResponseIndex (state, responseIndex) {
   state.responseIndex = responseIndex
 }
 
+/**
+ * Reactive function that adds the "tags" object to the parent "apiData" array
+ *
+ * @export
+ * @param {*} state
+ * @param {*} newPath
+ */
 export function setNewTag (state, tag) {
   if (state.apiData.tags === undefined) {
     Vue.set(state.apiData[0], 'tags', tag)
@@ -150,6 +212,13 @@ export function setNewTag (state, tag) {
   }
 }
 
+/**
+ * Reactive function that adds the "paths" object to the parent "tags" array
+ *
+ * @export
+ * @param {*} state
+ * @param {*} newPath
+ */
 export function setNewPath (state, newPath) {
   if (state.apiData.tags[state.tagIndex].paths === undefined) {
     Vue.set(state.apiData.tags[state.tagIndex], 'paths', [newPath])
@@ -159,6 +228,13 @@ export function setNewPath (state, newPath) {
   }
 }
 
+/**
+ * Reactive function that adds the "responses" object to the parent "paths" array
+ *
+ * @export
+ * @param {*} state
+ * @param {*} newResponse
+ */
 export function setNewResponse (state, newResponse) {
   if (state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses === undefined) {
     Vue.set(state.apiData.tags[state.tagIndex].paths[state.pathIndex], 'responses', [newResponse])
@@ -168,14 +244,32 @@ export function setNewResponse (state, newResponse) {
   }
 }
 
+/**
+ * Removes a "tag" from the parent object "apiData" reactively
+ *
+ * @export
+ * @param {*} state
+ */
 export function removeTag (state) {
   Vue.delete(state.apiData.tags, state.tagIndex)
 }
 
+/**
+ * Removes a "paths" from the parent object "tags" reactively
+ *
+ * @export
+ * @param {*} state
+ */
 export function removePath (state) {
   Vue.delete(state.apiData.tags[state.tagIndex].paths, state.pathIndex)
 }
 
+/**
+ * Removes a "responses" from the parent object "paths" reactively
+ *
+ * @export
+ * @param {*} state
+ */
 export function removeResponse (state) {
   Vue.delete(state.apiData.tags[state.tagIndex].paths[state.pathIndex].responses, state.responseIndex)
 }
