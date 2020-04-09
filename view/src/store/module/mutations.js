@@ -72,58 +72,43 @@ export async function setApiData (state, id) {
   }
 }
 
+/**
+ * Set Paths by Tag Index
+ *
+ * @export
+ * @param {*} state
+ * @param {*} tag
+ */
 export async function setPathsByTagIndex (state, tag) {
-  if (tag[1] === 'DocView') {
+  const _ = state
+  /**
+   * Get Method to request Object "Path And Response"
+   *
+   * @param {*} path Endpoint Api
+   */
+  async function abstractGetPathResponses (path) {
     try {
-      const result = await axios.get(state.urlApi + `api/api/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
+      const result = await axios.get(_.urlApi + path, { headers: _.user.headers })
       for (let i = 0; i < result.data.length; i++) {
         if (result.data[i].query === null) {
           result.data[i].query = { querys: [] }
         }
       }
-      Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
+      Vue.set(_.apiData.tags[_.tagIndex], 'paths', result.data)
     } catch (error) {
       // console.log(error.response.data.error)
     }
   }
-  if (tag[1] === 'DocViewTeam') {
-    try {
-      const result = await axios.get(state.urlApi + `api/teamdocs/api/getpathsandresponses/${state.rulesId}/${tag[0]}`, { headers: state.user.headers })
-      for (let i = 0; i < result.data.length; i++) {
-        if (result.data[i].query === null) {
-          result.data[i].query = { querys: [] }
-        }
-      }
-      Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
-    } catch (error) {
-      // console.log(error.response.data.error)
-    }
-  }
-  if (tag[1] === 'DocViewPublic') {
-    try {
-      const result = await axios.get(state.urlApi + `api/geral/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
-      for (let i = 0; i < result.data.length; i++) {
-        if (result.data[i].query === null) {
-          result.data[i].query = { querys: [] }
-        }
-      }
-      Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
-    } catch (error) {
-      // console.log(error.response.data.error)
-    }
-  }
-  if (tag[1] === 'SharedViewDoc') {
-    try {
-      const result = await axios.get(state.urlApi + `api/geral/getpathsandresponses/${tag[0]}`, { headers: state.user.headers })
-      for (let i = 0; i < result.data.length; i++) {
-        if (result.data[i].query === null) {
-          result.data[i].query = { querys: [] }
-        }
-      }
-      Vue.set(state.apiData.tags[state.tagIndex], 'paths', await result.data)
-    } catch (error) {
-      // console.log(error.response.data.error)
-    }
+
+  try {
+    let path
+    if (tag[1] === 'DocView') path = `api/api/getpathsandresponses/${tag[0]}`
+    if (tag[1] === 'DocView') path = `api/teamdocs/api/getpathsandresponses/${_.rulesId}/${tag[0]}`
+    if (tag[1] === 'DocViewPublic') path = `api/geral/getpathsandresponses/${tag[0]}`
+    if (tag[1] === 'SharedViewDoc') path = `api/geral/getpathsandresponses/${tag[0]}`
+    await abstractGetPathResponses(path)
+  } catch (error) {
+    // console.log(error.response.data.error)
   }
 }
 
