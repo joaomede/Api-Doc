@@ -1,77 +1,91 @@
 export default {
   methods: {
+    /**
+     * Path Test: method to test a endpoint
+     *
+     * @param {*} object Object: Header and Payload
+     * @param {*} indexTag Index of Tag
+     * @param {*} indexPath Index of Path
+     */
     async pathTest (object, indexTag, indexPath) {
-      const o = object
       this.$store.dispatch('setTagIndex', indexTag)
       this.$store.dispatch('setPathIndex', indexPath)
-      let params = ''
-      let querys = ''
-      let path = ''
-      forParams(object.parameter.params)
-      forQuerys(object.query.querys)
-      path = this.cApi.baseURL + '/' + o.path + params + querys
-      switch (o.methodType) {
+      const params = this.forParams(object.parameter.params)
+      const querys = this.forQuerys(object.query.querys)
+      const path = `${this.cApi.baseURL}/${object.path}${params}${querys}`
+      switch (object.methodType) {
         case 'DELETE':
-          await this.deleteMethod(o, path)
+          await this.methodWithoutPayload(object, path, 'delete')
           break
         case 'GET':
-          await this.getMethod(o, path)
+          await this.methodWithoutPayload(object, path, 'get')
           break
         case 'PUT':
-          await this.putMethod(o, path)
+          await this.methodWithPayload(object, path, 'put')
           break
         case 'POST':
-          await this.postMethod(o, path)
+          await this.methodWithPayload(object, path, 'post')
           break
       }
-
-      function forParams (param) {
-        for (let index = 0; index < param.length; index++) {
-          params = `${params}/${param[index].parameterValue}`
-        }
-      }
-
-      function forQuerys (query) {
-        if (query.length > 0) {
-          querys = '?'
-        }
-
-        for (let index = 0; index < query.length; index++) {
-          querys = `${querys}${query[index].queryName}=${query[index].queryValue}&`
-          if (index + 1 === query.length) {
-            querys = querys.slice(0, -1)
-          }
-        }
-        return querys
-      }
     },
-    async postMethod (o, path) {
+    /**
+     * Get a Params path
+     *
+     * @param {*} param params
+     * @returns string
+     */
+    forParams (param) {
+      let params = ''
+      for (let index = 0; index < param.length; index++) {
+        params = `${params}/${param[index].parameterValue}`
+      }
+      return params
+    },
+    /**
+     * Get a query string
+     *
+     * @param {*} query querys
+     * @returns string
+     */
+    forQuerys (query) {
+      let querys = ''
+      if (query.length > 0) {
+        querys = '?'
+      }
+
+      for (let index = 0; index < query.length; index++) {
+        querys = `${querys}${query[index].queryName}=${query[index].queryValue}&`
+        if (index + 1 === query.length) {
+          querys = querys.slice(0, -1)
+        }
+      }
+      return querys
+    },
+    /**
+     * Abstract method post or put
+     *
+     * @param {*} o Contains Headers Value and BodyValue
+     * @param {*} path Path
+     * @param {*} method Method: POST or PUT
+     */
+    async methodWithPayload (o, path, method) {
       try {
-        const result = await this.$axios.post(path, o.bodyValue, { headers: o.headersValue })
+        const result = await this.$axios[method](path, o.bodyValue, { headers: o.headersValue })
         this.$store.dispatch('setResponseTest', result)
       } catch (error) {
         this.$store.dispatch('setResponseTest', error.response)
       }
     },
-    async getMethod (o, path) {
+    /**
+     * Abstract method delete or get
+     *
+     * @param {*} o Contains Headers Values
+     * @param {*} path Path
+     * @param {*} method Method: "DELETE or GET"
+     */
+    async methodWithoutPayload (o, path, method) {
       try {
-        const result = await this.$axios.get(path, { headers: o.headersValue })
-        this.$store.dispatch('setResponseTest', result)
-      } catch (error) {
-        this.$store.dispatch('setResponseTest', error.response)
-      }
-    },
-    async putMethod (o, path) {
-      try {
-        const result = await this.$axios.put(path, o.bodyValue, { headers: o.headersValue })
-        this.$store.dispatch('setResponseTest', result)
-      } catch (error) {
-        this.$store.dispatch('setResponseTest', error.response)
-      }
-    },
-    async deleteMethod (o, path) {
-      try {
-        const result = await this.$axios.delete(path, { headers: o.headersValue })
+        const result = await this.$axios[method](path, { headers: o.headersValue })
         this.$store.dispatch('setResponseTest', result)
       } catch (error) {
         this.$store.dispatch('setResponseTest', error.response)
