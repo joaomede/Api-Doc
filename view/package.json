@@ -1,6 +1,6 @@
 {
   "name": "api-doc",
-  "version": "1.4.0",
+  "version": "2.1.5",
   "description": "Uma aplicação para gerir e testar documentações de api",
   "productName": "Api Doc",
   "cordovaId": "org.cordova.quasar.app",

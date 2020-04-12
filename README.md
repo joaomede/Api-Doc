@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.com/joaomede/Api-Doc.svg?branch=master)](https://travis-ci.com/joaomede/Api-Doc)
- ![GitHub](https://img.shields.io/github/license/joaomede/api-doc) ![GitHub package.json version](https://img.shields.io/github/package-json/v/joaomede/api-doc) ![GitHub repo size](https://img.shields.io/github/repo-size/joaomede/api-doc) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cb8e4c89586a43809c7a817a07f56309)](https://www.codacy.com/manual/joaomede/Api-Doc?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=joaomede/Api-Doc&amp;utm_campaign=Badge_Grade)
+ ![GitHub](https://img.shields.io/github/license/joaomede/api-doc) ![GitHub package.json version](https://img.shields.io/github/package-json/v/joaomede/api-doc) ![GitHub repo size](https://img.shields.io/github/repo-size/joaomede/api-doc) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cb8e4c89586a43809c7a817a07f56309)](https://www.codacy.com/manual/joaomede/Api-Doc?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=joaomede/Api-Doc&amp;utm_campaign=Badge_Grade) [![Linux Client](https://img.shields.io/badge/Linux_Client:_AppImage-v2.1.5-blue.svg)](https://sourceforge.net/projects/api-doc/files/Api%20Doc-2.1.5.AppImage/download) [![Windows Client](https://img.shields.io/badge/Windows_Client:_Setup_EXE-v2.1.5-blue.svg)](https://sourceforge.net/projects/api-doc/files/Api%20Doc%202.1.5.exe/download)  
+
 # Api Doc
 
 ### Mobile
@@ -13,7 +14,6 @@ API Doc is an API Rest test technology, it works as a CRUD, where you can access
 
 ### Client Electron for Desktop
 ![Destkop Electron](documentation/docs/image/electronDesktop.png)  
-[![Linux Client](https://img.shields.io/badge/Linux_Client:_AppImage-v1.4.0-blue.svg)](https://sourceforge.net/projects/api-doc/files/Api-Doc-1.4.0.AppImage/download)  
 
 
 ## Get Started
