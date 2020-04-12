@@ -110,7 +110,7 @@ export async function setPathsByTagIndex (state, tag) {
   try {
     let path
     if (tag[1] === 'DocView') path = `api/api/getpathsandresponses/${tag[0]}`
-    if (tag[1] === 'DocView') path = `api/teamdocs/api/getpathsandresponses/${_.rulesId}/${tag[0]}`
+    if (tag[1] === 'DocViewTeam') path = `api/teamdocs/api/getpathsandresponses/${_.rulesId}/${tag[0]}`
     if (tag[1] === 'DocViewPublic') path = `api/geral/getpathsandresponses/${tag[0]}`
     if (tag[1] === 'SharedViewDoc') path = `api/geral/getpathsandresponses/${tag[0]}`
     await abstractGetPathResponses(path)

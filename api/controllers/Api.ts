@@ -84,14 +84,10 @@ class Api {
     try {
       const pathAndResponses = await apiDoc.getPathAndResponses(apiDoc.knex(), tagId)
 
-      if (pathAndResponses.length === 0) {
-        resp.returnErrorMessage(res, 'Não há verbos disponíveis')
+      if (pathAndResponses[0].userIdFk === req.userId) {
+        resp.returnSucessObject(res, pathAndResponses)
       } else {
-        if (pathAndResponses[0].userIdFk === req.userId) {
-          resp.returnSucessObject(res, pathAndResponses)
-        } else {
-          resp.returnErrorMessage(res, 'Você não tem autorização para acessar essa documentação')
-        }
+        resp.returnErrorMessage(res, 'Você não tem autorização para acessar essa documentação')
       }
     } catch (error) {
       resp.returnErrorMessage(res, error.message)
