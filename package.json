@@ -1,6 +1,6 @@
 {
   "name": "api-doc",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "A crud for api documentation",
   "author": "João Medeiros N. Jr - <symbol2studio@gmail.com> (https://symbol2.com.br/)",
   "homepage": "http://github.com/joaomede/Api-Doc#readme",
@@ -27,7 +27,6 @@
     "migrate:dev": "sucrase-node api/config/migrate.ts",
     "build": "rimraf dist/ && sucrase ./api -d ./dist --transforms typescript,imports",
     "build:view": "cd view && yarn quasar build -m pwa",
-    "version": "git add -A ./",
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
