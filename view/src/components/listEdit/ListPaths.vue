@@ -552,6 +552,7 @@ export default {
     },
     async updatePath (path) {
       try {
+        path.responses = undefined
         const result = await this.$axios.put(`api/paths/update/${path.id}`, path, { headers: this.cUser.headers })
         this.$notify(result.data.ok, 'green')
       } catch (error) {
