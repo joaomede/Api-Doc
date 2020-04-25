@@ -18,6 +18,7 @@
               type="Email"
               label="E-mail"
               required
+              @keypress.enter="login()"
             />
             <q-input
               v-model="senha"
@@ -27,6 +28,7 @@
               lazy-rules
               required
               :rules="senhaRules"
+              @keypress.enter="login()"
             />
           </q-form>
         </q-card-section>
