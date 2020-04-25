@@ -1,56 +1,71 @@
 <template>
   <div class="centralDiv">
-    <q-form>
-      <q-card class="my-card">
-        <q-card-section>
-          <div class="text-h6">
-            Login
+    <ValidationObserver
+      ref="observer"
+      v-slot="{ invalid, validated, passes }"
+    >
+      <q-form>
+        <q-card class="my-card">
+          <q-card-section>
+            <div class="text-h6">
+              Login
+            </div>
+          </q-card-section>
+
+          <q-card-section>
+            <q-form class="q-gutter-md">
+              <ValidationProvider
+                v-slot="{ errors, invalid, validated }"
+                rules="required|email"
+              >
+                <q-input
+                  v-model="email"
+                  filled
+                  type="Email"
+                  label="E-mail"
+                  :error="invalid && validated"
+                  :error-message="errors[0]"
+                  @keypress.enter="login()"
+                />
+              </validationprovider>
+
+              <ValidationProvider
+                v-slot="{ errors, invalid, validated }"
+                rules="required|min:6"
+              >
+                <q-input
+                  v-model="senha"
+                  filled
+                  type="Password"
+                  label="Senha"
+                  :error="invalid && validated"
+                  :error-message="errors[0]"
+                  @keypress.enter="login()"
+                />
+              </validationprovider>
+            </q-form>
+          </q-card-section>
+
+          <div class="justify-center">
+            <q-btn
+              class="q-ma-xs"
+              color="primary"
+              to="/register"
+            >
+              Register
+            </q-btn>
+            <q-btn
+              class="q-ma-xs"
+              color="green"
+              :disable="invalid || !validated"
+              @click="passes(login)"
+            >
+              Entrar
+            </q-btn>
           </div>
-        </q-card-section>
-
-        <q-card-section>
-          <q-form class="q-gutter-md">
-            <q-input
-              v-model="email"
-              filled
-              lazy-rules
-              :rules="emailRules"
-              type="Email"
-              label="E-mail"
-              required
-              @keypress.enter="login()"
-            />
-            <q-input
-              v-model="senha"
-              filled
-              type="Password"
-              label="Senha"
-              lazy-rules
-              required
-              :rules="senhaRules"
-              @keypress.enter="login()"
-            />
-          </q-form>
-        </q-card-section>
-
-        <div class="justify-center">
-          <q-btn
-            class="q-ma-xs"
-            color="primary"
-            to="/register"
-          >
-            Register
-          </q-btn>
-          <q-btn
-            class="q-ma-xs"
-            color="green"
-            @click="login"
-          >
-            Entrar
-          </q-btn>
-        </div>
-      </q-card>
-    </q-form>
+        </q-card>
+      </q-form>
+    </validationobserver>
   </div>
 </template>
 

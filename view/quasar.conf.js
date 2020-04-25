@@ -12,7 +12,8 @@ module.exports = function (ctx) {
       'notify',
       'plugins',
       'globalFilters',
-      'globallyMixins'
+      'globallyMixins',
+      'vee-validate'
     ],
 
     css: [

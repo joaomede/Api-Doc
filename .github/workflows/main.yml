@@ -2,7 +2,7 @@ name: main
 on: [push]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
     name: Build Api Rest
     steps:
@@ -10,5 +10,5 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - run: npm run install
-    - run: npm run build
+    - run: npm install
+    - run: npm build
