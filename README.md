@@ -8,7 +8,7 @@ Main Menu             |  List Api          |Paths
 :-----------------------:|:-------------------------:|:-----------------------:
 ![](documentation/docs/image/1.png)      |![](documentation/docs/image/2.png)     |![](documentation/docs/image/3.png) 
 
-API Doc is an API Rest test technology, it works as a CRUD, where you can access the documentation from anywhere, I was inspired by applications like Swagger, postman and Insonmia to create it.
+API Doc is an API Rest test technology, it works as a CRUD, where you can access the documentation from anywhere, I was inspired by applications like Swagger, Postman and Insonmia to create it.
 
 <a href="https://www.buymeacoffee.com/iSTozIC" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-blue.png" alt="Buy Me A Coffee" style="height: 35px !important;width: 150px !important;" ></a>
 
