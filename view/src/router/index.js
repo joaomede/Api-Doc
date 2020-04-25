@@ -9,7 +9,7 @@ export default function ({ ssrContext }) {
   let allRoutes = [
     {
       path: '/',
-      redirect: '/publicdocs'
+      redirect: '/privatedocs'
     },
     {
       path: '/login',
@@ -133,10 +133,10 @@ export default function ({ ssrContext }) {
             next()
           })
           .catch(() => {
-            next({ path: '/login' })
+            next({ path: '/publicdocs' })
           })
       } else {
-        next({ path: '/login' })
+        next({ path: '/publicdocs' })
       }
     } else {
       next()
