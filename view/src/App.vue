@@ -67,7 +67,7 @@ export default {
     this.$store.dispatch('setUrlApi')
     this.checkLanguage()
     this.$store.dispatch('boot')
-    this.checkElectron()
+    this.checkElectronOrCordova()
   },
   methods: {
     checkLanguage () {
@@ -78,9 +78,10 @@ export default {
         }
       }
     },
-    checkElectron () {
-      if (this.$q.platform.is.electron) {
+    checkElectronOrCordova () {
+      if (this.$q.platform.is.electron || this.$q.platform.is.cordova) {
         const url = this.$q.localStorage.getItem('urlAPI')
+        console.log(url)
         if (url === null || url === undefined) {
           this.$router.push('electron')
         }

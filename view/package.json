@@ -1,6 +1,6 @@
 {
   "name": "api-doc",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Uma aplicação para gerir e testar documentações de api",
   "productName": "Api Doc",
   "cordovaId": "org.cordova.quasar.app",
@@ -9,9 +9,11 @@
   "scripts": {
     "dev": "quasar dev",
     "dev:pwa": "quasar dev -m pwa",
+    "dev:android": "quasar dev -m cordova -T android -e",
     "dev:electron": "quasar dev -m electron",
     "build": "quasar build",
     "build:electron": "quasar build -m electron",
+    "build:cordova": "quasar build -m cordova -T android",
     "lint": "eslint --ext .js,.vue src",
     "build:pwa": "quasar build -m pwa"
   },

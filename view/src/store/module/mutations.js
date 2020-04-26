@@ -32,7 +32,7 @@ export async function boot (state) {
  */
 export async function setUrlApi (state) {
   const _ = state
-  if (Platform.is.electron) {
+  if (Platform.is.electron || Platform.is.cordova) {
     const url = LocalStorage.getItem('urlAPI')
     _.urlApi = url
     Vue.prototype.$axios = axios.create({
