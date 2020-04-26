@@ -34,6 +34,7 @@ function genSidebarConfig (title) {
       collapsable: false,
       children: [
         'Introduction',
+        'CordovaAndElectron',
         'Docker',
         'Installation',
         'Contribution',

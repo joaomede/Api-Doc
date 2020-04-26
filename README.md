@@ -28,19 +28,22 @@
     </a>
 </p>
 
-### Mobile
+API Doc is an API Rest test technology, it works as a CRUD, where you can access the documentation from anywhere, I was inspired by applications like Swagger, ostman and Insonmia to create it.
+
+### Mobile - (Cordova or PWA)
 
 |              Main Menu              |              List Api               |                Paths                |
 | :---------------------------------: | :---------------------------------: | :---------------------------------: |
 | ![](documentation/docs/image/1.png) | ![](documentation/docs/image/2.png) | ![](documentation/docs/image/3.png) |
 
-API Doc is an API Rest test technology, it works as a CRUD, where you can access the documentation from anywhere, I was inspired by applications like Swagger, ostman and Insonmia to create it.
 
 <a href="https://www.buymeacoffee.com/iSTozIC" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-blue.png" alt="Buy Me A Coffee" style="height: 35px !important;width: 150px !important;" ></a>
 
 ### Client Electron for Desktop
 
 ![Destkop Electron](documentation/docs/image/electronDesktop.png)
+
+> Attention: Cordova and Electron Builds ask for the address of a Remote API, they work only as customers, while the PWA version does not make this requirement, as it runs in the same container as the API - for more, see in docs ["Cordova And Electron Docs"](https://joaomede.github.io/Api-Doc/pages/CordovaAndElectron.html)
 
 ## Get Started
 
