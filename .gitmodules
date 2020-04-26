@@ -1,0 +1,3 @@
+[submodule "api-doc-js-sdk"]
+	path = api-doc-js-sdk
+	url = https://github.com/joaomede/api-doc-js-sdk

@@ -5,4 +5,3 @@ yarn-error.log
 mydb.sqlite
 /dist
 /postgres
-api-doc-js-sdk
