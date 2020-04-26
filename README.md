@@ -24,7 +24,7 @@
         <img src="https://img.shields.io/badge/Windows_Client:_Setup_EXE-v2.1.5-blue.svg" />
     </a>
     <a href="https://sourceforge.net/projects/api-doc/files/ApiDoc-2.1.6.apk/download" alt="Android Cordova">
-        <img src="https://img.shields.io/badge/Windows_Client:_Setup_EXE-v2.1.5-blue.svg" />
+        <img src="https://img.shields.io/badge/Windows_Client:_Setup_EXE-v2.1.6-blue.svg" />
     </a>
 </p>
 
