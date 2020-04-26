@@ -13,7 +13,8 @@ Here are some of the functions that the software has to offer
 - [x] Client Electron for Windows, Mac And Linux Dist
 - [x] PWA/SPA Works
 - [ ] SSR Builder
-- [ ] Cordova Android / iOS
+- [x] Cordova Android
+- [ ] Cordova iOS
 - [x] Test Request
 - [x] Register Responses and Codes Definitions
 - [x] Methods Accept: Post, Get, Delete, Put

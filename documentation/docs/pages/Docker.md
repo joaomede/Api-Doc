@@ -3,7 +3,7 @@
 Want to start fast? use the official image of the docker
 
 ## Docker Compose
-```docker
+```yml
 version: "3.3"
 
 services:

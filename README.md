@@ -30,7 +30,8 @@ API Doc is an API Rest test technology, it works as a CRUD, where you can access
 - [x] Client Electron for Windows, Mac And Linux Dist
 - [x] PWA/SPA Works
 - [ ] SSR Builder
-- [ ] Cordova Android / iOS
+- [x] Cordova Android
+- [ ] Cordova iOS
 - [x] Test Request
 - [x] Register Responses and Codes Definitions
 - [x] Methods Accept: Post, Get, Delete, Put

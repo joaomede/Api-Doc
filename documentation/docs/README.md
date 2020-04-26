@@ -1,6 +1,7 @@
 ---
 home: true
 heroText: Api Doc
+heroImage: logo.png
 tagline: An open source to document and facilitate API testing
 actionText: GET STARTED →
 actionLink: /pages/Introduction.md
