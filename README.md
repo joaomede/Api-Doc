@@ -24,11 +24,11 @@
         <img src="https://img.shields.io/badge/Windows_Client:_Setup_EXE-v2.1.5-blue.svg" />
     </a>
     <a href="https://sourceforge.net/projects/api-doc/files/ApiDoc-2.1.6.apk/download" alt="Android Cordova">
-        <img src="https://img.shields.io/badge/Windows_Client:_Setup_EXE-v2.1.6-blue.svg" />
+        <img src="https://img.shields.io/badge/Android_Cordova:_APK-v2.1.6-blue.svg" />
     </a>
 </p>
 
-API Doc is an API Rest test technology, it works as a CRUD, where you can access the documentation from anywhere, I was inspired by applications like Swagger, ostman and Insonmia to create it.
+API Doc is an API Rest test technology, it works as a CRUD, where you can access the documentation from anywhere, I was inspired by applications like Swagger, Postman and Insonmia to create it.
 
 ### Mobile - (Cordova or PWA)
 
