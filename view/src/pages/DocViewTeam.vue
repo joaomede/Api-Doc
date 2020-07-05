@@ -1,22 +1,22 @@
 
 <template>
   <div class="centralDiv">
-    <BackMobile />
-    <BackDesktop />
+    <FabButton
+      color="orange darken-2"
+      position="left"
+      icon="fas fa-arrow-left"
+      @eventClick="$router.go(-1)"
+    />
     <ListApi class="text-center" />
   </div>
 </template>
 
 <script>
 import ListApi from '../components/listTeamDoc/ListApi'
-import BackMobile from '../components/fab/FabBtnBackMobile'
-import BackDesktop from '../components/fab/FabBtnBackDesktop'
 
 export default {
   components: {
-    ListApi,
-    BackMobile,
-    BackDesktop
+    ListApi
   },
   props: {
     id: {

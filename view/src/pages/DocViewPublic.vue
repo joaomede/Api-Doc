@@ -1,24 +1,23 @@
 
 <template>
   <div class="centralDiv">
-    <BackMobile v-if="this.$router.currentRoute.name !== 'SharedViewDoc'" />
-    <BackDesktop v-if="this.$router.currentRoute.name !== 'SharedViewDoc'" />
+    <FabButton
+      v-if="this.$router.currentRoute.name !== 'SharedViewDoc'"
+      color="orange darken-2"
+      position="left"
+      icon="fas fa-arrow-left"
+      @eventClick="$router.go(-1)"
+    />
     <ListApi class="text-center" />
   </div>
 </template>
 
 <script>
 import ListApi from '../components/listPublicDoc/ListApi'
-import BackMobile from '../components/fab/FabBtnBackMobile'
-import BackDesktop from '../components/fab/FabBtnBackDesktop'
 
 export default {
   components: {
-    ListApi,
-
-    BackMobile,
-    BackDesktop
-
+    ListApi
   },
   props: {
     id: {

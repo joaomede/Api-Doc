@@ -1,12 +1,16 @@
 <template>
   <q-card class="centralDiv">
-    <BackMobile />
-    <BackDesktop />
-
-    <AddMobile
-      @eventClick="dialogAddNewMember = true"
+    <FabButton
+      color="orange darken-2"
+      position="left"
+      icon="fas fa-arrow-left"
+      @eventClick="$router.go(-1)"
     />
-    <AddDesktop
+
+    <FabButton
+      color="orange darken-2"
+      position="right"
+      icon="add"
       @eventClick="dialogAddNewMember = true"
     />
 
@@ -70,20 +74,11 @@
 import DialogAddNewMember from '../components/dialog/addDialog/DialogAddNewMember'
 import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
 
-import BackMobile from '../components/fab/FabBtnBackMobile'
-import BackDesktop from '../components/fab/FabBtnBackDesktop'
-import AddMobile from '../components/fab/FabBtnAddMobile'
-import AddDesktop from '../components/fab/FabBtnAddDesktop'
-
 export default {
   name: 'PrivateList',
   components: {
     DialogAddNewMember,
-    DialogConfirmDelete,
-    BackMobile,
-    BackDesktop,
-    AddMobile,
-    AddDesktop
+    DialogConfirmDelete
   },
   props: {
     id: {

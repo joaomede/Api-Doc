@@ -1,7 +1,11 @@
 <template>
   <q-card class="centralDiv">
-    <BackMobile />
-    <BackDesktop v-if="!this.$q.platform.is.electron" />
+    <FabButton
+      color="orange darken-2"
+      position="left"
+      icon="fas fa-arrow-left"
+      @eventClick="$router.go(-1)"
+    />
 
     <div class="text-h6 text-central">
       Lista de Documentação de API publicas
@@ -47,15 +51,8 @@
 </template>
 
 <script>
-import BackMobile from '../components/fab/FabBtnBackMobile'
-import BackDesktop from '../components/fab/FabBtnBackDesktop'
-
 export default {
   name: 'PublicList',
-  components: {
-    BackMobile,
-    BackDesktop
-  },
   data () {
     return {
       listOfApis: []

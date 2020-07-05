@@ -1,7 +1,11 @@
 <template>
   <q-card class="centralDiv">
-    <BackMobile />
-    <BackDesktop />
+    <FabButton
+      color="orange darken-2"
+      position="left"
+      icon="fas fa-arrow-left"
+      @eventClick="$router.go(-1)"
+    />
 
     <DialogConfirmDelete
       :dialog="dialogconfirmExitTeam"
@@ -64,15 +68,10 @@
 <script>
 import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
 
-import BackMobile from '../components/fab/FabBtnBackMobile'
-import BackDesktop from '../components/fab/FabBtnBackDesktop'
-
 export default {
   name: 'PrivateList',
   components: {
-    DialogConfirmDelete,
-    BackMobile,
-    BackDesktop
+    DialogConfirmDelete
   },
   data () {
     return {
