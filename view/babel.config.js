@@ -1,5 +1,7 @@
 module.exports = {
   presets: [
-    '@quasar/babel-preset-app'
+    'vca-jsx',
+    '@vue/babel-preset-app'
+    // '@quasar/babel-preset-app'
   ]
 }
