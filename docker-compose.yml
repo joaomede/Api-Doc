@@ -5,7 +5,7 @@ services:
     image: postgres:11.5-alpine
     container_name: pg-database
     env_file:
-      - .env
+      - ./api/.env
     volumes:
       - ./postgres:/var/lib/postgresql/data
       - "/etc/localtime:/etc/localtime:ro"
@@ -26,10 +26,12 @@ services:
     environment:
       HOSTDB: pg
     env_file:
-      - .env
-    command: ./scripts/dev.sh
+      - ./api/.env
+    command: > 
+      bash -c "./scripts/dev.sh"
     volumes:
-      - .:/usr/src/app
+      - ./api:/usr/src/app/api
+      - ./scripts:/usr/src/app/scripts
       - "/etc/localtime:/etc/localtime:ro"
     networks:
       - redePostgres

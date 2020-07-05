@@ -5,5 +5,5 @@ dockerImage='joaomede/nodejs12prod:1.0'
 workDir='/usr/src/app'
 install='yarn -i'
 
-sudo $dockerRun -v $(pwd):$workDir $dockerImage $install
+sudo $dockerRun -v $(pwd)/api:$workDir -v $(pwd)/api-doc-js-sdk:/usr/src/api-doc-js-sdk $dockerImage $install
 sudo $dockerRun -v $(pwd)/view:$workDir $dockerImage $install

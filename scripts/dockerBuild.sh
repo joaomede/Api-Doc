@@ -6,20 +6,34 @@ workDir='/usr/src/app'
 install='yarn -i'
 installProd='yarn -i --production'
 
-
-
 read -p "New Tag Version: " version
 
-sudo rm -r node_modules yarn.lock view/dist
-sudo $dockerRun -v $(pwd):$workDir $dockerImage $install
+# Clear Dists and Old modules
+sudo rm -r api/node_modules yarn.lock view/dist
+
+# Install modules
+sudo $dockerRun -v $(pwd)/api:$workDir $dockerImage $install
 sudo $dockerRun -v $(pwd)/view:$workDir $dockerImage $install
-sudo $dockerRun -v $(pwd):$workDir $dockerImage yarn build:view
-sudo $dockerRun -v $(pwd):$workDir $dockerImage yarn build
-sudo rm -r node_modules yarn.lock
+
+# Build view and api
+sudo $dockerRun -v $(pwd)/view:$workDir $dockerImage yarn build:pwa
+sudo $dockerRun -v $(pwd)/api:$workDir $dockerImage yarn build
+
+
+# Clear api modules
+sudo rm -r ./api/node_modules ./api/yarn.lock
+
+# Install api productions
 sudo $dockerRun -v $(pwd):$workDir $dockerImage $installProd
+
+# Build docker image
 sudo docker build -t joaomede/apidoc:${version} .
 
-sudo rm -r node_modules yarn.lock
-sudo $dockerRun -v $(pwd):$workDir $dockerImage $install
+# Clear Modules again to install dev
+sudo rm -r ./api/node_modules ./api/yarn.lock
 
+# install dev
+sudo $dockerRun -v $(pwd)/api:$workDir $dockerImage $install
+
+# Tag latest image
 sudo docker tag joaomede/apidoc:${version} joaomede/apidoc:latest

@@ -1,8 +1,8 @@
 import * as path from 'path'
 import * as http from 'http'
 import * as https from 'https'
-import * as Routers from './routes/Router'
-import CheckJwt from './middlewares/CheckJwt'
+import * as Routers from './routes/router'
+import CheckJwt from './middlewares/checkJwt'
 
 import { env } from './config/env'
 import history = require('connect-history-api-fallback')
@@ -22,7 +22,7 @@ class App {
 
   private routes (): void {
     this.express.use(history())
-    this.express.use(express.static(path.join(__dirname, '../view/dist/pwa')))
+    this.express.use(express.static(path.join(__dirname, '../../view/dist/pwa')))
 
     this.express.use(new Routers.AuthRouters().routes)
     this.express.use(new Routers.PublicRouters().routes)

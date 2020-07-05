@@ -4,4 +4,5 @@ dockerRun='docker exec -it'
 dockerContainer='dev-api'
 migrate='yarn migrate:dev'
 
+cd api
 sudo $dockerRun $dockerContainer $migrate

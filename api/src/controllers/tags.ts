@@ -1,4 +1,4 @@
-import { NewRequest } from '../interface/NewRequest'
+import { NewRequest } from '../interface/newRequest'
 import { Response } from 'express'
 import apiDoc from '../config/api'
 import resp from 'resp-express'

@@ -1,7 +1,7 @@
 import apiDoc from '../config/api'
 import { Response, Request } from 'express'
 import resp from 'resp-express'
-import { NewRequest } from '../interface/NewRequest'
+import { NewRequest } from '../interface/newRequest'
 
 class Auth {
   public async register (req: Request, res: Response): Promise<void> {

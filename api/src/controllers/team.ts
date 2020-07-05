@@ -1,6 +1,6 @@
 import { Response } from 'express'
 import apiDoc from '../config/api'
-import { NewRequest } from '../interface/NewRequest'
+import { NewRequest } from '../interface/newRequest'
 import resp from 'resp-express'
 
 class Team {

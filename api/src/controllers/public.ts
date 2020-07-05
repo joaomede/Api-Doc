@@ -1,6 +1,6 @@
 import apiDoc from '../config/api'
 import { Api } from 'api-doc-js-sdk'
-import { NewRequest } from '../interface/NewRequest'
+import { NewRequest } from '../interface/newRequest'
 import resp from 'resp-express'
 import { Response } from 'express'
 
