@@ -105,11 +105,10 @@
 </template>
 <script>
 import ListTags from '../listPublicDoc/ListTags'
-import SharedEmbed from '../../components/dialog/SharedEmbed'
+
 export default {
   components: {
-    ListTags,
-    SharedEmbed
+    ListTags
   },
   data () {
     return {
