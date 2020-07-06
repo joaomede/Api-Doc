@@ -23,7 +23,7 @@
     <DialogConfirmDelete
       :dialog="dialogConfirmDeleteTeam"
       @eventClose="dialogConfirmDeleteTeam = false"
-      @confirm="deleteMyTeam()"
+      @eventConfirm="deleteMyTeam()"
     />
 
     <div class="text-h6 text-center">
@@ -76,14 +76,10 @@
 
 <script>
 import DialogAddTeam from '../components/dialog/addDialog/DialogAddTeam'
-import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
 
 export default {
   name: 'PrivateList',
-  components: {
-    DialogAddTeam,
-    DialogConfirmDelete
-  },
+  components: { DialogAddTeam },
   data () {
     return {
       listAllTeams: [],

@@ -1,4 +1,10 @@
 export default {
+  geral: {
+    questionDelete: 'Do you really want to delete this item?',
+    confirm: 'Yes',
+    deny: 'No',
+    back: 'Back'
+  },
   commonCodes: {
     // 1xx
     '100': {

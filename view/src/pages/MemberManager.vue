@@ -23,7 +23,7 @@
     <DialogConfirmDelete
       :dialog="dialogConfirmDeleteMember"
       @eventClose="dialogConfirmDeleteMember = false"
-      @confirm="deleteMember()"
+      @eventConfirm="deleteMember()"
     />
 
     <div class="text-h6 text-center">
@@ -72,14 +72,10 @@
 
 <script>
 import DialogAddNewMember from '../components/dialog/addDialog/DialogAddNewMember'
-import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
 
 export default {
   name: 'PrivateList',
-  components: {
-    DialogAddNewMember,
-    DialogConfirmDelete
-  },
+  components: { DialogAddNewMember },
   props: {
     id: {
       type: String,

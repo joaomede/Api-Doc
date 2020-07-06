@@ -4,7 +4,7 @@
     <DialogConfirmDelete
       :dialog="dialogConfirmDeleteResponses"
       @eventClose="dialogConfirmDeleteResponses = false"
-      @confirm="deleteResponse()"
+      @eventConfirm="deleteResponse()"
     />
     <q-card-section>
       <q-expansion-item
@@ -89,14 +89,10 @@
 </template>
 
 <script>
-import DialogConfirmDelete from '../dialog/DialogConfirmDelete'
 import VueJsonPretty from 'vue-json-pretty'
 
 export default {
-  components: {
-    DialogConfirmDelete,
-    VueJsonPretty
-  },
+  components: { VueJsonPretty },
   props: {
     responses: {
       type: Object,

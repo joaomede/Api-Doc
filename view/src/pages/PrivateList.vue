@@ -17,7 +17,7 @@
     <DialogConfirmDelete
       :dialog="showDelete"
       @eventClose="showDelete = false"
-      @confirm="deleteApi()"
+      @eventConfirm="deleteApi()"
     />
 
     <DialogAddApi
@@ -88,15 +88,11 @@
 </template>
 
 <script>
-import DialogConfirmDelete from '../components/dialog/DialogConfirmDelete'
 
 import DialogAddApi from '../components/dialog/addDialog/DialogAddApi'
 export default {
   name: 'PrivateList',
-  components: {
-    DialogAddApi,
-    DialogConfirmDelete
-  },
+  components: { DialogAddApi },
   data () {
     return {
       listOfApis: [],

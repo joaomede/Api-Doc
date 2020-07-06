@@ -5,9 +5,12 @@ import VueCompositionAPI from '@vue/composition-api'
 
 import { FabButton } from '../components/fabButton'
 import { SharedEmbedDialog } from '../components/sharedEmbed'
+import { DialogConfirmDelete } from '../components/dialogConfirm'
 
 Vue.component('FabButton', FabButton)
 Vue.component('SharedEmbed', SharedEmbedDialog)
+Vue.component('DialogConfirmDelete', DialogConfirmDelete)
+
 Vue.component(VueJsonPretty)
 
 Vue.use(JsonEditor)

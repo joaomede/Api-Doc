@@ -3,7 +3,7 @@
     <DialogConfirmDelete
       :dialog="dialogConfirmDeleteTag"
       @eventClose="dialogConfirmDeleteTag = false"
-      @confirm="deleteTag()"
+      @eventConfirm="deleteTag()"
     />
 
     <q-expansion-item
@@ -118,13 +118,9 @@
 
 <script>
 import ListPaths from '../listEdit/ListPaths'
-import DialogConfirmDelete from '../dialog/DialogConfirmDelete'
 
 export default {
-  components: {
-    ListPaths,
-    DialogConfirmDelete
-  },
+  components: { ListPaths },
   props: {
     tags: {
       type: Object,

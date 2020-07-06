@@ -1,4 +1,10 @@
 export default {
+  geral: {
+    questionDelete: 'Deseja realmente apagar este item?',
+    confirm: 'Sim',
+    deny: 'Não',
+    back: 'Voltar'
+  },
   commonCodes: {
     // 1xx
     '100': {

@@ -3,7 +3,7 @@
     <DialogConfirmDelete
       :dialog="dialogConfirmDeletePaths"
       @eventClose="dialogConfirmDeletePaths = false"
-      @confirm="deletePath()"
+      @eventConfirm="deletePath()"
     />
 
     <q-expansion-item
@@ -479,15 +479,10 @@
 <script>
 import VueJsonPretty from 'vue-json-pretty'
 import ListResponseEdit from '../listEdit/ListResponses'
-import DialogConfirmDelete from '../dialog/DialogConfirmDelete'
 import pathTest from '../../mixins/pathTest'
 
 export default {
-  components: {
-    VueJsonPretty,
-    ListResponseEdit,
-    DialogConfirmDelete
-  },
+  components: { VueJsonPretty, ListResponseEdit },
   mixins: [pathTest],
   props: {
     paths: {
