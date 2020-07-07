@@ -6,24 +6,7 @@
 </template>
 
 <script>
-import MainMenu from '../components/menu/MainMenu'
-export default {
-  components: {
-    MainMenu
-  },
-  data () {
-    return {
-    }
-  },
-  computed: {
-  },
-  created () {
-
-  },
-  methods: {
-
-  }
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>
