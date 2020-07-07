@@ -8,9 +8,10 @@
       <Drawer
         v-if="this.$router.currentRoute.name !== 'SharedViewDoc'"
         :width="200"
-        :left="left"
+        :menu="left"
         @estadoMenu="left = $event"
       />
+
       <Header
         v-if="this.$router.currentRoute.name !== 'SharedViewDoc' & (!this.$q.platform.is.electron)"
         :headertitle="title"
@@ -40,12 +41,11 @@
 <script>
 import Footer from './layout/Footer'
 import Header from './layout/Header'
-import Drawer from './layout/Drawer'
 import HeaderElectron from './layout/HeaderElectron'
 
 export default {
   name: 'App',
-  components: { Footer, Header, Drawer, HeaderElectron },
+  components: { Footer, Header, HeaderElectron },
   data () {
     return {
       title: 'Api Doc',
