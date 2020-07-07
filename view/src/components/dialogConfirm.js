@@ -11,7 +11,7 @@ export const DialogConfirmDelete = defineComponent({
     }
   },
   setup (p, ctx) {
-    const evt = () => {
+    const evtClose = () => {
       /**
        * Event Close
        */
@@ -30,7 +30,7 @@ export const DialogConfirmDelete = defineComponent({
         return p.dialog
       },
       set () {
-        evt()
+        evtClose()
       }
     })
 
@@ -44,7 +44,7 @@ export const DialogConfirmDelete = defineComponent({
               </div>
             </q-card-section>
             <q-card-section align={'center'}>
-              <q-btn class={'q-ma-xs'} color={'black'} onClick={evt}>
+              <q-btn class={'q-ma-xs'} color={'black'} onClick={evtClose}>
                 {i18n.t('geral.deny')}
               </q-btn>
               <q-btn class={'q-ma-xs'} color={'green'} onClick={evtConfirm}>
