@@ -5,6 +5,20 @@ export default {
     deny: 'No',
     back: 'Back'
   },
+  menu: {
+    dialogAddApi: {
+      title: 'Enter your API data',
+      form: {
+        apiName: 'New API name',
+        descriptionApi: 'Enter a description',
+        version: 'Enter the current version of the api',
+        email: 'Enter a contact email',
+        license: 'Enter the type of license or link',
+        isPublic: 'Is it public?',
+        baseURL: 'Enter the URL address of the API'
+      }
+    }
+  },
   commonCodes: {
     // 1xx
     '100': {

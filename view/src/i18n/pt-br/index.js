@@ -5,6 +5,20 @@ export default {
     deny: 'Não',
     back: 'Voltar'
   },
+  menu: {
+    dialogAddApi: {
+      title: 'Informe os dados da sua API',
+      form: {
+        apiName: 'Nome da nova API',
+        descriptionApi: 'Informe uma descrição',
+        version: 'Informe a versão atual da api',
+        email: 'Informe um e-mail para contato',
+        license: 'Informe o tipo de licença ou link',
+        isPublic: 'É publica?',
+        baseURL: 'Informe o endereço a URL da API'
+      }
+    }
+  },
   commonCodes: {
     // 1xx
     '100': {
