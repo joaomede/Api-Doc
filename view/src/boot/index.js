@@ -7,6 +7,5 @@ export default async ({ Vue }) => {
 import './globalFilters'
 import './components'
 import './vee-validate'
-import './notify'
 import './VueHighlightJS'
 import './axios'
