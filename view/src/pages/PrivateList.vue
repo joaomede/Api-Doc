@@ -22,8 +22,8 @@
 
     <DialogAddApi
       :dialog="dialogAddApi"
-      @eventClose="dialogAddApi = false"
-      @save="storeNewApi($event)"
+      @eventClose="dialogAddApi = $event"
+      @eventConfirm="storeNewApi($event)"
     />
 
     <div class="text-h6 text-center">
@@ -88,11 +88,8 @@
 </template>
 
 <script>
-
-import DialogAddApi from '../components/dialog/addDialog/DialogAddApi'
 export default {
   name: 'PrivateList',
-  components: { DialogAddApi },
   data () {
     return {
       listOfApis: [],
