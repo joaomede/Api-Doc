@@ -110,18 +110,20 @@ export default {
     async storeNewApi (api) {
       try {
         await this.$axios.post('api/api/create', api, { headers: this.cUser.headers })
-        this.indexMyDocList()
+        await this.indexMyDocList()
         this.dialogAddApi = false
         this.$notify('Nova Api criada com sucesso', 'green')
       } catch (error) {
+        console.log(error)
         this.$notify(error.response.data.error, 'red')
       }
     },
     async indexMyDocList () {
       try {
         const result = await this.$axios.get('api/api/getall', { headers: this.cUser.headers })
-        this.listOfApis = await result.data
+        this.listOfApis = result.data
       } catch (error) {
+        console.log(error)
         this.$notify(error.response.data.error, 'red')
       }
     },
@@ -129,7 +131,7 @@ export default {
       try {
         const result = await this.$axios.delete(`api/api/delete/${this.api.id}`, { headers: this.cUser.headers })
         this.showDelete = false
-        this.indexMyDocList()
+        await this.indexMyDocList()
         this.$notify(result.data.ok, 'green')
       } catch (error) {
         this.$notify(error.response.data.error, 'red')
