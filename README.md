@@ -26,6 +26,10 @@
     <a href="https://sourceforge.net/projects/api-doc/files/ApiDoc-2.1.6.apk/download" alt="Android Cordova">
         <img src="https://img.shields.io/badge/Android_Cordova:_APK-v2.1.6-blue.svg" />
     </a>
+    <a href="https://gitpod.io/#https://github.com/joaomede/Api-Doc" alt="Gitpod.io">
+        <img src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod" />
+    </a>
+
 </p>
 
 API Doc is an API Rest test technology, it works as a CRUD, where you can access the documentation from anywhere, I was inspired by applications like Swagger, Postman and Insonmia to create it.
