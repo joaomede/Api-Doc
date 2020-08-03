@@ -37,7 +37,7 @@
     "@vue/composition-api": "^1.0.0-beta.2",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
-    "babel-preset-vca-jsx": "b12f/babel-preset-vca-jsx#patch-1",
+    "babel-preset-vca-jsx": "^0.3.6",
     "core-js": "^3.6.5",
     "devtron": "^1.4.0",
     "electron": "^7.0.0",
