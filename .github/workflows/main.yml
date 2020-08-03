@@ -1,4 +1,5 @@
-name: main
+name: CI
+
 on:
   # push:
   #   branches: [master]
@@ -6,13 +7,38 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
-    name: Build Api Rest
+    # strategy:
+    #   matrix:
+    #     node-version: [10.x, 12.x, 14.x]
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./tests
+
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '10.x'
-    - run: npm install
-    - run: npm build
+      - uses: actions/checkout@v2
+        # name: Use Node.js ${{ matrix.node-version }}
+        name: Use Node.js 12x
+
+      - uses: actions/setup-node@v1
+        name: Project Install
+        # with:
+        #   node-version: ${{ matrix.node-version }}
+        with:
+          node-version: '12.x'
+      - run: npm install --production
+        # env: 
+        #   PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'false'
+
+      # - uses: mujo-code/puppeteer-headful@12.3.1
+      - uses: ./
+        name: Tests e2e
+      - run: yarn test:e2e
+        env:
+          LOGIN: ${{ secrets.LOGIN }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          URL: ${{ secrets.URL }}
+          CI: 'true'
+          PUPPETEER_EXEC_PATH: '/usr/bin/google-chrome'
