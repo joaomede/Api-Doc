@@ -1,0 +1,26 @@
+{
+  "name": "api-doc",
+  "version": "2.1.7",
+  "main": "index.js",
+  "repository": "https://github.com/joaomede/Api-Doc",
+  "author": "Joao Medeiros <joaoserj@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "release": "standard-version && git push --tags",
+    "commit": "git-cz"
+  },
+  "dependencies": {
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
+    "cz-conventional-changelog": "^3.2.0",
+    "git-cz": "^4.7.0",
+    "husky": "^4.2.5",
+    "rimraf": "^3.0.0",
+    "standard-version": "^9.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
