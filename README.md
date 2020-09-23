@@ -2,6 +2,9 @@
   <img src="./view/src/statics/app-logo-512x512.png"height="130">
 </p>
 <p align="center">
+    <a href="http://commitizen.github.io/cz-cli/" alt="Commitizen friendly">
+        <img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" />
+    </a>
     <a href="https://img.shields.io/github/workflow/status/joaomede/Api-Doc/main?label=Build%20API" alt="Build Api">
         <img src="https://img.shields.io/github/workflow/status/joaomede/Api-Doc/main?label=Build%20API" />
     </a>
