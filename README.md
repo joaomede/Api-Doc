@@ -11,12 +11,10 @@
     <a href="https://travis-ci.com/joaomede/Api-Doc" alt="Build Status">
         <img src="https://travis-ci.com/joaomede/Api-Doc.svg?branch=master" />
     </a>
-    <a href="https://img.shields.io/github/license/joaomede/api-doc" alt="GitHub package.json version">
-        <img src="https://img.shields.io/github/package-json/v/joaomede/api-doc" />
-    </a>
-    <a href="https://img.shields.io/github/license/joaomede/api-doc" alt="GitHub repo size">
+    <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/joaomede/Api-Doc">    <a href="https://img.shields.io/github/license/joaomede/api-doc" alt="GitHub repo size">
         <img src="https://img.shields.io/github/repo-size/joaomede/api-doc" />
     </a>
+    <img alt="GitHub" src="https://img.shields.io/github/license/joaomede/Api-Doc">
     <a href="https://www.codacy.com/manual/joaomede/Api-Doc?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=joaomede/Api-Doc&amp;utm_campaign=Badge_Grade" alt="Codacy Badge">
         <img src="https://api.codacy.com/project/badge/Grade/cb8e4c89586a43809c7a817a07f56309" />
     </a>
