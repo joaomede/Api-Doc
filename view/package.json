@@ -22,7 +22,7 @@
     "@quasar/app": "^2.1.14",
     "@quasar/extras": "^1.9.13",
     "axios": "^0.21.1",
-    "highlight.js": "^9.17.1",
+    "highlight.js": "^10.5.0",
     "moment": "^2.29.1",
     "quasar": "^1.15.0",
     "vee-validate": "^3.4.3",
