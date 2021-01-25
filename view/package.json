@@ -33,8 +33,7 @@
   },
   "devDependencies": {
     "@quasar/quasar-app-extension-dotenv": "^1.0.5",
-    "@vue/babel-preset-app": "^4.4.6",
-    "@vue/composition-api": "^1.0.0-beta.18",
+    "@vue/composition-api": "^1.0.0-rc.1",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
     "babel-preset-vca-jsx": "^0.3.6",
