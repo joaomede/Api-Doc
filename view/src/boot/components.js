@@ -8,7 +8,8 @@ import { SharedEmbedDialog } from '../components/sharedEmbed'
 import { DialogConfirmDelete } from '../components/dialogConfirm'
 import { DialogAddApi } from '../components/dialogAdd'
 import { MainMenu } from '../components/mainMenu'
-import { Drawer } from '../layout/drawer'
+
+Vue.use(VueCompositionAPI)
 
 Vue.component('FabButton', FabButton)
 Vue.component('SharedEmbed', SharedEmbedDialog)
@@ -22,4 +23,3 @@ Vue.component('Drawer', Drawer)
 Vue.component(VueJsonPretty)
 
 Vue.use(JsonEditor)
-Vue.use(VueCompositionAPI)
