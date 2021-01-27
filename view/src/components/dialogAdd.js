@@ -11,9 +11,6 @@ export const DialogAddApi = defineComponent({
       type: Boolean
     }
   },
-  components: {
-    Dialog
-  },
   setup (p, ctx) {
     const resetForm = {
       apiName: '',
