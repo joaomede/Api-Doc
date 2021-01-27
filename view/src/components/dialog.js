@@ -28,7 +28,7 @@ export const Dialog = defineComponent({
       return (
         <q-dialog v-model={dialogComponent.value}>
           <q-card>
-            {ctx.slots.body()}
+            {ctx.slots.body ? ctx.slots.body() : ''}
           </q-card>
         </q-dialog>
       )
