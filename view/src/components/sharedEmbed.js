@@ -1,4 +1,4 @@
-import { defineComponent, reactive, computed, watch } from '@vue/composition-api'
+import { defineComponent, reactive, computed, watch, getCurrentInstance } from '@vue/composition-api'
 
 export const SharedEmbedDialog = defineComponent({
   props: {
@@ -10,6 +10,7 @@ export const SharedEmbedDialog = defineComponent({
     }
   },
   setup (p, ctx) {
+    const root = getCurrentInstance().proxy.$root
     const evt = () => {
       /**
        * Event Close
@@ -34,14 +35,14 @@ export const SharedEmbedDialog = defineComponent({
       const origin = window.location.origin
       state.code = `
       <embed 
-        src="${origin}/sharedviewdoc/${ctx.root.cApi.id}" 
+        src="${origin}/sharedviewdoc/${root.cApi.id}" 
         style="width:500px; height: 300px;"
       />`
     })
 
     return () => {
       return (
-        <q-dialog v-model={dialogComponent.value}>
+        <q-dialog vModel={dialogComponent.value}>
           <q-card>
             <q-card-section>
               <div class={'text-h6'}>
@@ -53,7 +54,9 @@ export const SharedEmbedDialog = defineComponent({
             </q-card-section>
 
             <q-card-section align={'center'}>
-              <q-btn class={'q-ma-xs'} color={'black'} onclick={evt}>
+              <q-btn class={'q-ma-xs'} color={'black'} onClick={() => {
+                evt()
+              }}>
               Fechar
               </q-btn>
             </q-card-section>
