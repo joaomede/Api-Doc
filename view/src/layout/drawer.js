@@ -1,4 +1,6 @@
-import { defineComponent, computed } from '@vue/composition-api'
+/* eslint-disable no-unused-vars */
+import { defineComponent, computed, getCurrentInstance, reactive } from '@vue/composition-api'
+import { QDrawer } from 'quasar'
 
 export const Drawer = defineComponent({
   props: {
@@ -17,6 +19,8 @@ export const Drawer = defineComponent({
     }
   },
   setup (p, ctx) {
+    const root = getCurrentInstance().proxy.$root
+
     const evt = (v) => {
       /**
        * Update Status in App.vue
@@ -26,6 +30,7 @@ export const Drawer = defineComponent({
 
     const menuDrawer = computed({
       get () {
+        console.log('atualizou')
         return p.menu
       },
       set (v) {
@@ -38,19 +43,19 @@ export const Drawer = defineComponent({
         name: 'Tela Inicial',
         router: '/dash',
         icon: 'dashboard',
-        validate: ctx.root.cUser.id !== null
+        validate: root.cUser.id !== null
       },
       {
         name: 'Public List',
         router: '/publicdocs',
         icon: 'vpn_key',
-        validate: ctx.root.cUser.id !== null
+        validate: root.cUser.id !== null
       },
       {
         name: 'Trocar Senha',
         router: '/changepassword',
         icon: 'vpn_key',
-        validate: ctx.root.cUser.id !== null
+        validate: root.cUser.id !== null
       },
       {
         name: 'About',
@@ -96,10 +101,10 @@ export const Drawer = defineComponent({
         >
           <div class={'absolute-bottom bg-transparent'}>
             <div class={'text-weight-bold'}>
-              { ctx.root.cUser.name }
+              { root.cUser.name }
             </div>
             <div>
-              { ctx.root.cUser.email }
+              { root.cUser.email }
             </div>
           </div>
         </q-img>
@@ -108,15 +113,15 @@ export const Drawer = defineComponent({
 
     return () => {
       return (
-        <q-drawer
-          v-model={menuDrawer.value}
+        <QDrawer
+          vModel={menuDrawer.value}
           width={p.width}
           side={'left'}
           overlay
         >
           { scrollArea.value }
           { backgroundImage.value }
-        </q-drawer>
+        </QDrawer>
       )
     }
   }
