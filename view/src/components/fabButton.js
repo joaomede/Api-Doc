@@ -1,4 +1,4 @@
-import { defineComponent, reactive, computed } from '@vue/composition-api'
+import { defineComponent, reactive, computed, getCurrentInstance } from '@vue/composition-api'
 
 export const FabButton = defineComponent({
   props: {
@@ -22,6 +22,7 @@ export const FabButton = defineComponent({
     }
   },
   setup (prop, ctx) {
+    const root = getCurrentInstance().proxy.$root
     const evt = () => {
       /**
        * Event Click
@@ -30,11 +31,11 @@ export const FabButton = defineComponent({
     }
 
     const modeView = computed(() => {
-      if (ctx.root.$q.platform.is.desktop) {
+      if (root.$q.platform.is.desktop) {
         return {
           type: 'desktop'
         }
-      } else if (ctx.root.$q.platform.is.mobile) {
+      } else if (root.$q.platform.is.mobile) {
         return {
           type: 'mobile'
         }
