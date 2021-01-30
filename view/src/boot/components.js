@@ -18,7 +18,6 @@ Vue.component('DialogConfirmDelete', DialogConfirmDelete)
 Vue.component('DialogAddApi', DialogAddApi)
 
 Vue.component('MainMenu', MainMenu)
-Vue.component('Drawer', Drawer)
 
 Vue.component(VueJsonPretty)
 
