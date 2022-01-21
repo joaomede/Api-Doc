@@ -13,7 +13,7 @@
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^13.0.0",
     "cz-conventional-changelog": "^3.2.0",
-    "git-cz": "^4.7.0",
+    "git-cz": "^4.8.0",
     "husky": "^4.2.5",
     "rimraf": "^3.0.0",
     "standard-version": "^9.0.0"
