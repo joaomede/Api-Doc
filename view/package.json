@@ -23,7 +23,7 @@
     "@quasar/extras": "^1.10.8",
     "axios": "^0.25.0",
     "highlight.js": "^10.5.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "quasar": "^1.15.21",
     "vee-validate": "^3.4.14",
     "vue-highlight.js": "^3.1.0",
