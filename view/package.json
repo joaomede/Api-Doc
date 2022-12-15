@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@mdi/font": "^4.7.95",
-    "@quasar/app": "^2.2.10",
+    "@quasar/app": "^2.4.3",
     "@quasar/extras": "^1.10.8",
     "axios": "^0.25.0",
     "highlight.js": "^10.5.0",
